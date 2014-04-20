@@ -1,0 +1,62 @@
+<!DOCTYPE article PUBLIC "-//NLM//DTD Journal Archiving and Interchange DTD v2.3 20070202//EN" "archivearticle.dtd">
+<article xmlns:mml="http://www.w3.org/1998/Math/MathML" article-type="research-article"><?properties open_access?><front><journal-meta><journal-id journal-id-type="nlm-ta">Clin Dev Immunol</journal-id><journal-title>Clinical and Developmental Immunology</journal-title><issn pub-type="ppub">1740-2522</issn><issn pub-type="epub">1740-2530</issn><publisher><publisher-name>Hindawi Publishing Corporation</publisher-name></publisher></journal-meta><article-meta><article-id pub-id-type="pmid">15154607</article-id><article-id pub-id-type="pmc">2275406</article-id>
+        <article-id pub-id-type="pii">S1740252204000034</article-id>
+        <article-id pub-id-type="doi">10.1080/10446670410001670445</article-id>
+    <article-categories><subj-group subj-group-type="heading"><subject>Research Article</subject></subj-group></article-categories><title-group><article-title>Suppression of Leukotriene B<sub>4</sub> Generation by <italic>Ex-vivo</italic> Neutrophils Isolated from Asthma Patients on Dietary Supplementation with Gammalinolenic Acid-containing Borage Oil: Possible Implication in Asthma</article-title></title-group><contrib-group>
+        <contrib contrib-type="author"><name><surname>Ziboh</surname><given-names>Vincent A.</given-names></name><xref ref-type="aff" rid="aff1">1</xref><xref ref-type="aff" rid="aff2">2</xref></contrib>
+        <contrib contrib-type="author"><name><surname>Naguwa</surname><given-names>Stanley</given-names></name><xref ref-type="aff" rid="aff1">1</xref><xref ref-type="aff" rid="aff2">2</xref></contrib>
+        <contrib contrib-type="author"><name><surname>Vang</surname><given-names>Kao</given-names></name><xref ref-type="aff" rid="aff1">1</xref><xref ref-type="aff" rid="aff2">2</xref></contrib>
+        <contrib contrib-type="author"><name><surname>Wineinger</surname><given-names>Julie</given-names></name><xref ref-type="aff" rid="aff1">1</xref><xref ref-type="aff" rid="aff2">2</xref></contrib>
+        <contrib contrib-type="author"><name><surname>Morrissey</surname><given-names> Brian M.</given-names></name><xref ref-type="aff" rid="aff1">1</xref><xref ref-type="aff" rid="aff2">2</xref></contrib>
+        <contrib contrib-type="author"><name><surname>McIntyre</surname><given-names>J. A.</given-names></name><xref ref-type="aff" rid="aff1">1</xref><xref ref-type="aff" rid="aff2">2</xref></contrib>
+        <contrib contrib-type="author"><name><surname>Watnik</surname><given-names>Mitchell</given-names></name><xref ref-type="aff" rid="aff1">1</xref><xref ref-type="aff" rid="aff2">2</xref></contrib>
+        <contrib contrib-type="author" corresp="yes"><name><surname>Gershwin</surname><given-names>M. Eric</given-names></name><address><email>megershwin@ucdavis.edu</email><phone>+1-530-752-2884</phone><fax>+1-530-752-4669</fax></address><xref ref-type="aff" rid="aff1">1</xref><xref ref-type="aff" rid="aff3">3</xref></contrib>
+    </contrib-group>
+        <aff id="aff1"><label>1</label>
+            <addr-line>Division of Rheumatology</addr-line>
+            <addr-line>Allergy and Clinical Immunology</addr-line>
+            <addr-line>Departments of Dermatology and Internal Medicine</addr-line>
+            <addr-line>University of California at Davis School of Medicine, TB 192</addr-line>
+            <addr-line>Davis</addr-line>
+            <addr-line>CA</addr-line>
+            <addr-line>95616</addr-line>
+            <country>USA</country>
+        </aff>
+        <aff id="aff2"><label>2</label>
+            <addr-line>Division of Pulmonary Medicine</addr-line>
+            <addr-line>Department of Statistics</addr-line>
+            <addr-line>University of California at Davis School of Medicine, TB 192</addr-line>
+            <addr-line>Davis</addr-line>
+            <addr-line>CA</addr-line>
+            <addr-line>95616</addr-line>
+            <country>USA</country>
+        </aff>
+        <aff id="aff3"><label>3</label>
+            <addr-line>Division of Rheumatology</addr-line>
+            <addr-line>Allergy and Clinical Immunology</addr-line>
+            <addr-line>Departments of Dermatology and Internal Medicine</addr-line>
+            <addr-line>University of California at Davis School of Medicine, TB 192</addr-line>
+            <addr-line>Davis</addr-line>
+            <addr-line>CA</addr-line>
+            <addr-line>95616</addr-line>
+            <country>USA</country>
+        </aff>
+    <pub-date pub-type="ppub"><month>3</month><year>2004</year></pub-date><volume>11</volume><issue>1</issue><fpage>13</fpage><lpage>21</lpage><permissions><copyright-statement>Copyright &#x000a9; 2004 Hindawi Publishing Corporation.</copyright-statement><copyright-year>2004</copyright-year><copyright-holder>Hindawi Publishing Corporation</copyright-holder><license license-type="open-access" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://creativecommons.org/licenses/by/"><p>This is an open access article distributed under the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original work is properly cited.</p></license></permissions><abstract>
+        <p>Dietary gammalinolenic acid (GLA), a potent inhibitor of 5-lipoxygenase (5-LOX) and suppressor of
+leukotriene B<sub>4</sub> (LTB<sub>4</sub>), can attenuate the clinical course of rheumatoid arthritics, with negligible side
+effects. Since Zileuton, also an inhibitor of 5-LOX, attenuates asthma but with an undesirable side
+effect, we investigated whether dietary GLA would suppress biosynthesis of PMN-LTB<sub>4</sub> isolated from
+asthma patients and attenuate asthma. Twenty-four mild-moderate asthma patients (16&#x02013;75 years) were
+randomized to receive either 2.0 g daily GLA (borage oil) or corn oil (placebo) for 12 months. Blood
+drawn at 3 months intervals was used to prepare sera for fatty acid analysis, PMNs for determining
+phospholipid fatty acids and for LTB4 generation. Patients were monitored by daily asthma scores,
+pulmonary function, and exhaled NO. Ingestion of daily GLA (i) increased DGLA (GLA metabolite) in
+PMN-phospholipids; (ii) increased generation of PMN-15-HETrE (5-LOX metabolite of DGLA).
+Increased PMN-DGLA/15-HETrE paralleled the decreased PMN generation of proinflammatory LTB<sub>4</sub>.
+However, the suppression of PMN-LTB4 did not reveal statistically significant suppression of the
+asthma scores evaluated. Nonetheless, the study demonstrated dietary fatty acid modulation of
+endogenous inflammatory mediators without side effects and thus warrant further explorations into the
+roles of GLA at higher doses, leukotrienes and asthma.</p>
+    </abstract></article-meta></front></article>
+
+
