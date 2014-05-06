@@ -21,6 +21,8 @@ public class Table {
 	/** The num_of_rows. */
 	private int num_of_rows;
 	
+	public int tableInTable;
+	
 	/** The num_of_columns. */
 	private int num_of_columns;
 	

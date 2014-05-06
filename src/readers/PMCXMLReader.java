@@ -490,6 +490,21 @@ public class PMCXMLReader implements Reader{
 		return table;
 	}
 	
+	public int getNumOfTablesInArticle(NodeList tablesxml)
+	{
+		int numOfTables = 0;
+		for(int i = 0;i<tablesxml.getLength();i++)
+		{
+			List<Node> tb = getChildrenByTagName(tablesxml.item(i),"table");
+			numOfTables+=tb.size();
+		}
+		if(numOfTables<tablesxml.getLength())
+			numOfTables = tablesxml.getLength();
+		
+		return numOfTables;
+	}
+	
+	
 	/**
 	 * Parses table, makes matrix of cells and put it into Article object
 	 * @param article - Article to populate
@@ -499,38 +514,37 @@ public class PMCXMLReader implements Reader{
 	public Article ParseTables(Article article, Document parse)
 	{
 		NodeList tablesxml = parse.getElementsByTagName("table-wrap");
+		int numOfTables =  getNumOfTablesInArticle(tablesxml);
 		
-		Table[] tables = new Table[tablesxml.getLength()];
+		Table[] tables = new Table[numOfTables];
 		article.setTables(tables);
+		int tableindex = 0;
 		//Iterate document tables
 		for(int i = 0;i<tablesxml.getLength();i++)
 		{
+			//TODO: This should go up, not to count in statistics tables that are stored in images
+			List<Node> tb = getChildrenByTagName(tablesxml.item(i),"table");
+
+			for(int s = 0;s<tb.size();s++)
+			{
 			Statistics.addTable();
 			String label = readTableLabel(tablesxml.item(i));
 			
-			tables[i] = new Table(label);
-			tables[i].setDocumentFileName("PMC"+article.getPmc());
-			tables[i].setXml(Utilities.CreateXMLStringFromSubNode(tablesxml.item(i)));
-			System.out.println("Table title:"+tables[i].getTable_title());
+			tables[tableindex] = new Table(label);
+			tables[tableindex].setDocumentFileName("PMC"+article.getPmc());
+			tables[tableindex].setXml(Utilities.CreateXMLStringFromSubNode(tablesxml.item(i)));
+			System.out.println("Table title:"+tables[tableindex].getTable_title());
 			String caption = readTableCaption(tablesxml.item(i));
-			tables[i].setTable_caption(caption);
+			tables[tableindex].setTable_caption(caption);
 			String foot = ReadTableFooter(tablesxml.item(i));
-			tables[i].setTable_footer(foot);
+			tables[tableindex].setTable_footer(foot);
 			System.out.println("Foot: "+foot);
-			
-			//TODO: This should go up, not to count in statistics tables that are stored in images
-			List<Node> tb = getChildrenByTagName(tablesxml.item(i),"table");
-			if(tb.size()==0)
-			{
-				Statistics.ImageTable(FileName);
-				tables[i].setNoXMLTable(true);
-				continue;
-			}
+
 			//count rows
 			int headsize = 0;
 			List<Node> thead = null;
 			if(tb.size()>0){
-				thead = getChildrenByTagName(tb.get(0), "thead");
+				thead = getChildrenByTagName(tb.get(s), "thead");
 				headsize = thead.size();
 			}
 			List<Node> rowshead = null;
@@ -540,14 +554,15 @@ public class PMCXMLReader implements Reader{
 			}
 			else
 			{
-				tables[i].setHasHeader(false);
+				tables[tableindex].setHasHeader(false);
 				Statistics.TableWithoutHead();
 			}
-			List<Node> tbody = getChildrenByTagName(tb.get(0), "tbody");
+			List<Node> tbody = getChildrenByTagName(tb.get(s), "tbody");
 			if(tbody.size()==0)
 			{
 				Statistics.TableWithoutBody();
-				tables[i].setHasBody(false);
+				tables[tableindex].setHasBody(false);
+				tableindex++;
 				continue;
 			}
 			List<Node> rowsbody = getChildrenByTagName(tbody.get(0), "tr");
@@ -557,17 +572,18 @@ public class PMCXMLReader implements Reader{
 				headrowscount = rowshead.size();
 			int num_of_rows = rowsbody.size()+headrowscount;
 			int cols = CountColumns(rowsbody,rowshead);
+			tables[tableindex].tableInTable = s;
 
 			int num_of_columns = cols;
-			tables[i].setNum_of_columns(num_of_columns);
-			tables[i].setNum_of_rows(num_of_rows);
-			tables[i].CreateCells(num_of_columns, num_of_rows);
-			Cell[][] cells = tables[i].getTable_cells();
-			tables[i] = ProcessTableHeader(tables[i],cells, rowshead, headrowscount, num_of_columns);
+			tables[tableindex].setNum_of_columns(num_of_columns);
+			tables[tableindex].setNum_of_rows(num_of_rows);
+			tables[tableindex].CreateCells(num_of_columns, num_of_rows);
+			Cell[][] cells = tables[tableindex].getTable_cells();
+			tables[tableindex] = ProcessTableHeader(tables[tableindex],cells, rowshead, headrowscount, num_of_columns);
 			Statistics.addColumn(num_of_columns);
 			Statistics.addRow(num_of_rows);
-			tables[i] = ProcessTableBody(tables[i],cells, rowsbody, headrowscount, num_of_columns);
-			tables[i].setTable_cells(cells);		
+			tables[tableindex] = ProcessTableBody(tables[tableindex],cells, rowsbody, headrowscount, num_of_columns);
+			tables[tableindex].setTable_cells(cells);		
 			//Print cells
 			for(int j = 0; j<cells.length;j++)
 			{
@@ -578,17 +594,37 @@ public class PMCXMLReader implements Reader{
 			}
 			System.out.println("Number of rows: "+num_of_rows);
 			System.out.println("Number of columns: "+num_of_columns);
-			
+			tableindex++;
+			}
+			if(tb.size()==0 && tableindex<numOfTables)
+			{
+				Statistics.addTable();
+				String label = readTableLabel(tablesxml.item(i));
+				
+				tables[tableindex] = new Table(label);
+				tables[tableindex].setDocumentFileName("PMC"+article.getPmc());
+				tables[tableindex].setXml(Utilities.CreateXMLStringFromSubNode(tablesxml.item(i)));
+				System.out.println("Table title:"+tables[tableindex].getTable_title());
+				String caption = readTableCaption(tablesxml.item(i));
+				tables[tableindex].setTable_caption(caption);
+				String foot = ReadTableFooter(tablesxml.item(i));
+				tables[tableindex].setTable_footer(foot);
+				System.out.println("Foot: "+foot);
+				Statistics.ImageTable(FileName);
+				tables[tableindex].setNoXMLTable(true);
+				tableindex++;
+				continue;
+			}
 		}// end for tables
 		if(TablInExMain.TypeClassify){
-			for(int i = 0;i<tablesxml.getLength();i++)
+			for(int i = 0;i<numOfTables;i++)
 			{
 				SimpleTableClassifier.ClassifyTableByType(tables[i]);
 				tables[i].printTableStatsToFile("TableStats.txt");
 			}
 		}
 		if(TablInExMain.ComplexClassify){
-			for(int i = 0;i<tablesxml.getLength();i++)
+			for(int i = 0;i<numOfTables;i++)
 			{
 				SimpleTableClassifier.ClassifyTableByComplexity(tables[i]);
 				//tables[i].printTableStatsToFile("TableStats.txt");
