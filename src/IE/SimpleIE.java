@@ -85,12 +85,28 @@ public class SimpleIE {
 	{
 		if(hasTableSubheader(cells,table))
 		{
+			boolean hadsubheader = false;
+			boolean valueSeparator = false;
 			for(int j=1;j<cells.length;j++)
 			{
 				if(cells[j][0].isIs_columnspanning() && table.getNum_of_columns()>1 && cells[j][0].getCells_columnspanning()>=table.getNum_of_columns())
 				{
 					continue;
 				}
+				boolean emptyCells = true;
+
+				for(int h=1;h<cells[j].length;h++)
+				{
+					
+					if(!cells[j][0].getCell_content().trim().equalsIgnoreCase("") && !cells[j][0].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[j][0].getCell_content().trim().charAt(0))== 160) && (!cells[j][h].getCell_content().trim().equalsIgnoreCase("") && !cells[j][h].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[j][h].getCell_content().trim().charAt(0))== 160)))
+					{
+						emptyCells = false;
+					}
+				}
+				if(emptyCells)
+					continue;
+				
+
 				for(int k=1;k<cells[j].length;k++)
 				{
 					try{
@@ -105,6 +121,19 @@ public class SimpleIE {
 						
 						Element attribute = doc.createElement("attribute");
 						String subheaderVal = "";
+
+						if(Utilities.isSpace(cells[j][0].getCell_content().trim().charAt(0)) )
+						{
+							valueSeparator = true;
+							hadsubheader = true;
+						}
+						
+						if((valueSeparator == true && (Utilities.isSpace(cells[j][0].getCell_content().trim().charAt(0)))) || (hadsubheader == true && valueSeparator == false)){
+							attribute.setTextContent(cells[0][0].getCell_content()+";"+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
+							valueSeparator = false;
+						}
+						else
+						{
 						for(int l=j;l>=0;l--)
 						{
 							if(cells[l][0].isIs_columnspanning() && table.getNum_of_columns()>1 && cells[l][0].getCells_columnspanning()>=table.getNum_of_columns() && !cells[l][0].getCell_content().trim().equalsIgnoreCase("") && !cells[l][0].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[l][0].getCell_content().trim().charAt(0))== 160))
@@ -112,7 +141,7 @@ public class SimpleIE {
 								subheaderVal = cells[l][0].getCell_content().trim();
 								break;
 							}
-							boolean emptyCells = true;
+							emptyCells = true;
 							for(int h=1;h<cells[l].length;h++)
 							{
 								
@@ -131,7 +160,7 @@ public class SimpleIE {
 							attribute.setTextContent(cells[0][0].getCell_content()+";"+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
 						else
 							attribute.setTextContent(cells[0][0].getCell_content()+";"+subheaderVal+":"+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
-						
+						}
 						rootElement.appendChild(attribute);
 						
 						//info elements
@@ -321,7 +350,7 @@ public class SimpleIE {
 		for(int i = 0; i< tables.length;i++)
 		{
 			//only simple tables
-			if( tables[i].getStructureClass()!=2)
+			if( tables[i].getStructureClass()!=2 && tables[i].getStructureClass()!=3)
 				continue;
 			
 			String tableFileName = "/"+tables[i].getDocumentFileName()+tables[i].getTable_title()+"-"+tables[i].tableInTable;

@@ -133,4 +133,12 @@ public class Utilities {
 	    //exception handling left as an exercise for the reader
 	}
 	}
+	
+	public static boolean isSpace(char ch)
+	{
+		if(((int)ch)==8195 || (int)ch==160 || (int)ch== ' ' || (int)ch==8194 || (int)ch==8201 )
+			return true;
+		else
+			return false;
+	}
 }
