@@ -67,7 +67,10 @@ public class SimpleIE {
 			boolean emptyCells = true;
 			for(int j=1;j<cells[i].length;j++)
 			{
-				
+				if(cells[i][j].getCell_content()==null)
+				{
+					cells[i][j].setCell_content("");
+				}
 				if(!cells[i][0].getCell_content().trim().equalsIgnoreCase("") && !cells[i][0].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[i][0].getCell_content().trim().charAt(0))== 160) && (!cells[i][j].getCell_content().trim().equalsIgnoreCase("") && !cells[i][j].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[i][j].getCell_content().trim().charAt(0))== 160)))
 				{
 					emptyCells = false;
@@ -81,31 +84,48 @@ public class SimpleIE {
 		}
 		return hasSubheader;
 	}
+	
+	
+	
+	
 	public void processTableWithSubheaders(Cell[][] cells,Table table, Article art, String tableFileName)
 	{
 		if(hasTableSubheader(cells,table))
 		{
 			boolean hadsubheader = false;
 			boolean valueSeparator = false;
+			boolean subheaderTableWIthValSeparators = false;
+			String subheaderVal = "";
+			String prevRowHeader = "";
 			for(int j=1;j<cells.length;j++)
 			{
 				if(cells[j][0].isIs_columnspanning() && table.getNum_of_columns()>1 && cells[j][0].getCells_columnspanning()>=table.getNum_of_columns())
 				{
+					subheaderVal = cells[j][0].getCell_content()+": ";
 					continue;
 				}
 				boolean emptyCells = true;
 
 				for(int h=1;h<cells[j].length;h++)
 				{
-					
-					if(!cells[j][0].getCell_content().trim().equalsIgnoreCase("") && !cells[j][0].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[j][0].getCell_content().trim().charAt(0))== 160) && (!cells[j][h].getCell_content().trim().equalsIgnoreCase("") && !cells[j][h].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[j][h].getCell_content().trim().charAt(0))== 160)))
+					if(cells[j][h].getCell_content()==null)
+					{
+						cells[j][h].setCell_content("");
+					}
+					if(Utilities.isSpaceOrEmpty(cells[j][0].getCell_content()) || !Utilities.isSpaceOrEmpty(cells[j][h].getCell_content()))
 					{
 						emptyCells = false;
+						prevRowHeader = cells[j-1][0].getCell_content();
 					}
+//					if(!cells[j][0].getCell_content().trim().equalsIgnoreCase("") && !cells[j][0].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[j][0].getCell_content().trim().charAt(0))== 160) && (!cells[j][h].getCell_content().trim().equalsIgnoreCase("") && !cells[j][h].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[j][h].getCell_content().trim().charAt(0))== 160)))
+//					{
+//						emptyCells = false;
+//					}
 				}
-				if(emptyCells)
+				if(emptyCells){
+					subheaderVal = cells[j][0].getCell_content()+": ";
 					continue;
-				
+				}
 
 				for(int k=1;k<cells[j].length;k++)
 				{
@@ -120,46 +140,75 @@ public class SimpleIE {
 						doc.appendChild(rootElement);
 						
 						Element attribute = doc.createElement("attribute");
-						String subheaderVal = "";
-
-						if(Utilities.isSpace(cells[j][0].getCell_content().trim().charAt(0)) )
+					//	String subheaderVal = "";
+						
+						if(cells[j][0].getCell_content().length()>0 && Utilities.isSpace(cells[j][0].getCell_content().trim().charAt(0)) )
 						{
 							valueSeparator = true;
 							hadsubheader = true;
+							subheaderTableWIthValSeparators = true;
+						}
+						else
+						{
+							valueSeparator = false;
+							hadsubheader = false;
+							if(subheaderTableWIthValSeparators && !Utilities.isSpaceOrEmpty(cells[j][0].getCell_content()))
+								subheaderVal = "";
 						}
 						
 						if((valueSeparator == true && (Utilities.isSpace(cells[j][0].getCell_content().trim().charAt(0)))) || (hadsubheader == true && valueSeparator == false)){
-							attribute.setTextContent(cells[0][0].getCell_content()+";"+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
-							valueSeparator = false;
+							if(cells[j][0].getCell_content()=="")
+							{
+								attribute.setTextContent(cells[0][0].getCell_content()+";"+subheaderVal+prevRowHeader+";"+cells[0][k].getCell_content());
+									
+							}else
+							attribute.setTextContent(cells[0][0].getCell_content()+";"+subheaderVal+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
 						}
 						else
 						{
-						for(int l=j;l>=0;l--)
-						{
-							if(cells[l][0].isIs_columnspanning() && table.getNum_of_columns()>1 && cells[l][0].getCells_columnspanning()>=table.getNum_of_columns() && !cells[l][0].getCell_content().trim().equalsIgnoreCase("") && !cells[l][0].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[l][0].getCell_content().trim().charAt(0))== 160))
+//						for(int l=j;l>=0;l--)
+//						{
+//							if(cells[l][0].isIs_columnspanning() && table.getNum_of_columns()>1 && cells[l][0].getCells_columnspanning()>=table.getNum_of_columns() && !cells[l][0].getCell_content().trim().equalsIgnoreCase("") && !cells[l][0].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[l][0].getCell_content().trim().charAt(0))== 160))
+//							{
+//								subheaderVal = cells[l][0].getCell_content().trim();
+//								break;
+//							}
+//							emptyCells = true;
+//							for(int h=1;h<cells[l].length;h++)
+//							{
+//								
+//								if(!cells[l][0].getCell_content().trim().equalsIgnoreCase("") && !cells[l][0].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[l][0].getCell_content().trim().charAt(0))== 160) && (!cells[l][h].getCell_content().trim().equalsIgnoreCase("") && !cells[l][h].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[l][h].getCell_content().trim().charAt(0))== 160)))
+//								{
+//									emptyCells = false;
+//								}
+//							}
+//							if(emptyCells == true)
+//							{
+//								subheaderVal = cells[l][0].getCell_content();
+//								break;
+//							}
+//						}
+						if(subheaderVal.equals("")){
+							if(cells[j][0].getCell_content()!="")
 							{
-								subheaderVal = cells[l][0].getCell_content().trim();
-								break;
+								attribute.setTextContent(cells[0][0].getCell_content()+";"+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
 							}
-							emptyCells = true;
-							for(int h=1;h<cells[l].length;h++)
+							else
 							{
+								attribute.setTextContent(cells[0][0].getCell_content()+";"+prevRowHeader+";"+cells[0][k].getCell_content());
 								
-								if(!cells[l][0].getCell_content().trim().equalsIgnoreCase("") && !cells[l][0].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[l][0].getCell_content().trim().charAt(0))== 160) && (!cells[l][h].getCell_content().trim().equalsIgnoreCase("") && !cells[l][h].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[l][h].getCell_content().trim().charAt(0))== 160)))
+							}
+							}else{
+								if(cells[j][0].getCell_content()!="")
 								{
-									emptyCells = false;
+							attribute.setTextContent(cells[0][0].getCell_content()+";"+subheaderVal+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
+								}
+								else
+								{
+									attribute.setTextContent(cells[0][0].getCell_content()+";"+subheaderVal+":"+prevRowHeader+";"+cells[0][k].getCell_content());
+									
 								}
 							}
-							if(emptyCells == true)
-							{
-								subheaderVal = cells[l][0].getCell_content();
-								break;
-							}
-						}
-						if(subheaderVal.equals(""))
-							attribute.setTextContent(cells[0][0].getCell_content()+";"+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
-						else
-							attribute.setTextContent(cells[0][0].getCell_content()+";"+subheaderVal+":"+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
 						}
 						rootElement.appendChild(attribute);
 						
@@ -350,7 +399,7 @@ public class SimpleIE {
 		for(int i = 0; i< tables.length;i++)
 		{
 			//only simple tables
-			if( tables[i].getStructureClass()!=2 && tables[i].getStructureClass()!=3)
+			if( tables[i].getStructureClass()!=2 && tables[i].getStructureClass()!=1)
 				continue;
 			
 			String tableFileName = "/"+tables[i].getDocumentFileName()+tables[i].getTable_title()+"-"+tables[i].tableInTable;

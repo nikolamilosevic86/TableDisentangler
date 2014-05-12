@@ -17,6 +17,8 @@ public class Table {
 	private String xml;
 	private String documentFileName;
 	public TableStats stat;
+	public boolean isEmptyOnlyHeaders = true;
+	
 	
 	/** The num_of_rows. */
 	private int num_of_rows;
@@ -312,4 +314,6 @@ public class Table {
 	public void setStructureClass(int structureClass) {
 		StructureClass = structureClass;
 	}
+
+
 }

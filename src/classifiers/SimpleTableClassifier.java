@@ -94,19 +94,18 @@ public class SimpleTableClassifier {
 		
 		String tableFileName = "/"+t.getDocumentFileName()+t.getTable_title()+".xml.html";
 		
-		if(t.stat.getNum_of_header_rows()==1 && t.stat.getNum_of_empty_cells()==0)
-		{
-			t.setStructureClass(2);
-			Utilities.WriteFile(SimpleFolder+tableFileName, t.getXml());
-		}
-		
-		if(t.stat.getNum_of_header_rows()==1 && t.stat.getNum_of_empty_cells()==0 && t.stat.getNum_of_part_numeric_cells()==0)
+		if(t.stat.getNum_of_header_rows()<5 && t.isHasHeader() && !t.isNoXMLTable() && t.stat.getNum_of_empty_cells()==0 && t.stat.getNum_of_part_numeric_cells()==0)
 		{
 			if(t.getStructureClass()==0)
 				t.setStructureClass(1);
 			Utilities.WriteFile(SimplestFolder+tableFileName, t.getXml());
 		}
-		else if(( (float)t.stat.getNum_of_empty_cells() / t.stat.getNum_of_cells())<0.85 && t.stat.getNum_of_header_rows()==1 && t.stat.getNum_of_part_numeric_cells()<15)
+		else if(t.stat.getNum_of_header_rows()<5 && (t.stat.getNum_of_empty_cells()==t.stat.getHeader_empty_cells()||t.isEmptyOnlyHeaders) && t.isHasHeader() && !t.isNoXMLTable())
+		{
+			t.setStructureClass(2);
+			Utilities.WriteFile(SimpleFolder+tableFileName, t.getXml());
+		}
+		else if(( (float)t.stat.getNum_of_empty_cells() / t.stat.getNum_of_cells())<0.85 && t.stat.getNum_of_header_rows()<5 && t.stat.getNum_of_part_numeric_cells()<15 &&  t.isHasHeader() && !t.isNoXMLTable())
 		{
 			if(t.getStructureClass()==0)
 				t.setStructureClass(3);

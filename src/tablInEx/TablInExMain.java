@@ -100,6 +100,15 @@ public class TablInExMain {
 		{
 			articles = runReadingloop(articles,files, files.length, PMCXMLReader.class);
 		}
+		for(int i = 0; i < articles.length;i++)
+		{
+			if(articles[i]!=null && articles[i].getTables()!=null)
+			for(int j = 0; j<articles[i].getTables().length;j++)
+			{
+				Table t = articles[i].getTables()[j];
+				t = TableSimplifier.MergeHeaders(t);
+			}
+		}
 		if (doIE) 
 		{
 			SimpleIE ie = new SimpleIE(Inpath);

@@ -35,6 +35,8 @@ public class TableStats {
 	/** The num_of_header_rows. */
 	private int num_of_header_rows;
 	
+	private int header_empty_cells;
+	
 	/** The num_of_body_rows. */
 	private int num_of_body_rows;
 	
@@ -44,6 +46,11 @@ public class TableStats {
 	public void AddHeaderRow()
 	{
 		num_of_header_rows++;
+	}
+	
+	public void AddHeaderEmptyCell()
+	{
+		header_empty_cells++;
 	}
 	
 	/**
@@ -273,6 +280,14 @@ public class TableStats {
 	 */
 	public void setNum_of_body_rows(int num_of_body_rows) {
 		this.num_of_body_rows = num_of_body_rows;
+	}
+
+	public int getHeader_empty_cells() {
+		return header_empty_cells;
+	}
+
+	public void setHeader_empty_cells(int header_empty_cells) {
+		this.header_empty_cells = header_empty_cells;
 	}
 
 }

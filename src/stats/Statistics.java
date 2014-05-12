@@ -282,6 +282,8 @@ public class Statistics {
 			num_of_empty_cells++;
 			table.stat.AddEmptyCell();
 			cell.setCell_content("");
+			if(cell.isIs_header())
+				table.stat.AddHeaderEmptyCell();
 			
 		}
 		else

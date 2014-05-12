@@ -141,4 +141,19 @@ public class Utilities {
 		else
 			return false;
 	}
+	
+	public static boolean isSpaceOrEmpty(String s)
+	{
+		if(s==null)
+			return false;
+		if(s.length()>1)
+			return false;
+		if(s.length()==0)
+			return true;
+		char ch = s.charAt(0);
+		if(((int)ch)==8195 || (int)ch==160 || (int)ch== ' ' || (int)ch==8194 || (int)ch==8201 )
+			return true;
+		else
+			return false;
+	}
 }

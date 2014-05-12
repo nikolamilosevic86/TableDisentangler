@@ -69,9 +69,55 @@ public class TableSimplifier {
 	 * @param cells - Cell[][] - Table
 	 * @return cells - Cell[][] - Table with simplified header
 	 */
-	public static Cell[][] MergeHeaders(Cell[][] cells)
+	public static Table MergeHeaders(Table table)
 	{
-		return cells;
+		if(table.stat.getNum_of_header_rows()<2)
+			return table;
+		Cell[][] cells = table.getTable_cells();
+		
+		for(int i = table.stat.getNum_of_header_rows() - 2; i >= 0;i--)
+		{
+			for(int j = 0; j<cells[i].length;j++)
+			{
+				if(!Utilities.isSpaceOrEmpty(cells[i][j].getCell_content()))
+					cells[table.stat.getNum_of_header_rows() - 1][j].setCell_content(cells[i][j].getCell_content()+ " "+cells[table.stat.getNum_of_header_rows() - 1][j].getCell_content());
+			}
+		}
+		
+		Cell[][] newcells = new Cell[table.getNum_of_rows()- table.stat.getNum_of_header_rows()+1][table.getNum_of_columns()];
+		for(int i = 0;i<newcells.length;i++)
+		{
+			newcells[i] = cells[i+table.stat.getNum_of_header_rows()-1].clone();
+		}
+		table.stat.setNum_of_header_rows(1);
+		table.setNum_of_rows(1+table.stat.getNum_of_body_rows());
+		table.cells = newcells;
+		
+		//TODO: Delete this part
+		for(int i = 0;i<table.cells.length;i++){
+			int num_of_empty = 0;
+			for(int j = 0;j<table.cells[i].length;j++)
+			{
+				
+				if(table.cells[i][j].getCell_content()==null)
+				{
+					table.cells[i][j].setCell_content("");
+				}
+				if(table.cells[i][j]==null)
+				{
+					table.cells[i][j] = new Cell(i, j);
+					table.cells[i][j].setCell_content("");
+				}
+				if(Utilities.isSpaceOrEmpty(table.cells[i][j].getCell_content()))
+				{
+					num_of_empty++;
+				}
+			}
+			if(table.getNum_of_columns()-num_of_empty>1)
+				table.isEmptyOnlyHeaders = false;
+		}
+		
+		return table;
 	}
 
 }
