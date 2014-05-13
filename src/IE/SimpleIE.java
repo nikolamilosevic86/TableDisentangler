@@ -99,6 +99,16 @@ public class SimpleIE {
 			String prevRowHeader = "";
 			for(int j=1;j<cells.length;j++)
 			{
+				boolean emptyLine = true;
+				for(int h = 0;h<cells[j].length;h++)
+				{
+					if(!Utilities.isSpaceOrEmpty(cells[j][h].getCell_content()))
+					{
+						emptyLine = false;
+					}
+				}
+				if(emptyLine)
+					continue;
 				if(cells[j][0].isIs_columnspanning() && table.getNum_of_columns()>1 && cells[j][0].getCells_columnspanning()>=table.getNum_of_columns())
 				{
 					subheaderVal = cells[j][0].getCell_content()+": ";
@@ -166,28 +176,7 @@ public class SimpleIE {
 						}
 						else
 						{
-//						for(int l=j;l>=0;l--)
-//						{
-//							if(cells[l][0].isIs_columnspanning() && table.getNum_of_columns()>1 && cells[l][0].getCells_columnspanning()>=table.getNum_of_columns() && !cells[l][0].getCell_content().trim().equalsIgnoreCase("") && !cells[l][0].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[l][0].getCell_content().trim().charAt(0))== 160))
-//							{
-//								subheaderVal = cells[l][0].getCell_content().trim();
-//								break;
-//							}
-//							emptyCells = true;
-//							for(int h=1;h<cells[l].length;h++)
-//							{
-//								
-//								if(!cells[l][0].getCell_content().trim().equalsIgnoreCase("") && !cells[l][0].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[l][0].getCell_content().trim().charAt(0))== 160) && (!cells[l][h].getCell_content().trim().equalsIgnoreCase("") && !cells[l][h].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[l][h].getCell_content().trim().charAt(0))== 160)))
-//								{
-//									emptyCells = false;
-//								}
-//							}
-//							if(emptyCells == true)
-//							{
-//								subheaderVal = cells[l][0].getCell_content();
-//								break;
-//							}
-//						}
+
 						if(subheaderVal.equals("")){
 							if(cells[j][0].getCell_content()!="")
 							{
