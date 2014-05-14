@@ -119,5 +119,18 @@ public class TableSimplifier {
 		
 		return table;
 	}
+	
+	/**
+	 * Function that simplifies complex stubs, that have more then one columns.
+	 * Function merges complex stubs into one column stub, by appending 
+	 * leftmost cells before content of right-most cells. At the end copied cells are deleted.
+	 * @param cells - Cell[][] - Table
+	 * @return cells - Cell[][] - Table with simplified header
+	 */
+	public static Table MergeStubs(Table table)
+	{
+		
+		return table;
+	}
 
 }
