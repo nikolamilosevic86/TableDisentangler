@@ -87,15 +87,17 @@ public class SimpleIE {
 	
 	
 	
-	
+	//TODO: Redo, comment, do something with this!!!
 	public void processTableWithSubheaders(Cell[][] cells,Table table, Article art, String tableFileName)
 	{
 		if(hasTableSubheader(cells,table))
 		{
+			int subHeaderValIndex = 0;
 			boolean hadsubheader = false;
 			boolean valueSeparator = false;
 			boolean subheaderTableWIthValSeparators = false;
 			String subheaderVal = "";
+			String subHeaderValLevelUp = "";
 			String prevRowHeader = "";
 			for(int j=1;j<cells.length;j++)
 			{
@@ -105,6 +107,7 @@ public class SimpleIE {
 					if(!Utilities.isSpaceOrEmpty(cells[j][h].getCell_content()))
 					{
 						emptyLine = false;
+						break;
 					}
 				}
 				if(emptyLine)
@@ -127,14 +130,20 @@ public class SimpleIE {
 						emptyCells = false;
 						prevRowHeader = cells[j-1][0].getCell_content();
 					}
-//					if(!cells[j][0].getCell_content().trim().equalsIgnoreCase("") && !cells[j][0].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[j][0].getCell_content().trim().charAt(0))== 160) && (!cells[j][h].getCell_content().trim().equalsIgnoreCase("") && !cells[j][h].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[j][h].getCell_content().trim().charAt(0))== 160)))
-//					{
-//						emptyCells = false;
-//					}
+
 				}
 				if(emptyCells){
+					if(subHeaderValIndex!=0 && subHeaderValIndex == j-1)
+					{
+						subHeaderValLevelUp = subheaderVal;
+						subheaderVal = cells[j][0].getCell_content()+": ";
+					}
+					else
+					{
 					subheaderVal = cells[j][0].getCell_content()+": ";
+					subHeaderValIndex = j;
 					continue;
+					}
 				}
 
 				for(int k=1;k<cells[j].length;k++)
@@ -150,7 +159,6 @@ public class SimpleIE {
 						doc.appendChild(rootElement);
 						
 						Element attribute = doc.createElement("attribute");
-					//	String subheaderVal = "";
 						
 						if(cells[j][0].getCell_content().length()>0 && Utilities.isSpace(cells[j][0].getCell_content().trim().charAt(0)) )
 						{
@@ -162,17 +170,17 @@ public class SimpleIE {
 						{
 							valueSeparator = false;
 							hadsubheader = false;
-							if(subheaderTableWIthValSeparators && !Utilities.isSpaceOrEmpty(cells[j][0].getCell_content()))
+							if(subheaderTableWIthValSeparators && !Utilities.isSpaceOrEmpty(cells[j][0].getCell_content()) && Utilities.isSpaceOrEmpty(subHeaderValLevelUp))
 								subheaderVal = "";
 						}
 						
 						if((valueSeparator == true && (Utilities.isSpace(cells[j][0].getCell_content().trim().charAt(0)))) || (hadsubheader == true && valueSeparator == false)){
 							if(cells[j][0].getCell_content()=="")
 							{
-								attribute.setTextContent(cells[0][0].getCell_content()+";"+subheaderVal+prevRowHeader+";"+cells[0][k].getCell_content());
+								attribute.setTextContent(cells[0][0].getCell_content()+";"+subHeaderValLevelUp+ " "+subheaderVal+prevRowHeader+";"+cells[0][k].getCell_content());
 									
 							}else
-							attribute.setTextContent(cells[0][0].getCell_content()+";"+subheaderVal+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
+							attribute.setTextContent(cells[0][0].getCell_content()+";"+subHeaderValLevelUp+ " "+subheaderVal+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
 						}
 						else
 						{
@@ -190,11 +198,11 @@ public class SimpleIE {
 							}else{
 								if(cells[j][0].getCell_content()!="")
 								{
-							attribute.setTextContent(cells[0][0].getCell_content()+";"+subheaderVal+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
+							attribute.setTextContent(cells[0][0].getCell_content()+";"+subHeaderValLevelUp+ " "+subheaderVal+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
 								}
 								else
 								{
-									attribute.setTextContent(cells[0][0].getCell_content()+";"+subheaderVal+":"+prevRowHeader+";"+cells[0][k].getCell_content());
+									attribute.setTextContent(cells[0][0].getCell_content()+";"+subHeaderValLevelUp+ " "+subheaderVal+":"+prevRowHeader+";"+cells[0][k].getCell_content());
 									
 								}
 							}
