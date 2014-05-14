@@ -107,6 +107,7 @@ public class TablInExMain {
 			{
 				Table t = articles[i].getTables()[j];
 				t = TableSimplifier.MergeHeaders(t);
+				t = TableSimplifier.MergeStubs(t);
 			}
 		}
 		if (doIE) 

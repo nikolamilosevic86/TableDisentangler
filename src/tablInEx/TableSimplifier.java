@@ -5,6 +5,7 @@
  */
 package tablInEx;
 
+import java.util.Arrays;
 import java.util.LinkedList; 
 
 /**
@@ -129,6 +130,68 @@ public class TableSimplifier {
 	 */
 	public static Table MergeStubs(Table table)
 	{
+		if(table.getNum_of_columns()<3)
+			return table;
+		Cell[][] cells = table.getTable_cells();
+		String prevVal = "";
+		boolean hasComplexStub = false;
+		for(int i = 0;i<cells.length;i++)
+		{
+			if(Utilities.isSpaceOrEmpty(cells[i][0].getCell_content()) && Utilities.isSpaceOrEmpty(cells[i][1].getCell_content()))
+			{
+				hasComplexStub = true;
+				break;
+			}
+		}
+		if(!hasComplexStub)
+			return table;
+		for(int i = 0;i<cells.length;i++)
+		{
+			if(Utilities.isSpaceOrEmpty(cells[i][0].getCell_content()) && Utilities.isSpaceOrEmpty(cells[i][1].getCell_content()))
+				continue;
+			if(Utilities.isSpaceOrEmpty(cells[i][0].getCell_content()) && i>1)
+			{
+				if(cells[i-1][0]!=null && !Utilities.isSpaceOrEmpty(cells[i-1][0].getCell_content()))
+				prevVal = cells[i-1][0].getCell_content();
+			}
+			if(hasComplexStub)
+			{
+				if(prevVal==null || Utilities.isSpaceOrEmpty(prevVal) || !Utilities.isSpaceOrEmpty(cells[i][0].getCell_content()))
+				{
+					if(Utilities.isSpaceOrEmpty(cells[i][0].getCell_content()) && !Utilities.isSpaceOrEmpty(cells[i][1].getCell_content()))
+					{
+						cells[i][1].setCell_content(cells[i][1].getCell_content());
+					}
+					if(!Utilities.isSpaceOrEmpty(cells[i][0].getCell_content()) && Utilities.isSpaceOrEmpty(cells[i][1].getCell_content()))
+					{
+						cells[i][1].setCell_content(cells[i][0].getCell_content());
+					}
+					if(!Utilities.isSpaceOrEmpty(cells[i][0].getCell_content()) && !Utilities.isSpaceOrEmpty(cells[i][1].getCell_content()))
+					{
+						cells[i][1].setCell_content(cells[i][0].getCell_content()+", " +cells[i][1].getCell_content());
+					}
+						
+				}
+				else
+				{
+					if(Utilities.isSpaceOrEmpty(cells[i][1].getCell_content()))
+						cells[i][1].setCell_content(prevVal);
+					else
+						cells[i][1].setCell_content(prevVal + ", " +cells[i][1].getCell_content());
+				}
+			}
+		}
+		if(hasComplexStub)
+		{			
+			Cell[][] newcells = new Cell[table.getNum_of_rows()][table.getNum_of_columns()-1];
+			for(int i = 0;i<newcells.length;i++)
+			{
+				newcells[i] =  Arrays.copyOfRange(cells[i], 1, cells[i].length);
+			}
+			table.stat.setNum_of_header_rows(1);
+			table.setNum_of_rows(1+table.stat.getNum_of_body_rows());
+			table.cells = newcells;
+		}
 		
 		return table;
 	}
