@@ -6,8 +6,12 @@
 package tablInEx;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
-
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import IE.SimpleIE;
 import classifiers.SimpleTableClassifier;
 import readers.PMCXMLReader;
@@ -20,9 +24,11 @@ public class TablInExMain {
 	public static boolean doStats = false; 
 	public static boolean TypeClassify = false;
 	public static boolean ComplexClassify = false;
+	public static boolean learnheaders = false;
 	public static boolean doIE = false;
 	public static String outputDest = "";
 	public static String Inpath;
+	public static HashMap<String,Integer> headermap = new HashMap<String, Integer>();
 	
 	public static Article[] runReadingloop(Article[] a,File[] files,int len, Class s)
 	{
@@ -65,6 +71,11 @@ public class TablInExMain {
 		{
 			int i = Arrays.asList(args).indexOf("-o");
 			outputDest = args[i+1];
+		}
+		if(Arrays.asList(args).contains("-learnheaders"))
+		{
+			int i = Arrays.asList(args).indexOf("-learnheaders");
+			learnheaders = true;
 		}
 		if(Arrays.asList(args).contains("-makestats"))
 		{
@@ -119,6 +130,39 @@ public class TablInExMain {
 				
 			}
 		}
+		if(learnheaders)
+		{
+			LinkedHashMap lm = Utilities.sortHashMapByValuesD(headermap);
+			Object [] ss = lm.keySet().toArray();
+			String[] sa = new String[ss.length];
+			int k = 0;
+			for(Object o:ss)
+			{
+				sa[k] = (String)ss[k];
+				k++;
+			}
+			PrintWriter writer;
+			try {
+				writer = new PrintWriter("headers.txt", "UTF-8");
+
+
+			for (String name: sa){
+
+	            String key =name.toString();
+	            String value = lm.get(name).toString();  
+	            writer.println(key + " " + value);  
+
+	}
+			writer.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 		
 		Statistics.CalculateStatistics();
 		String stats = Statistics.makeOutputStatisticString();
@@ -143,6 +187,7 @@ public class TablInExMain {
 		System.out.println("    -typeclassify - Classify tables by tipes (useful tables, tables without head, without body, with rowspans, with colspans...)");
 		System.out.println("    -complexclassify - Classify tables by complexity (simple,medium,complex)");
 		System.out.println("    -doie - Tells system do do Information extraction and save it to inputfolder_ie");
+		System.out.println("    -learnheaders - Tells system do calculate frequency of phrases in headers. These phrases are stored in a file headers.txt, and can be later used.");
 		
 	}
 }

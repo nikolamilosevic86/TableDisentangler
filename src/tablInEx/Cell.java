@@ -336,6 +336,18 @@ public class Cell {
 		cell.rowspanning_index = rowspanning_index;
 		cell.columnspanning_index = columnspanning_index;
 		cell.is_filled = true;
+		if(TablInExMain.learnheaders && cell.isIs_header()){
+		if(!TablInExMain.headermap.containsKey(cell.getCell_content()))
+		{
+			TablInExMain.headermap.put(cell.getCell_content(), 1);
+		}
+		else
+		{
+			int freq = TablInExMain.headermap.get(cell.getCell_content());
+			freq++;
+			TablInExMain.headermap.put(cell.getCell_content(), freq);
+		}
+		}
 		return cell;
 
 	}
