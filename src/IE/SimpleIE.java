@@ -55,6 +55,34 @@ public class SimpleIE {
 		}
 		return false;
 	}
+	
+	public boolean isRowSubheader(Cell [] cells, Table table)
+	{
+		boolean isSubheader = false;
+		if(cells[0].isIs_columnspanning() && table.getNum_of_columns()>1 && cells[0].getCells_columnspanning()>=table.getNum_of_columns() && !cells[0].getCell_content().trim().equalsIgnoreCase("") && !cells[0].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[0].getCell_content().trim().charAt(0))== 160))
+		{
+			isSubheader = true;
+		}
+		boolean emptyCells = true;
+		for(int j=1;j<cells.length;j++)
+		{
+			if(cells[j].getCell_content()==null)
+			{
+				cells[j].setCell_content("");
+			}
+			if(!cells[0].getCell_content().trim().equalsIgnoreCase("") && !cells[0].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[0].getCell_content().trim().charAt(0))== 160) && (!cells[j].getCell_content().trim().equalsIgnoreCase("") && !cells[j].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[j].getCell_content().trim().charAt(0))== 160)))
+			{
+				emptyCells = false;
+			}
+		}
+		if(emptyCells == true)
+		{
+			isSubheader = true;
+		}
+		return isSubheader;
+	}
+	
+	
 	public boolean hasTableSubheader(Cell [][] cells, Table table)
 	{
 		boolean hasSubheader = false;
@@ -99,8 +127,23 @@ public class SimpleIE {
 		}
 		return s;
 	}
+	
+	public Element getStackAsElements(String[] stack, int subheaderLevel,Document doc,Element stub)
+	{
+		//String s = "";
+		for(int i = 0;i<subheaderLevel;i++)
+		{
+
+				Element st = doc.createElement("SubHeader"+i);
+				st.setTextContent(stack[i]);
+				stub.appendChild(st);
+			//	s+=", "+stack[i];
+			
+		}
+		return stub;
+	}
+	
 	//TODO: Redo, comment, do something with this!!!
-	//TODO: Impelemnt stack for subheader tree
 	public void processTableWithSubheaders(Cell[][] cells,Table table, Article art, String tableFileName)
 	{
 		if(hasTableSubheader(cells,table))
@@ -184,9 +227,11 @@ public class SimpleIE {
 					}
 
 				}
-
+				if(isRowSubheader(cells[j],table))
+					continue;
 				for(int k=1;k<cells[j].length;k++)
 				{
+					
 					try{ 
 						DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 						DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -197,7 +242,7 @@ public class SimpleIE {
 						Element rootElement = doc.createElement("information");
 						doc.appendChild(rootElement);
 						
-						Element attribute = doc.createElement("attribute");
+						Element ReadingPath = doc.createElement("ReadingPath");
 						
 						if(cells[j][0].getCell_content().length()>0 && Utilities.isSpace(cells[j][0].getCell_content().trim().charAt(0)) )
 						{
@@ -225,17 +270,98 @@ public class SimpleIE {
 							{
 								//attribute.setTextContent(cells[0][0].getCell_content()+";"+subHeaderValLevelUp+ " "+subheaderVal+prevRowHeader+";"+cells[0][k].getCell_content());
 								if( Arrays.asList(Arrays.copyOfRange(headerStack, 0, currentSubHeaderLevel)).contains(subHeaderValLevelUp.substring(0,subHeaderValLevelUp.length()-2)))
-									attribute.setTextContent(cells[0][0].getCell_content()+";"+getStack(headerStack, currentSubHeaderLevel)+prevRowHeader+";"+cells[0][k].getCell_content());
-								else		
-									attribute.setTextContent(cells[0][0].getCell_content()+";"+subHeaderValLevelUp+getStack(headerStack, currentSubHeaderLevel)+prevRowHeader+";"+cells[0][k].getCell_content());
-								
+								{
+									if(!Utilities.isSpaceOrEmpty(cells[0][0].getCell_content()))
+									{
+										Element Head00 = doc.createElement("Head00");
+										Head00.setTextContent(cells[0][0].getCell_content());
+										ReadingPath.appendChild(Head00);
+									}
+									Element Stub = doc.createElement("Stub");
+									Stub = getStackAsElements(headerStack, currentSubHeaderLevel, doc, Stub);
+									Element prev = doc.createElement("Subheader"+currentSubHeaderLevel);
+									prev.setTextContent(prevRowHeader);
+									Stub.appendChild(prev);
+									Element s = doc.createElement("HeaderValue");
+									s.setTextContent(cells[0][k].getCell_content());
+									Stub.appendChild(s);
+									
+									ReadingPath.appendChild(Stub);
+									//attribute.setTextContent(cells[0][0].getCell_content()+";"+getStack(headerStack, currentSubHeaderLevel)+prevRowHeader+";"+cells[0][k].getCell_content());
+								}
+								else	
+								{
+									if(!Utilities.isSpaceOrEmpty(cells[0][0].getCell_content()))
+									{
+										Element Head00 = doc.createElement("Head00");
+										Head00.setTextContent(cells[0][0].getCell_content());
+										ReadingPath.appendChild(Head00);
+									}
+									Element Stub = doc.createElement("Stub");
+									Element subHeadValLevelUp = doc.createElement("SubLevelUp");
+									subHeadValLevelUp.setTextContent(subHeaderValLevelUp);
+									Stub.appendChild(subHeadValLevelUp);
+									Stub = getStackAsElements(headerStack, currentSubHeaderLevel, doc, Stub);
+									Element prev = doc.createElement("Subheader"+currentSubHeaderLevel);
+									prev.setTextContent(prevRowHeader);
+									Stub.appendChild(prev);
+									Element s = doc.createElement("HeaderValue");
+									s.setTextContent(cells[0][k].getCell_content());
+									Stub.appendChild(s);
+									
+									ReadingPath.appendChild(Stub);
+									//attribute.setTextContent(cells[0][0].getCell_content()+";"+subHeaderValLevelUp+getStack(headerStack, currentSubHeaderLevel)+prevRowHeader+";"+cells[0][k].getCell_content());
+								}
 							}else
 							{
 								if(subHeaderValLevelUp.length()>2 && Arrays.asList(Arrays.copyOfRange(headerStack, 0, currentSubHeaderLevel)).contains(subHeaderValLevelUp.substring(0,subHeaderValLevelUp.length()-2)))
-									attribute.setTextContent(cells[0][0].getCell_content()+";"+getStack(headerStack, currentSubHeaderLevel)+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
+								{
+									if(!Utilities.isSpaceOrEmpty(cells[0][0].getCell_content()))
+									{
+										Element Head00 = doc.createElement("Head00");
+										Head00.setTextContent(cells[0][0].getCell_content());
+										ReadingPath.appendChild(Head00);
+									}
+									Element Stub = doc.createElement("Stub");
+									Stub = getStackAsElements(headerStack, currentSubHeaderLevel, doc, Stub);
+									Element s = doc.createElement("HeaderValue");
+									s.setTextContent(cells[0][k].getCell_content());
+									ReadingPath.appendChild(s);
+									
+									Element ss = doc.createElement("StubValue");
+									ss.setTextContent(cells[j][0].getCell_content());
+									Stub.appendChild(ss);
+									
+									ReadingPath.appendChild(Stub);
+									//attribute.setTextContent(cells[0][0].getCell_content()+";"+getStack(headerStack, currentSubHeaderLevel)+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
+								}
 								else
 								{
-									attribute.setTextContent(cells[0][0].getCell_content()+";"+subHeaderValLevelUp+getStack(headerStack, currentSubHeaderLevel)+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
+									if(!Utilities.isSpaceOrEmpty(cells[0][0].getCell_content()))
+									{
+										Element Head00 = doc.createElement("Head00");
+										Head00.setTextContent(cells[0][0].getCell_content());
+										ReadingPath.appendChild(Head00);
+									}
+									Element Stub = doc.createElement("Stub");
+									if(!Utilities.isSpaceOrEmpty(subHeaderValLevelUp)){
+									Element subHeaderLevelUp = doc.createElement("SubHeaderLevelUp");
+									subHeaderLevelUp.setTextContent(subHeaderValLevelUp);
+									Stub.appendChild(subHeaderLevelUp);
+									}
+									
+									
+									Stub = getStackAsElements(headerStack, currentSubHeaderLevel, doc, Stub);
+									Element s = doc.createElement("HeaderValue");
+									s.setTextContent(cells[0][k].getCell_content());
+									ReadingPath.appendChild(s);
+									
+									Element ss = doc.createElement("StubValue");
+									ss.setTextContent(cells[j][0].getCell_content());
+									Stub.appendChild(ss);
+									
+									ReadingPath.appendChild(Stub);
+									//attribute.setTextContent(cells[0][0].getCell_content()+";"+subHeaderValLevelUp+getStack(headerStack, currentSubHeaderLevel)+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
 
 								}
 							}
@@ -246,32 +372,157 @@ public class SimpleIE {
 						if(subheaderVal.equals("")){
 							if(cells[j][0].getCell_content()!="")
 							{
-								attribute.setTextContent(cells[0][0].getCell_content()+";"+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
+								if(!Utilities.isSpaceOrEmpty(cells[0][0].getCell_content()))
+								{
+									Element Head00 = doc.createElement("Head00");
+									Head00.setTextContent(cells[0][0].getCell_content());
+									ReadingPath.appendChild(Head00);
+								}
+								Element Stub = doc.createElement("Stub");								
+								
+							//	Stub = getStackAsElements(headerStack, currentSubHeaderLevel, doc, Stub);
+								Element s = doc.createElement("HeaderValue");
+								s.setTextContent(cells[0][k].getCell_content());
+								ReadingPath.appendChild(s);
+								
+								Element ss = doc.createElement("StubValue");
+								ss.setTextContent(cells[j][0].getCell_content());
+								Stub.appendChild(ss);
+								
+								ReadingPath.appendChild(Stub);
+								//attribute.setTextContent(cells[0][0].getCell_content()+";"+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
 							}
 							else
 							{
-								attribute.setTextContent(cells[0][0].getCell_content()+";"+prevRowHeader+";"+cells[0][k].getCell_content());
+								if(!Utilities.isSpaceOrEmpty(cells[0][0].getCell_content()))
+								{
+									Element Head00 = doc.createElement("Head00");
+									Head00.setTextContent(cells[0][0].getCell_content());
+									ReadingPath.appendChild(Head00);
+								}
+								Element Stub = doc.createElement("Stub");								
+								
+								//Stub = getStackAsElements(headerStack, currentSubHeaderLevel, doc, Stub);
+								Element s = doc.createElement("HeaderValue");
+								s.setTextContent(cells[0][k].getCell_content());
+								ReadingPath.appendChild(s);
+								
+								Element ss = doc.createElement("StubValue");
+								ss.setTextContent(prevRowHeader);
+								Stub.appendChild(ss);
+								
+								ReadingPath.appendChild(Stub);
+							//	attribute.setTextContent(cells[0][0].getCell_content()+";"+prevRowHeader+";"+cells[0][k].getCell_content());
 								
 							}
 							}else{
 								if(cells[j][0].getCell_content()!="")
 								{
 									if( subHeaderValLevelUp.length()>2 && Arrays.asList(Arrays.copyOfRange(headerStack, 0, currentSubHeaderLevel)).contains(subHeaderValLevelUp.substring(0,subHeaderValLevelUp.length()-2)))
-										attribute.setTextContent(cells[0][0].getCell_content()+";"+getStack(headerStack, currentSubHeaderLevel)+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
+									{
+										if(!Utilities.isSpaceOrEmpty(cells[0][0].getCell_content()))
+										{
+											Element Head00 = doc.createElement("Head00");
+											Head00.setTextContent(cells[0][0].getCell_content());
+											ReadingPath.appendChild(Head00);
+										}
+										Element Stub = doc.createElement("Stub");		
+										
+										Stub = getStackAsElements(headerStack, currentSubHeaderLevel, doc, Stub);
+										Element s = doc.createElement("HeaderValue");
+										s.setTextContent(cells[0][k].getCell_content());
+										ReadingPath.appendChild(s);
+										
+										Element ss = doc.createElement("StubValue");
+										ss.setTextContent(cells[j][0].getCell_content());
+										Stub.appendChild(ss);
+										
+										ReadingPath.appendChild(Stub);
+									//	attribute.setTextContent(cells[0][0].getCell_content()+";"+getStack(headerStack, currentSubHeaderLevel)+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
+									}
 									else
-										attribute.setTextContent(cells[0][0].getCell_content()+";"+subHeaderValLevelUp+getStack(headerStack, currentSubHeaderLevel)+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
+									{
+										if(!Utilities.isSpaceOrEmpty(cells[0][0].getCell_content()))
+										{
+											Element Head00 = doc.createElement("Head00");
+											Head00.setTextContent(cells[0][0].getCell_content());
+											ReadingPath.appendChild(Head00);
+										}
+										Element Stub = doc.createElement("Stub");
+										if(!Utilities.isSpaceOrEmpty(subHeaderValLevelUp)){
+										Element subHeaderLevelUp = doc.createElement("SubHeaderLevelUp");
+										subHeaderLevelUp.setTextContent(subHeaderValLevelUp);
+										Stub.appendChild(subHeaderLevelUp);
+										}
+										
+										
+										Stub = getStackAsElements(headerStack, currentSubHeaderLevel, doc, Stub);
+										Element s = doc.createElement("HeaderValue");
+										s.setTextContent(cells[0][k].getCell_content());
+										ReadingPath.appendChild(s);
+										
+										Element ss = doc.createElement("StubValue");
+										ss.setTextContent(cells[j][0].getCell_content());
+										Stub.appendChild(ss);
+										
+										ReadingPath.appendChild(Stub);
+										//attribute.setTextContent(cells[0][0].getCell_content()+";"+subHeaderValLevelUp+getStack(headerStack, currentSubHeaderLevel)+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
+									}
 								}
 								else
 								{
 									if( subHeaderValLevelUp.length()>2 && Arrays.asList(Arrays.copyOfRange(headerStack, 0, currentSubHeaderLevel)).contains(subHeaderValLevelUp.substring(0,subHeaderValLevelUp.length()-2)))
-										attribute.setTextContent(cells[0][0].getCell_content()+";"+getStack(headerStack, currentSubHeaderLevel)+":"+prevRowHeader+";"+cells[0][k].getCell_content());
+									{
+										if(!Utilities.isSpaceOrEmpty(cells[0][0].getCell_content()))
+										{
+											Element Head00 = doc.createElement("Head00");
+											Head00.setTextContent(cells[0][0].getCell_content());
+											ReadingPath.appendChild(Head00);
+										}
+										Element Stub = doc.createElement("Stub");
+								
+										Stub = getStackAsElements(headerStack, currentSubHeaderLevel, doc, Stub);
+										Element prev = doc.createElement("StubValue");
+										prev.setTextContent(prevRowHeader);
+										Stub.appendChild(prev);
+										Element s = doc.createElement("HeaderValue");
+										s.setTextContent(cells[0][k].getCell_content());
+										ReadingPath.appendChild(s);
+										
+//										Element ss = doc.createElement("StubValue");
+//										ss.setTextContent(cells[j][0].getCell_content());
+//										Stub.appendChild(ss);
+										
+										ReadingPath.appendChild(Stub);
+										//attribute.setTextContent(cells[0][0].getCell_content()+";"+getStack(headerStack, currentSubHeaderLevel)+":"+prevRowHeader+";"+cells[0][k].getCell_content());
+									}
 									else
-										attribute.setTextContent(cells[0][0].getCell_content()+";"+subHeaderValLevelUp+getStack(headerStack, currentSubHeaderLevel)+":"+prevRowHeader+";"+cells[0][k].getCell_content());
-									
+									{
+										if(!Utilities.isSpaceOrEmpty(cells[0][0].getCell_content()))
+										{
+											Element Head00 = doc.createElement("Head00");
+											Head00.setTextContent(cells[0][0].getCell_content());
+											ReadingPath.appendChild(Head00);
+										}
+										Element Stub = doc.createElement("Stub");
+										Element subHeadValLevelUp = doc.createElement("SubLevelUp");
+										subHeadValLevelUp.setTextContent(subHeaderValLevelUp);
+										Stub.appendChild(subHeadValLevelUp);
+										Stub = getStackAsElements(headerStack, currentSubHeaderLevel, doc, Stub);
+										Element prev = doc.createElement("Subheader"+currentSubHeaderLevel);
+										prev.setTextContent(prevRowHeader);
+										Stub.appendChild(prev);
+										Element s = doc.createElement("HeaderValue");
+										s.setTextContent(cells[0][k].getCell_content());
+										Stub.appendChild(s);
+										
+										ReadingPath.appendChild(Stub);
+									//	attribute.setTextContent(cells[0][0].getCell_content()+";"+subHeaderValLevelUp+getStack(headerStack, currentSubHeaderLevel)+":"+prevRowHeader+";"+cells[0][k].getCell_content());
+									}
 								}
 							}
 						}
-						rootElement.appendChild(attribute);
+						rootElement.appendChild(ReadingPath);
 						
 						//info elements
 						Element info = doc.createElement("value");
@@ -281,6 +532,14 @@ public class SimpleIE {
 						Element tname = doc.createElement("tableName");
 						tname.setTextContent(table.getTable_caption());
 						rootElement.appendChild(tname);
+						
+						Element TableType = doc.createElement("TableType");
+						TableType.setTextContent("Subheader");
+						rootElement.appendChild(TableType);
+						
+						Element CellType = doc.createElement("CellType");
+						CellType.setTextContent(cells[j][k].getCellType());
+						rootElement.appendChild(CellType);
 						
 						Element torder = doc.createElement("tableOrder");
 						torder.setTextContent(table.getTable_title());
@@ -342,9 +601,12 @@ public class SimpleIE {
 						Element rootElement = doc.createElement("information");
 						doc.appendChild(rootElement);
 						
-						Element attribute = doc.createElement("attribute");
-						attribute.setTextContent(cells[0][k].getCell_content());
-						rootElement.appendChild(attribute);
+						Element ReadingPath = doc.createElement("ReadingPath");
+						//attribute.setTextContent(cells[0][k].getCell_content());
+						Element Header = doc.createElement("Header");
+						Header.setTextContent(cells[0][k].getCell_content());
+						ReadingPath.appendChild(Header);
+						rootElement.appendChild(ReadingPath);
 						
 						//info elements
 						Element info = doc.createElement("value");
@@ -354,6 +616,14 @@ public class SimpleIE {
 						Element tname = doc.createElement("tableName");
 						tname.setTextContent(table.getTable_caption());
 						rootElement.appendChild(tname);
+						
+						Element TableType = doc.createElement("TableType");
+						TableType.setTextContent("List");
+						rootElement.appendChild(TableType);
+						
+						Element CellType = doc.createElement("CellType");
+						CellType.setTextContent(cells[j][k].getCellType());
+						rootElement.appendChild(CellType);
 						
 						Element torder = doc.createElement("tableOrder");
 						torder.setTextContent(table.getTable_title());
@@ -402,15 +672,38 @@ public class SimpleIE {
 
 					Element rootElement = doc.createElement("information");
 					doc.appendChild(rootElement);
+					// TODO: Make attribute ReadingPath and make it structured
+					Element ReadingPath = doc.createElement("ReadingPath");
+					if(!Utilities.isSpaceOrEmpty(cells[0][0].getCell_content())){
+					Element TopLeftHeader = doc.createElement("Head00");
+					TopLeftHeader.setTextContent(cells[0][0].getCell_content());
+					ReadingPath.appendChild(TopLeftHeader);
+					}
+					if(!Utilities.isSpaceOrEmpty(cells[j][0].getCell_content())){
+						Element StubValue = doc.createElement("StubValue");
+						StubValue.setTextContent(cells[j][0].getCell_content());
+						ReadingPath.appendChild(StubValue);
+						}
+					if(!Utilities.isSpaceOrEmpty(cells[0][k].getCell_content())){
+						Element HeaderValue = doc.createElement("HeaderValue");
+						HeaderValue.setTextContent(cells[0][k].getCell_content());
+						ReadingPath.appendChild(HeaderValue);
+						}
 					
-					Element attribute = doc.createElement("attribute");
-					attribute.setTextContent(cells[0][0].getCell_content()+";"+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
-					rootElement.appendChild(attribute);
+					rootElement.appendChild(ReadingPath);
 					
 					//info elements
 					Element info = doc.createElement("value");
 					info.setTextContent(cells[j][k].getCell_content());
 					rootElement.appendChild(info);
+					
+					Element TableType = doc.createElement("TableType");
+					TableType.setTextContent("Matrix");
+					rootElement.appendChild(TableType);
+					
+					Element CellType = doc.createElement("CellType");
+					CellType.setTextContent(cells[j][k].getCellType());
+					rootElement.appendChild(CellType);
 					
 					Element tname = doc.createElement("tableName");
 					tname.setTextContent(tables[tableindex].getTable_caption());

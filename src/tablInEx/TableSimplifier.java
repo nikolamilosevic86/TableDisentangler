@@ -135,14 +135,18 @@ public class TableSimplifier {
 		Cell[][] cells = table.getTable_cells();
 		String prevVal = "";
 		boolean hasComplexStub = false;
-		
+		int cnt =0 ; 
 		for(int i = 1;i<cells.length;i++) // starting from the header
 		{
 			if(Utilities.isSpaceOrEmpty(cells[i][0].getCell_content()) && !Utilities.isSpaceOrEmpty(cells[i][1].getCell_content()))
 			{
+				cnt++;
+				if(cnt>1){
 				hasComplexStub = true;
 				break;
+				}
 			}
+			else cnt = 0;
 		}
 		if(!hasComplexStub)
 			return table;

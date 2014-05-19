@@ -302,6 +302,40 @@ public class Cell {
 
 	}
 	
+	public String getCellType()
+	{
+		if(Utilities.isNumeric(this.getCell_content()))
+		{
+			return "Numeric";
+		}
+		
+		int numbers = 0;
+		int chars = 0;
+		String tempCellVal = this.getCell_content().replaceAll("[\\s\\xA0]","");
+		for(int i=0;i<tempCellVal.length();i++)
+		{
+			if(Utilities.isNumeric(tempCellVal.substring(i, i+1)) )
+			{
+				numbers++;
+			}
+			else
+			{
+				chars++;
+			}
+		}
+		float proportion = (float)numbers / (chars+numbers);
+		//part numeric cell
+		if(proportion>0.49 && !Utilities.isNumeric(this.getCell_content()))
+		{
+			return "Partially Numeric";
+		}
+		if(proportion<=0.49 && !Utilities.isNumeric(this.getCell_content()))
+		{
+			return "Text";
+		}
+		return "Other";
+	}
+	
 	/**
 	 * Sets the cell values. For spanning cells
 	 *
