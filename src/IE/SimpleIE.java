@@ -48,6 +48,13 @@ public class SimpleIE {
 	//TODO: Think about reading tables like PMC2361090 Table 2
 	
 	
+	/**
+	 * Checks if is list table.
+	 *
+	 * @param cells the cells
+	 * @param table the table
+	 * @return true, if is list table
+	 */
 	public boolean isListTable(Cell[][] cells,Table table)
 	{
 		if(cells[0][0].isIs_columnspanning() && table.getNum_of_columns()>1 && cells[0][0].getCells_columnspanning()>=table.getNum_of_columns())
@@ -57,6 +64,13 @@ public class SimpleIE {
 		return false;
 	}
 	
+	/**
+	 * Checks if is row subheader.
+	 *
+	 * @param cells the cells
+	 * @param table the table
+	 * @return true, if is row subheader
+	 */
 	public boolean isRowSubheader(Cell [] cells, Table table)
 	{
 		boolean isSubheader = false;
@@ -84,6 +98,13 @@ public class SimpleIE {
 	}
 	
 	
+	/**
+	 * Checks for table subheader.
+	 *
+	 * @param cells the cells
+	 * @param table the table
+	 * @return true, if successful
+	 */
 	public boolean hasTableSubheader(Cell [][] cells, Table table)
 	{
 		boolean hasSubheader = false;
@@ -118,6 +139,13 @@ public class SimpleIE {
 	}
 	
 	
+	/**
+	 * Gets the stack.
+	 *
+	 * @param stack the stack
+	 * @param subheaderLevel the subheader level
+	 * @return the stack
+	 */
 	public String getStack(String[] stack, int subheaderLevel)
 	{
 		String s = "";
@@ -131,6 +159,15 @@ public class SimpleIE {
 		return s;
 	}
 	
+	/**
+	 * Gets the stack as elements.
+	 *
+	 * @param stack the stack
+	 * @param subheaderLevel the subheader level
+	 * @param doc the doc
+	 * @param stub the stub
+	 * @return the stack as elements
+	 */
 	public Element getStackAsElements(String[] stack, int subheaderLevel,Document doc,Element stub)
 	{
 		//String s = "";
@@ -145,6 +182,15 @@ public class SimpleIE {
 		}
 		return stub;
 	}
+	
+	/**
+	 * Process table with subheaders.
+	 *
+	 * @param cells the cells
+	 * @param table the table
+	 * @param art the art
+	 * @param tableFileName the table file name
+	 */
 	public void processTableWithSubheaders(Cell[][] cells,Table table, Article art, String tableFileName)
 	{
 		if(hasTableSubheader(cells,table))
@@ -276,6 +322,8 @@ public class SimpleIE {
 
 						Element rootElement = doc.createElement("information");
 						doc.appendChild(rootElement);
+						Element cell = doc.createElement("Cell");
+						rootElement.appendChild(cell);
 						
 						Element NavigationPath = doc.createElement("NavigationPath");
 						if(!Utilities.isSpaceOrEmpty(cells[0][0].getCell_content()))
@@ -303,40 +351,48 @@ public class SimpleIE {
 						Stub.appendChild(ss);
 						
 						NavigationPath.appendChild(Stub);
-						rootElement.appendChild(NavigationPath);
+						cell.appendChild(NavigationPath);
 						
 						//info elements
 						Element info = doc.createElement("value");
 						info.setTextContent(cells[j][k].getCell_content());
-						rootElement.appendChild(info);
-						
-						Element tname = doc.createElement("tableName");
-						tname.setTextContent(table.getTable_caption());
-						rootElement.appendChild(tname);
-						
-						Element TableType = doc.createElement("TableType");
-						TableType.setTextContent("Subheader");
-						rootElement.appendChild(TableType);
+						cell.appendChild(info);
 						
 						Element CellType = doc.createElement("CellType");
 						CellType.setTextContent(cells[j][k].getCellType());
-						rootElement.appendChild(CellType);
+						cell.appendChild(CellType);
+						
+						Element tableEl = doc.createElement("Table");
+						rootElement.appendChild(tableEl);
+						
+						Element tname = doc.createElement("tableName");
+						tname.setTextContent(table.getTable_caption());
+						tableEl.appendChild(tname);
+						
+						Element TableType = doc.createElement("TableType");
+						TableType.setTextContent("Subheader");
+						tableEl.appendChild(TableType);
+						
+
 						
 						Element torder = doc.createElement("tableOrder");
 						torder.setTextContent(table.getTable_title());
-						rootElement.appendChild(torder);
+						tableEl.appendChild(torder);
 						
 						Element tfooter = doc.createElement("tableFooter");
 						tfooter.setTextContent(table.getTable_footer());
-						rootElement.appendChild(tfooter);
+						tableEl.appendChild(tfooter);
+						
+						Element document = doc.createElement("Document");
+						rootElement.appendChild(document);
 						
 						Element docTitle = doc.createElement("DocumentTitle");
 						docTitle.setTextContent(art.getTitle());
-						rootElement.appendChild(docTitle);
+						document.appendChild(docTitle);
 						
 						Element pmc = doc.createElement("PMC");
 						pmc.setTextContent(art.getPmc());
-						rootElement.appendChild(pmc);
+						document.appendChild(pmc);
 						
 											
 						TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -354,7 +410,18 @@ public class SimpleIE {
 			}
 		}
 	}
-	//TODO: Redo, comment, do something with this!!!
+	
+	
+	/**
+	 * This is deprecated method that contains old XML structure. Do Not Use!!!
+	 * Use processTableWithSubheaders instead
+	 *
+	 * @param cells the cells
+	 * @param table the table
+	 * @param art the art
+	 * @param tableFileName the table file name
+	 */
+	@Deprecated
 	public void processTableWithSubheadersB(Cell[][] cells,Table table, Article art, String tableFileName)
 	{
 		if(hasTableSubheader(cells,table))
@@ -816,45 +883,54 @@ public class SimpleIE {
 						Element rootElement = doc.createElement("information");
 						doc.appendChild(rootElement);
 						
+						Element cell = doc.createElement("Cell");
+						rootElement.appendChild(cell);
+						
 						Element NavigationPath = doc.createElement("NavigationPath");
 						//attribute.setTextContent(cells[0][k].getCell_content());
-						Element Header = doc.createElement("Header");
+						Element Header = doc.createElement("HeaderValue");
 						Header.setTextContent(cells[0][k].getCell_content());
 						NavigationPath.appendChild(Header);
-						rootElement.appendChild(NavigationPath);
+						cell.appendChild(NavigationPath);
 						
 						//info elements
 						Element info = doc.createElement("value");
 						info.setTextContent(cells[j][k].getCell_content());
-						rootElement.appendChild(info);
-						
-						Element tname = doc.createElement("tableName");
-						tname.setTextContent(table.getTable_caption());
-						rootElement.appendChild(tname);
-						
-						Element TableType = doc.createElement("TableType");
-						TableType.setTextContent("List");
-						rootElement.appendChild(TableType);
+						cell.appendChild(info);
 						
 						Element CellType = doc.createElement("CellType");
 						CellType.setTextContent(cells[j][k].getCellType());
-						rootElement.appendChild(CellType);
+						cell.appendChild(CellType);
+						
+						Element tableA = doc.createElement("Table");
+						rootElement.appendChild(tableA);
+						
+						Element tname = doc.createElement("tableName");
+						tname.setTextContent(table.getTable_caption());
+						tableA.appendChild(tname);
+						
+						Element TableType = doc.createElement("TableType");
+						TableType.setTextContent("List");
+						tableA.appendChild(TableType);			
 						
 						Element torder = doc.createElement("tableOrder");
 						torder.setTextContent(table.getTable_title());
-						rootElement.appendChild(torder);
+						tableA.appendChild(torder);
 						
 						Element tfooter = doc.createElement("tableFooter");
 						tfooter.setTextContent(table.getTable_footer());
-						rootElement.appendChild(tfooter);
+						tableA.appendChild(tfooter);
+						
+						Element document = doc.createElement("Document");
+						rootElement.appendChild(document);
 						
 						Element docTitle = doc.createElement("DocumentTitle");
 						docTitle.setTextContent(art.getTitle());
-						rootElement.appendChild(docTitle);
+						document.appendChild(docTitle);
 						
 						Element pmc = doc.createElement("PMC");
 						pmc.setTextContent(art.getPmc());
-						rootElement.appendChild(pmc);
+						document.appendChild(pmc);
 						
 											
 						TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -872,6 +948,15 @@ public class SimpleIE {
 		}
 	}
 	
+	/**
+	 * Process regular table.
+	 *
+	 * @param cells the cells
+	 * @param tables the tables
+	 * @param art the art
+	 * @param tableFileName the table file name
+	 * @param tableindex the tableindex
+	 */
 	public void processRegularTable(Cell[][] cells, Table[] tables, Article art, String tableFileName, int tableindex)
 	{
 		Statistics.addMatrixTable();
@@ -888,6 +973,10 @@ public class SimpleIE {
 
 					Element rootElement = doc.createElement("information");
 					doc.appendChild(rootElement);
+					
+					Element cell = doc.createElement("Cell");
+					rootElement.appendChild(cell);
+					
 					// TODO: Make attribute NavigationPath and make it structured
 					Element NavigationPath = doc.createElement("NavigationPath");
 					if(!Utilities.isSpaceOrEmpty(cells[0][0].getCell_content())){
@@ -896,9 +985,11 @@ public class SimpleIE {
 					NavigationPath.appendChild(TopLeftHeader);
 					}
 					if(!Utilities.isSpaceOrEmpty(cells[j][0].getCell_content())){
+						Element Stub = doc.createElement("Stub");
 						Element StubValue = doc.createElement("StubValue");
 						StubValue.setTextContent(cells[j][0].getCell_content());
-						NavigationPath.appendChild(StubValue);
+						Stub.appendChild(StubValue);
+						NavigationPath.appendChild(Stub);
 						}
 					if(!Utilities.isSpaceOrEmpty(cells[0][k].getCell_content())){
 						Element HeaderValue = doc.createElement("HeaderValue");
@@ -906,40 +997,48 @@ public class SimpleIE {
 						NavigationPath.appendChild(HeaderValue);
 						}
 					
-					rootElement.appendChild(NavigationPath);
+					cell.appendChild(NavigationPath);
 					
 					//info elements
 					Element info = doc.createElement("value");
 					info.setTextContent(cells[j][k].getCell_content());
-					rootElement.appendChild(info);
-					
-					Element TableType = doc.createElement("TableType");
-					TableType.setTextContent("Matrix");
-					rootElement.appendChild(TableType);
+					cell.appendChild(info);
 					
 					Element CellType = doc.createElement("CellType");
 					CellType.setTextContent(cells[j][k].getCellType());
-					rootElement.appendChild(CellType);
+					cell.appendChild(CellType);
+					
+					Element tableA = doc.createElement("Table");
+					rootElement.appendChild(tableA);
+					
+					Element TableType = doc.createElement("TableType");
+					TableType.setTextContent("Matrix");
+					tableA.appendChild(TableType);
+					
+
 					
 					Element tname = doc.createElement("tableName");
 					tname.setTextContent(tables[tableindex].getTable_caption());
-					rootElement.appendChild(tname);
+					tableA.appendChild(tname);
 					
 					Element torder = doc.createElement("tableOrder");
 					torder.setTextContent(tables[tableindex].getTable_title());
-					rootElement.appendChild(torder);
+					tableA.appendChild(torder);
 					
 					Element tfooter = doc.createElement("tableFooter");
 					tfooter.setTextContent(tables[tableindex].getTable_footer());
-					rootElement.appendChild(tfooter);
+					tableA.appendChild(tfooter);
+					
+					Element document = doc.createElement("Document");
+					rootElement.appendChild(document);
 					
 					Element docTitle = doc.createElement("DocumentTitle");
 					docTitle.setTextContent(art.getTitle());
-					rootElement.appendChild(docTitle);
+					document.appendChild(docTitle);
 					
 					Element pmc = doc.createElement("PMC");
 					pmc.setTextContent(art.getPmc());
-					rootElement.appendChild(pmc);
+					document.appendChild(pmc);
 					
 										
 					TransformerFactory transformerFactory = TransformerFactory.newInstance();

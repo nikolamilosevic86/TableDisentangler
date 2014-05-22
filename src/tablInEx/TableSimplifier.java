@@ -80,6 +80,10 @@ public class TableSimplifier {
 		{
 			for(int j = 0; j<cells[i].length;j++)
 			{
+				if(cells[i][j].getCell_content()==null)
+				{
+					cells[i][j].setCell_content("");
+				}
 				if(!Utilities.isSpaceOrEmpty(cells[i][j].getCell_content()) ){
 					if(!cells[i][j].getCell_content().equals(cells[i+1][j].getCell_content()))
 						cells[table.stat.getNum_of_header_rows() - 1][j].setCell_content(cells[i][j].getCell_content()+ " "+cells[table.stat.getNum_of_header_rows() - 1][j].getCell_content());
