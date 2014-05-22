@@ -80,8 +80,11 @@ public class TableSimplifier {
 		{
 			for(int j = 0; j<cells[i].length;j++)
 			{
-				if(!Utilities.isSpaceOrEmpty(cells[i][j].getCell_content()))
-					cells[table.stat.getNum_of_header_rows() - 1][j].setCell_content(cells[i][j].getCell_content()+ " "+cells[table.stat.getNum_of_header_rows() - 1][j].getCell_content());
+				if(!Utilities.isSpaceOrEmpty(cells[i][j].getCell_content()) ){
+					if(!cells[i][j].getCell_content().equals(cells[i+1][j].getCell_content()))
+						cells[table.stat.getNum_of_header_rows() - 1][j].setCell_content(cells[i][j].getCell_content()+ " "+cells[table.stat.getNum_of_header_rows() - 1][j].getCell_content());
+			
+				}
 			}
 		}
 		
@@ -120,6 +123,39 @@ public class TableSimplifier {
 		
 		return table;
 	}
+	/**
+	 * Function that labels header cells in case header 
+	 * is wrongly wrapped in thead tags. This can be case in headers with more 
+	 * than one row. All the rows that contains spanning are labeled as headers 
+	 * until first one that does not span
+	 * @param table -  Table
+	 * @return table - Table with labeled header cells
+	 */
+	public static Table LabelHeaderCells(Table table)
+	{
+		Cell[][] cells = table.getTable_cells();
+		boolean isHeader = true;
+		for(int i = 0;i<cells.length;i++)
+		{
+			boolean isSpanning = false;
+			for(int j=0;j<cells[i].length;j++)
+			{
+				if(cells[i][j].isIs_columnspanning())
+					isSpanning = true;
+			}
+			if(isSpanning == false)
+				isHeader = false;
+			
+			if(isHeader)
+			{
+				for(int j=0;j<cells[i].length;j++)
+				{
+					cells[i][j].setIs_header(true);
+				}
+			}
+		}
+		return table;
+	}
 	
 	/**
 	 * Function that simplifies complex stubs, that have more then one columns.
@@ -147,6 +183,9 @@ public class TableSimplifier {
 				}
 			}
 			else cnt = 0;
+			
+			if(cells[i][0].isIs_rowspanning())
+				hasComplexStub = true;
 		}
 		if(!hasComplexStub)
 			return table;
@@ -175,7 +214,9 @@ public class TableSimplifier {
 					{
 						cells[i][1].setCell_content(cells[i][0].getCell_content()+", " +cells[i][1].getCell_content());
 					}
-						
+//					if(cells[i][0].isIs_rowspanning()){
+//						cells[i][1].setCell_content(cells[i][0].getCell_content()+", " +cells[i][1].getCell_content());
+//					}
 				}
 				else
 				{

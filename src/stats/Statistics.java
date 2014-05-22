@@ -38,6 +38,10 @@ public class Statistics {
 	/** The useful tables. */
 	private static int usefulTables;
 	
+	private static int MatrixTables;
+	private static int ListTables;
+	private static int SubheaderTables;
+	
 	/** The tables_without_head. */
 	private static int tables_without_head;
 	
@@ -179,6 +183,24 @@ public class Statistics {
 		newImageTable = false;
 		newColSpanningTable = false;
 		newRowSpanningTable = false;
+	}
+	
+	
+	/**
+	 * Adds the matrix table.
+	 */
+	public static void addMatrixTable()
+	{
+		MatrixTables++;
+	}
+	
+	public static void addListTable()
+	{
+		ListTables++;
+	}
+	public static void addSubheaderTable()
+	{
+		SubheaderTables++;
 	}
 	
 	/**
@@ -1001,6 +1023,10 @@ public class Statistics {
 		output += "Useful tables (with body and cells): ,"+usefulTables+ "\r\n";	
 		
 		output+="Image Tables are in Files:"+ImageFiles;
+		output+="\r\n";
+		output += "Matrix tables: ,"+MatrixTables+ "\r\n";	
+		output += "List tables: ,"+ListTables+ "\r\n";	
+		output += "Subheader tables: ,"+SubheaderTables+ "\r\n";	
 		
 		return output;
 	}
@@ -1116,6 +1142,30 @@ public class Statistics {
 	 */
 	public static void setUsefulTables(int usefulTables) {
 		Statistics.usefulTables = usefulTables;
+	}
+
+	public static int getMatrixTables() {
+		return MatrixTables;
+	}
+
+	public static void setMatrixTables(int matrixTables) {
+		MatrixTables = matrixTables;
+	}
+
+	public static int getListTables() {
+		return ListTables;
+	}
+
+	public static void setListTables(int listTables) {
+		ListTables = listTables;
+	}
+
+	public static int getSubheaderTables() {
+		return SubheaderTables;
+	}
+
+	public static void setSubheaderTables(int subheaderTables) {
+		SubheaderTables = subheaderTables;
 	}
 	
 

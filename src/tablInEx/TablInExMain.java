@@ -117,6 +117,7 @@ public class TablInExMain {
 			for(int j = 0; j<articles[i].getTables().length;j++)
 			{
 				Table t = articles[i].getTables()[j];
+		//		t = TableSimplifier.LabelHeaderCells(t);// did not help
 				t = TableSimplifier.MergeHeaders(t);
 				t = TableSimplifier.MergeStubs(t);
 			}

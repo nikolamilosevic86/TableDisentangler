@@ -18,6 +18,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import stats.Statistics;
 import tablInEx.Article;
 import tablInEx.Cell;
 import tablInEx.Table;
@@ -86,6 +87,8 @@ public class SimpleIE {
 	public boolean hasTableSubheader(Cell [][] cells, Table table)
 	{
 		boolean hasSubheader = false;
+		if(table.getNum_of_columns()<2)
+			return false;
 		for(int i = 1; i < cells.length;i++)
 		{
 			if(cells[i][0].isIs_columnspanning() && table.getNum_of_columns()>1 && cells[i][0].getCells_columnspanning()>=table.getNum_of_columns() && !cells[i][0].getCell_content().trim().equalsIgnoreCase("") && !cells[i][0].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[i][0].getCell_content().trim().charAt(0))== 160))
@@ -142,12 +145,222 @@ public class SimpleIE {
 		}
 		return stub;
 	}
-	
-	//TODO: Redo, comment, do something with this!!!
 	public void processTableWithSubheaders(Cell[][] cells,Table table, Article art, String tableFileName)
 	{
 		if(hasTableSubheader(cells,table))
 		{
+			Statistics.addSubheaderTable();
+			String[] headerStackA = new String[20];
+			boolean hadsubheader = false;
+			int sequalHeaders = 0;
+			//is this needed?
+			boolean valueSeparator = false;
+			boolean subheaderTableWithValSeparators = false;
+			String subheaderVal = "";
+			int subHeaderValIndex = 0; // 
+			//is this before needed?
+			int currentSubHeaderLevel = 0; //number of levels
+			for(int j=1;j<cells.length;j++)
+			{
+				boolean emptyLine = true;
+				for(int h = 0;h<cells[j].length;h++)
+				{
+					if(!Utilities.isSpaceOrEmpty(cells[j][h].getCell_content()))
+					{
+						emptyLine = false;
+						break;
+					}
+				}
+				if(emptyLine)
+					continue;
+				
+				//Record headers in spanning structure
+				if(cells[j][0].isIs_columnspanning() && table.getNum_of_columns()>1 && cells[j][0].getCells_columnspanning()>=table.getNum_of_columns())
+				{
+					if(Utilities.numOfBegeningSpaces(cells[j][0].getCell_content())==currentSubHeaderLevel)
+						headerStackA[currentSubHeaderLevel++] = cells[j][0].getCell_content();
+					else
+					{
+						currentSubHeaderLevel = Utilities.numOfBegeningSpaces(cells[j][0].getCell_content());
+						headerStackA[currentSubHeaderLevel++] = cells[j][0].getCell_content();
+					}
+						
+					continue;
+				}
+				boolean emptyCells = true;
+				//check if row has all empty cells except first
+				for(int h=1;h<cells[j].length;h++)
+				{
+					if(cells[j][h].getCell_content()==null)
+					{
+						cells[j][h].setCell_content("");
+					}
+					if(Utilities.isSpaceOrEmpty(cells[j][0].getCell_content()) || !Utilities.isSpaceOrEmpty(cells[j][h].getCell_content()))
+					{
+						emptyCells = false;
+					}
+
+				}
+				//If it has all empty cells, except firts it is header
+				if(emptyCells){
+					if(currentSubHeaderLevel!=0 && currentSubHeaderLevel == j-1)
+					{
+						if(Utilities.numOfBegeningSpaces(cells[j][0].getCell_content())==currentSubHeaderLevel)
+						{
+							headerStackA[sequalHeaders+currentSubHeaderLevel++] = cells[j][0].getCell_content();
+							sequalHeaders++;
+						}
+						else
+						{
+							currentSubHeaderLevel = Utilities.numOfBegeningSpaces(cells[j][0].getCell_content());
+							headerStackA[sequalHeaders+currentSubHeaderLevel++] = cells[j][0].getCell_content();
+							sequalHeaders++;
+						}
+					}
+					else
+					{					
+					if(Utilities.numOfBegeningSpaces(cells[j][0].getCell_content())==currentSubHeaderLevel)
+					{
+						headerStackA[sequalHeaders+currentSubHeaderLevel++] = cells[j][0].getCell_content();
+						sequalHeaders ++;
+					}
+					else
+					{
+						currentSubHeaderLevel = Utilities.numOfBegeningSpaces(cells[j][0].getCell_content());
+						headerStackA[sequalHeaders+currentSubHeaderLevel++] = cells[j][0].getCell_content(); 
+						sequalHeaders++;
+					}
+					continue;					
+					}
+
+				}
+				else
+				{
+					sequalHeaders = 0;
+				}
+				//If row is a subheader, don't recrod values
+				if(isRowSubheader(cells[j],table))
+					continue;
+				//Other levels of subheaders with possibly filled cells.
+				for(int k=1;k<cells[j].length;k++)
+				{
+					if(cells[j][0].getCell_content().length()>0 && Utilities.isSpace(cells[j][0].getCell_content().trim().charAt(0)) )
+					{
+						if(Utilities.numOfBegeningSpaces(cells[j][0].getCell_content())==currentSubHeaderLevel+1)
+							headerStackA[++currentSubHeaderLevel] = cells[j][0].getCell_content();
+						else
+						{
+							currentSubHeaderLevel = Utilities.numOfBegeningSpaces(cells[j][0].getCell_content())-1;
+							headerStackA[++currentSubHeaderLevel] = cells[j][0].getCell_content();
+						}
+						valueSeparator = true;
+						hadsubheader = true;
+						subheaderTableWithValSeparators = true;
+					}
+					else
+					{
+						valueSeparator = false;
+						hadsubheader = false;
+						currentSubHeaderLevel = 0;
+					}
+				}
+				for(int k=1;k<cells[j].length;k++)
+				{
+					
+					try{ 
+						DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+						DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+
+						//root elements
+						Document doc = docBuilder.newDocument();
+
+						Element rootElement = doc.createElement("information");
+						doc.appendChild(rootElement);
+						
+						Element NavigationPath = doc.createElement("NavigationPath");
+						if(!Utilities.isSpaceOrEmpty(cells[0][0].getCell_content()))
+						{
+							Element Head00 = doc.createElement("Head00");
+							Head00.setTextContent(cells[0][0].getCell_content());
+							NavigationPath.appendChild(Head00);
+						}
+						Element Stub = doc.createElement("Stub");								
+						
+					//	Stub = getStackAsElements(headerStack, currentSubHeaderLevel, doc, Stub);
+						Element s = doc.createElement("HeaderValue");
+						s.setTextContent(cells[0][k].getCell_content());
+						NavigationPath.appendChild(s);
+						
+
+						
+						if(currentSubHeaderLevel>0)
+						{
+							getStackAsElements(headerStackA, currentSubHeaderLevel, doc, Stub);
+							
+						}
+						Element ss = doc.createElement("StubValue");
+						ss.setTextContent(cells[j][0].getCell_content());
+						Stub.appendChild(ss);
+						
+						NavigationPath.appendChild(Stub);
+						rootElement.appendChild(NavigationPath);
+						
+						//info elements
+						Element info = doc.createElement("value");
+						info.setTextContent(cells[j][k].getCell_content());
+						rootElement.appendChild(info);
+						
+						Element tname = doc.createElement("tableName");
+						tname.setTextContent(table.getTable_caption());
+						rootElement.appendChild(tname);
+						
+						Element TableType = doc.createElement("TableType");
+						TableType.setTextContent("Subheader");
+						rootElement.appendChild(TableType);
+						
+						Element CellType = doc.createElement("CellType");
+						CellType.setTextContent(cells[j][k].getCellType());
+						rootElement.appendChild(CellType);
+						
+						Element torder = doc.createElement("tableOrder");
+						torder.setTextContent(table.getTable_title());
+						rootElement.appendChild(torder);
+						
+						Element tfooter = doc.createElement("tableFooter");
+						tfooter.setTextContent(table.getTable_footer());
+						rootElement.appendChild(tfooter);
+						
+						Element docTitle = doc.createElement("DocumentTitle");
+						docTitle.setTextContent(art.getTitle());
+						rootElement.appendChild(docTitle);
+						
+						Element pmc = doc.createElement("PMC");
+						pmc.setTextContent(art.getPmc());
+						rootElement.appendChild(pmc);
+						
+											
+						TransformerFactory transformerFactory = TransformerFactory.newInstance();
+						Transformer transformer = transformerFactory.newTransformer();
+						DOMSource source = new DOMSource(doc);
+
+						StreamResult result =  new StreamResult(new File(folder+tableFileName+"e"+j+","+k+".xml"));
+						transformer.transform(source, result);
+						
+					}catch(Exception ex)
+					{
+						ex.printStackTrace();
+					}
+				}
+			}
+		}
+	}
+	//TODO: Redo, comment, do something with this!!!
+	public void processTableWithSubheadersB(Cell[][] cells,Table table, Article art, String tableFileName)
+	{
+		if(hasTableSubheader(cells,table))
+		{
+			Statistics.addSubheaderTable();
+			
 			String[] headerStack = new String[10];
 			int currentSubHeaderLevel = -1;
 			int subHeaderValIndex = 0;
@@ -242,7 +455,7 @@ public class SimpleIE {
 						Element rootElement = doc.createElement("information");
 						doc.appendChild(rootElement);
 						
-						Element ReadingPath = doc.createElement("ReadingPath");
+						Element NavigationPath = doc.createElement("NavigationPath");
 						
 						if(cells[j][0].getCell_content().length()>0 && Utilities.isSpace(cells[j][0].getCell_content().trim().charAt(0)) )
 						{
@@ -261,6 +474,7 @@ public class SimpleIE {
 						{
 							valueSeparator = false;
 							hadsubheader = false;
+							currentSubHeaderLevel = 0;
 							if(subheaderTableWIthValSeparators && !Utilities.isSpaceOrEmpty(cells[j][0].getCell_content()) && Utilities.isSpaceOrEmpty(subHeaderValLevelUp))
 								subheaderVal = "";
 						}
@@ -275,7 +489,7 @@ public class SimpleIE {
 									{
 										Element Head00 = doc.createElement("Head00");
 										Head00.setTextContent(cells[0][0].getCell_content());
-										ReadingPath.appendChild(Head00);
+										NavigationPath.appendChild(Head00);
 									}
 									Element Stub = doc.createElement("Stub");
 									Stub = getStackAsElements(headerStack, currentSubHeaderLevel, doc, Stub);
@@ -286,7 +500,7 @@ public class SimpleIE {
 									s.setTextContent(cells[0][k].getCell_content());
 									Stub.appendChild(s);
 									
-									ReadingPath.appendChild(Stub);
+									NavigationPath.appendChild(Stub);
 									//attribute.setTextContent(cells[0][0].getCell_content()+";"+getStack(headerStack, currentSubHeaderLevel)+prevRowHeader+";"+cells[0][k].getCell_content());
 								}
 								else	
@@ -295,7 +509,7 @@ public class SimpleIE {
 									{
 										Element Head00 = doc.createElement("Head00");
 										Head00.setTextContent(cells[0][0].getCell_content());
-										ReadingPath.appendChild(Head00);
+										NavigationPath.appendChild(Head00);
 									}
 									Element Stub = doc.createElement("Stub");
 									Element subHeadValLevelUp = doc.createElement("SubLevelUp");
@@ -309,7 +523,7 @@ public class SimpleIE {
 									s.setTextContent(cells[0][k].getCell_content());
 									Stub.appendChild(s);
 									
-									ReadingPath.appendChild(Stub);
+									NavigationPath.appendChild(Stub);
 									//attribute.setTextContent(cells[0][0].getCell_content()+";"+subHeaderValLevelUp+getStack(headerStack, currentSubHeaderLevel)+prevRowHeader+";"+cells[0][k].getCell_content());
 								}
 							}else
@@ -320,19 +534,19 @@ public class SimpleIE {
 									{
 										Element Head00 = doc.createElement("Head00");
 										Head00.setTextContent(cells[0][0].getCell_content());
-										ReadingPath.appendChild(Head00);
+										NavigationPath.appendChild(Head00);
 									}
 									Element Stub = doc.createElement("Stub");
 									Stub = getStackAsElements(headerStack, currentSubHeaderLevel, doc, Stub);
 									Element s = doc.createElement("HeaderValue");
 									s.setTextContent(cells[0][k].getCell_content());
-									ReadingPath.appendChild(s);
+									NavigationPath.appendChild(s);
 									
 									Element ss = doc.createElement("StubValue");
 									ss.setTextContent(cells[j][0].getCell_content());
 									Stub.appendChild(ss);
 									
-									ReadingPath.appendChild(Stub);
+									NavigationPath.appendChild(Stub);
 									//attribute.setTextContent(cells[0][0].getCell_content()+";"+getStack(headerStack, currentSubHeaderLevel)+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
 								}
 								else
@@ -341,7 +555,7 @@ public class SimpleIE {
 									{
 										Element Head00 = doc.createElement("Head00");
 										Head00.setTextContent(cells[0][0].getCell_content());
-										ReadingPath.appendChild(Head00);
+										NavigationPath.appendChild(Head00);
 									}
 									Element Stub = doc.createElement("Stub");
 									if(!Utilities.isSpaceOrEmpty(subHeaderValLevelUp)){
@@ -354,13 +568,13 @@ public class SimpleIE {
 									Stub = getStackAsElements(headerStack, currentSubHeaderLevel, doc, Stub);
 									Element s = doc.createElement("HeaderValue");
 									s.setTextContent(cells[0][k].getCell_content());
-									ReadingPath.appendChild(s);
+									NavigationPath.appendChild(s);
 									
 									Element ss = doc.createElement("StubValue");
 									ss.setTextContent(cells[j][0].getCell_content());
 									Stub.appendChild(ss);
 									
-									ReadingPath.appendChild(Stub);
+									NavigationPath.appendChild(Stub);
 									//attribute.setTextContent(cells[0][0].getCell_content()+";"+subHeaderValLevelUp+getStack(headerStack, currentSubHeaderLevel)+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
 
 								}
@@ -376,20 +590,20 @@ public class SimpleIE {
 								{
 									Element Head00 = doc.createElement("Head00");
 									Head00.setTextContent(cells[0][0].getCell_content());
-									ReadingPath.appendChild(Head00);
+									NavigationPath.appendChild(Head00);
 								}
 								Element Stub = doc.createElement("Stub");								
 								
 							//	Stub = getStackAsElements(headerStack, currentSubHeaderLevel, doc, Stub);
 								Element s = doc.createElement("HeaderValue");
 								s.setTextContent(cells[0][k].getCell_content());
-								ReadingPath.appendChild(s);
+								NavigationPath.appendChild(s);
 								
 								Element ss = doc.createElement("StubValue");
 								ss.setTextContent(cells[j][0].getCell_content());
 								Stub.appendChild(ss);
 								
-								ReadingPath.appendChild(Stub);
+								NavigationPath.appendChild(Stub);
 								//attribute.setTextContent(cells[0][0].getCell_content()+";"+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
 							}
 							else
@@ -398,20 +612,20 @@ public class SimpleIE {
 								{
 									Element Head00 = doc.createElement("Head00");
 									Head00.setTextContent(cells[0][0].getCell_content());
-									ReadingPath.appendChild(Head00);
+									NavigationPath.appendChild(Head00);
 								}
 								Element Stub = doc.createElement("Stub");								
 								
 								//Stub = getStackAsElements(headerStack, currentSubHeaderLevel, doc, Stub);
 								Element s = doc.createElement("HeaderValue");
 								s.setTextContent(cells[0][k].getCell_content());
-								ReadingPath.appendChild(s);
+								NavigationPath.appendChild(s);
 								
 								Element ss = doc.createElement("StubValue");
 								ss.setTextContent(prevRowHeader);
 								Stub.appendChild(ss);
 								
-								ReadingPath.appendChild(Stub);
+								NavigationPath.appendChild(Stub);
 							//	attribute.setTextContent(cells[0][0].getCell_content()+";"+prevRowHeader+";"+cells[0][k].getCell_content());
 								
 							}
@@ -424,20 +638,20 @@ public class SimpleIE {
 										{
 											Element Head00 = doc.createElement("Head00");
 											Head00.setTextContent(cells[0][0].getCell_content());
-											ReadingPath.appendChild(Head00);
+											NavigationPath.appendChild(Head00);
 										}
 										Element Stub = doc.createElement("Stub");		
 										
 										Stub = getStackAsElements(headerStack, currentSubHeaderLevel, doc, Stub);
 										Element s = doc.createElement("HeaderValue");
 										s.setTextContent(cells[0][k].getCell_content());
-										ReadingPath.appendChild(s);
+										NavigationPath.appendChild(s);
 										
 										Element ss = doc.createElement("StubValue");
 										ss.setTextContent(cells[j][0].getCell_content());
 										Stub.appendChild(ss);
 										
-										ReadingPath.appendChild(Stub);
+										NavigationPath.appendChild(Stub);
 									//	attribute.setTextContent(cells[0][0].getCell_content()+";"+getStack(headerStack, currentSubHeaderLevel)+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
 									}
 									else
@@ -446,7 +660,7 @@ public class SimpleIE {
 										{
 											Element Head00 = doc.createElement("Head00");
 											Head00.setTextContent(cells[0][0].getCell_content());
-											ReadingPath.appendChild(Head00);
+											NavigationPath.appendChild(Head00);
 										}
 										Element Stub = doc.createElement("Stub");
 										if(!Utilities.isSpaceOrEmpty(subHeaderValLevelUp)){
@@ -459,13 +673,13 @@ public class SimpleIE {
 										Stub = getStackAsElements(headerStack, currentSubHeaderLevel, doc, Stub);
 										Element s = doc.createElement("HeaderValue");
 										s.setTextContent(cells[0][k].getCell_content());
-										ReadingPath.appendChild(s);
+										NavigationPath.appendChild(s);
 										
 										Element ss = doc.createElement("StubValue");
 										ss.setTextContent(cells[j][0].getCell_content());
 										Stub.appendChild(ss);
 										
-										ReadingPath.appendChild(Stub);
+										NavigationPath.appendChild(Stub);
 										//attribute.setTextContent(cells[0][0].getCell_content()+";"+subHeaderValLevelUp+getStack(headerStack, currentSubHeaderLevel)+cells[j][0].getCell_content()+";"+cells[0][k].getCell_content());
 									}
 								}
@@ -477,7 +691,7 @@ public class SimpleIE {
 										{
 											Element Head00 = doc.createElement("Head00");
 											Head00.setTextContent(cells[0][0].getCell_content());
-											ReadingPath.appendChild(Head00);
+											NavigationPath.appendChild(Head00);
 										}
 										Element Stub = doc.createElement("Stub");
 								
@@ -487,13 +701,13 @@ public class SimpleIE {
 										Stub.appendChild(prev);
 										Element s = doc.createElement("HeaderValue");
 										s.setTextContent(cells[0][k].getCell_content());
-										ReadingPath.appendChild(s);
+										NavigationPath.appendChild(s);
 										
 //										Element ss = doc.createElement("StubValue");
 //										ss.setTextContent(cells[j][0].getCell_content());
 //										Stub.appendChild(ss);
 										
-										ReadingPath.appendChild(Stub);
+										NavigationPath.appendChild(Stub);
 										//attribute.setTextContent(cells[0][0].getCell_content()+";"+getStack(headerStack, currentSubHeaderLevel)+":"+prevRowHeader+";"+cells[0][k].getCell_content());
 									}
 									else
@@ -502,7 +716,7 @@ public class SimpleIE {
 										{
 											Element Head00 = doc.createElement("Head00");
 											Head00.setTextContent(cells[0][0].getCell_content());
-											ReadingPath.appendChild(Head00);
+											NavigationPath.appendChild(Head00);
 										}
 										Element Stub = doc.createElement("Stub");
 										Element subHeadValLevelUp = doc.createElement("SubLevelUp");
@@ -516,13 +730,13 @@ public class SimpleIE {
 										s.setTextContent(cells[0][k].getCell_content());
 										Stub.appendChild(s);
 										
-										ReadingPath.appendChild(Stub);
+										NavigationPath.appendChild(Stub);
 									//	attribute.setTextContent(cells[0][0].getCell_content()+";"+subHeaderValLevelUp+getStack(headerStack, currentSubHeaderLevel)+":"+prevRowHeader+";"+cells[0][k].getCell_content());
 									}
 								}
 							}
 						}
-						rootElement.appendChild(ReadingPath);
+						rootElement.appendChild(NavigationPath);
 						
 						//info elements
 						Element info = doc.createElement("value");
@@ -585,8 +799,9 @@ public class SimpleIE {
 	 * @param tableFileName the table file name
 	 */
 	public void processListTable(Cell[][] cells,Table table, Article art, String tableFileName){
-		if(cells[0][0].isIs_columnspanning() && table.getNum_of_columns()>1 && cells[0][0].getCells_columnspanning()>=table.getNum_of_columns())
+		if((cells[0][0].isIs_columnspanning() && table.getNum_of_columns()>1 && cells[0][0].getCells_columnspanning()>=table.getNum_of_columns())||(table.getNum_of_columns()==1))
 		{
+			Statistics.addListTable();
 			for(int j=1;j<cells.length;j++)
 			{
 				for(int k=0;k<cells[j].length;k++)
@@ -601,12 +816,12 @@ public class SimpleIE {
 						Element rootElement = doc.createElement("information");
 						doc.appendChild(rootElement);
 						
-						Element ReadingPath = doc.createElement("ReadingPath");
+						Element NavigationPath = doc.createElement("NavigationPath");
 						//attribute.setTextContent(cells[0][k].getCell_content());
 						Element Header = doc.createElement("Header");
 						Header.setTextContent(cells[0][k].getCell_content());
-						ReadingPath.appendChild(Header);
-						rootElement.appendChild(ReadingPath);
+						NavigationPath.appendChild(Header);
+						rootElement.appendChild(NavigationPath);
 						
 						//info elements
 						Element info = doc.createElement("value");
@@ -659,6 +874,7 @@ public class SimpleIE {
 	
 	public void processRegularTable(Cell[][] cells, Table[] tables, Article art, String tableFileName, int tableindex)
 	{
+		Statistics.addMatrixTable();
 		for(int j=1;j<cells.length;j++)
 		{
 			for(int k=1;k<cells[j].length;k++)
@@ -672,25 +888,25 @@ public class SimpleIE {
 
 					Element rootElement = doc.createElement("information");
 					doc.appendChild(rootElement);
-					// TODO: Make attribute ReadingPath and make it structured
-					Element ReadingPath = doc.createElement("ReadingPath");
+					// TODO: Make attribute NavigationPath and make it structured
+					Element NavigationPath = doc.createElement("NavigationPath");
 					if(!Utilities.isSpaceOrEmpty(cells[0][0].getCell_content())){
 					Element TopLeftHeader = doc.createElement("Head00");
 					TopLeftHeader.setTextContent(cells[0][0].getCell_content());
-					ReadingPath.appendChild(TopLeftHeader);
+					NavigationPath.appendChild(TopLeftHeader);
 					}
 					if(!Utilities.isSpaceOrEmpty(cells[j][0].getCell_content())){
 						Element StubValue = doc.createElement("StubValue");
 						StubValue.setTextContent(cells[j][0].getCell_content());
-						ReadingPath.appendChild(StubValue);
+						NavigationPath.appendChild(StubValue);
 						}
 					if(!Utilities.isSpaceOrEmpty(cells[0][k].getCell_content())){
 						Element HeaderValue = doc.createElement("HeaderValue");
 						HeaderValue.setTextContent(cells[0][k].getCell_content());
-						ReadingPath.appendChild(HeaderValue);
+						NavigationPath.appendChild(HeaderValue);
 						}
 					
-					rootElement.appendChild(ReadingPath);
+					rootElement.appendChild(NavigationPath);
 					
 					//info elements
 					Element info = doc.createElement("value");
