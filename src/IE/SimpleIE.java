@@ -197,14 +197,7 @@ public class SimpleIE {
 		{
 			Statistics.addSubheaderTable();
 			String[] headerStackA = new String[20];
-			boolean hadsubheader = false;
 			int sequalHeaders = 0;
-			//is this needed?
-			boolean valueSeparator = false;
-			boolean subheaderTableWithValSeparators = false;
-			String subheaderVal = "";
-			int subHeaderValIndex = 0; // 
-			//is this before needed?
 			int currentSubHeaderLevel = 0; //number of levels
 			for(int j=1;j<cells.length;j++)
 			{
@@ -288,8 +281,6 @@ public class SimpleIE {
 				if(isRowSubheader(cells[j],table))
 					continue;
 				//Other levels of subheaders with possibly filled cells.
-				for(int k=1;k<cells[j].length;k++)
-				{
 					if(cells[j][0].getCell_content().length()>0 && Utilities.isSpace(cells[j][0].getCell_content().trim().charAt(0)) )
 					{
 						if(Utilities.numOfBegeningSpaces(cells[j][0].getCell_content())==currentSubHeaderLevel+1)
@@ -299,17 +290,13 @@ public class SimpleIE {
 							currentSubHeaderLevel = Utilities.numOfBegeningSpaces(cells[j][0].getCell_content())-1;
 							headerStackA[++currentSubHeaderLevel] = cells[j][0].getCell_content();
 						}
-						valueSeparator = true;
-						hadsubheader = true;
-						subheaderTableWithValSeparators = true;
 					}
 					else
 					{
-						valueSeparator = false;
-						hadsubheader = false;
+
 						currentSubHeaderLevel = 0;
 					}
-				}
+
 				for(int k=1;k<cells[j].length;k++)
 				{
 					
