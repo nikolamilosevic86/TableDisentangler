@@ -312,26 +312,35 @@ public class SimpleIE {
 					}
 					continue;
 				}
-//				if(cells[j-1][0].getCell_content()!= null && cells[j-1][0].getCell_content().length()>0 && Utilities.isSpace(cells[j-1][0].getCell_content().trim().charAt(0)) )
-//				{
-//					currentSubHeaderLevel = Utilities.numOfBegeningSpaces(cells[j][0].getCell_content());
-//					headerStackA[currentSubHeaderLevel++] = cells[j][0].getCell_content();
-//				}
+
 				//Other levels of subheaders with possibly filled cells.
 					if(cells[j][0].getCell_content().length()>0 && Utilities.isSpace(cells[j][0].getCell_content().trim().charAt(0)) )
 					{
-						if(Utilities.numOfBegeningSpaces(cells[j][0].getCell_content())==currentSubHeaderLevel+1)
-							headerStackA[currentSubHeaderLevel++] = cells[j][0].getCell_content();
+						if(Utilities.numOfBegeningSpaces(cells[j][0].getCell_content())==currentSubHeaderLevel)
+							headerStackA[currentSubHeaderLevel] = cells[j][0].getCell_content();
 						else
 						{
-							currentSubHeaderLevel = Utilities.numOfBegeningSpaces(cells[j][0].getCell_content())-1;
-							headerStackA[currentSubHeaderLevel++] = cells[j][0].getCell_content();
+							currentSubHeaderLevel = Utilities.numOfBegeningSpaces(cells[j][0].getCell_content());
+							headerStackA[currentSubHeaderLevel] = cells[j][0].getCell_content();
 						}
 					}
 					else
 					{
-
 						currentSubHeaderLevel = 0;
+						headerStackA[currentSubHeaderLevel] = cells[j][0].getCell_content();
+						
+					}
+					
+					if(cells[j-1][0].getCell_content()!= null && cells[j-1][0].getCell_content().length()>0 && Utilities.isSpace(cells[j-1][0].getCell_content().trim().charAt(0)) && !cells[j-1][0].isIs_header())
+					{
+						if( Utilities.numOfBegeningSpaces(cells[j-1][0].getCell_content()) <  Utilities.numOfBegeningSpaces(cells[j][0].getCell_content())){
+						currentSubHeaderLevel = Utilities.numOfBegeningSpaces(cells[j-1][0].getCell_content());
+						headerStackA[currentSubHeaderLevel] = cells[j-1][0].getCell_content();
+						}
+						else
+						{
+							currentSubHeaderLevel = Utilities.numOfBegeningSpaces(cells[j][0].getCell_content());
+						}
 					}
 
 				for(int k=1;k<cells[j].length;k++)
@@ -359,11 +368,6 @@ public class SimpleIE {
 						Element Stub = doc.createElement("Stub");								
 						
 					//	Stub = getStackAsElements(headerStack, currentSubHeaderLevel, doc, Stub);
-						Element s = doc.createElement("HeaderValue");
-						s.setTextContent(cells[0][k].getCell_content());
-						NavigationPath.appendChild(s);
-						
-
 						
 						if(currentSubHeaderLevel>0)
 						{
@@ -375,6 +379,9 @@ public class SimpleIE {
 						Stub.appendChild(ss);
 						
 						NavigationPath.appendChild(Stub);
+						Element s = doc.createElement("HeaderValue");
+						s.setTextContent(cells[0][k].getCell_content());
+						NavigationPath.appendChild(s);
 						cell.appendChild(NavigationPath);
 						
 						//info elements

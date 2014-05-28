@@ -87,6 +87,7 @@ public class SimpleTableClassifier {
 	 *
 	 * @param t the t
 	 */
+	//TODO: Rewrite classifier
 	public static void ClassifyTableByComplexity(Table t)
 	{
 		if(t==null)
