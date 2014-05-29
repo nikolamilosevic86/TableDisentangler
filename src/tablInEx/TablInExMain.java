@@ -27,6 +27,7 @@ public class TablInExMain {
 	public static boolean learnheaders = false;
 	public static boolean doIE = false;
 	public static String outputDest = "";
+	public static boolean doXMLInput = false;
 	public static String Inpath;
 	public static HashMap<String,Integer> headermap = new HashMap<String, Integer>();
 	
@@ -65,8 +66,9 @@ public class TablInExMain {
 		System.out.println("____________________________________________________________________________________________________________________________");
 		String path = args[0];
 		Inpath = path;
-		
-		String runas = args[1];
+		String runas = "";
+		if(args.length>1)
+			runas = args[1];
 		if(Arrays.asList(args).contains("-o"))
 		{
 			int i = Arrays.asList(args).indexOf("-o");
@@ -85,6 +87,11 @@ public class TablInExMain {
 		{
 			TypeClassify = true;
 		}
+		
+		if(Arrays.asList(args).contains("-doHTMLInput2Output"))
+		{
+			doXMLInput = true;
+		}
 		if(Arrays.asList(args).contains("-complexclassify"))
 		{
 			ComplexClassify = true;
@@ -97,6 +104,7 @@ public class TablInExMain {
 		if(Arrays.asList(args).contains("-help"))
 		{
 			printHelp();
+			return;
 		}
 		if(TypeClassify)
 			SimpleTableClassifier.init(TablInExMain.Inpath);
@@ -189,6 +197,7 @@ public class TablInExMain {
 		System.out.println("    -complexclassify - Classify tables by complexity (simple,medium,complex)");
 		System.out.println("    -doie - Tells system do do Information extraction and save it to inputfolder_ie");
 		System.out.println("    -learnheaders - Tells system do calculate frequency of phrases in headers. These phrases are stored in a file headers.txt, and can be later used.");
+		System.out.println("    -doHTMLInput2Output - Tells system to take from cells values as they are in XML or HTML format with all included tags. If this is not present, everything will be transformed to text and tags will be ignored");
 		
 	}
 }

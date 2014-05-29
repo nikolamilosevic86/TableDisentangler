@@ -90,9 +90,9 @@ public class PMCXMLReader implements Reader{
 	    	String surname = "";
 	    	NodeList name = authors.item(j).getChildNodes().item(0).getChildNodes();
 	    	if(name.item(1)!=null)
-	    		surname = name.item(0).getTextContent();
+	    		surname = Utilities.getString(name.item(0));
 	    	if(name.item(1)!=null)
-	    		givenName = name.item(1).getTextContent();
+	    		givenName = Utilities.getString(name.item(1));
 	    	auths[j] = surname+ ", "+givenName;
 	    }
 	    return auths;
@@ -110,7 +110,7 @@ public class PMCXMLReader implements Reader{
 	    String[] affilis = new String[affis.getLength()];
 	    for(int j = 0; j<affis.getLength(); j++)
 	    {
-	    	String affiliation = affis.item(j).getTextContent();
+	    	String affiliation = Utilities.getString(affis.item(j));
 	    	affilis[j] = affiliation;
 	    	System.out.println("Affiliation:"+affiliation);
 	    }
@@ -251,7 +251,7 @@ public class PMCXMLReader implements Reader{
 		List<Node> nl = getChildrenByTagName(tablexmlNode,"label");
 		if(nl.size()>0)
 		{
-			label = nl.get(0).getTextContent();
+			label = Utilities.getString(nl.get(0));
 		}
 		
 		return label;
@@ -268,15 +268,15 @@ public class PMCXMLReader implements Reader{
 		String caption = "";
 		List<Node>nl = getChildrenByTagName(tablexmlNode,"caption");
 		if(nl.size()>0){
-			caption = nl.get(0).getTextContent();
+			caption = Utilities.getString(nl.get(0));
 		}
 		nl = getChildrenByTagName(tablexmlNode,"p");
 		if(nl.size()>0){
-			caption = nl.get(0).getTextContent();
+			caption = Utilities.getString(nl.get(0));
 		}
 		nl = getChildrenByTagName(tablexmlNode,"title");
 		if(nl.size()>0){
-			caption = nl.get(0).getTextContent();
+			caption = Utilities.getString(nl.get(0));
 		}
 		return caption;
 	}
@@ -293,7 +293,7 @@ public class PMCXMLReader implements Reader{
 		List<Node> nl = getChildrenByTagName(tablesxmlNode,"table-wrap-foot");
 		if(nl.size()>=1)
 		{
-			foot = nl.get(0).getTextContent();
+			foot = Utilities.getString(nl.get(0));
 		}
 		return foot;
 	}
@@ -394,7 +394,7 @@ public class PMCXMLReader implements Reader{
 						{
 							while(cells[rowindex][index].isIs_filled() && index!=num_of_columns)
 								index++;
-							cells[rowindex][index] = Cell.setCellValues(cells[rowindex][index], tds.get(k).getTextContent(), is_colspanning, colspanVal, is_rowspanning, rowspanVal, true, 1, false, 0, index,rowindex, l, s);
+							cells[rowindex][index] = Cell.setCellValues(cells[rowindex][index], Utilities.getString(tds.get(k)), is_colspanning, colspanVal, is_rowspanning, rowspanVal, true, 1, false, 0, index,rowindex, l, s);
 							//System.out.println(j+","+index+": "+cells[j][index].getCell_content());
 							table = Statistics.statisticsForCell(table, cells[rowindex][index]);
 						}
@@ -472,7 +472,7 @@ public class PMCXMLReader implements Reader{
 						{
 							while(cells[rowindex][index].isIs_filled() && index!=num_of_columns)
 								index++;
-							cells[rowindex][index] = Cell.setCellValues(cells[rowindex][index], tds.get(k).getTextContent(), is_colspanning, colspanVal, is_rowspanning, rowspanVal, false, 0, isStub, stubProbability, index,rowindex, l, s);
+							cells[rowindex][index] = Cell.setCellValues(cells[rowindex][index], Utilities.getString(tds.get(k)), is_colspanning, colspanVal, is_rowspanning, rowspanVal, false, 0, isStub, stubProbability, index,rowindex, l, s);
 							//System.out.println(j+","+index+": "+cells[j][index].getCell_content());
 							table = Statistics.statisticsForCell(table, cells[rowindex][index]);
 						}

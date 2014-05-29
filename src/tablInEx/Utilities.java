@@ -18,12 +18,15 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -98,6 +101,43 @@ public class Utilities {
 		}catch (Exception ex)
 		{
 			ex.printStackTrace();
+		}
+		return result;
+	}
+	
+	/**
+	 * Creates the xml string from sub node.
+	 *
+	 * @param xml the xml
+	 * @return the string
+	 */
+	public static String CreateXMLStringFromSubNodeWithoutDeclaration(Node xml)
+	{
+		xml = xml.getFirstChild();
+		String result = "";
+		try{
+		StringWriter sw = new StringWriter();
+		Transformer serializer = TransformerFactory.newInstance().newTransformer();
+		serializer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+		serializer.transform(new DOMSource(xml), new StreamResult(sw));
+		result = sw.toString(); 
+		}catch (Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static String getString(Node xml)
+	{
+		String result = "";
+		if(TablInExMain.doXMLInput)
+		{
+			result = CreateXMLStringFromSubNodeWithoutDeclaration(xml);
+		}
+		else
+		{
+			result = xml.getTextContent();
 		}
 		return result;
 	}
@@ -212,4 +252,6 @@ public class Utilities {
 		else
 			return false;
 	}
+	
+	
 }
