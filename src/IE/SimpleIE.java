@@ -135,6 +135,7 @@ public class SimpleIE {
 				{
 					cells[i][j].setCell_content("");
 				}
+				//TODO: This is not correct. Use Utilites function for empty cell checking
 				if(!cells[i][0].getCell_content().trim().equalsIgnoreCase("") && !cells[i][0].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[i][0].getCell_content().trim().charAt(0))== 160) && (!cells[i][j].getCell_content().trim().equalsIgnoreCase("") && !cells[i][j].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[i][j].getCell_content().trim().charAt(0))== 160)))
 				{
 					emptyCells = false;
