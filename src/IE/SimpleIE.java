@@ -21,6 +21,8 @@ import org.w3c.dom.Element;
 import stats.Statistics;
 import tablInEx.Article;
 import tablInEx.Cell;
+import tablInEx.DataExtractionOutputObj;
+import tablInEx.TablInExMain;
 import tablInEx.Table;
 import tablInEx.Utilities;
 
@@ -427,12 +429,8 @@ public class SimpleIE {
 						document.appendChild(pmc);
 						
 											
-						TransformerFactory transformerFactory = TransformerFactory.newInstance();
-						Transformer transformer = transformerFactory.newTransformer();
-						DOMSource source = new DOMSource(doc);
-
-						StreamResult result =  new StreamResult(new File(folder+tableFileName+"e"+j+","+k+".xml"));
-						transformer.transform(source, result);
+						DataExtractionOutputObj dataExtObj = new DataExtractionOutputObj(folder+tableFileName+"e"+j+","+k+".xml", doc);
+						TablInExMain.outputs.add(dataExtObj);
 						
 					}catch(Exception ex)
 					{
@@ -523,12 +521,8 @@ public class SimpleIE {
 						document.appendChild(pmc);
 						
 											
-						TransformerFactory transformerFactory = TransformerFactory.newInstance();
-						Transformer transformer = transformerFactory.newTransformer();
-						DOMSource source = new DOMSource(doc);
-
-						StreamResult result =  new StreamResult(new File(folder+tableFileName+"e"+j+","+k+".xml"));
-						transformer.transform(source, result);
+						DataExtractionOutputObj dataExtObj = new DataExtractionOutputObj(folder+tableFileName+"e"+j+","+k+".xml", doc);
+						TablInExMain.outputs.add(dataExtObj);
 					}catch(Exception ex)
 					{
 						ex.printStackTrace();
@@ -630,13 +624,10 @@ public class SimpleIE {
 					pmc.setTextContent(art.getPmc());
 					document.appendChild(pmc);
 					
+					DataExtractionOutputObj dataExtObj = new DataExtractionOutputObj(folder+tableFileName+"e"+j+","+k+".xml", doc);
+					TablInExMain.outputs.add(dataExtObj);
 										
-					TransformerFactory transformerFactory = TransformerFactory.newInstance();
-					Transformer transformer = transformerFactory.newTransformer();
-					DOMSource source = new DOMSource(doc);
 
-					StreamResult result =  new StreamResult(new File(folder+tableFileName+"e"+j+","+k+".xml"));
-					transformer.transform(source, result);
 				}catch(Exception ex)
 				{
 					ex.printStackTrace();

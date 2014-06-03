@@ -12,6 +12,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+
 import IE.SimpleIE;
 import classifiers.SimpleTableClassifier;
 import readers.PMCXMLReader;
@@ -30,6 +32,7 @@ public class TablInExMain {
 	public static boolean doXMLInput = false;
 	public static String Inpath;
 	public static HashMap<String,Integer> headermap = new HashMap<String, Integer>();
+	public static LinkedList<DataExtractionOutputObj> outputs = new LinkedList<DataExtractionOutputObj>();
 	
 	public static Article[] runReadingloop(Article[] a,File[] files,int len, Class s)
 	{
@@ -137,6 +140,12 @@ public class TablInExMain {
 			{
 					ie.ExtractInformation(articles[i]);
 				
+			}
+			
+			//Create output
+			for(int i = 0;i<outputs.size();i++)
+			{
+				outputs.get(i).CreateOutput();
 			}
 		}
 		if(learnheaders)
