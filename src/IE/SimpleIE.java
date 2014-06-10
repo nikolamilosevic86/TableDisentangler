@@ -544,6 +544,7 @@ public class SimpleIE {
 	public void processRegularTable(Cell[][] cells, Table[] tables, Article art, String tableFileName, int tableindex)
 	{
 		Statistics.addMatrixTable();
+
 		for(int j=1;j<cells.length;j++)
 		{
 			for(int k=1;k<cells[j].length;k++)
@@ -626,6 +627,8 @@ public class SimpleIE {
 					
 					DataExtractionOutputObj dataExtObj = new DataExtractionOutputObj(folder+tableFileName+"e"+j+","+k+".xml", doc);
 					TablInExMain.outputs.add(dataExtObj);
+					
+
 										
 
 				}catch(Exception ex)
@@ -634,6 +637,7 @@ public class SimpleIE {
 				}
 			}
 		}
+
 	}
 
 	/**

@@ -8,6 +8,8 @@ import gov.nih.nlm.nls.metamap.PCM;
 import gov.nih.nlm.nls.metamap.Result;
 import gov.nih.nlm.nls.metamap.Utterance;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +19,8 @@ import java.util.Map;
 public class MetaMapping {
 	//initialise MetaMap api
 	private static MetaMapApi api;
+	public static HashMap<String, String> SemanticTypes;
+	
 	
 	public MetaMapping() throws MalformedURLException
 	{
@@ -37,10 +41,31 @@ public class MetaMapping {
 	   // theOptions.add("-R SNOMEDCT,ICD10CM,ICD9CM,ICF,ICF-CY,RXNORM");
 		for(String opt: theOptions)
 	    	api.setOptions(opt);
+		try{
+		SemanticTypes = new HashMap<String, String>();
+		BufferedReader br = new BufferedReader(new FileReader("SemanticTypes"));
+		String line;
+		while ((line = br.readLine()) != null) {
+			String[] splitted = line.split("\\|");
+			SemanticTypes.put(splitted[0], splitted[2]);
+		   // process the line.
+		}
+		br.close();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		
 
 	}
 	
-	private static Map<Object, Object> getClassification(String term) throws Exception
+	public static String getNiceSemanticType(String str)
+	{
+		return SemanticTypes.get(str);
+	}
+	
+	public static Map<Object, Object> getClassification(String term) throws Exception
 	{
 		//String[] classfication = new String[3]; 
 		Map<Object, Object> mp = new HashMap<Object, Object>();

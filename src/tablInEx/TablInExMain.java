@@ -30,6 +30,7 @@ public class TablInExMain {
 	public static boolean doIE = false;
 	public static String outputDest = "";
 	public static boolean doXMLInput = false;
+	public static boolean shouldTag = false;
 	public static String Inpath;
 	public static HashMap<String,Integer> headermap = new HashMap<String, Integer>();
 	public static LinkedList<DataExtractionOutputObj> outputs = new LinkedList<DataExtractionOutputObj>();
@@ -81,6 +82,11 @@ public class TablInExMain {
 		{
 			int i = Arrays.asList(args).indexOf("-learnheaders");
 			learnheaders = true;
+		}
+		//shouldTag
+		if(Arrays.asList(args).contains("-tag"))
+		{
+			shouldTag = true;
 		}
 		if(Arrays.asList(args).contains("-makestats"))
 		{
@@ -145,6 +151,9 @@ public class TablInExMain {
 			//Create output
 			for(int i = 0;i<outputs.size();i++)
 			{
+				if(shouldTag){
+				outputs.get(i).MetamapTagDocument();
+				}
 				outputs.get(i).CreateOutput();
 			}
 		}
