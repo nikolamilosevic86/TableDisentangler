@@ -1,5 +1,6 @@
 package tablInEx;
 
+import IE.MetaMapStats;
 import IE.MetaMapping;
 import gov.nih.nlm.nls.metamap.Position;
 
@@ -60,6 +61,7 @@ public class DataExtractionOutputObj {
 		String DocumentTitleStr = "";
 		String PMCStr = "";
 		Head00Str = Head00.item(0).getTextContent();
+		Head00Str = Head00Str.replaceAll("'", "");
 
 		 MetaMapping mp = new MetaMapping();
 		 System.out.print("initiated");
@@ -89,6 +91,7 @@ public class DataExtractionOutputObj {
 			 HeadPart.setAttribute("ConceptID", aMap.get(i-1).toString());
 			 HeadPart.setAttribute("SemanticType", aMap.get(i+2).toString());
 			 HeadPart.setAttribute("NiceSemanticType", MetaMapping.getNiceSemanticType(aMap.get(i+2).toString()));
+			 MetaMapStats.AddHead00MMStats( MetaMapping.getNiceSemanticType(aMap.get(i+2).toString()));
 			 HeadPart.setAttribute("ConceptName", aMap.get(i+3).toString());
 			 HeadPart.setAttribute("PreferredName", aMap.get(i+3).toString());
 			 HeadPart.setTextContent(Head00Str.substring(X,X+ Y));
@@ -100,6 +103,7 @@ public class DataExtractionOutputObj {
 		 
 		 //Header
 		 HeaderValueStr = HeaderValue.item(0).getTextContent();
+		 HeaderValueStr = HeaderValueStr.replaceAll("'", "");
 		 mp = new MetaMapping();
 		 System.out.print("initiated");
 		 aMap = mp.getClassification(HeaderValueStr);
@@ -122,6 +126,7 @@ public class DataExtractionOutputObj {
 			 HeadPart.setAttribute("ConceptID", aMap.get(i-1).toString());
 			 HeadPart.setAttribute("SemanticType", aMap.get(i+2).toString());
 			 HeadPart.setAttribute("NiceSemanticType", MetaMapping.getNiceSemanticType(aMap.get(i+2).toString()));
+			 MetaMapStats.AddHeaderMMStats( MetaMapping.getNiceSemanticType(aMap.get(i+2).toString()));
 			 HeadPart.setAttribute("ConceptName", aMap.get(i+3).toString());
 			 HeadPart.setAttribute("PreferredName", aMap.get(i+3).toString());
 			 HeadPart.setTextContent(HeaderValueStr.substring(X, X+Y));
@@ -139,6 +144,7 @@ public class DataExtractionOutputObj {
 		 {
 			 String nodeName =  stubVals.item(j).getNodeName();
 			 String nodeValue = stubVals.item(j).getTextContent();
+			 nodeValue = nodeValue.replaceAll("'", "");
 			 mp = new MetaMapping();
 			 System.out.print("initiated");
 			 aMap = mp.getClassification(nodeValue);
@@ -161,6 +167,14 @@ public class DataExtractionOutputObj {
 				 HeadPart.setAttribute("ConceptID", aMap.get(i-1).toString());
 				 HeadPart.setAttribute("SemanticType", aMap.get(i+2).toString());
 				 HeadPart.setAttribute("NiceSemanticType", MetaMapping.getNiceSemanticType(aMap.get(i+2).toString()));
+				 if(nodeName.equals("StubValue"))
+				 {
+					 MetaMapStats.AddStubMMStats( MetaMapping.getNiceSemanticType(aMap.get(i+2).toString()));
+				 }
+				 else
+				 {
+					 MetaMapStats.AddSubHeaderMMStats( MetaMapping.getNiceSemanticType(aMap.get(i+2).toString()));
+				 }
 				 HeadPart.setAttribute("ConceptName", aMap.get(i+3).toString());
 				 HeadPart.setAttribute("PreferredName", aMap.get(i+3).toString());
 				 HeadPart.setTextContent(nodeValue.substring(X, X+Y));
@@ -174,6 +188,7 @@ public class DataExtractionOutputObj {
 		 
 		 //Value
 		 valueStr = value.item(0).getTextContent();
+		 valueStr = valueStr.replaceAll("'", "");
 		 Element Valuee = doc.createElement("value");
 		 Cell.appendChild(Valuee);
 		 mp = new MetaMapping();
@@ -197,6 +212,7 @@ public class DataExtractionOutputObj {
 			 HeadPart.setAttribute("ConceptID", aMap.get(i-1).toString());
 			 HeadPart.setAttribute("SemanticType", aMap.get(i+2).toString());
 			 HeadPart.setAttribute("NiceSemanticType", MetaMapping.getNiceSemanticType(aMap.get(i+2).toString()));
+			 MetaMapStats.AddValueMMStats( MetaMapping.getNiceSemanticType(aMap.get(i+2).toString()));
 			 HeadPart.setAttribute("ConceptName", aMap.get(i+3).toString());
 			 HeadPart.setAttribute("PreferredName", aMap.get(i+3).toString());
 			 HeadPart.setTextContent(valueStr.substring(X, X+Y));
@@ -221,6 +237,7 @@ public class DataExtractionOutputObj {
 		 Element TableNamee = doc.createElement("tableName");
 		 Table.appendChild(TableNamee);
 		 TableNameStr = tableName.item(0).getTextContent();
+		 TableNameStr = TableNameStr.replaceAll("'", "");
 		 mp = new MetaMapping();
 		 System.out.print("initiated");
 		 aMap = mp.getClassification(TableNameStr);
@@ -242,6 +259,7 @@ public class DataExtractionOutputObj {
 			 HeadPart.setAttribute("ConceptID", aMap.get(i-1).toString());
 			 HeadPart.setAttribute("SemanticType", aMap.get(i+2).toString());
 			 HeadPart.setAttribute("NiceSemanticType", MetaMapping.getNiceSemanticType(aMap.get(i+2).toString()));
+			 MetaMapStats.AddTableNameMMStats( MetaMapping.getNiceSemanticType(aMap.get(i+2).toString()));
 			 HeadPart.setAttribute("ConceptName", aMap.get(i+3).toString());
 			 HeadPart.setAttribute("PreferredName", aMap.get(i+3).toString());
 			 HeadPart.setTextContent(TableNameStr.substring(X, X+Y));
@@ -258,6 +276,7 @@ public class DataExtractionOutputObj {
 		 Element TableFootere = doc.createElement("tableFooter");
 		 Table.appendChild(TableFootere);
 		 TableFooterStr = tableFooter.item(0).getTextContent();
+		 TableFooterStr = TableFooterStr.replaceAll("'", "");
 		 mp = new MetaMapping();
 		 System.out.print("initiated");
 		 aMap = mp.getClassification(TableFooterStr);
@@ -279,6 +298,7 @@ public class DataExtractionOutputObj {
 			 HeadPart.setAttribute("ConceptID", aMap.get(i-1).toString());
 			 HeadPart.setAttribute("SemanticType", aMap.get(i+2).toString());
 			 HeadPart.setAttribute("NiceSemanticType", MetaMapping.getNiceSemanticType(aMap.get(i+2).toString()));
+			 MetaMapStats.AddTableFooterMMStats( MetaMapping.getNiceSemanticType(aMap.get(i+2).toString()));
 			 HeadPart.setAttribute("ConceptName", aMap.get(i+3).toString());
 			 HeadPart.setAttribute("PreferredName", aMap.get(i+3).toString());
 			 HeadPart.setTextContent(TableFooterStr.substring(X, X+Y));
@@ -292,6 +312,7 @@ public class DataExtractionOutputObj {
 		 
 		 Element DocumentTitlee = doc.createElement("DocumentTitle");
 		 DocumentTitleStr = DocumentTitle.item(0).getTextContent();
+		 DocumentTitleStr = DocumentTitleStr.replaceAll("'", "");
 		 Documente.appendChild(DocumentTitlee);
 		 mp = new MetaMapping();
 		 System.out.print("initiated");
@@ -314,6 +335,7 @@ public class DataExtractionOutputObj {
 			 HeadPart.setAttribute("ConceptID", aMap.get(i-1).toString());
 			 HeadPart.setAttribute("SemanticType", aMap.get(i+2).toString());
 			 HeadPart.setAttribute("NiceSemanticType", MetaMapping.getNiceSemanticType(aMap.get(i+2).toString()));
+			 MetaMapStats.AddArticleNameMMStats( MetaMapping.getNiceSemanticType(aMap.get(i+2).toString()));
 			 HeadPart.setAttribute("ConceptName", aMap.get(i+3).toString());
 			 HeadPart.setAttribute("PreferredName", aMap.get(i+3).toString());
 			 HeadPart.setTextContent(DocumentTitleStr.substring(X, X+Y));

@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 
+import IE.MetaMapStats;
 import IE.SimpleIE;
 import classifiers.SimpleTableClassifier;
 import readers.PMCXMLReader;
@@ -190,6 +191,7 @@ public class TablInExMain {
 			}
 			
 		}
+		MetaMapStats.PrintMMStats();
 		
 		Statistics.CalculateStatistics();
 		String stats = Statistics.makeOutputStatisticString();
@@ -216,6 +218,7 @@ public class TablInExMain {
 		System.out.println("    -doie - Tells system do do Information extraction and save it to inputfolder_ie");
 		System.out.println("    -learnheaders - Tells system do calculate frequency of phrases in headers. These phrases are stored in a file headers.txt, and can be later used.");
 		System.out.println("    -doHTMLInput2Output - Tells system to take from cells values as they are in XML or HTML format with all included tags. If this is not present, everything will be transformed to text and tags will be ignored");
+		System.out.println("    -tag - Tag output (using metamap)");
 		
 	}
 }
