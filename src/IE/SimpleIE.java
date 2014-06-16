@@ -26,7 +26,6 @@ import tablInEx.TablInExMain;
 import tablInEx.Table;
 import tablInEx.Utilities;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SimpleIE. Does simple Information extraction. 
  */
@@ -41,7 +40,6 @@ public class SimpleIE {
 	 * @param inpath the inpath
 	 */
 	public SimpleIE(String inpath) {
-		// TODO Auto-generated constructor stub
 		folder = inpath+"_ie";
 		Utilities.DeleteFolderWithContent(folder);
 		Utilities.MakeDirectory(folder);
@@ -125,7 +123,13 @@ public class SimpleIE {
 			return false;
 		for(int i = 1; i < cells.length;i++)
 		{
-			if(cells[i][0].isIs_columnspanning() && table.getNum_of_columns()>1 && cells[i][0].getCells_columnspanning()>=table.getNum_of_columns() && !cells[i][0].getCell_content().trim().equalsIgnoreCase("") && !cells[i][0].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[i][0].getCell_content().trim().charAt(0))== 160))
+			if(cells[i][0].isIs_columnspanning() && table.getNum_of_columns()>1 && cells[i][0].getCells_columnspanning()>=table.getNum_of_columns() && !Utilities.isSpaceOrEmpty(cells[i][0].getCell_content()))
+			{
+				hasSubheader = true;
+				break;
+			}
+			//Tree structures
+			if(Utilities.numOfBegeningSpaces(cells[i][0].getCell_content())>0)
 			{
 				hasSubheader = true;
 				break;
@@ -137,11 +141,13 @@ public class SimpleIE {
 				{
 					cells[i][j].setCell_content("");
 				}
-				//TODO: This is not correct. Use Utilites function for empty cell checking
-				if(!cells[i][0].getCell_content().trim().equalsIgnoreCase("") && !cells[i][0].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[i][0].getCell_content().trim().charAt(0))== 160) && (!cells[i][j].getCell_content().trim().equalsIgnoreCase("") && !cells[i][j].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[i][j].getCell_content().trim().charAt(0))== 160)))
+				//TODO: Test, hopefully this does work
+				//if(!cells[i][0].getCell_content().trim().equalsIgnoreCase("") && !cells[i][0].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[i][0].getCell_content().trim().charAt(0))== 160) && (!cells[i][j].getCell_content().trim().equalsIgnoreCase("") && !cells[i][j].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[i][j].getCell_content().trim().charAt(0))== 160)))
+				if(!Utilities.isSpaceOrEmpty(cells[i][0].getCell_content()) && !Utilities.isSpaceOrEmpty(cells[i][j].getCell_content()))
 				{
 					emptyCells = false;
 				}
+				
 			}
 			if(emptyCells == true)
 			{
@@ -562,7 +568,6 @@ public class SimpleIE {
 					Element cell = doc.createElement("Cell");
 					rootElement.appendChild(cell);
 					
-					// TODO: Make attribute NavigationPath and make it structured
 					Element NavigationPath = doc.createElement("NavigationPath");
 					if(!Utilities.isSpaceOrEmpty(cells[0][0].getCell_content())){
 					Element TopLeftHeader = doc.createElement("Head00");

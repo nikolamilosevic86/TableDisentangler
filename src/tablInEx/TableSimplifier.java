@@ -101,7 +101,6 @@ public class TableSimplifier {
 		table.setNum_of_rows(1+table.stat.getNum_of_body_rows());
 		table.cells = newcells;
 		
-		//TODO: Delete this part
 		for(int i = 0;i<table.cells.length;i++){
 			int num_of_empty = 0;
 			for(int j = 0;j<table.cells[i].length;j++)

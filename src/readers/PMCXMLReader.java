@@ -46,7 +46,6 @@ public class PMCXMLReader implements Reader{
 	public Article Read()
 	{
 		Article art =  new Article(FileName);
-		//TODO: Reading of file
 		try{
 		@SuppressWarnings("resource")
 		BufferedReader reader = new BufferedReader(new FileReader(FileName));
@@ -522,7 +521,6 @@ public class PMCXMLReader implements Reader{
 		//Iterate document tables
 		for(int i = 0;i<tablesxml.getLength();i++)
 		{
-			//TODO: This should go up, not to count in statistics tables that are stored in images
 			List<Node> tb = getChildrenByTagName(tablesxml.item(i),"table");
 
 			for(int s = 0;s<tb.size();s++)

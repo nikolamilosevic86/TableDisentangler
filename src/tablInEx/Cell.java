@@ -5,7 +5,6 @@
  */
 package tablInEx;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Cell. One cell of the table. Contains all necessary information about cell
  * @author Nikola Milosevic

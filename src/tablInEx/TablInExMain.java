@@ -53,17 +53,14 @@ public class TablInExMain {
 				a[i]=r.Read();
 			}
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	return a;
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		System.out.println("=============================================");
 		System.out.println("Hello TablInEx");
 		System.out.println("=============================================");
@@ -183,10 +180,8 @@ public class TablInExMain {
 	}
 			writer.close();
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			

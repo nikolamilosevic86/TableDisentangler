@@ -5,7 +5,6 @@
  */
 package stats;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class TableStats. Used for statistics about one table
  */

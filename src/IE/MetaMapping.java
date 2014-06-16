@@ -28,16 +28,42 @@ public class MetaMapping {
 		/**
 		 * set parameters (set parameters in conf/metamap.properties)
 		 */
+		List<String> theOptions=new ArrayList<String>();;
+		try{
+		String HostName = "";
+		int PortNumber = 0;
+		String [] options = new String[0];
+		BufferedReader bropt = new BufferedReader(new FileReader("metamapSettings"));
+		String linea;
+		while ((linea = bropt.readLine()) != null) {
+			if(linea.contains("Host:"))
+			{
+				HostName = linea.substring(5);
+			}
+			if(linea.contains("Port:"))
+			{
+				PortNumber = Integer.parseInt(linea.substring(5));
+			}
+			if(linea.contains("Options:"))
+			{
+				String opt = linea.substring(8);
+				options = opt.split(" ");
+			}
+		}
+		
+
 		api = new MetaMapApiImpl();
-		api.setHost("gnode1.mib.man.ac.uk");
-		api.setPort(8066);
-	    
-	    //get and set parameters
-		//List<String> theOptions = FileOps.getFileContentAsList(new File("conf/metamap.parameters").toURI().toURL());
-		List<String> theOptions = new ArrayList<String>();
-	    theOptions.add("-y");  // turn on Word Sense Disambiguation
-	    theOptions.add("-i");
-	    theOptions.add("-l");
+		api.setHost(HostName);
+		api.setPort(PortNumber);
+	   
+		for(int i = 0;i<options.length;i++)
+		{
+			theOptions.add(options[i]); 	
+		}
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
 	   // theOptions.add("-R SNOMEDCT,ICD10CM,ICD9CM,ICF,ICF-CY,RXNORM");
 		for(String opt: theOptions)
 	    	api.setOptions(opt);

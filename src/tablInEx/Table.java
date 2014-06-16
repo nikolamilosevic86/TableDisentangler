@@ -8,7 +8,6 @@ package tablInEx;
 import stats.TableStats;
 
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Table. Contain various information about table, including the cell matrix
  */

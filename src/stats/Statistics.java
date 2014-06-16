@@ -9,7 +9,6 @@ import tablInEx.Cell;
 import tablInEx.Table;
 import tablInEx.Utilities;
 
-// TODO: Auto-generated Javadoc
 /**
  * 
  * The Class Statistics. Class is used for generating statistics about tables

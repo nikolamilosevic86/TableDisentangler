@@ -60,7 +60,10 @@ public class DataExtractionOutputObj {
 		String TableFooterStr = "";
 		String DocumentTitleStr = "";
 		String PMCStr = "";
-		Head00Str = Head00.item(0).getTextContent();
+		if(Head00!=null && Head00.item(0)!=null)
+		{
+			Head00Str = Head00.item(0).getTextContent();
+		}
 		Head00Str = Head00Str.replaceAll("'", "");
 
 		 MetaMapping mp = new MetaMapping();
@@ -102,7 +105,10 @@ public class DataExtractionOutputObj {
 		 NavigationPath.appendChild(Head00e);
 		 
 		 //Header
-		 HeaderValueStr = HeaderValue.item(0).getTextContent();
+		 if(HeaderValue!=null && HeaderValue.item(0)!=null)
+		 {
+			 HeaderValueStr = HeaderValue.item(0).getTextContent();
+		 }
 		 HeaderValueStr = HeaderValueStr.replaceAll("'", "");
 		 mp = new MetaMapping();
 		 System.out.print("initiated");
@@ -187,7 +193,10 @@ public class DataExtractionOutputObj {
 		 // End of Stub
 		 
 		 //Value
-		 valueStr = value.item(0).getTextContent();
+		 if(value!=null && value.item(0)!=null)
+		 {
+			 valueStr = value.item(0).getTextContent();
+		 } 
 		 valueStr = valueStr.replaceAll("'", "");
 		 Element Valuee = doc.createElement("value");
 		 Cell.appendChild(Valuee);
@@ -236,7 +245,10 @@ public class DataExtractionOutputObj {
 		 
 		 Element TableNamee = doc.createElement("tableName");
 		 Table.appendChild(TableNamee);
-		 TableNameStr = tableName.item(0).getTextContent();
+		 if(tableName!=null && tableName.item(0)!=null)
+		 {
+			 TableNameStr = tableName.item(0).getTextContent();
+		 }
 		 TableNameStr = TableNameStr.replaceAll("'", "");
 		 mp = new MetaMapping();
 		 System.out.print("initiated");
@@ -269,13 +281,17 @@ public class DataExtractionOutputObj {
 		 TableNamee.appendChild(tn);
 		 
 		 Element TableOrdere = doc.createElement("tableOrder");
-		 TableOrderStr = tableOrder.item(0).getTextContent();
+		 if(tableOrder!=null && tableOrder.item(0)!=null){
+			 TableOrderStr = tableOrder.item(0).getTextContent();
+		 }
 		 TableOrdere.setTextContent(TableOrderStr);
 		 Table.appendChild(TableOrdere);
 		 
 		 Element TableFootere = doc.createElement("tableFooter");
 		 Table.appendChild(TableFootere);
-		 TableFooterStr = tableFooter.item(0).getTextContent();
+		 if(tableFooter!=null && tableFooter.item(0)!=null){
+			 TableFooterStr = tableFooter.item(0).getTextContent();
+		 }
 		 TableFooterStr = TableFooterStr.replaceAll("'", "");
 		 mp = new MetaMapping();
 		 System.out.print("initiated");
@@ -311,7 +327,9 @@ public class DataExtractionOutputObj {
 		 RootElement.appendChild(Documente);
 		 
 		 Element DocumentTitlee = doc.createElement("DocumentTitle");
-		 DocumentTitleStr = DocumentTitle.item(0).getTextContent();
+		 if(DocumentTitle!=null && DocumentTitle.item(0)!=null){
+			 DocumentTitleStr = DocumentTitle.item(0).getTextContent();
+		 }
 		 DocumentTitleStr = DocumentTitleStr.replaceAll("'", "");
 		 Documente.appendChild(DocumentTitlee);
 		 mp = new MetaMapping();
