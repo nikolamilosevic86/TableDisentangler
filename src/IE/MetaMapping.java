@@ -64,7 +64,6 @@ public class MetaMapping {
 		{
 			ex.printStackTrace();
 		}
-	   // theOptions.add("-R SNOMEDCT,ICD10CM,ICD9CM,ICF,ICF-CY,RXNORM");
 		for(String opt: theOptions)
 	    	api.setOptions(opt);
 		try{

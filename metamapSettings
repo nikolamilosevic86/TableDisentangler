@@ -1,0 +1,3 @@
+Host:gnode1.mib.man.ac.uk
+Port:8066
+Options:-y -i -l

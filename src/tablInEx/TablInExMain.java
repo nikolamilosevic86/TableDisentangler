@@ -15,7 +15,8 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 
 import IE.MetaMapStats;
-import IE.SimpleIE;
+import IE.SimpleDataExtraction;
+import IE.TrialInformationExtraction;
 import classifiers.SimpleTableClassifier;
 import readers.PMCXMLReader;
 import readers.Reader;
@@ -32,6 +33,7 @@ public class TablInExMain {
 	public static String outputDest = "";
 	public static boolean doXMLInput = false;
 	public static boolean shouldTag = false;
+	public static boolean IEinSQLTial = false;
 	public static String Inpath;
 	public static HashMap<String,Integer> headermap = new HashMap<String, Integer>();
 	public static LinkedList<DataExtractionOutputObj> outputs = new LinkedList<DataExtractionOutputObj>();
@@ -90,6 +92,10 @@ public class TablInExMain {
 		{
 			doStats = true;
 		}
+		if(Arrays.asList(args).contains("-extractTrialToSQL"))
+		{
+			IEinSQLTial = true;
+		}
 		if(Arrays.asList(args).contains("-typeclassify"))
 		{
 			TypeClassify = true;
@@ -139,7 +145,7 @@ public class TablInExMain {
 		}
 		if (doIE) 
 		{
-			SimpleIE ie = new SimpleIE(Inpath);
+			SimpleDataExtraction ie = new SimpleDataExtraction(Inpath);
 			for (int i = 0; i < articles.length; i++) 
 			{
 					ie.ExtractInformation(articles[i]);
@@ -153,6 +159,15 @@ public class TablInExMain {
 				outputs.get(i).MetamapTagDocument();
 				}
 				outputs.get(i).CreateOutput();
+			}
+			
+			if(IEinSQLTial)
+			{
+				TrialInformationExtraction tie = new TrialInformationExtraction("");
+				for (int i = 0; i < articles.length; i++) 
+				{
+					tie.ExtractTrialData(articles[i]);				
+				}
 			}
 		}
 		if(learnheaders)
@@ -214,6 +229,7 @@ public class TablInExMain {
 		System.out.println("    -learnheaders - Tells system do calculate frequency of phrases in headers. These phrases are stored in a file headers.txt, and can be later used.");
 		System.out.println("    -doHTMLInput2Output - Tells system to take from cells values as they are in XML or HTML format with all included tags. If this is not present, everything will be transformed to text and tags will be ignored");
 		System.out.println("    -tag - Tag output (using metamap)");
-		
+		System.out.println("    -extractTrialToSQL - Extract information about trial (no of patients, males, females, age range...) and stores it in mySQL database. Has to be executed together with -doIE command");
+		//extractTrialToSQL
 	}
 }

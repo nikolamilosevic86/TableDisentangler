@@ -29,7 +29,7 @@ import tablInEx.Utilities;
 /**
  * The Class SimpleIE. Does simple Information extraction. 
  */
-public class SimpleIE {
+public class SimpleDataExtraction {
 	
 	/** The folder. */
 	private static String folder;
@@ -39,7 +39,7 @@ public class SimpleIE {
 	 *
 	 * @param inpath the inpath
 	 */
-	public SimpleIE(String inpath) {
+	public SimpleDataExtraction(String inpath) {
 		folder = inpath+"_ie";
 		Utilities.DeleteFolderWithContent(folder);
 		Utilities.MakeDirectory(folder);
