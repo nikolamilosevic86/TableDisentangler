@@ -252,5 +252,30 @@ public class Utilities {
 			return false;
 	}
 	
+	public static String ReplaceNonBrakingSpaceToSpace(String s)
+	{
+		char ch = 160;
+		s= s.replace(ch, ' ');
+		ch = 8195;
+		s = s.replace(ch, ' ');
+		ch = 8194;
+		s = s.replace(ch, ' ');
+		ch = 8201;
+		s = s.replace(ch, ' ');
+		return s;
+	}
+	
+	public static boolean isDouble(String s)
+	{
+		try{
+			Double.parseDouble(s);
+			return true;
+		}
+		catch(Exception ex)
+		{
+			return false;
+		}
+	}
+	
 	
 }

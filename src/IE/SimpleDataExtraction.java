@@ -437,6 +437,7 @@ public class SimpleDataExtraction {
 											
 						DataExtractionOutputObj dataExtObj = new DataExtractionOutputObj(folder+tableFileName+"e"+j+","+k+".xml", doc);
 						TablInExMain.outputs.add(dataExtObj);
+						table.output.add(dataExtObj);
 						
 					}catch(Exception ex)
 					{
@@ -529,6 +530,7 @@ public class SimpleDataExtraction {
 											
 						DataExtractionOutputObj dataExtObj = new DataExtractionOutputObj(folder+tableFileName+"e"+j+","+k+".xml", doc);
 						TablInExMain.outputs.add(dataExtObj);
+						table.output.add(dataExtObj);
 					}catch(Exception ex)
 					{
 						ex.printStackTrace();
@@ -632,6 +634,7 @@ public class SimpleDataExtraction {
 					
 					DataExtractionOutputObj dataExtObj = new DataExtractionOutputObj(folder+tableFileName+"e"+j+","+k+".xml", doc);
 					TablInExMain.outputs.add(dataExtObj);
+					tables[tableindex].output.add(dataExtObj);
 					
 
 										

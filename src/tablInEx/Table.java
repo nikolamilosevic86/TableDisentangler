@@ -5,6 +5,8 @@
  */
 package tablInEx;
 
+import java.util.LinkedList;
+
 import stats.TableStats;
 
 
@@ -17,6 +19,7 @@ public class Table {
 	private String documentFileName;
 	public TableStats stat;
 	public boolean isEmptyOnlyHeaders = true;
+	public LinkedList<DataExtractionOutputObj> output = new LinkedList<DataExtractionOutputObj>();
 	
 	
 	/** The num_of_rows. */
