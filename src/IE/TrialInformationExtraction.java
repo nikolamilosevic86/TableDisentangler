@@ -28,6 +28,8 @@ import tablInEx.Utilities;
  * The Class TrialInformationExtraction.
  */
 public class TrialInformationExtraction {
+	
+
 	 
  	/** The jdbc driver. */
  	private String jdbcDriver = "com.mysql.jdbc.Driver";
@@ -73,8 +75,8 @@ public class TrialInformationExtraction {
 	            String myTableName = "CREATE TABLE IF NOT EXISTS TrialDetails ("
 	            		+"idNo INT(64) NOT NULL AUTO_INCREMENT," 
 	            		+"PMC VARCHAR(10),"	            		
-	            		+"Title VARCHAR(255)," 
-	            		+"Authors VARCHAR(255)," 
+	            		+"Title VARCHAR(555)," 
+	            		+"Authors VARCHAR(555)," 
 	            		+"NoPatients INT," 
 	            		+"NoMale INT," 
 	            		+"NoFemale INT," 
@@ -163,17 +165,36 @@ public class TrialInformationExtraction {
 				    	maxs.add(getFirstDoubleValue(range[1]));
 				    }
 			    }
+			    //TODO: Check age range correctness
 			    if(Vvalue.contains("±"))
 			    {
 			    	String[] sd = Vvalue.split("±");
-			    	means.add(Double.parseDouble(sd[0]));
-			    	Double min = Double.parseDouble(sd[0]) - Double.parseDouble(sd[1]);
-			    	Double max = Double.parseDouble(sd[0]) + Double.parseDouble(sd[1]);
+			    	if(sd[0].length()>0)
+			    	means.add(getFirstDoubleValue(sd[0]));
+			    	if(sd[1].contains("("))
+			    	{
+			    		Pattern regex1 = Pattern.compile("\\b[0-9]{1,}[\\.]{0,1}[0-9]*[–-][0-9]{1,}[\\.]{0,1}[0-9]*\\b");
+					    Matcher regexMatcher1 = regex1.matcher(sd[1]);
+					    if(regexMatcher1.find())
+					    {
+					    	String[] range = sd[1].split("–");
+					    	if(range.length<2)
+					    	{
+					    		range = sd[1].split("-");
+					    	}
+					    	mins.add(getFirstDoubleValue(range[0]));
+					    	maxs.add(getFirstDoubleValue(range[1]));
+			    	}
+			    	}else
+			    	{
+					if(sd[0].length()>0 && sd[1].length()>0){  
+			    	Double min = getFirstDoubleValue(sd[0]) - getFirstDoubleValue(sd[1]);
+			    	Double max = getFirstDoubleValue(sd[0]) + getFirstDoubleValue(sd[1]);
 			    	mins.add(min);
 			    	maxs.add(max);
+					}
+			    	}
 			    }
-				System.out.println(Vvalue);
-				
 			}	
 		}
 		Double FinalMean = 0.0;
@@ -201,21 +222,22 @@ public class TrialInformationExtraction {
 	
 	public boolean checkGender(String s)
 	{
+		if(s==null)
+			return false;
 		if(s.toLowerCase().contains("male") || s.toLowerCase().contains("female")||s.toLowerCase().contains("m/f"))
 		{
 			return true;
 		}
 		return false;
 	}
+		
 	
-	
-	
-	public int[] getMalesFemales(Cell[] cells)
+	public Genders getMalesFemales(Cell[] cells, LinkedList<Integer> numOfPatients, Genders results)
 	{
-			int[] results = new int[2];
+			
 		    String matched = "";
-			LinkedList<Integer> malesList = new LinkedList<Integer>();
-			LinkedList<Integer> femalesList = new LinkedList<Integer>();
+			LinkedList<Integer> malesList = results.males;
+			LinkedList<Integer> femalesList =results.females;
 			String cellValue = Utilities.ReplaceNonBrakingSpaceToSpace(cells[0].getCell_content().toLowerCase());
 		  	Pattern regex = Pattern.compile("\\b[ ]{0,1}[:/\\|a-z]{0,}male[s]{0,1}[ ]{0,1}[:/\\|]{0,}[ ]{0,1}([a-z]{0,}(male)[s]*)*\\b");
 		    Matcher regexMatcher = regex.matcher(cellValue);
@@ -241,8 +263,7 @@ public class TrialInformationExtraction {
 		    	hasBothValues = true;
 		    	if(regexMatcher1.start()>regexMatcher2.start())
 		    		MaleSecond = true;		    	
-		    }
-		    
+		    }		    
 		    
 		    for(int i=1;i<cells.length;i++)
 		    {
@@ -323,25 +344,44 @@ public class TrialInformationExtraction {
 		    		malesList.add(secondnum);
 		    	}
 		    }
-		    for(int maleItem:malesList)
-		    {
-		    	results[0]+=maleItem;
-		    }
-		    for(int femaleItem:femalesList)
-		    {
-		    	results[1]+=femaleItem;
-		    }
+		    results.males = malesList;
+		    results.females = femalesList;
+//		    int k = 0;
+//		    for(int maleItem:malesList)
+//		    {
+//		    	if(maleItem+femalesList.get(k)==100 && numOfPatients.get(k)!=100)
+//		    	{
+//		    		results[0]+=(maleItem/100)*numOfPatients.get(k);
+//		    	}
+//		    	else{
+//		    	results[0]+=maleItem;
+//		    	}
+//		    	k++;
+//		    }
+//		    k= 0;
+//		    for(int femaleItem:femalesList)
+//		    {
+//		    	if(femaleItem+malesList.get(k)==100 && numOfPatients.get(k)!=100)
+//		    	{
+//		    		results[1]+=(femaleItem/100)*numOfPatients.get(k);
+//		    	}
+//		    	else{
+//		    	results[1]+=femaleItem;
+//		    	}
+//		    	k++;
+//		    }
 		return results;
 	}
 	
 	
 	public boolean checkNumOfPatients(String s)
 	{
+		if(s!=null)
 		if(s.toLowerCase().contains("number of patients") || s.toLowerCase().contains("no of patients")|| s.toLowerCase().contains("no. of patients")|| s.toLowerCase().contains("n of patients")||s.toLowerCase().contains("n=")||s.toLowerCase().contains("n ="))
 		{
 			return true;
 		}
-		else return false;
+		return false;
 	}
 	
 	public double getFirstDoubleValue(String s)
@@ -403,8 +443,11 @@ public class TrialInformationExtraction {
 	
 	public void ExtractTrialData(Article a)
 	{
+		if(a==null)
+			return;
 		String articleName = a.getTitle();
 		String articlePMC = a.getPmc();
+		System.out.println("PMC:"+articlePMC);
 		String URL = "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC"+articlePMC;
 		int NoPatiens = 0;
 		int NoMales = 0;
@@ -420,13 +463,16 @@ public class TrialInformationExtraction {
 		{
 			articleAuthors = articleAuthors+";"+auth;
 		}
-		articleAuthors = articleAuthors.substring(1);
+		if(articleAuthors.length()>1)
+			articleAuthors = articleAuthors.substring(1);
 		Table[] tables = a.getTables();
 		LinkedList<Integer> numOfPatients = new LinkedList<Integer>(); 
 		
 		for(Table t:tables)
 		{
 			Cell[][] cells = t.cells;
+			if(cells==null)
+				continue;
 			for(int i = 0;i<cells.length;i++)
 			{
 				if(checkNumOfPatients(cells[i][0].getCell_content()))
@@ -447,16 +493,16 @@ public class TrialInformationExtraction {
 					}
 					if(cells[i][0].getCell_content().toLowerCase().contains("n=")||cells[i][0].getCell_content().toLowerCase().contains("n ="))
 					{
-						int n = getFirstValue(cells[i][0].getCell_content());
+						Pattern regex3 = Pattern.compile("\\bn[ ]{0,1}=[ ]{0,1}[0-9]*\\b");
+					    Matcher regexMatcher3 = regex3.matcher(cells[i][0].getCell_content().toLowerCase());
+					    if(regexMatcher3.find()){
+						int n = getFirstValue(regexMatcher3.group());
 						if(n>0)
+						{
 							numOfPatients.add(n);
+						}
+					    }
 					}
-				}
-				if(checkGender(cells[i][0].getCell_content()))
-				{
-					int[] res = getMalesFemales(cells[i]);
-					NoMales += res[0];
-					NoFemales += res[1];
 				}
 			}
 			for(int i = 0; i<cells[0].length;i++)
@@ -465,36 +511,71 @@ public class TrialInformationExtraction {
 				{
 					if(cells[0][i].getCell_content().toLowerCase().contains("n=")||cells[0][i].getCell_content().toLowerCase().contains("n ="))
 					{
-						int n = getFirstValue(cells[0][i].getCell_content());
+						Pattern regex3 = Pattern.compile("\\bn[ ]{0,1}=[ ]{0,1}[0-9]*\\b");
+					    Matcher regexMatcher3 = regex3.matcher(cells[0][i].getCell_content().toLowerCase());
+					    if(regexMatcher3.find()){
+						int n = getFirstValue(regexMatcher3.group());
 						if(n>0)
 						{
 							numOfPatients.add(n);
 							NoArms++;
 						}
+					    }
 					}
+				}
+			}
+			Genders res = new Genders();
+			for(int i = 0;i<cells.length;i++)
+			{
+				if(checkGender(cells[i][0].getCell_content()))
+				{
+					res = getMalesFemales(cells[i],numOfPatients,res);
 				}
 			}
 			for(int j = 0;j<numOfPatients.size();j++)
 			{
 				NoPatiens += numOfPatients.get(j);
 			}
+			if(res!=null){
+			for(int j = 0;j<res.males.size();j++)
+			{
+				LinkedList<Integer> males = res.males;
+				LinkedList<Integer> females = res.females;
+				if(females!= null && females.size()== males.size() &&males.size()==numOfPatients.size() &&numOfPatients!=null&&numOfPatients.size()>0 && numOfPatients.get(j)!=100 && males.get(j)+females.get(j)==100)
+				{
+					NoMales+=(males.get(j).intValue()/100.0)*numOfPatients.get(j).intValue();
+					if(females!=null && females.get(j)!=null)
+					{
+						NoFemales+=(females.get(j).intValue()/100.0)*numOfPatients.get(j).intValue();
+					}
+					else
+					{
+						if(numOfPatients.get(j).intValue()>NoMales)
+							NoFemales += numOfPatients.get(j).intValue() - NoMales;
+					}
+				}
+				else
+				{
+					NoMales += males.get(j).intValue();
+				}
+			}
+			
+			}
 			
 
 			getMeanAndRange(t,Mean,Range);
-			
-//			System.out.println("Mean: "+ Mean);
-//			System.out.println("Range: "+ Range);
+
 		
 			
 			if(numOfPatients.size()>=1)
 				break;
 		}
 		
-		if(NoMales==0 && NoFemales!=0)
+		if(NoMales==0 && NoFemales!=0 && NoPatiens>NoFemales)
 		{
 			NoMales = NoPatiens-NoFemales;
 		}
-		if(NoMales!=0 && NoFemales==0)
+		if(NoMales!=0 && NoFemales==0 && NoPatiens>NoMales)
 		{
 			NoFemales = NoPatiens - NoMales;
 		}
@@ -519,6 +600,7 @@ public class TrialInformationExtraction {
          preparedStatement.setDouble(9, Double.parseDouble(Mean.toString()));
          preparedStatement.setString(10, Range.toString());
          preparedStatement.executeUpdate();
+         con.close();
 		}
 		catch(Exception ex)
 		{

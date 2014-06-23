@@ -277,5 +277,48 @@ public class Utilities {
 		}
 	}
 	
+	public static int getFirstValue(String s)
+	{
+		int numericStart=0;
+		int numericCount = 0;
+		boolean isFirst = false;
+		boolean gotVlaue = false;
+		for(int i = 0;i<s.length();i++)
+		{
+			if(Utilities.isNumeric(s.charAt(i)+""))
+			{
+				if(!isFirst)
+				{
+					numericStart = i;
+				}
+				isFirst = true;
+				numericCount = i-numericStart+1;
+			}
+			if(i>=1 && Utilities.isNumeric(s.charAt(i-1)+"") && !Utilities.isNumeric(s.charAt(i)+""))
+			{
+				break;
+			}	
+		}
+		int num = 0;
+		if(numericCount>0)
+		 num = Integer.parseInt(s.substring(numericStart,numericStart+numericCount));
+		return num;
+		
+	}
+	
+	public static int GetNumOfOccurrences(String string, String substring)
+	{
+		  string  = string.toLowerCase();
+		  substring = substring.toLowerCase();
+		  int index = string.indexOf(substring);
+		    int occurrences = 0;
+		    while (index != -1) {
+		        occurrences++;
+		        string = string.substring(index + 1);
+		        index = string.indexOf(substring);
+		    }
+		    return occurrences;
+	}
+	
 	
 }

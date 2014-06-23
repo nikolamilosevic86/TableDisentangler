@@ -16,6 +16,7 @@ import java.util.LinkedList;
 
 import IE.MetaMapStats;
 import IE.SimpleDataExtraction;
+import IE.TrialIE2;
 import IE.TrialInformationExtraction;
 import classifiers.SimpleTableClassifier;
 import readers.PMCXMLReader;
@@ -163,7 +164,8 @@ public class TablInExMain {
 			
 			if(IEinSQLTial)
 			{
-				TrialInformationExtraction tie = new TrialInformationExtraction("");
+				//TrialInformationExtraction tie = new TrialInformationExtraction("");
+				TrialIE2 tie = new TrialIE2();
 				for (int i = 0; i < articles.length; i++) 
 				{
 					tie.ExtractTrialData(articles[i]);				
