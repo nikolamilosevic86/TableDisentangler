@@ -5,8 +5,8 @@
  */
 package classifiers;
 
+import Utils.Utilities;
 import tablInEx.Table;
-import tablInEx.Utilities;
 
 /**
  * The Class SimpleTableClassifier. Does couple of simple classifications of table

@@ -18,6 +18,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
+import Utils.Utilities;
 import classifiers.SimpleTableClassifier;
 import stats.Statistics;
 import tablInEx.*;

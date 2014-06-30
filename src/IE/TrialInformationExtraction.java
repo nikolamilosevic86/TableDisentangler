@@ -16,12 +16,12 @@ import java.util.regex.Pattern;
 
 import org.w3c.dom.NodeList;
 
+import Utils.Utilities;
 import tablInEx.Article;
 import tablInEx.Cell;
 import tablInEx.ChangableString;
 import tablInEx.DataExtractionOutputObj;
 import tablInEx.Table;
-import tablInEx.Utilities;
 
 // TODO: Auto-generated Javadoc
 /**

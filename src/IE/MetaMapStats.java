@@ -6,8 +6,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
+import Utils.Utilities;
 import tablInEx.TablInExMain;
-import tablInEx.Utilities;
 
 public class MetaMapStats {
 

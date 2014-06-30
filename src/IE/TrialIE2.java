@@ -10,11 +10,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import IEData.PatientNumExtractor;
+import Utils.Utilities;
 import tablInEx.Article;
 import tablInEx.Cell;
 import tablInEx.ChangableString;
 import tablInEx.Table;
-import tablInEx.Utilities;
 
 public class TrialIE2 {
 	/** The jdbc driver. */

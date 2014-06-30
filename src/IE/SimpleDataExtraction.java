@@ -18,13 +18,13 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import Utils.Utilities;
 import stats.Statistics;
 import tablInEx.Article;
 import tablInEx.Cell;
 import tablInEx.DataExtractionOutputObj;
 import tablInEx.TablInExMain;
 import tablInEx.Table;
-import tablInEx.Utilities;
 
 /**
  * The Class SimpleIE. Does simple Information extraction. 
@@ -372,6 +372,7 @@ public class SimpleDataExtraction {
 						{
 							Element Head00 = doc.createElement("Head00");
 							Head00.setTextContent(cells[0][0].getCell_content());
+							cells[j][k].setHead00(cells[0][0].getCell_content());
 							NavigationPath.appendChild(Head00);
 						}
 						Element Stub = doc.createElement("Stub");								
@@ -383,13 +384,21 @@ public class SimpleDataExtraction {
 							getStackAsElements(headerStackA,prevSubheader, currentSubHeaderLevel, doc, Stub);
 							
 						}
+						String subheaderValues = "";
+						for(int l=0;l<Stub.getChildNodes().getLength();l++)
+						{
+							subheaderValues+=" "+Stub.getChildNodes().item(l).getTextContent();
+						}
+						cells[j][k].setSubheader_values(subheaderValues);
 						Element ss = doc.createElement("StubValue");
 						ss.setTextContent(cells[j][0].getCell_content());
+						cells[j][k].setStub_values(cells[j][0].getCell_content());
 						Stub.appendChild(ss);
 						
 						NavigationPath.appendChild(Stub);
 						Element s = doc.createElement("HeaderValue");
 						s.setTextContent(cells[0][k].getCell_content());
+						cells[j][k].setHeader_values(cells[0][k].getCell_content());
 						NavigationPath.appendChild(s);
 						cell.appendChild(NavigationPath);
 						
@@ -487,6 +496,7 @@ public class SimpleDataExtraction {
 						Header.setTextContent(cells[0][k].getCell_content());
 						NavigationPath.appendChild(Header);
 						cell.appendChild(NavigationPath);
+						cells[j][k].setHeader_values(cells[0][k].getCell_content());
 						
 						//info elements
 						Element info = doc.createElement("value");
@@ -574,18 +584,21 @@ public class SimpleDataExtraction {
 					if(!Utilities.isSpaceOrEmpty(cells[0][0].getCell_content())){
 					Element TopLeftHeader = doc.createElement("Head00");
 					TopLeftHeader.setTextContent(cells[0][0].getCell_content());
+					cells[j][k].setHead00(cells[0][0].getCell_content());
 					NavigationPath.appendChild(TopLeftHeader);
 					}
 					if(!Utilities.isSpaceOrEmpty(cells[j][0].getCell_content())){
 						Element Stub = doc.createElement("Stub");
 						Element StubValue = doc.createElement("StubValue");
 						StubValue.setTextContent(cells[j][0].getCell_content());
+						cells[j][k].setStub_values(cells[j][0].getCell_content());
 						Stub.appendChild(StubValue);
 						NavigationPath.appendChild(Stub);
 						}
 					if(!Utilities.isSpaceOrEmpty(cells[0][k].getCell_content())){
 						Element HeaderValue = doc.createElement("HeaderValue");
 						HeaderValue.setTextContent(cells[0][k].getCell_content());
+						cells[j][k].setHeader_values(cells[0][k].getCell_content());
 						NavigationPath.appendChild(HeaderValue);
 						}
 					

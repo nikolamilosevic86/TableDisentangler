@@ -5,11 +5,21 @@
  */
 package tablInEx;
 
+import Utils.Utilities;
+
 /**
  * The Class Cell. One cell of the table. Contains all necessary information about cell
  * @author Nikola Milosevic
  */
 public class Cell {
+	
+	private String subheader_values;
+	
+	private String stub_values;
+	
+	private String header_values;
+	
+	private String head00;
 	
 	/** The row_number. */
 	private int row_number;
@@ -427,6 +437,38 @@ public class Cell {
 
 	public void setIs_filled(boolean is_filled) {
 		this.is_filled = is_filled;
+	}
+
+	public String getStub_values() {
+		return stub_values;
+	}
+
+	public void setStub_values(String stub_values) {
+		this.stub_values = stub_values;
+	}
+
+	public String getHeader_values() {
+		return header_values;
+	}
+
+	public void setHeader_values(String header_values) {
+		this.header_values = header_values;
+	}
+
+	public String getHead00() {
+		return head00;
+	}
+
+	public void setHead00(String head00) {
+		this.head00 = head00;
+	}
+
+	public String getSubheader_values() {
+		return subheader_values;
+	}
+
+	public void setSubheader_values(String subheader_values) {
+		this.subheader_values = subheader_values;
 	}
 	
 }

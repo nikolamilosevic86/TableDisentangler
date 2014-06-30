@@ -3,7 +3,7 @@
  * @affiliation: University of Manchester, School of Computer science
  * 
  */
-package tablInEx;
+package Utils;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -27,6 +27,8 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import tablInEx.TablInExMain;
 
 /**
  * The Class Utilities.

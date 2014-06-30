@@ -8,6 +8,8 @@ package tablInEx;
 import java.util.Arrays;
 import java.util.LinkedList; 
 
+import Utils.Utilities;
+
 /**
  * Table simplifier siplifies tables for later use
  * @author Nikola Milosevic

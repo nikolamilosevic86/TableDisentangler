@@ -18,6 +18,7 @@ import IE.MetaMapStats;
 import IE.SimpleDataExtraction;
 import IE.TrialIE2;
 import IE.TrialInformationExtraction;
+import Utils.Utilities;
 import classifiers.SimpleTableClassifier;
 import readers.PMCXMLReader;
 import readers.Reader;

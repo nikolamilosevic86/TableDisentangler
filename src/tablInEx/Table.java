@@ -7,6 +7,7 @@ package tablInEx;
 
 import java.util.LinkedList;
 
+import Utils.Utilities;
 import stats.TableStats;
 
 

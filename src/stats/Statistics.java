@@ -5,9 +5,9 @@
  */
 package stats;
 
+import Utils.Utilities;
 import tablInEx.Cell;
 import tablInEx.Table;
-import tablInEx.Utilities;
 
 /**
  * 
