@@ -89,12 +89,12 @@ public class TableSimplifier {
 				if(!Utilities.isSpaceOrEmpty(cells[i][j].getCell_content()) ){
 					if(!cells[i][j].getCell_content().equals(cells[i+1][j].getCell_content()))
 						cells[table.stat.getNum_of_header_rows() - 1][j].setCell_content(cells[i][j].getCell_content()+ " "+cells[table.stat.getNum_of_header_rows() - 1][j].getCell_content());
-			
+					cells[table.stat.getNum_of_header_rows() - 1][j].setIs_header(true);
 				}
 			}
 		}
-		
-		Cell[][] newcells = new Cell[table.getNum_of_rows()- table.stat.getNum_of_header_rows()+1][table.getNum_of_columns()];
+		System.out.println("Simplifying "+table.getDocumentFileName());
+		Cell[][] newcells = new Cell[table.cells.length - table.stat.getNum_of_header_rows()+1][table.getNum_of_columns()];
 		for(int i = 0;i<newcells.length;i++)
 		{
 			newcells[i] = cells[i+table.stat.getNum_of_header_rows()-1].clone();
@@ -102,7 +102,6 @@ public class TableSimplifier {
 		table.stat.setNum_of_header_rows(1);
 		table.setNum_of_rows(1+table.stat.getNum_of_body_rows());
 		table.cells = newcells;
-		
 		for(int i = 0;i<table.cells.length;i++){
 			int num_of_empty = 0;
 			for(int j = 0;j<table.cells[i].length;j++)

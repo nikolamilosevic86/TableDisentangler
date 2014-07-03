@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 
+import FreqIE.FreqIE;
 import IE.MetaMapStats;
 import IE.SimpleDataExtraction;
 import IE.TrialIE2;
@@ -36,6 +37,7 @@ public class TablInExMain {
 	public static boolean doXMLInput = false;
 	public static boolean shouldTag = false;
 	public static boolean IEinSQLTial = false;
+	public static boolean IEFreqSQLTial = false;
 	public static String Inpath;
 	public static HashMap<String,Integer> headermap = new HashMap<String, Integer>();
 	public static LinkedList<DataExtractionOutputObj> outputs = new LinkedList<DataExtractionOutputObj>();
@@ -90,6 +92,10 @@ public class TablInExMain {
 		{
 			shouldTag = true;
 		}
+		if(Arrays.asList(args).contains("-freq"))
+		{
+			IEFreqSQLTial = true;
+		}
 		if(Arrays.asList(args).contains("-makestats"))
 		{
 			doStats = true;
@@ -141,8 +147,10 @@ public class TablInExMain {
 			{
 				Table t = articles[i].getTables()[j];
 		//		t = TableSimplifier.LabelHeaderCells(t);// did not help
+				if(t.isHasHeader()){
 				t = TableSimplifier.MergeHeaders(t);
 				t = TableSimplifier.MergeStubs(t);
+				}
 			}
 		}
 		if (doIE) 
@@ -150,7 +158,7 @@ public class TablInExMain {
 			SimpleDataExtraction ie = new SimpleDataExtraction(Inpath);
 			for (int i = 0; i < articles.length; i++) 
 			{
-					ie.ExtractInformation(articles[i]);
+					ie.ExtractData(articles[i]);
 				
 			}
 			
@@ -167,6 +175,15 @@ public class TablInExMain {
 			{
 				//TrialInformationExtraction tie = new TrialInformationExtraction("");
 				TrialIE2 tie = new TrialIE2();
+				for (int i = 0; i < articles.length; i++) 
+				{
+					tie.ExtractTrialData(articles[i]);				
+				}
+			}
+			if(IEFreqSQLTial)
+			{
+				//TrialInformationExtraction tie = new TrialInformationExtraction("");
+				FreqIE tie = new FreqIE();
 				for (int i = 0; i < articles.length; i++) 
 				{
 					tie.ExtractTrialData(articles[i]);				
@@ -233,6 +250,8 @@ public class TablInExMain {
 		System.out.println("    -doHTMLInput2Output - Tells system to take from cells values as they are in XML or HTML format with all included tags. If this is not present, everything will be transformed to text and tags will be ignored");
 		System.out.println("    -tag - Tag output (using metamap)");
 		System.out.println("    -extractTrialToSQL - Extract information about trial (no of patients, males, females, age range...) and stores it in mySQL database. Has to be executed together with -doIE command");
-		//extractTrialToSQL
+		System.out.println("    -freq - Extract information about trial using frequency algorithm(no of patients, males, females, age range...) and stores it in mySQL database. Has to be executed together with -doIE command");
+		
+		
 	}
 }

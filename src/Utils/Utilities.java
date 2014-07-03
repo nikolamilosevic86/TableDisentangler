@@ -321,6 +321,66 @@ public class Utilities {
 		    }
 		    return occurrences;
 	}
+	public static String getCellType(String cellContent)
+	{
+		int numbers = 0;
+		int chars = 0;
+		String tempCellVal = cellContent.replaceAll("[\\s\\xA0]","");
+		for(int i=0;i<tempCellVal.length();i++)
+		{
+			if(Utilities.isNumeric(tempCellVal.substring(i, i+1)) )
+			{
+				numbers++;
+			}
+			else
+			{
+				chars++;
+			}
+		}
+		float proportion = (float)numbers / (chars+numbers);
+		if(Utilities.isNumeric(tempCellVal))
+			return "PureNumeric";
+		//part numeric cell
+		if(proportion>0.49 && !Utilities.isNumeric(tempCellVal))
+		{
+			return "PartNumeric";
+		}
+		if(proportion<=0.49 && !Utilities.isNumeric(tempCellVal))
+		{
+			return "PureText";
+		}
+		return "Other (Empty)";
+	}
 	
+	public static String getCellTypeIsNum(String cellContent)
+	{
+		int numbers = 0;
+		int chars = 0;
+		String tempCellVal = cellContent.replaceAll("[\\s\\xA0]","");
+		for(int i=0;i<tempCellVal.length();i++)
+		{
+			if(Utilities.isNumeric(tempCellVal.substring(i, i+1)) )
+			{
+				numbers++;
+			}
+			else
+			{
+				chars++;
+			}
+		}
+		float proportion = (float)numbers / (chars+numbers);
+		if(Utilities.isNumeric(tempCellVal))
+			return "Numeric";
+		//part numeric cell
+		if(proportion>0.49 && !Utilities.isNumeric(tempCellVal))
+		{
+			return "Numeric";
+		}
+		if(proportion<=0.49 && !Utilities.isNumeric(tempCellVal))
+		{
+			return "PureText";
+		}
+		return "Other (Empty)";
+	}
 	
 }
