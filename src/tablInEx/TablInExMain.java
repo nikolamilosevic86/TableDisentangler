@@ -18,7 +18,6 @@ import FreqIE.FreqIE;
 import IE.MetaMapStats;
 import IE.SimpleDataExtraction;
 import IE.TrialIE2;
-import IE.TrialInformationExtraction;
 import Utils.Utilities;
 import classifiers.SimpleTableClassifier;
 import readers.PMCXMLReader;
@@ -40,7 +39,9 @@ public class TablInExMain {
 	public static boolean IEFreqSQLTial = false;
 	public static String Inpath;
 	public static HashMap<String,Integer> headermap = new HashMap<String, Integer>();
+	public static HashMap<String,Integer> stubmap = new HashMap<String, Integer>();
 	public static LinkedList<DataExtractionOutputObj> outputs = new LinkedList<DataExtractionOutputObj>();
+	public static LinkedList<String> PMCBMI = new LinkedList<String>();
 	
 	public static Article[] runReadingloop(Article[] a,File[] files,int len, Class s)
 	{
@@ -190,6 +191,8 @@ public class TablInExMain {
 				}
 			}
 		}
+		int weight = 0;
+		int BMI = 0;
 		if(learnheaders)
 		{
 			LinkedHashMap lm = Utilities.sortHashMapByValuesD(headermap);
@@ -210,7 +213,15 @@ public class TablInExMain {
 
 	            String key =name.toString();
 	            String value = lm.get(name).toString();  
-	            writer.println(key + " " + value);  
+	            writer.println(key + " ; " + value);  
+	            if((key.toLowerCase().contains("bmi")||key.toLowerCase().contains("weight")||key.toLowerCase().contains("body mass index")||key.toLowerCase().contains("bodyweight"))&&(!key.toLowerCase().contains("loss")||!key.toLowerCase().contains("decrease")||!key.toLowerCase().contains("increase")||!key.toLowerCase().contains("gain")||!key.toLowerCase().contains("gain")))
+	            {
+	            	weight+=Integer.parseInt(lm.get(name).toString());
+	            }
+	            if((key.toLowerCase().contains("bmi")||key.toLowerCase().contains("body mass index")))
+	            {
+	            	BMI+=Integer.parseInt(lm.get(name).toString());
+	            }
 
 	}
 			writer.close();
@@ -220,12 +231,64 @@ public class TablInExMain {
 				e.printStackTrace();
 			}
 			
+			
+			
+			lm = Utilities.sortHashMapByValuesD(stubmap);
+			ss = lm.keySet().toArray();
+			sa = new String[ss.length];
+		    k = 0;
+			for(Object o:ss)
+			{
+				sa[k] = (String)ss[k];
+				k++;
+			}
+			try {
+				writer = new PrintWriter("stubs.txt", "UTF-8");
+
+
+			for (String name: sa){
+
+	            String key =name.toString();
+	            String value = lm.get(name).toString();  
+	            writer.println(key + " ; " + value);  
+	            if((key.toLowerCase().contains("bmi")||key.toLowerCase().contains("weight")||key.toLowerCase().contains("body mass index")||key.toLowerCase().contains("bodyweight"))&&(!key.toLowerCase().contains("loss")||!key.toLowerCase().contains("decrease")||!key.toLowerCase().contains("increase")||!key.toLowerCase().contains("gain")||!key.toLowerCase().contains("gain")))
+	            {
+	            	weight+=Integer.parseInt(lm.get(name).toString());
+	            }
+	            if((key.toLowerCase().contains("bmi")||key.toLowerCase().contains("body mass index")))
+	            {
+	            	BMI+=Integer.parseInt(lm.get(name).toString());
+	            }
+
+			}
+			writer.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			
 		}
+		try{
+		PrintWriter writer = new PrintWriter("PMCBMI3.txt", "UTF-8");
+		for(int i=0;i<PMCBMI.size();i++)
+		{
+			writer.println(PMCBMI.get(i));
+		}
+		writer.close();
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		
 		MetaMapStats.PrintMMStats();
 		
 		Statistics.CalculateStatistics();
 		String stats = Statistics.makeOutputStatisticString();
 		System.out.print(stats);
+		System.out.println("BMI alone:"+BMI);
+		System.out.println("Number of weight/BMI:"+weight);
+		System.out.println("PMC documents with weight/BMI:"+PMCBMI.size());
 	}
 	
 	/**

@@ -275,42 +275,6 @@ public class Cell {
 	}
 	
 	
-	/**
-	 * Sets the cell values. For nonspanning cells
-	 *
-	 * @param cell the cell
-	 * @param cell_content the cell_content
-	 * @param is_columnspanning the is_columnspanning
-	 * @param colspanVal the colspan val
-	 * @param is_rowSpanning the is_row spanning
-	 * @param rowspanning the rowspanning
-	 * @param isHeader the is header
-	 * @param headerProbability the header probability
-	 * @param isStub the is stub
-	 * @param stubProbability the stub probability
-	 * @param ColumnIndex the column index
-	 * @param RowIndex the row index
-	 * @return the cell
-	 */
-	public static Cell setCellValues(Cell cell, String cell_content, boolean is_columnspanning, int colspanVal, boolean is_rowSpanning, int rowspanning, boolean isHeader,float headerProbability, boolean isStub, float stubProbability, int ColumnIndex,int RowIndex)
-	{
-		cell.setCell_content(cell_content);
-		cell.setCells_columnspanning(colspanVal);
-		cell.setHeader_probability(headerProbability);
-		cell.setIs_header(isHeader);
-		cell.setIs_columnspanning(is_columnspanning);
-		cell.setIs_rowspanning(is_rowSpanning);
-		cell.setColumn_number(ColumnIndex);
-		cell.setRow_number(RowIndex);
-		cell.setIs_stub(isStub);
-		cell.setStub_probability(stubProbability);
-		cell.rowspanning_index = 0;
-		cell.columnspanning_index = 0;
-		cell.is_filled = true;
-		return cell;
-
-	}
-	
 	public String getCellType()
 	{
 		if(Utilities.isNumeric(this.getCell_content()))
@@ -364,7 +328,7 @@ public class Cell {
 	 * @param rowspanning_index the rowspanning_index
 	 * @return the cell
 	 */
-	public static Cell setCellValues(Cell cell, String cell_content, boolean is_columnspanning, int colspanVal, boolean is_rowSpanning, int rowspanning, boolean isHeader,float headerProbability, boolean isStub, float stubProbability, int ColumnIndex,int RowIndex, int columnspanning_index,int rowspanning_index)
+	public static Cell setCellValues(Article a, Cell cell, String cell_content, boolean is_columnspanning, int colspanVal, boolean is_rowSpanning, int rowspanning, boolean isHeader,float headerProbability, boolean isStub, float stubProbability, int ColumnIndex,int RowIndex, int columnspanning_index,int rowspanning_index)
 	{
 		cell.setCell_content(cell_content);
 		cell.setCells_columnspanning(colspanVal);
@@ -391,6 +355,27 @@ public class Cell {
 			TablInExMain.headermap.put(cell.getCell_content(), freq);
 		}
 		}
+		
+		if(TablInExMain.learnheaders && cell.isIs_stub()){
+			if(!TablInExMain.stubmap.containsKey(cell.getCell_content()))
+			{
+				TablInExMain.stubmap.put(cell.getCell_content(), 1);
+			}
+			else
+			{
+				int freq = TablInExMain.stubmap.get(cell.getCell_content());
+				freq++;
+				TablInExMain.stubmap.put(cell.getCell_content(), freq);
+			}
+			}
+		if((cell.getCell_content().toLowerCase().contains("bmi")||cell.getCell_content().toLowerCase().contains("b.m.i.")||cell.getCell_content().toLowerCase().contains("weight")||cell.getCell_content().toLowerCase().contains("body mass index")||cell.getCell_content().toLowerCase().contains("bodyweight")||cell.getCell_content().toLowerCase().contains("quetelet index")))
+        {
+			if(!TablInExMain.PMCBMI.contains(a.getPmc()))
+			{
+				TablInExMain.PMCBMI.add(a.getPmc());
+			}
+        }
+		
 		return cell;
 
 	}

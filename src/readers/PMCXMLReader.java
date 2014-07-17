@@ -350,7 +350,7 @@ public class PMCXMLReader implements Reader{
 	 * @param num_of_columns the num_of_columns
 	 * @return the table
 	 */
-	public Table ProcessTableHeader(Table table, Cell[][] cells,List<Node> rowshead,int headrowscount,int num_of_columns)
+	public Table ProcessTableHeader(Article a,Table table, Cell[][] cells,List<Node> rowshead,int headrowscount,int num_of_columns)
 	{
 		for(int j = 0;j<headrowscount;j++)
 		{
@@ -394,7 +394,7 @@ public class PMCXMLReader implements Reader{
 						{
 							while(cells[rowindex][index].isIs_filled() && index!=num_of_columns)
 								index++;
-							cells[rowindex][index] = Cell.setCellValues(cells[rowindex][index], Utilities.getString(tds.get(k)), is_colspanning, colspanVal, is_rowspanning, rowspanVal, true, 1, false, 0, index,rowindex, l, s);
+							cells[rowindex][index] = Cell.setCellValues(a,cells[rowindex][index], Utilities.getString(tds.get(k)), is_colspanning, colspanVal, is_rowspanning, rowspanVal, true, 1, false, 0, index,rowindex, l, s);
 							//System.out.println(j+","+index+": "+cells[j][index].getCell_content());
 							table = Statistics.statisticsForCell(table, cells[rowindex][index]);
 						}
@@ -421,7 +421,7 @@ public class PMCXMLReader implements Reader{
 	 * @param num_of_columns the num_of_columns
 	 * @return the table
 	 */
-	public Table ProcessTableBody(Table table, Cell[][] cells,List<Node> rowsbody,int headrowscount, int num_of_columns)
+	public Table ProcessTableBody(Article a, Table table, Cell[][] cells,List<Node> rowsbody,int headrowscount, int num_of_columns)
 	{
 		int startj = headrowscount;
 		for(int j = 0;j<rowsbody.size();j++)
@@ -472,7 +472,7 @@ public class PMCXMLReader implements Reader{
 						{
 							while(cells[rowindex][index].isIs_filled() && index!=num_of_columns)
 								index++;
-							cells[rowindex][index] = Cell.setCellValues(cells[rowindex][index], Utilities.getString(tds.get(k)), is_colspanning, colspanVal, is_rowspanning, rowspanVal, false, 0, isStub, stubProbability, index,rowindex, l, s);
+							cells[rowindex][index] = Cell.setCellValues(a,cells[rowindex][index], Utilities.getString(tds.get(k)), is_colspanning, colspanVal, is_rowspanning, rowspanVal, false, 0, isStub, stubProbability, index,rowindex, l, s);
 							//System.out.println(j+","+index+": "+cells[j][index].getCell_content());
 							table = Statistics.statisticsForCell(table, cells[rowindex][index]);
 						}
@@ -578,10 +578,10 @@ public class PMCXMLReader implements Reader{
 			tables[tableindex].setNum_of_rows(num_of_rows);
 			tables[tableindex].CreateCells(num_of_columns, num_of_rows);
 			Cell[][] cells = tables[tableindex].getTable_cells();
-			tables[tableindex] = ProcessTableHeader(tables[tableindex],cells, rowshead, headrowscount, num_of_columns);
+			tables[tableindex] = ProcessTableHeader(article,tables[tableindex],cells, rowshead, headrowscount, num_of_columns);
 			Statistics.addColumn(num_of_columns);
 			Statistics.addRow(num_of_rows);
-			tables[tableindex] = ProcessTableBody(tables[tableindex],cells, rowsbody, headrowscount, num_of_columns);
+			tables[tableindex] = ProcessTableBody(article,tables[tableindex],cells, rowsbody, headrowscount, num_of_columns);
 			tables[tableindex].setTable_cells(cells);		
 			//Print cells
 			for(int j = 0; j<cells.length;j++)
