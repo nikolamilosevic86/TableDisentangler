@@ -18,6 +18,7 @@ import FreqIE.FreqIE;
 import IE.MetaMapStats;
 import IE.SimpleDataExtraction;
 import IE.TrialIE2;
+import IEArmBased.IEArmBased;
 import Utils.Utilities;
 import classifiers.SimpleTableClassifier;
 import readers.PMCXMLReader;
@@ -37,6 +38,7 @@ public class TablInExMain {
 	public static boolean shouldTag = false;
 	public static boolean IEinSQLTial = false;
 	public static boolean IEFreqSQLTial = false;
+	public static boolean IEFine = false;
 	public static String Inpath;
 	public static HashMap<String,Integer> headermap = new HashMap<String, Integer>();
 	public static HashMap<String,Integer> stubmap = new HashMap<String, Integer>();
@@ -104,6 +106,11 @@ public class TablInExMain {
 		if(Arrays.asList(args).contains("-extractTrialToSQL"))
 		{
 			IEinSQLTial = true;
+		}
+		
+		if(Arrays.asList(args).contains("-iefine"))
+		{
+			IEFine = true;
 		}
 		if(Arrays.asList(args).contains("-typeclassify"))
 		{
@@ -185,6 +192,14 @@ public class TablInExMain {
 			{
 				//TrialInformationExtraction tie = new TrialInformationExtraction("");
 				FreqIE tie = new FreqIE();
+				for (int i = 0; i < articles.length; i++) 
+				{
+					tie.ExtractTrialData(articles[i]);				
+				}
+			}
+			if(IEFine)
+			{
+				IEArmBased tie = new IEArmBased();
 				for (int i = 0; i < articles.length; i++) 
 				{
 					tie.ExtractTrialData(articles[i]);				
@@ -314,6 +329,7 @@ public class TablInExMain {
 		System.out.println("    -tag - Tag output (using metamap)");
 		System.out.println("    -extractTrialToSQL - Extract information about trial (no of patients, males, females, age range...) and stores it in mySQL database. Has to be executed together with -doIE command");
 		System.out.println("    -freq - Extract information about trial using frequency algorithm(no of patients, males, females, age range...) and stores it in mySQL database. Has to be executed together with -doIE command");
+		System.out.println("    -iefine - Extract information about trial using fine graned approach (data about each arm) and stores it in mySQL database. Has to be executed together with -doIE command");
 		
 		
 	}

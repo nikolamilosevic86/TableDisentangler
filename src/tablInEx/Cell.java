@@ -21,6 +21,8 @@ public class Cell {
 	
 	private String head00;
 	
+	private boolean isSubheader = false;
+	
 	/** The row_number. */
 	private int row_number;
 	
@@ -454,6 +456,14 @@ public class Cell {
 
 	public void setSubheader_values(String subheader_values) {
 		this.subheader_values = subheader_values;
+	}
+
+	public boolean isSubheader() {
+		return isSubheader;
+	}
+
+	public void setSubheader(boolean isSubheader) {
+		this.isSubheader = isSubheader;
 	}
 	
 }

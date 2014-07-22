@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.xml.transform.OutputKeys;
@@ -381,6 +382,82 @@ public class Utilities {
 			return "PureText";
 		}
 		return "Other (Empty)";
+	}
+	
+	public static LinkedList<NumberFormat> getNumsAndFormats(String num)
+	{
+		num.replace("·", ".");
+		LinkedList<NumberFormat> nums = new LinkedList<NumberFormat>();
+		int startVal = 0;
+		int endVal = 0;
+		boolean numberStart = false;
+		boolean numberFinish = false;
+		for(int i = 0;i<num.length();i++)
+		{
+			if(!(Utilities.isNumeric(num.substring(i,i+1)) || num.substring(i,i+1).equals(".")||num.substring(i,i+1).equals("-")||num.substring(i,i+1).equals(",")|| num.substring(i,i+1).equals("%")||Utilities.isSpaceOrEmpty(num.substring(i,i+1))))
+			{
+				if(numberStart){
+				numberFinish = true;
+				}
+				endVal = i;
+				
+				if(numberStart == true && numberFinish == true)
+				{
+					String form = "SingleVal";
+					String newVal = num.substring(startVal, endVal);
+					if(newVal.contains("."))
+					{
+						if(newVal.contains("-")){
+							String[] ss = newVal.split("-");
+							for(int j=0;j<ss.length;j++)
+							{
+								ss[j] = "0"+ss[j];
+							}
+						}
+						else
+						{
+							newVal = 0+newVal;
+						}
+					}
+					if(newVal.contains(",")||newVal.contains("-"))
+						form = "Range";
+					if(newVal.contains("%"))
+						form = "Percent";
+					NumberFormat f = new NumberFormat(newVal, form);
+					nums.add(f);
+					startVal = i;
+					numberStart = false;
+					numberFinish = false;
+				}
+			}
+			if(Utilities.isNumeric(num.substring(i,i+1)) || num.substring(i,i+1).equals(".")||num.substring(i,i+1).equals("-")||num.substring(i,i+1).equals(",")|| num.substring(i,i+1).equals("%")||Utilities.isSpaceOrEmpty(num.substring(i,i+1)))
+			{
+				if(numberStart == false)
+				{
+				startVal = i;
+				numberStart = true;
+				}
+			}		
+		}
+		if(startVal<num.length()){
+			String form = "SingleVal";
+			String newVal = num.substring(startVal,num.length());
+			boolean hasValue = false;
+			for(int k = 0;k<newVal.length();k++)
+			{
+				if(Utilities.isNumeric(newVal.substring(k,k+1)))
+					hasValue = true;
+			}
+			if(hasValue){
+			if(newVal.contains(",")||newVal.contains("-"))
+				form = "Range";
+			if(newVal.contains("%"))
+				form = "Percent";
+			NumberFormat f = new NumberFormat(num.substring(startVal,num.length()), form);
+			nums.add(f);
+			}
+		}
+		return nums;
 	}
 	
 }
