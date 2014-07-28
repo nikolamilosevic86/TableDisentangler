@@ -329,11 +329,11 @@ public class SimpleDataExtraction {
 	 * @param art the art
 	 * @param tableFileName the table file name
 	 */
-	private void processTableWithSubheadersWithoutHeader(Cell[][] cells,Table table, Article art, String tableFileName)
+	private Cell[][] processTableWithSubheadersWithoutHeader(Cell[][] cells,Table table, Article art, String tableFileName)
 	{
 		if(!hasTableSubheader(cells,table))
 		{
-			return;
+			return cells;
 		}
 		Statistics.addSubheaderTable();
 		String[] headerStackA = new String[20];
@@ -560,6 +560,8 @@ public class SimpleDataExtraction {
 				}
 			}
 		}
+		
+		return cells;
 		
 	}
 
@@ -801,7 +803,7 @@ public class SimpleDataExtraction {
 			Cell[][] cells = tables[i].cells;
 			
 			processListTable(cells,tables[i], art, tableFileName);
-			processTableWithSubheadersWithoutHeader(cells,tables[i],art,tableFileName);//processTableWithSubheaders(cells,tables[i],art,tableFileName);
+			tables[i].cells = processTableWithSubheadersWithoutHeader(cells,tables[i],art,tableFileName);//processTableWithSubheaders(cells,tables[i],art,tableFileName);
 			if(!isListTable(cells, tables[i]) && !hasTableSubheader(cells, tables[i]))
 			{
 				processRegularTable(cells,  tables, art, tableFileName, i);

@@ -1,5 +1,7 @@
 package IEArmBased;
 
+import java.util.LinkedList;
+
 public class ClinicalArm {
 	private String PMC;
 	private String DocumentName;
@@ -9,6 +11,7 @@ public class ClinicalArm {
 	private String weight;
 	private int NoMale;
 	private int NoFemale;
+	public LinkedList<Weight> weights = new LinkedList<Weight>();
 	
 	public ClinicalArm(String PMC, String DocumentName)
 	{

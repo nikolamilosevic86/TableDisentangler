@@ -477,6 +477,8 @@ public class Utilities {
 	
 	public static boolean stringContainsItemFromList(String inputString, String[] items)
 	{
+		if(inputString==null||inputString.equals(""))
+			return false;
 	    for(int i =0; i < items.length; i++)
 	    {
 	        if(inputString.contains(items[i]))
