@@ -18,6 +18,8 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -458,6 +460,57 @@ public class Utilities {
 			}
 		}
 		return nums;
+	}
+	
+	public static int NoDimensions(String s)
+	{
+		int no = 0;
+		Matcher m = Pattern.compile("-?\\d+(\\.\\d+)?").matcher(s);
+
+        while(m.find()) {
+//            double value = Double.parseDouble(m.group());
+//            System.out.println("value=" + value);
+            no++;
+        }
+		return no;
+	}
+	
+	public static boolean stringContainsItemFromList(String inputString, String[] items)
+	{
+	    for(int i =0; i < items.length; i++)
+	    {
+	        if(inputString.contains(items[i]))
+	        {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+	
+	public static boolean stringEqualsItemFromList(String inputString, String[] items)
+	{
+	    for(int i =0; i < items.length; i++)
+	    {
+	        if(inputString.equals(items[i]))
+	        {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+	
+	public static boolean stringMatchRegexItemFromList(String inputString, String[] items)
+	{
+	    for(int i =0; i < items.length; i++)
+	    {
+	    	Pattern r = Pattern.compile(items[i]);
+		    Matcher m = r.matcher(inputString);
+		    if(m.find())
+		    {
+		    	return true;
+		    }
+	    }
+	    return false;
 	}
 	
 }

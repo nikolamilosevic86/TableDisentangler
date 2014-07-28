@@ -23,15 +23,169 @@ import weka.associations.tertius.Body;
 
 public class IEArmBased {
 	
+	String[] DemographicTableWords = {"weight","bodyweight","bmi","body mass index"};
+	
 	String[] weightWords = {"weight","bodyweight"};
 	String[] BMIWords = {"bmi","body mass index"};
-	String[] NotAnArm = {"p value","p* value", "p", "N", "p-value","total", "all"};
+	
+	String [] equalsNotAnArm = {"p","range","p*"," ± ","n","T","ρ","p-value","p* value","%"};
+	String [] containsNotAnArm = {"all","total","p-value","95%","ratio"};
+	String [] TotalArm = {"mean±sd","mean ± sd"};
+	String [] TotalArmContains = {"n°"};
+	String[] Male = {"male\\b","man\\b","men\\b","boy\\b","boys\\b","m\\b"};
+	String[] NotGenderInfo = {"±","m-2","m 2","m−2","ratio"};
+	String[] Female = {"female\\b","woman\\b","women\\b","girl\\b","girls\\b"};
+	String[] Mixed = {"m(ale){0,1}[ ]{0,1}[s]{0,1}[:\\/|][ ]{0,1}f(emale){0,1}[s]{0,1}","f(emale){0,1}[s]{0,1}[ ]{0,1}[:\\/|][ ]{0,1}m(ale){0,1}[s]{0,1}"};
+	String[] Patients = {"number of patients","patients"};
+	String PatientPattern1 = "\\bn[ ]{0,1}=[ ]{0,1}[0-9]*\\b";
 		
-//	SELECT ArmID, WeightCategory, WeightValue, ArmName, PMC
-//	FROM `WeightDetails`
-//	INNER JOIN ArmDetails ON ArmDetails.id = WeightDetails.ArmID
-//	INNER JOIN DocumentDetails ON DocumentDetails.id = ArmDetails.DocumentID
-//	LIMIT 0 , 30
+
+	
+	public ClinicalArm  getArmCharacteristics(ClinicalArm arm, int k, Cell[][] cells)
+	{
+		
+		for(int i = 0;i<cells.length;i++)
+		{
+			cells[i][0].setCell_content(Utilities.ReplaceNonBrakingSpaceToSpace(cells[i][0].getCell_content()));
+			cells[0][k].setCell_content(Utilities.ReplaceNonBrakingSpaceToSpace(cells[0][k].getCell_content()));
+			cells[i][k].setCell_content(Utilities.ReplaceNonBrakingSpaceToSpace(cells[i][k].getCell_content()));
+			boolean femalePercent = false;
+			boolean malePercent = false;
+			for(String mm:Male){
+				Pattern r = Pattern.compile("\\b" + mm);
+				Matcher m = r.matcher(cells[i][0].getCell_content().toLowerCase());
+				if (m.find()) {
+					if(Utilities.isNumeric(cells[i][k].getCell_content()))
+					{
+						arm.setNoMale(Utilities.getFirstValue(cells[i][k].getCell_content()));
+						if(cells[i][0].getCell_content().toLowerCase().contains("%"))
+						{
+							malePercent = true;
+						}
+					}
+					else
+					{
+						if(Utilities.getCellType(cells[i][k].getCell_content()).equals("PartNumeric")&&!Utilities.stringContainsItemFromList(cells[i][0].getCell_content().toLowerCase(), NotGenderInfo))
+						{
+							arm.setNoMale(Utilities.getFirstValue(cells[i][k].getCell_content()));
+						}
+					}
+				}
+			}
+			for(String mm:Female){
+				Pattern r = Pattern.compile("\\b" + mm);
+				Matcher m = r.matcher(cells[i][0].getCell_content().toLowerCase());
+				if (m.find()) {
+					if(Utilities.isNumeric(cells[i][k].getCell_content()))
+					{
+						arm.setNoFemale(Utilities.getFirstValue(cells[i][k].getCell_content()));
+						if(cells[i][0].getCell_content().toLowerCase().contains("%"))
+						{
+							femalePercent = true;
+						}
+					}
+					else
+					{
+						if(Utilities.getCellType(cells[i][k].getCell_content()).equals("PartNumeric")&&!Utilities.stringContainsItemFromList(cells[i][k].getCell_content().toLowerCase(), NotGenderInfo)&&!Utilities.stringContainsItemFromList(cells[i][0].getCell_content().toLowerCase(), NotGenderInfo))
+						{
+							arm.setNoFemale(Utilities.getFirstValue(cells[i][k].getCell_content()));
+						}
+					}
+					
+				}
+			}
+			
+			for(String mm:Mixed){
+				Pattern r = Pattern.compile("\\b" + mm);
+				Matcher m = r.matcher(cells[i][0].getCell_content()
+						.toLowerCase());
+				if (m.find()) {
+				String content = cells[i][k].getCell_content();
+				r = Pattern.compile("[:/|\\\\]");
+				if(cells[i][k].getCell_content().contains("("))
+					r = Pattern.compile("[:/|\\\\]");
+				m =r.matcher(content);
+				String separator = "";
+				if(m.find())
+				{
+					separator = m.group();
+				}
+				if(Utilities.NoDimensions(cells[i][k].getCell_content())<2)
+					continue;
+				String stub = cells[i][0].getCell_content().toLowerCase();
+				String[] stubsplit = stub.split(separator);
+				for(int j=0;j<stubsplit.length;j++)
+				{
+					r = Pattern.compile("\\bm(ale){0,1}");
+					m =r.matcher(stubsplit[j]);
+					if(m.find())
+					{
+						
+						String[] split = content.split(separator);
+						
+						arm.setNoMale(Utilities.getFirstValue(split[j]));
+					}
+					r = Pattern.compile("\\bf(emale){0,1}");
+					m =r.matcher(stubsplit[j]);
+					if(m.find())
+					{
+						String[] split;
+						split = content.split(separator);
+						arm.setNoFemale(Utilities.getFirstValue(split[j]));
+					}
+				}	
+			}
+			}
+			
+			for(String mm:Patients){
+				Pattern r = Pattern.compile("\\b" + mm);
+				Matcher m = r.matcher(cells[i][0].getCell_content()
+						.toLowerCase());
+				if (m.find()) {
+					if(Utilities.isNumeric(cells[i][k].getCell_content()))
+					{
+						cells[i][k].setCell_content(cells[i][k].getCell_content().replace(",", ""));
+						arm.setNoPatients(Utilities.getFirstValue(cells[i][k].getCell_content()));
+					}
+				}
+			}
+			cells[i][0].setCell_content(cells[i][0].getCell_content().replace(",", ""));
+			Pattern r = Pattern.compile(PatientPattern1);
+			Matcher m = r.matcher(cells[i][0].getCell_content()
+					.toLowerCase());
+			if (m.find()) {
+				arm.setNoPatients(Utilities.getFirstValue(m.group()));
+			}
+			cells[0][k].setCell_content(cells[0][k].getCell_content().replace(",", ""));
+			r = Pattern.compile(PatientPattern1);
+			m = r.matcher(cells[0][k].getCell_content()
+					.toLowerCase());
+			if (m.find()) {
+				arm.setNoPatients(Utilities.getFirstValue(m.group()));
+			}
+			//[\(][0-9]{0,}[\)]
+			r = Pattern.compile("[\\(][0-9]{0,}[\\)]");
+			m = r.matcher(cells[0][k].getCell_content()
+					.toLowerCase());
+			if (m.find()) {
+				arm.setNoPatients(Utilities.getFirstValue(m.group()));
+			}
+			if(malePercent)
+			{
+				double Meles = arm.getNoPatients()*(arm.getNoMale()/100.0);
+				arm.setNoMale((int)Meles);
+			}
+			if(femalePercent)
+			{
+				double Femeles = arm.getNoPatients()*(arm.getNoFemale()/100.0);
+				arm.setNoFemale((int)Femeles);
+			}
+		}
+		
+		return arm;
+	}
+	
+	
 	
 	public void ExtractTrialData(Article art)
 	{
@@ -52,6 +206,8 @@ public class IEArmBased {
 				{
 					for(int k = 1;k<cells[0].length;k++)
 					{
+						if(!Utilities.stringEqualsItemFromList(cells[0][k].getCell_content().toLowerCase(),TotalArm))
+						{
 						if(cells[0][k].getCell_content().contains("SD"))
 						{
 							cells[0][k].setCell_content(cells[0][k].getCell_content().replace("SD", ""));
@@ -60,9 +216,11 @@ public class IEArmBased {
 						{
 							cells[0][k].setCell_content(cells[0][k].getCell_content().replace("Mean", ""));
 						}
-						if(!(cells[0][k].getCell_content().toLowerCase().equals("p")||cells[0][k].getCell_content().toLowerCase().contains("all")||cells[0][k].getCell_content().toLowerCase().contains("total")||cells[0][k].getCell_content().toLowerCase().equals("range")||cells[0][k].getCell_content().toLowerCase().equals("p*")||cells[0][k].getCell_content().toLowerCase().equals(" ± ")||Utilities.isSpaceOrEmpty(cells[0][k].getCell_content())||cells[0][k].getCell_content().toLowerCase().equals("n")||cells[0][k].getCell_content().toLowerCase().contains("n°")))
+						}
+						if(!(Utilities.stringContainsItemFromList(cells[0][k].getCell_content().toLowerCase(), containsNotAnArm)||Utilities.stringEqualsItemFromList(cells[0][k].getCell_content().toLowerCase(), equalsNotAnArm)||Utilities.isSpaceOrEmpty(cells[0][k].getCell_content())))
 						{
-							Pattern r = Pattern.compile("\\bp[-* ]*value[a-z]*\\b");
+							//TODO: Change this to list of patterns
+							Pattern r = Pattern.compile("\\bp[*-]{0,1}[ ]{0,1}(value){0,1}[s]{0,1}\\b");
 						    Matcher m = r.matcher(cells[0][k].getCell_content().toLowerCase());
 						    if(!m.find())
 						    {
@@ -72,27 +230,76 @@ public class IEArmBased {
 						    	if(cells[j][k].isIs_columnspanning() && cells[j][k].getCells_columnspanning()==cells[j].length)
 						    		Content = cells[j+1][k].getCell_content();
 						    	String type = Utilities.getCellTypeIsNum(Content);
-						    	if(type.equals("Numeric"))
+						    	double d = Utilities.getFirstValue(Content);
+						    	
+						    	if(type.equals("Numeric") && d>5.0){
 						    		arm.setBMI(Content);
-						    	arms.add(arm);
+						    		arms.add(arm);
+						    		arm = getArmCharacteristics(arm,k,cells);
+						    	}
 						    }
 						}
 					}
 				}
 				
 				}
+				for(String word:weightWords){
+					if(!cells[j][0].isIs_header() && cells[j][0].getCell_content().toLowerCase().contains(word))
+					{
+						for(int k = 1;k<cells[0].length;k++)
+						{
+							if(!Utilities.stringEqualsItemFromList(cells[0][k].getCell_content().toLowerCase(),TotalArm))
+							{
+							if(cells[0][k].getCell_content().contains("SD"))
+							{
+								cells[0][k].setCell_content(cells[0][k].getCell_content().replace("SD", ""));
+							}
+							if(cells[0][k].getCell_content().contains("Mean"))
+							{
+								cells[0][k].setCell_content(cells[0][k].getCell_content().replace("Mean", ""));
+							}
+							}
+							if(!(Utilities.stringContainsItemFromList(cells[0][k].getCell_content().toLowerCase(), containsNotAnArm)||Utilities.stringEqualsItemFromList(cells[0][k].getCell_content().toLowerCase(), equalsNotAnArm)))
+							{
+
+							    	ClinicalArm arm = new ClinicalArm(art.getPmc(),art.getTitle());
+							    	arm.setArmName(cells[0][k].getCell_content());
+							    	String Content = cells[j][k].getCell_content();
+							    	if(cells[j][k].isIs_columnspanning() && cells[j][k].getCells_columnspanning()==cells[j].length)
+							    		Content = cells[j+1][k].getCell_content();
+							    	String type = Utilities.getCellTypeIsNum(Content);
+							    	double d = Utilities.getFirstValue(Content);
+							    	if(type.equals("Numeric") && d>5.0){
+							    		arm.setWeight(Content);
+							    		arms.add(arm);
+							    		arm = getArmCharacteristics(arm,k,cells);
+							    	}
+							    	
+							    
+							}
+						}
+					}
+					
+					}
 			}
 		}
-		LinkedList<ClinicalArm> arms2 = new LinkedList<ClinicalArm>();
-		LinkedList<String> armNames = new LinkedList<String>();
-		for(int i = 0;i<arms.size();i++)
+		//Mergining arms
+		for(int i =0;i<arms.size();i++)
 		{
-			if(!armNames.contains(arms.get(i).getArmName())){
-				arms2.add(arms.get(i));
-				armNames.add(arms.get(i).getArmName());
+			for(int j = i+1;j<arms.size();j++)
+			{
+				if(arms.get(i).getArmName().equals(arms.get(j).getArmName()))
+				{
+					arms.get(i).setWeight(arms.get(j).getWeight());
+					arms.remove(j);
+				}
+			}
+			if(Utilities.stringEqualsItemFromList(arms.get(i).getArmName().toLowerCase(),TotalArm)||Utilities.stringContainsItemFromList(arms.get(i).getArmName().toLowerCase(),TotalArmContains))
+			{
+				arms.get(i).setArmName("Total");
 			}
 		}
-		AddArmsToDB(document_id,arms2);
+		AddArmsToDB(document_id,arms);
 	}
 	
 private String jdbcDriver = "com.mysql.jdbc.Driver";
@@ -261,9 +468,21 @@ private String jdbcDriver = "com.mysql.jdbc.Driver";
 		         preparedStatement.setInt(1, id);
 		         preparedStatement.setString(2, "BMI");
 		         preparedStatement.setString(3, arms.get(i).getBMI());
+		         preparedStatement.setString(4, "kg/m2");
+		         preparedStatement.executeUpdate();
+			 }
+			 if(arms.get(i).getWeight()!=null && !arms.get(i).getWeight().equals(""))
+			 {
+				 con = DriverManager.getConnection(dbAddress + dbName, userName, password);
+		         insertSQL = "INSERT INTO WeightDetails (ArmID, WeightCategory, WeightValue,WeightUnit ) VALUES (?, ?, ?,?)";
+		         preparedStatement = con.prepareStatement(insertSQL,Statement.RETURN_GENERATED_KEYS);
+		         preparedStatement.setInt(1, id);
+		         preparedStatement.setString(2, "Weight");
+		         preparedStatement.setString(3, arms.get(i).getWeight());
 		         preparedStatement.setString(4, "kg");
 		         preparedStatement.executeUpdate();
 			 }
+			 
 
 	         con.close();
 			 }

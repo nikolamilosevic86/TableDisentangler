@@ -19,6 +19,7 @@ import IE.MetaMapStats;
 import IE.SimpleDataExtraction;
 import IE.TrialIE2;
 import IEArmBased.IEArmBased;
+import IEArmBased.IEArmBased2;
 import Utils.Utilities;
 import classifiers.SimpleTableClassifier;
 import readers.PMCXMLReader;
@@ -199,7 +200,7 @@ public class TablInExMain {
 			}
 			if(IEFine)
 			{
-				IEArmBased tie = new IEArmBased();
+				IEArmBased2 tie = new IEArmBased2();
 				for (int i = 0; i < articles.length; i++) 
 				{
 					tie.ExtractTrialData(articles[i]);				
