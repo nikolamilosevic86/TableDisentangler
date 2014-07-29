@@ -491,6 +491,8 @@ public class Utilities {
 	
 	public static boolean stringEqualsItemFromList(String inputString, String[] items)
 	{
+		if(inputString==null||inputString.equals(""))
+			return false;
 	    for(int i =0; i < items.length; i++)
 	    {
 	        if(inputString.equals(items[i]))
@@ -503,6 +505,8 @@ public class Utilities {
 	
 	public static boolean stringMatchRegexItemFromList(String inputString, String[] items)
 	{
+		if(inputString==null||inputString.equals(""))
+			return false;
 	    for(int i =0; i < items.length; i++)
 	    {
 	    	Pattern r = Pattern.compile(items[i]);
@@ -513,6 +517,22 @@ public class Utilities {
 		    }
 	    }
 	    return false;
+	}
+	
+	public static String stringMatchRegexItemFromListPattern(String inputString, String[] items)
+	{
+		if(inputString==null||inputString.equals(""))
+			return "";
+	    for(int i =0; i < items.length; i++)
+	    {
+	    	Pattern r = Pattern.compile(items[i]);
+		    Matcher m = r.matcher(inputString);
+		    if(m.find())
+		    {
+		    	return items[i];
+		    }
+	    }
+	    return "";
 	}
 	
 }

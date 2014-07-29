@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,17 +28,20 @@ public class IEArmBased2 {
 	private Connection con;
 	
 	
-	String[] DemographicTableWords = {"weight","bodyweight","bmi","body mass index"};
+	String[] DemographicTableWords = {"weight","bodyweight","bmi","body mass index","age"};
 	
 	String[] weightWords = {"weight","bodyweight"};
 	String[] BMIWords = {"bmi","body mass index"};
+	String[] NotWeight = {"n (","%","problems"};
 	
-	String [] equalsNotAnArm = {"p","range","p*"," ± ","T","ρ","p-value","p* value","%","(%)","[%]"};
+	String [] equalsNotAnArm = {"p","range","p*"," ± ","T","ρ","p-value","p* value","%","(%)","[%]","significance"};
+	String [] Age = {"\\bage\\b"};
+	String [] AgeUnits = {"\\bmonth\\b","\\bmonths\\b","\\bday\\b","\\bdays\\b","\\byear\\b","\\byears\\b"};
 	String [] containsNotAnArm = {"all","total","p-value","95%","ratio","p*", "p value"};
 	String [] TotalArm = {"mean±sd","mean ± sd"};
 	String [] TotalArmContains = {"n°"};
 	String[] Male = {"male\\b","man\\b","men\\b","boy\\b","boys\\b","m\\b"};
-	String[] NotGenderInfo = {"±","m-2","m 2","m−2","ratio"};
+	String[] NotGenderInfo = {"±","m-2","m 2","m−2","ratio","·m","m -2","kg","height"};
 	String[] Female = {"female\\b","woman\\b","women\\b","girl\\b","girls\\b"};
 	String[] Mixed = {"m(ale){0,1}[ ]{0,1}[s]{0,1}[:\\/|][ ]{0,1}f(emale){0,1}[s]{0,1}","f(emale){0,1}[s]{0,1}[ ]{0,1}[:\\/|][ ]{0,1}m(ale){0,1}[s]{0,1}"};
 	String[] Patients = {"number of patients","patients"};
@@ -52,6 +57,8 @@ public class IEArmBased2 {
 			boolean femalePercent = false;
 			boolean malePercent = false;
 			for(String mm:Male){
+				if(Utilities.stringContainsItemFromList(cells[i][0].getCell_content().toLowerCase(), NotGenderInfo))
+					continue;
 				Pattern r = Pattern.compile("\\b" + mm);
 				Matcher m = r.matcher(cells[i][0].getCell_content().toLowerCase());
 				if (m.find()) {
@@ -191,29 +198,92 @@ public class IEArmBased2 {
 			String stub = cells[i][0].getCell_content().toLowerCase();
 			if(Utilities.stringContainsItemFromList(stub, BMIWords))
 			{
-				Weight w = new Weight();
+				ArmProperty w = new ArmProperty();
 				w.setUnit("kg/m2");
 				w.setValue(cells[i][k].getCell_content());
 				int val = Utilities.getFirstValue(w.getValue());
 				if(val<20)
-					w.setWeightType("BMI change");
+					w.setType("BMI change");
 				else
-					w.setWeightType("BMI");
+					w.setType("BMI");
+				
 				arm.weights.add(w);
 			}
 			if(Utilities.stringContainsItemFromList(subheader, BMIWords))
 			{
-				Weight w = new Weight();
+				ArmProperty w = new ArmProperty();
 				w.setUnit("kg/m2");
 				w.setValue(cells[i][k].getCell_content());
 				int val = Utilities.getFirstValue(w.getValue());
 				if(val<20)
-					w.setWeightType("BMI change");
+					w.setType("BMI change");
 				else
-					w.setWeightType("BMI");
+					w.setType("BMI");
 				w.setAdditionalInfo(cells[i][0].getCell_content());
 				arm.weights.add(w);
 			}
+			if(Utilities.stringContainsItemFromList(stub, weightWords))
+			{
+				ArmProperty w = new ArmProperty();
+				w.setUnit("kg");
+				w.setValue(cells[i][k].getCell_content());
+				int val = Utilities.getFirstValue(w.getValue());
+				if(val<30)
+					w.setType("Weight change");
+				else
+					w.setType("Weight");
+				if(val>300)
+				{
+					w.setUnit("g");
+				}
+				if(!Utilities.stringContainsItemFromList(cells[i][0].getCell_content(), NotWeight)&&!Utilities.stringContainsItemFromList(cells[0][k].getCell_content(), NotWeight))
+					arm.weights.add(w);
+			}
+			if(Utilities.stringContainsItemFromList(subheader, weightWords))
+			{
+				ArmProperty w = new ArmProperty();
+				w.setUnit("kg");
+				w.setValue(cells[i][k].getCell_content());
+				int val = Utilities.getFirstValue(w.getValue());
+				if(val<30)
+					w.setType("Weight change");
+				else
+					w.setType("Weight");
+				if(val>300)
+				{
+					w.setUnit("g");
+				}
+				w.setAdditionalInfo(cells[i][0].getCell_content());
+				if(!Utilities.stringContainsItemFromList(cells[i][0].getCell_content(), NotWeight)&&!Utilities.stringContainsItemFromList(cells[0][k].getCell_content(), NotWeight))
+					arm.weights.add(w);
+			}
+			
+			if(Utilities.stringMatchRegexItemFromList(stub, Age))
+			{
+				ArmProperty w = new ArmProperty();
+				w.setType("Age");
+				String unit = Utilities.stringMatchRegexItemFromListPattern(cells[i][0].getCell_content().toLowerCase(),AgeUnits);
+				unit=unit.replace("\\b", "");
+				w.setUnit(unit);
+				w.setValue(cells[i][k].getCell_content());
+				w.setAdditionalInfo("");
+				if(!cells[i][k].getCell_content().equals(""))
+					arm.weights.add(w);
+			}
+			
+			if(Utilities.stringMatchRegexItemFromList(subheader, Age))
+			{
+				ArmProperty w = new ArmProperty();
+				w.setType("Age");
+				String unit = Utilities.stringMatchRegexItemFromListPattern(cells[i][0].getCell_content().toLowerCase(),AgeUnits);
+				unit=unit.replace("\\b", "");
+				w.setUnit(unit);
+				w.setValue(cells[i][k].getCell_content());
+				w.setAdditionalInfo(cells[i][0].getCell_content());
+				if(!cells[i][k].getCell_content().equals(""))
+					arm.weights.add(w);
+			}
+			
 			
 		}
 		return arm;
@@ -257,11 +327,60 @@ public class IEArmBased2 {
 			{
 				if(arms.get(i).getArmName().equals(arms.get(j).getArmName()))
 				{
-					arms.get(i).setWeight(arms.get(j).getWeight());
+					//arms.get(i).setWeight(arms.get(j).getWeight());
+					HashMap<String,ArmProperty> armproperties = new HashMap<String,ArmProperty>();
+					LinkedList<ArmProperty> armproperties2 = new LinkedList<ArmProperty>();
+					for(ArmProperty a:arms.get(i).weights)
+					{
+						armproperties.put(a.getType()+a.getValue(), a);
+					}
+					for(ArmProperty a:arms.get(j).weights)
+					{
+						armproperties.put(a.getType()+a.getValue(), a);
+					}
+				//	LinkedHashMap<String,ArmProperty> lhm = Utilities.sortHashMapByValuesD(armproperties);
+					Object [] ss = armproperties.keySet().toArray();
+					for(Object s:ss)
+					{
+						armproperties2.add(armproperties.get(s));
+					}
+					arms.get(i).weights=armproperties2;
+					arms.remove(j);
+				}
+			}
+			if(arms.get(i).getArmName().toLowerCase().equals("n") && arms.size()>1)
+				arms.remove(i);
+		}
+		for(int i =0;i<arms.size();i++)
+		{
+			for(int j = i+1;j<arms.size();j++)
+			{
+				String[] arm1N = arms.get(i).getArmName().split(" ");
+				String[] arm2N = arms.get(j).getArmName().split(" ");
+				if(arm1N.length>2&&arm2N.length>2&&arm1N[0].equals(arm2N[0])&&arm1N[1].equals(arm2N[1]))
+				{
+					HashMap<String,ArmProperty> armproperties = new HashMap<String,ArmProperty>();
+					LinkedList<ArmProperty> armproperties2 = new LinkedList<ArmProperty>();
+					for(ArmProperty a:arms.get(i).weights)
+					{
+						armproperties.put(a.getType()+a.getValue(), a);
+					}
+					for(ArmProperty a:arms.get(j).weights)
+					{
+						armproperties.put(a.getType()+a.getValue(), a);
+					}
+				//	LinkedHashMap<String,ArmProperty> lhm = Utilities.sortHashMapByValuesD(armproperties);
+					Object [] ss = armproperties.keySet().toArray();
+					for(Object s:ss)
+					{
+						armproperties2.add(armproperties.get(s));
+					}
+					arms.get(i).weights=armproperties2;
 					arms.remove(j);
 				}
 			}
 		}
+		
 		AddArmsToDB(document_id,arms);
 	}
 	
@@ -386,13 +505,13 @@ public class IEArmBased2 {
 	         preparedStatement.setString(6,"");
 	         preparedStatement.executeUpdate();
 
-	         for(Weight ww: arms.get(i).weights)
+	         for(ArmProperty ww: arms.get(i).weights)
 	         {
-				 con = DriverManager.getConnection(dbAddress + dbName, userName, password);
+				// con = DriverManager.getConnection(dbAddress + dbName, userName, password);
 				 insertSQL = "INSERT INTO ArmProperty (ArmID,PropertyName,  Type,Value,AdditionalInfo,ValueUnit ) VALUES (?,?,?,?,?, ?)";
 		         preparedStatement = con.prepareStatement(insertSQL,Statement.RETURN_GENERATED_KEYS);
 		         preparedStatement.setInt(1, id);
-		         preparedStatement.setString(2, ww.getWeightType());
+		         preparedStatement.setString(2, ww.getType());
 		         preparedStatement.setString(3, "Mean+SD");
 		         preparedStatement.setString(4,ww.getValue());
 		         preparedStatement.setString(5,ww.getAdditionalInfo());
@@ -477,7 +596,7 @@ public class IEArmBased2 {
                             		+"ArmID INT(64),"	            		
                             		+"PropertyName VARCHAR(200)," 
                             		+"Type VARCHAR(100)," // May be Mean weight, Weight range, BMI, Weight change 
-                            		+"Value VARCHAR(200),"
+                            		+"Value VARCHAR(300),"
                             		+"AdditionalInfo VARCHAR(200),"
                             		+"ValueUnit VARCHAR(20),"  //kg, g, kg/m2,g/m2
                             		+"PRIMARY KEY (`id`));"; 
@@ -485,6 +604,7 @@ public class IEArmBased2 {
                                     //The next line has the issue
                                     statement.executeUpdate(myTableName);
                                     System.out.println("ArmProperty Table Created");	
+                                    con.close();
 	  } 
         catch (Exception e) {
         	e.printStackTrace();

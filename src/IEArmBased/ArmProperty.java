@@ -1,17 +1,17 @@
 package IEArmBased;
 
-public class Weight {
+public class ArmProperty {
 
-	private String WeightType;//BMI, Weight, Weight change, BMI change
+	private String Type;//BMI, Weight, Weight change, BMI change
 	private String value;
 	private String unit;
 	private String AdditionalInfo;
 	
-	public String getWeightType() {
-		return WeightType;
+	public String getType() {
+		return Type;
 	}
-	public void setWeightType(String weightType) {
-		WeightType = weightType;
+	public void setType(String weightType) {
+		Type = weightType;
 	}
 	public String getValue() {
 		return value;

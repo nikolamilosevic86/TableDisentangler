@@ -11,7 +11,7 @@ public class ClinicalArm {
 	private String weight;
 	private int NoMale;
 	private int NoFemale;
-	public LinkedList<Weight> weights = new LinkedList<Weight>();
+	public LinkedList<ArmProperty> weights = new LinkedList<ArmProperty>();
 	
 	public ClinicalArm(String PMC, String DocumentName)
 	{
