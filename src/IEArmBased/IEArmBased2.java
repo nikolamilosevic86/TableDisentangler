@@ -201,9 +201,13 @@ public class IEArmBased2 {
 				ArmProperty w = new ArmProperty();
 				w.setUnit("kg/m2");
 				w.setValue(cells[i][k].getCell_content());
-				int val = Utilities.getFirstValue(w.getValue());
-				if(val<20)
-					w.setType("BMI change");
+				int val = Utilities.getFirstValue(w.getValue()); //if there are 2 values in the row, probaly one is SD
+				if(val<20){
+					if(Utilities.getFirstValue(cells[i][k-1].getCell_content())>20)
+						w.setType("BMI SD");
+					else
+						w.setType("BMI change");
+				}
 				else
 					w.setType("BMI");
 				
@@ -215,8 +219,12 @@ public class IEArmBased2 {
 				w.setUnit("kg/m2");
 				w.setValue(cells[i][k].getCell_content());
 				int val = Utilities.getFirstValue(w.getValue());
-				if(val<20)
-					w.setType("BMI change");
+				if(val<20){//if there are 2 values in the row, probaly one is SD
+					if(Utilities.getFirstValue(cells[i][k-1].getCell_content())>20)
+						w.setType("BMI SD");
+					else
+						w.setType("BMI change");
+				}
 				else
 					w.setType("BMI");
 				w.setAdditionalInfo(cells[i][0].getCell_content());
