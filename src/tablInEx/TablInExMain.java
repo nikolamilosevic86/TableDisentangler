@@ -5,8 +5,10 @@
  */
 package tablInEx;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
@@ -18,8 +20,10 @@ import FreqIE.FreqIE;
 import IE.MetaMapStats;
 import IE.SimpleDataExtraction;
 import IE.TrialIE2;
+import IEArmBased.ArmExtractor;
 import IEArmBased.IEArmBased;
 import IEArmBased.IEArmBased2;
+import Utils.SemanticType;
 import Utils.Utilities;
 import classifiers.SimpleTableClassifier;
 import readers.PMCXMLReader;
@@ -45,6 +49,26 @@ public class TablInExMain {
 	public static HashMap<String,Integer> stubmap = new HashMap<String, Integer>();
 	public static LinkedList<DataExtractionOutputObj> outputs = new LinkedList<DataExtractionOutputObj>();
 	public static LinkedList<String> PMCBMI = new LinkedList<String>();
+	public static HashMap<String, SemanticType> semanticTypes = new HashMap<String, SemanticType>();
+	
+	public static void ReadSemanticTypes(){
+		try{
+		BufferedReader br = new BufferedReader(new FileReader("SemTypesOfInterestShort"));
+		String line;
+		while ((line = br.readLine()) != null) {
+		   String[] semtypes = line.split("\\|");
+		   SemanticType s = new SemanticType();
+		   s.setShortLabel(semtypes[0]);
+		   s.setLongName(semtypes[2]);
+		   semanticTypes.put(semtypes[0], s);
+		}
+		br.close();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+	}
 	
 	public static Article[] runReadingloop(Article[] a,File[] files,int len, Class s)
 	{
@@ -77,6 +101,7 @@ public class TablInExMain {
 		System.out.println("For a moment, nothing happened. Then, after a second or so, nothing continued to happen. - Duglas Adams");
 		System.out.println("____________________________________________________________________________________________________________________________");
 		String path = args[0];
+		ReadSemanticTypes();
 		Inpath = path;
 		String runas = "";
 		if(args.length>1)
@@ -200,6 +225,7 @@ public class TablInExMain {
 			}
 			if(IEFine)
 			{
+				//IEArmBased2  or   ArmExtractor
 				IEArmBased2 tie = new IEArmBased2();
 				for (int i = 0; i < articles.length; i++) 
 				{

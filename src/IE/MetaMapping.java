@@ -90,7 +90,7 @@ public class MetaMapping {
 		return SemanticTypes.get(str);
 	}
 	
-	public static Map<Object, Object> getClassification(String term) throws Exception
+	public Map<Object, Object> getClassification(String term) throws Exception
 	{
 		//String[] classfication = new String[3]; 
 		Map<Object, Object> mp = new HashMap<Object, Object>();
