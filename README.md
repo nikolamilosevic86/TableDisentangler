@@ -12,8 +12,14 @@ Requirements
 
 The tool requires Java, OpenNLP, Weka toolkit, MySQL database and possibly it will require some semantic tools such as metamap, WikipediaMiner etc.
 
+
+Other project dependences
+---------------------------
+
 Some manipulation on dataset (splitting data to training, testing and cross-validation sets, downloading data, extracting tables etc.) are done by python scripts in TableMiningHelpers git project.
   
+Database output of this system may be used as input database for the MedCurator project
+
 License
 -------
 
