@@ -32,6 +32,7 @@ public class IEArmBased2 {
 	String[] DemographicTableWords = {"weight","bodyweight","bmi","body mass index","age"};
 	
 	String[] weightWords = {"weight","bodyweight"};
+	String[] weightWordsStop = {"loss","growth","change","height","age"};
 	String[] BMIWords = {"bmi","body mass index"};
 	String[] NotWeight = {"n (","%","problems"};
 	
@@ -231,7 +232,7 @@ public class IEArmBased2 {
 				w.setAdditionalInfo(cells[i][0].getCell_content());
 				arm.weights.add(w);
 			}
-			if(Utilities.stringContainsItemFromList(stub, weightWords))
+			if(Utilities.stringContainsItemFromList(stub, weightWords)&&!Utilities.stringContainsItemFromList(stub, weightWordsStop)&&!Utilities.stringContainsItemFromList(cells[i][k].getSubheader_values(),weightWordsStop))
 			{
 				ArmProperty w = new ArmProperty();
 				w.setUnit("kg");
