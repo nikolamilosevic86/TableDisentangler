@@ -1,0 +1,19 @@
+\information_class_resource
+Metadata:
+	class_name:BMI
+	class_unit_def:m2/kg
+	value_range:15-40
+	value_type:semi-text
+	where:data
+	vicinity:2
+MatchList:
+	bmi
+	body mass index
+BlackList:
+	change
+	loss
+	gain
+	obese
+	obesity
+	normal
+	overweight
