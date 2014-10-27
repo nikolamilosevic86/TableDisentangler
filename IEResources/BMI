@@ -3,7 +3,7 @@ Metadata:
 	class_name:BMI
 	class_unit_def:m2/kg
 	value_range:15-40
-	value_type:semi-text
+	value_type:semi-value
 	where:data
 	vicinity:2
 MatchList:

@@ -16,6 +16,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 
+import ExternalResourceHandlers.InformationClass;
+import ExternalResourceHandlers.ResourceReader;
 import FreqIE.FreqIE;
 import IE.MetaMapStats;
 import IE.SimpleDataExtraction;
@@ -23,11 +25,13 @@ import IE.TrialIE2;
 import IEArmBased.ArmExtractor;
 import IEArmBased.IEArmBased;
 import IEArmBased.IEArmBased2;
+import IEArmBased.IEArmBased21;
 import Utils.SemanticType;
 import Utils.Utilities;
 import classifiers.SimpleTableClassifier;
 import readers.PMCXMLReader;
 import readers.Reader;
+import stats.ConceptizationStats;
 import stats.Statistics;
 
 
@@ -44,11 +48,13 @@ public class TablInExMain {
 	public static boolean IEinSQLTial = false;
 	public static boolean IEFreqSQLTial = false;
 	public static boolean IEFine = false;
+	public static boolean Conceptization = false;
 	public static String Inpath;
 	public static HashMap<String,Integer> headermap = new HashMap<String, Integer>();
 	public static HashMap<String,Integer> stubmap = new HashMap<String, Integer>();
 	public static LinkedList<DataExtractionOutputObj> outputs = new LinkedList<DataExtractionOutputObj>();
 	public static LinkedList<String> PMCBMI = new LinkedList<String>();
+	public static LinkedList<InformationClass> informationClasses = new LinkedList<InformationClass>();
 	public static HashMap<String, SemanticType> semanticTypes = new HashMap<String, SemanticType>();
 	
 	public static void ReadSemanticTypes(){
@@ -120,6 +126,10 @@ public class TablInExMain {
 		if(Arrays.asList(args).contains("-tag"))
 		{
 			shouldTag = true;
+		}
+		if(Arrays.asList(args).contains("-conceptisation"))
+		{
+			Conceptization = true;
 		}
 		if(Arrays.asList(args).contains("-freq"))
 		{
@@ -226,10 +236,20 @@ public class TablInExMain {
 			if(IEFine)
 			{
 				//IEArmBased2  or   ArmExtractor
-				IEArmBased2 tie = new IEArmBased2();
+				IEArmBased21 tie = new IEArmBased21();
+				informationClasses = ResourceReader.read("IEResources");
 				for (int i = 0; i < articles.length; i++) 
 				{
 					tie.ExtractTrialData(articles[i]);				
+				}
+			}
+			if(Conceptization)
+			{
+				stats.ConceptizationStats concept = new ConceptizationStats();
+				stats.ConceptizationStats.ReadPatterns("patterns.txt");
+				for (int i = 0; i < articles.length; i++) 
+				{
+					concept.processArticle(articles[i]);				
 				}
 			}
 		}
@@ -331,6 +351,7 @@ public class TablInExMain {
 		System.out.println("BMI alone:"+BMI);
 		System.out.println("Number of weight/BMI:"+weight);
 		System.out.println("PMC documents with weight/BMI:"+PMCBMI.size());
+		ConceptizationStats.PrintConceptizationStats();
 	}
 	
 	/**

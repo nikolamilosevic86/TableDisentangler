@@ -260,6 +260,8 @@ public class Utilities {
 	public static String ReplaceNonBrakingSpaceToSpace(String s)
 	{
 		char ch = 160;
+		if(s==null)
+			return "";
 		s= s.replace(ch, ' ');
 		ch = 8195;
 		s = s.replace(ch, ' ');
@@ -280,6 +282,35 @@ public class Utilities {
 		{
 			return false;
 		}
+	}
+	
+	public static double getFirstDValue(String s)
+	{
+		int numericStart=0;
+		int numericCount = 0;
+		boolean isFirst = false;
+		//boolean gotVlaue = false;
+		for(int i = 0;i<s.length();i++)
+		{
+			if(Utilities.isNumeric(s.charAt(i)+"")||s.charAt(i)=='.')
+			{
+				if(!isFirst)
+				{
+					numericStart = i;
+				}
+				isFirst = true;
+				numericCount = i-numericStart+1;
+			}
+			if(i>=1 && Utilities.isNumeric(s.charAt(i-1)+"") && (!Utilities.isNumeric(s.charAt(i)+"")&&s.charAt(i)!='.'))
+			{
+				break;
+			}	
+		}
+		double num = 0;
+		if(numericCount>0)
+		 num = Double.parseDouble(s.substring(numericStart,numericStart+numericCount));
+		return num;
+		
 	}
 	
 	public static int getFirstValue(String s)
@@ -502,6 +533,25 @@ public class Utilities {
 	    }
 	    return false;
 	}
+	public static boolean stringMatchRegexItemFromList(String inputString, LinkedList<String> items)
+	{
+		if(inputString==null||inputString.equals(""))
+			return false;
+		if(items.size()==0)
+			return true;
+	    for(int i =0; i < items.size(); i++)
+	    {
+	    	Pattern r = Pattern.compile(items.get(i));
+		    Matcher m = r.matcher(inputString);
+		    if(m.find())
+		    {
+		    	return true;
+		    }
+	    }
+	    return false;
+	}
+	
+	
 	
 	public static boolean stringMatchRegexItemFromList(String inputString, String[] items)
 	{
