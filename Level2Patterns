@@ -1,0 +1,6 @@
++Integer
+^[ \t]*[-—–−+]*\d{1,}[ ]*\d*[†‡abcdefg\*\^#]{0,3}$[\n\t ]*$
++RealNumers
+^[ \t]*[-—–−+]*\d*[.,·]{1,}\d*[ ]*[†‡abcdefg\*#\^]{0,3}[\n\t ]*$
++SimpleRomanNumerals
+^[ \t]*([Ii]{1,3}|[iI][vV]|[Vv][Ii]{1,3}|[Vv])[†‡abcdeABCDE231fg\*\^#]{0,3}$

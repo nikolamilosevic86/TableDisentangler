@@ -23,7 +23,7 @@ import tablInEx.Table;
 public class ConceptizationStats {
 	
 	/** The patterns. */
-	public static LinkedList<stats.Pattern> patterns = new LinkedList<stats.Pattern>();
+	public LinkedList<stats.Pattern> patterns = new LinkedList<stats.Pattern>();
 
 	public void processArticle(Article art)
 	{
@@ -46,7 +46,7 @@ public class ConceptizationStats {
 	}
 	
 	
-	public static void PrintConceptizationStats()
+	public void PrintConceptizationStats()
 	{
 		for(int i = 0;i<patterns.size();i++)
 		{
@@ -61,7 +61,7 @@ public class ConceptizationStats {
 	 *
 	 * @param c the c
 	 */
-	public static void ProcessCell(Cell c,Table t, Article art)
+	public void ProcessCell(Cell c,Table t, Article art)
 	{
 		if(c.isIs_header()||c.isIs_stub())
 			return;
@@ -89,7 +89,7 @@ public class ConceptizationStats {
 	 *
 	 * @param filename the filename
 	 */
-	public static void ReadPatterns(String filename) {
+	public void ReadPatterns(String filename) {
 		try {
 			File file = new File(filename);
 			BufferedReader br = new BufferedReader(new FileReader(file));

@@ -56,6 +56,8 @@ public class TablInExMain {
 	public static LinkedList<String> PMCBMI = new LinkedList<String>();
 	public static LinkedList<InformationClass> informationClasses = new LinkedList<InformationClass>();
 	public static HashMap<String, SemanticType> semanticTypes = new HashMap<String, SemanticType>();
+	public static stats.ConceptizationStats concept;
+	public static stats.ConceptizationStats concept2;
 	
 	public static void ReadSemanticTypes(){
 		try{
@@ -101,6 +103,8 @@ public class TablInExMain {
 	}
 
 	public static void main(String[] args) {
+		concept = new ConceptizationStats();
+		concept2 = new ConceptizationStats();
 		System.out.println("=============================================");
 		System.out.println("Hello TablInEx");
 		System.out.println("=============================================");
@@ -108,6 +112,7 @@ public class TablInExMain {
 		System.out.println("____________________________________________________________________________________________________________________________");
 		String path = args[0];
 		ReadSemanticTypes();
+		
 		Inpath = path;
 		String runas = "";
 		if(args.length>1)
@@ -245,11 +250,13 @@ public class TablInExMain {
 			}
 			if(Conceptization)
 			{
-				stats.ConceptizationStats concept = new ConceptizationStats();
-				stats.ConceptizationStats.ReadPatterns("patterns.txt");
+				
+				concept.ReadPatterns("HighLevelPatterns");
+				concept2.ReadPatterns("Level2Patterns");
 				for (int i = 0; i < articles.length; i++) 
 				{
-					concept.processArticle(articles[i]);				
+					concept.processArticle(articles[i]);	
+					concept2.processArticle(articles[i]);
 				}
 			}
 		}
@@ -351,7 +358,9 @@ public class TablInExMain {
 		System.out.println("BMI alone:"+BMI);
 		System.out.println("Number of weight/BMI:"+weight);
 		System.out.println("PMC documents with weight/BMI:"+PMCBMI.size());
-		ConceptizationStats.PrintConceptizationStats();
+		concept.PrintConceptizationStats();
+		concept2.PrintConceptizationStats();
+		
 	}
 	
 	/**
