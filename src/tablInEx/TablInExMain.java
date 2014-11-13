@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 
+import ConceptualizationOfValues.ConceptizationStats;
 import ExternalResourceHandlers.InformationClass;
 import ExternalResourceHandlers.ResourceReader;
 import FreqIE.FreqIE;
@@ -31,7 +32,6 @@ import Utils.Utilities;
 import classifiers.SimpleTableClassifier;
 import readers.PMCXMLReader;
 import readers.Reader;
-import stats.ConceptizationStats;
 import stats.Statistics;
 
 
@@ -56,8 +56,8 @@ public class TablInExMain {
 	public static LinkedList<String> PMCBMI = new LinkedList<String>();
 	public static LinkedList<InformationClass> informationClasses = new LinkedList<InformationClass>();
 	public static HashMap<String, SemanticType> semanticTypes = new HashMap<String, SemanticType>();
-	public static stats.ConceptizationStats concept;
-	public static stats.ConceptizationStats concept2;
+	public static ConceptualizationOfValues.ConceptizationStats concept;
+	//public static ConceptualizationOfValues.ConceptizationStats concept2;
 	
 	public static void ReadSemanticTypes(){
 		try{
@@ -104,7 +104,7 @@ public class TablInExMain {
 
 	public static void main(String[] args) {
 		concept = new ConceptizationStats();
-		concept2 = new ConceptizationStats();
+	//	concept2 = new ConceptizationStats();
 		System.out.println("=============================================");
 		System.out.println("Hello TablInEx");
 		System.out.println("=============================================");
@@ -251,12 +251,12 @@ public class TablInExMain {
 			if(Conceptization)
 			{
 				
-				concept.ReadPatterns("HighLevelPatterns");
-				concept2.ReadPatterns("Level2Patterns");
+				concept.ReadPatterns("patterns");
+			//	concept2.ReadPatterns("Level2Patterns");
 				for (int i = 0; i < articles.length; i++) 
 				{
 					concept.processArticle(articles[i]);	
-					concept2.processArticle(articles[i]);
+				//	concept2.processArticle(articles[i]);
 				}
 			}
 		}
@@ -359,7 +359,7 @@ public class TablInExMain {
 		System.out.println("Number of weight/BMI:"+weight);
 		System.out.println("PMC documents with weight/BMI:"+PMCBMI.size());
 		concept.PrintConceptizationStats();
-		concept2.PrintConceptizationStats();
+		//concept2.PrintConceptizationStats();
 		
 	}
 	
@@ -387,7 +387,5 @@ public class TablInExMain {
 		System.out.println("    -extractTrialToSQL - Extract information about trial (no of patients, males, females, age range...) and stores it in mySQL database. Has to be executed together with -doIE command");
 		System.out.println("    -freq - Extract information about trial using frequency algorithm(no of patients, males, females, age range...) and stores it in mySQL database. Has to be executed together with -doIE command");
 		System.out.println("    -iefine - Extract information about trial using fine graned approach (data about each arm) and stores it in mySQL database. Has to be executed together with -doIE command");
-		
-		
 	}
 }

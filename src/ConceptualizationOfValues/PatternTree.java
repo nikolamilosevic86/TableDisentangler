@@ -1,4 +1,4 @@
-package stats;
+package ConceptualizationOfValues;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -6,14 +6,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
 
-public class Pattern {
+public class PatternTree {
 
 	private String PatternName;
 	public LinkedList<String> FoundWords = new LinkedList<String>();
+	public LinkedList<PatternTree> patternSubTree = new LinkedList<PatternTree>();
 	private int NoItems = 0;
 	private String pattern;
 	
-	public void PrintPattern()
+	public void PrintPatternTree()
 	{
 		
 		String filename ="Conceptisation\\" +PatternName+".txt";
@@ -33,6 +34,10 @@ public class Pattern {
 				bw.write(FoundWords.get(i)+"\r\n");
 			}
 			bw.close();
+			for(int i = 0;i<patternSubTree.size();i++)
+			{
+				patternSubTree.get(i).PrintPatternTree();
+			}
  
 			//System.out.println("Done");
  
@@ -78,8 +83,6 @@ public class Pattern {
 	public void setPatternName(String patternName) {
 		PatternName = patternName;
 	}
-	
-	
 	
 	
 }
