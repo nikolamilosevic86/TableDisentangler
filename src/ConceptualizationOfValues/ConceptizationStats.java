@@ -8,11 +8,20 @@ package ConceptualizationOfValues;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import opennlp.tools.tokenize.Tokenizer;
+import opennlp.tools.tokenize.TokenizerME;
+import opennlp.tools.tokenize.TokenizerModel;
+import net.didion.jwnl.data.IndexWord;
+import net.didion.jwnl.data.POS;
+import net.didion.jwnl.dictionary.Dictionary;
 import tablInEx.Article;
 import tablInEx.Cell;
 import tablInEx.Table;
@@ -84,6 +93,38 @@ public class ConceptizationStats {
 	{
 		String value = Utils.Utilities.ReplaceNonBrakingSpaceToSpace(c.getCell_content());
 		String pattern = pat.getPattern();
+		if(pattern.equals("NL"))
+		{
+			Dictionary dict = Dictionary.getInstance();
+			InputStream is;
+			try {
+				is = new FileInputStream("en-token.bin");
+
+				TokenizerModel model = new TokenizerModel(is);
+		 
+				Tokenizer tokenizer = new TokenizerME(model);
+				String[] tokens = value.split(" ");
+				int isNLP = 0;
+				for(int i = 0; i < tokens.length;i++)
+				{
+					if(tokens[i].length()>2 && wordExistInEnglish(tokens[i]))
+					{
+						isNLP++;
+					}
+				}
+				float percentNLP = ((float)isNLP/(float)tokens.length);
+				if(percentNLP>0.5)
+				{
+					pat.FoundWords.add(value+"\t"+art.getPmc()+t.getTable_title());
+			    	pat.setNoItems(pat.getNoItems()+1);
+			    	return true;
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
+		}
 		Pattern r = Pattern.compile(pattern);
 	    Matcher m = r.matcher(value);
 	    if(m.find())
@@ -100,6 +141,31 @@ public class ConceptizationStats {
 	    }
 	    return false;
 		
+	}
+	
+	public static boolean wordExistInEnglish(String word)
+	{
+		try{
+		IndexWord fword = null; 
+		Dictionary dict = Dictionary.getInstance();
+		fword = dict.lookupIndexWord(POS.NOUN, word);
+		if(fword!=null)
+			return true;
+		fword = dict.lookupIndexWord(POS.ADJECTIVE, word);
+		if(fword!=null)
+			return true;
+		fword = dict.lookupIndexWord(POS.ADVERB, word);
+		if(fword!=null)
+			return true;
+		fword = dict.lookupIndexWord(POS.VERB, word);
+		if(fword!=null)
+			return true;
+		}
+		catch(Exception ex)
+		{
+			return false;
+		}
+		return false;
 	}
 	
 	

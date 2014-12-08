@@ -7,6 +7,7 @@ package tablInEx;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
@@ -16,6 +17,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 
+import net.didion.jwnl.JWNL;
 import ConceptualizationOfValues.ConceptizationStats;
 import ExternalResourceHandlers.InformationClass;
 import ExternalResourceHandlers.ResourceReader;
@@ -103,6 +105,14 @@ public class TablInExMain {
 	}
 
 	public static void main(String[] args) {
+		String propsFile = "file_properties.xml";
+		try {
+			JWNL.initialize(new FileInputStream(propsFile));
+		}
+		catch(Exception Ex)
+		{
+			Ex.printStackTrace();
+		}
 		concept = new ConceptizationStats();
 	//	concept2 = new ConceptizationStats();
 		System.out.println("=============================================");
@@ -189,6 +199,34 @@ public class TablInExMain {
 		{
 			articles = runReadingloop(articles,files, files.length, PMCXMLReader.class);
 		}
+		SimpleDataExtraction ie = null;
+		TrialIE2 tie = null;
+		FreqIE tie2 = null;
+		IEArmBased21 tie3 = null;
+		if (doIE) 
+		{
+			ie = new SimpleDataExtraction(Inpath);
+		}
+		if(IEFreqSQLTial)
+		{
+			//TrialInformationExtraction tie = new TrialInformationExtraction("");
+			tie2 = new FreqIE();
+		}
+		if(IEinSQLTial)
+		{
+			//TrialInformationExtraction tie = new TrialInformationExtraction("");
+			tie = new TrialIE2();
+		}
+		if(IEFine)
+		{
+			//IEArmBased2  or   ArmExtractor
+			tie3 = new IEArmBased21();
+			informationClasses = ResourceReader.read("IEResources");
+		}
+		if(Conceptization)
+		{
+			concept.ReadPatterns("patterns");
+		}
 		for(int i = 0; i < articles.length;i++)
 		{
 			if(articles[i]!=null && articles[i].getTables()!=null)
@@ -201,15 +239,30 @@ public class TablInExMain {
 				t = TableSimplifier.MergeStubs(t);
 				}
 			}
-		}
+		
 		if (doIE) 
 		{
-			SimpleDataExtraction ie = new SimpleDataExtraction(Inpath);
-			for (int i = 0; i < articles.length; i++) 
-			{
-					ie.ExtractData(articles[i]);
-				
-			}
+			
+			ie.ExtractData(articles[i]); 		
+		}
+		if(IEinSQLTial)
+		{
+			tie.ExtractTrialData(articles[i]);	
+		}
+		if(IEFreqSQLTial)
+		{
+			tie2.ExtractTrialData(articles[i]);	
+		}
+		if(IEFine)
+		{
+			tie3.ExtractTrialData(articles[i]);
+		}
+		if(Conceptization)
+		{
+			concept.processArticle(articles[i]);	
+		}
+		
+		}
 			
 			//Create output
 			for(int i = 0;i<outputs.size();i++)
@@ -219,47 +272,6 @@ public class TablInExMain {
 				}
 				outputs.get(i).CreateOutput();
 			}
-			
-			if(IEinSQLTial)
-			{
-				//TrialInformationExtraction tie = new TrialInformationExtraction("");
-				TrialIE2 tie = new TrialIE2();
-				for (int i = 0; i < articles.length; i++) 
-				{
-					tie.ExtractTrialData(articles[i]);				
-				}
-			}
-			if(IEFreqSQLTial)
-			{
-				//TrialInformationExtraction tie = new TrialInformationExtraction("");
-				FreqIE tie = new FreqIE();
-				for (int i = 0; i < articles.length; i++) 
-				{
-					tie.ExtractTrialData(articles[i]);				
-				}
-			}
-			if(IEFine)
-			{
-				//IEArmBased2  or   ArmExtractor
-				IEArmBased21 tie = new IEArmBased21();
-				informationClasses = ResourceReader.read("IEResources");
-				for (int i = 0; i < articles.length; i++) 
-				{
-					tie.ExtractTrialData(articles[i]);				
-				}
-			}
-			if(Conceptization)
-			{
-				
-				concept.ReadPatterns("patterns");
-			//	concept2.ReadPatterns("Level2Patterns");
-				for (int i = 0; i < articles.length; i++) 
-				{
-					concept.processArticle(articles[i]);	
-				//	concept2.processArticle(articles[i]);
-				}
-			}
-		}
 		int weight = 0;
 		int BMI = 0;
 		if(learnheaders)
