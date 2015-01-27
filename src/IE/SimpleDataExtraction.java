@@ -87,7 +87,7 @@ public class SimpleDataExtraction {
 		if(emptyLine)
 			return false;
 		boolean isSubheader = false;
-		if(cells[0].isIs_columnspanning() && table.getNum_of_columns()>1 && cells[0].getCells_columnspanning()>=table.getNum_of_columns() && !cells[0].getCell_content().trim().equalsIgnoreCase("") && !cells[0].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[0].getCell_content().trim().charAt(0))== 160))
+ 		if(cells[0].isIs_columnspanning() && table.getNum_of_columns()>1 && cells[0].getCells_columnspanning()>=table.getNum_of_columns() && !cells[0].getCell_content().trim().equalsIgnoreCase("") && !cells[0].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[0].getCell_content().trim().charAt(0))== 160))
 		{
 			isSubheader = true;
 		}
@@ -98,7 +98,7 @@ public class SimpleDataExtraction {
 			{
 				cells[j].setCell_content("");
 			}
-			if(!Utilities.isSpaceOrEmpty(cells[0].getCell_content())  && !Utilities.isSpaceOrEmpty(cells[j].getCell_content()))
+			if((!Utilities.isSpaceOrEmpty(cells[0].getCell_content())  && !Utilities.isSpaceOrEmpty(cells[j].getCell_content())) || (Utilities.isSpaceOrEmpty(cells[0].getCell_content())  && !Utilities.isSpaceOrEmpty(cells[j].getCell_content())))
 			{
 				emptyCells = false;
 			}
@@ -438,11 +438,11 @@ public class SimpleDataExtraction {
 			}
 
 			//Other levels of subheaders with possibly filled cells.
-				if(cells[j][0].getCell_content().length()>0 && Utilities.isSpace(cells[j][0].getCell_content().trim().charAt(0)) )
+				if((cells[j][0].getCell_content().length()>0 && Utilities.isSpace(cells[j][0].getCell_content().trim().charAt(0)))||Utilities.isSpaceOrEmpty(cells[j][0].getCell_content()) )
 				{
 					hasSpaceSubheaders = true;
 					SetSubheaderRow(cells[j]);
-					if(Utilities.numOfBegeningSpaces(cells[j][0].getCell_content())==currentSubHeaderLevel)
+					if(Utilities.numOfBegeningSpaces(cells[j][0].getCell_content())==currentSubHeaderLevel||Utilities.isSpaceOrEmpty(cells[j][0].getCell_content()))
 						headerStackA[currentSubHeaderLevel] = cells[j][0].getCell_content();
 					else
 					{
@@ -501,10 +501,16 @@ public class SimpleDataExtraction {
 					
 					NavigationPath.appendChild(Stub);
 					if(cells[0][k].isIs_header()){
-					Element s = doc.createElement("HeaderValue");
-					s.setTextContent(cells[0][k].getCell_content());
-					cells[j][k].setHeader_values(cells[0][k].getCell_content());
-					NavigationPath.appendChild(s);
+						for(int s = 0;s<cells[0][k].headers.size();s++){
+							Element Header = doc.createElement("HeaderValue"+s);
+							Header.setTextContent(cells[0][k].headers.get(s));
+							cells[j][k].setHeader_values(cells[0][k].getCell_content());
+							NavigationPath.appendChild(Header);
+						}
+//					Element s = doc.createElement("HeaderValue");
+//					s.setTextContent(cells[0][k].getCell_content());
+//					cells[j][k].setHeader_values(cells[0][k].getCell_content());
+//					NavigationPath.appendChild(s);
 					}
 					cell.appendChild(NavigationPath);
 					
@@ -597,9 +603,12 @@ public class SimpleDataExtraction {
 						rootElement.appendChild(cell);
 						
 						Element NavigationPath = doc.createElement("NavigationPath");
-						Element Header = doc.createElement("HeaderValue");
-						Header.setTextContent(cells[0][k].getCell_content());
-						NavigationPath.appendChild(Header);
+						for(int s = 0;s<cells[0][k].headers.size();s++){
+							Element Header = doc.createElement("HeaderValue"+s);
+							Header.setTextContent(cells[0][k].headers.get(s));
+						
+							NavigationPath.appendChild(Header);
+						}
 						cell.appendChild(NavigationPath);
 						cells[j][k].setHeader_values(cells[0][k].getCell_content());
 						
@@ -708,10 +717,16 @@ public class SimpleDataExtraction {
 						NavigationPath.appendChild(Stub);
 						}
 					if(!Utilities.isSpaceOrEmpty(cells[0][k].getCell_content()) && cells[0][k].isIs_header()){
-						Element HeaderValue = doc.createElement("HeaderValue");
-						HeaderValue.setTextContent(cells[0][k].getCell_content());
-						cells[j][k].setHeader_values(cells[0][k].getCell_content());
-						NavigationPath.appendChild(HeaderValue);
+						//Element HeaderValue = doc.createElement("HeaderValue");
+						//HeaderValue.setTextContent(cells[0][k].getCell_content());
+						//cells[j][k].setHeader_values(cells[0][k].getCell_content());
+						//NavigationPath.appendChild(HeaderValue);
+						for(int s = 0;s<cells[0][k].headers.size();s++){
+							Element Header = doc.createElement("HeaderValue"+s);
+							Header.setTextContent(cells[0][k].headers.get(s));
+							cells[j][k].setHeader_values(cells[0][k].getCell_content());
+							NavigationPath.appendChild(Header);
+						}
 						}
 					
 					cell.appendChild(NavigationPath);

@@ -117,8 +117,7 @@ public class ArmExtractor {
 		         String insertSQL = "INSERT INTO ArmDetails (ArmName,  DocumentID ) VALUES (?, ?)";
 		         PreparedStatement preparedStatement = con.prepareStatement(insertSQL,Statement.RETURN_GENERATED_KEYS);
 		         preparedStatement.setString(1, arms.get(i).getArmName());
-		         preparedStatement.setInt(2, document_id);
-		         
+		         preparedStatement.setInt(2, document_id);		         
 		         int id=0;
 		         preparedStatement.executeUpdate();
 		       

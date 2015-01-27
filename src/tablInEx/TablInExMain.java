@@ -121,7 +121,7 @@ public class TablInExMain {
 		System.out.println("For a moment, nothing happened. Then, after a second or so, nothing continued to happen. - Duglas Adams");
 		System.out.println("____________________________________________________________________________________________________________________________");
 		String path = args[0];
-		ReadSemanticTypes();
+		//ReadSemanticTypes();
 		
 		Inpath = path;
 		String runas = "";

@@ -5,6 +5,8 @@
  */
 package tablInEx;
 
+import java.util.LinkedList;
+
 import Utils.Utilities;
 
 /**
@@ -18,6 +20,9 @@ public class Cell {
 	private String stub_values;
 	
 	private String header_values;
+	
+	public LinkedList<String>headers = new LinkedList<String>();
+	public LinkedList<String>stubs = new LinkedList<String>();
 	
 	private String head00;
 	

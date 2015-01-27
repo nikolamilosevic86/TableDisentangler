@@ -74,9 +74,17 @@ public class TableSimplifier {
 	 */
 	public static Table MergeHeaders(Table table)
 	{
-		if(table.stat.getNum_of_header_rows()<2)
+		if(table.stat.getNum_of_header_rows()<2){
+			for(int j = 0; j<table.cells[0].length;j++ )
+			table.cells[0][j].headers.add(table.cells[0][j].getCell_content());
 			return table;
+		}
 		Cell[][] cells = table.getTable_cells();
+		
+		for(int i = 0;i<cells[0].length;i++)
+		{
+			cells[table.stat.getNum_of_header_rows() - 1][i].headers.add(cells[table.stat.getNum_of_header_rows() - 1][i].getCell_content());
+		}
 		
 		for(int i = table.stat.getNum_of_header_rows() - 2; i >= 0;i--)
 		{
@@ -87,8 +95,12 @@ public class TableSimplifier {
 					cells[i][j].setCell_content("");
 				}
 				if(!Utilities.isSpaceOrEmpty(cells[i][j].getCell_content()) ){
-					if(!cells[i][j].getCell_content().equals(cells[i+1][j].getCell_content()))
+					//Appending values
+					if(!cells[i][j].getCell_content().equals(cells[i+1][j].getCell_content())){
 						cells[table.stat.getNum_of_header_rows() - 1][j].setCell_content(cells[i][j].getCell_content()+ " "+cells[table.stat.getNum_of_header_rows() - 1][j].getCell_content());
+						cells[table.stat.getNum_of_header_rows() - 1][j].headers.addFirst(cells[i][j].getCell_content());
+					}
+					
 					cells[table.stat.getNum_of_header_rows() - 1][j].setIs_header(true);
 				}
 			}
@@ -165,6 +177,7 @@ public class TableSimplifier {
 	 * Function that simplifies complex stubs, that have more then one columns.
 	 * Function merges complex stubs into one column stub, by appending 
 	 * leftmost cells before content of right-most cells. At the end copied cells are deleted.
+	 * This works only for 2 cell header, needs a fix
 	 * @param cells - Cell[][] - Table
 	 * @return cells - Cell[][] - Table with simplified header
 	 */

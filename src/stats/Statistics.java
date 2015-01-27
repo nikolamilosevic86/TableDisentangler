@@ -40,6 +40,7 @@ public class Statistics {
 	private static int MatrixTables;
 	private static int ListTables;
 	private static int SubheaderTables;
+	private static int MultiTables;
 	
 	/** The tables_without_head. */
 	private static int tables_without_head;
@@ -193,10 +194,25 @@ public class Statistics {
 		MatrixTables++;
 	}
 	
+	/**
+	 * Adds the multi table.
+	 */
+	public static void addMultiTable()
+	{
+		MultiTables++;
+	}
+	
+	/**
+	 * Adds the list table.
+	 */
 	public static void addListTable()
 	{
 		ListTables++;
 	}
+	
+	/**
+	 * Adds the subheader table.
+	 */
 	public static void addSubheaderTable()
 	{
 		SubheaderTables++;
@@ -1165,6 +1181,20 @@ public class Statistics {
 
 	public static void setSubheaderTables(int subheaderTables) {
 		SubheaderTables = subheaderTables;
+	}
+
+	/**
+	 * @return the multiTables
+	 */
+	public static int getMultiTables() {
+		return MultiTables;
+	}
+
+	/**
+	 * @param multiTables the multiTables to set
+	 */
+	public static void setMultiTables(int multiTables) {
+		MultiTables = multiTables;
 	}
 	
 
