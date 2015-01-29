@@ -10,6 +10,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.text.html.HTML;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -129,9 +130,11 @@ public class PMCXMLReader implements Reader{
 	    String[] keywords_str = new String[keywords.getLength()];
 	    for(int j = 0; j<keywords.getLength(); j++)
 	    {
-	    	String Keyword = keywords.item(j).getTextContent().substring(1);
-	    	keywords_str[j] = Keyword;
-	    	System.out.println("Keyword:"+Keyword);
+	    	if(keywords.item(j).getTextContent().length()>1){
+	    		String Keyword = keywords.item(j).getTextContent().substring(1);
+	    		keywords_str[j] = Keyword;
+	    		System.out.println("Keyword:"+Keyword);
+	    	}
 	    }
 	    return keywords_str;
 	}
@@ -176,14 +179,14 @@ public class PMCXMLReader implements Reader{
 	    NodeList article_id = parse.getElementsByTagName("article-id");
 	    for(int j=0;j<article_id.getLength();j++)
 	    {
-	    	if(article_id.item(j).getAttributes().getNamedItem("pub-id-type").getNodeValue().equals("pmid"))
+	    	if(article_id.item(j).getAttributes()!=null && article_id.item(j).getAttributes().getNamedItem("pub-id-type")!=null && article_id.item(j).getAttributes().getNamedItem("pub-id-type").getNodeValue().equals("pmid"))
 	    	{
 	    	String pmid = article_id.item(j).getTextContent();	
 	    	art.setPmid(pmid);
 	    	if(pmid!=null)
 	    		System.out.println(pmid);
 	    	}
-	    	if(article_id.item(j).getAttributes().getNamedItem("pub-id-type").getNodeValue().equals("pmc"))
+	    	if(article_id.item(j).getAttributes()!=null && article_id.item(j).getAttributes().getNamedItem("pub-id-type")!=null && article_id.item(j).getAttributes().getNamedItem("pub-id-type").getNodeValue().equals("pmc"))
 	    	{
 	    		String pmc = article_id.item(j).getTextContent();	
 		    	art.setPmc(pmc);
@@ -317,9 +320,9 @@ public class PMCXMLReader implements Reader{
 			List<Node> tds = getChildrenByTagName(rowsbody.get(row), "td");
 			for(int k=0;k<tds.size();k++)
 			{
-				if(tds.get(k).getAttributes().getNamedItem("colspan")!=null && Integer.parseInt(tds.get(k).getAttributes().getNamedItem("colspan").getNodeValue())>1)
+				if(tds.get(k).getAttributes().getNamedItem("colspan")!=null && Utilities.getFirstValue(tds.get(k).getAttributes().getNamedItem("colspan").getNodeValue())>1)
 				{
-					cnt+=Integer.parseInt(tds.get(k).getAttributes().getNamedItem("colspan").getNodeValue());
+					cnt+=Utilities.getFirstValue(tds.get(k).getAttributes().getNamedItem("colspan").getNodeValue());
 				}
 				else
 				{
@@ -367,22 +370,22 @@ public class PMCXMLReader implements Reader{
 				boolean is_rowspanning = false;
 				int colspanVal = 1;
 				int rowspanVal = 1;
-				if(tds.get(k).getAttributes().getNamedItem("rowspan")!=null && Utilities.isNumeric(tds.get(k).getAttributes().getNamedItem("rowspan").getNodeValue()) && Integer.parseInt(tds.get(k).getAttributes().getNamedItem("rowspan").getNodeValue())>1)
+				if(tds.get(k).getAttributes().getNamedItem("rowspan")!=null && Utilities.isNumeric(tds.get(k).getAttributes().getNamedItem("rowspan").getNodeValue()) && Utilities.getFirstValue(tds.get(k).getAttributes().getNamedItem("rowspan").getNodeValue())>1)
 				{
 					table.setRowSpanning(true);
 					Statistics.addRowSpanningCell();
 					table.stat.AddRowSpanningCell();
 					is_rowspanning = true;
-					rowspanVal =  Integer.parseInt(tds.get(k).getAttributes().getNamedItem("rowspan").getNodeValue());											
+					rowspanVal =  Utilities.getFirstValue(tds.get(k).getAttributes().getNamedItem("rowspan").getNodeValue());											
 				}
 				//colspan
-				if(tds.get(k).getAttributes().getNamedItem("colspan")!=null && Utilities.isNumeric(tds.get(k).getAttributes().getNamedItem("colspan").getNodeValue()) && Integer.parseInt(tds.get(k).getAttributes().getNamedItem("colspan").getNodeValue())>1)
+				if(tds.get(k).getAttributes().getNamedItem("colspan")!=null && Utilities.isNumeric(tds.get(k).getAttributes().getNamedItem("colspan").getNodeValue()) && Utilities.getFirstValue(tds.get(k).getAttributes().getNamedItem("colspan").getNodeValue())>1)
 				{
 					table.setColSpanning(true);
 					Statistics.addColumnSpanningCell();
 					table.stat.AddColSpanningCell();
 					is_colspanning = true;
-					colspanVal =  Integer.parseInt(tds.get(k).getAttributes().getNamedItem("colspan").getNodeValue());					
+					colspanVal =  Utilities.getFirstValue(tds.get(k).getAttributes().getNamedItem("colspan").getNodeValue());					
 				}
 
 				for(int l=0;l<colspanVal;l++)
@@ -420,10 +423,11 @@ public class PMCXMLReader implements Reader{
 	 * @param headrowscount the headrowscount
 	 * @param num_of_columns the num_of_columns
 	 * @return the table
-	 */
+	 */ 
 	public Table ProcessTableBody(Article a, Table table, Cell[][] cells,List<Node> rowsbody,int headrowscount, int num_of_columns)
 	{
 		int startj = headrowscount;
+		boolean tablecounted = false;
 		for(int j = 0;j<rowsbody.size();j++)
 		{
 			table.stat.AddBodyRow();
@@ -432,6 +436,12 @@ public class PMCXMLReader implements Reader{
 			int rowindex = startj;
 			for(int k = 0;k<tds.size();k++)
 			{
+				List<Node> hr = getChildrenByTagName(tds.get(k), "hr");
+				if(!tablecounted && hr!=null && hr.size()!=0 && hr.get(0)!=null){
+					Statistics.addMultiTable();
+					table.setTableStructureType(Table.StructureType.MULTI);
+					tablecounted = true;
+				}
 				boolean isStub = false;
 				float stubProbability =0;
 				
@@ -446,22 +456,22 @@ public class PMCXMLReader implements Reader{
 				boolean is_rowspanning = false;
 				int colspanVal = 1;
 				int rowspanVal = 1;
-				if(tds.get(k).getAttributes().getNamedItem("rowspan")!=null && Utilities.isNumeric(tds.get(k).getAttributes().getNamedItem("rowspan").getNodeValue()) && Integer.parseInt(tds.get(k).getAttributes().getNamedItem("rowspan").getNodeValue())>1)
+				if(tds.get(k).getAttributes().getNamedItem("rowspan")!=null && Utilities.isNumeric(tds.get(k).getAttributes().getNamedItem("rowspan").getNodeValue()) && Utilities.getFirstValue(tds.get(k).getAttributes().getNamedItem("rowspan").getNodeValue())>1)
 				{
 					table.setRowSpanning(true);
 					Statistics.addRowSpanningCell();
 					table.stat.AddRowSpanningCell();
 					is_rowspanning = true;
-					rowspanVal =  Integer.parseInt(tds.get(k).getAttributes().getNamedItem("rowspan").getNodeValue());											
+					rowspanVal = Utilities.getFirstValue(tds.get(k).getAttributes().getNamedItem("rowspan").getNodeValue());											
 				}
 				//colspan
-				if(tds.get(k).getAttributes().getNamedItem("colspan")!=null && Utilities.isNumeric(tds.get(k).getAttributes().getNamedItem("colspan").getNodeValue()) && Integer.parseInt(tds.get(k).getAttributes().getNamedItem("colspan").getNodeValue())>1)
+				if(tds.get(k).getAttributes().getNamedItem("colspan")!=null && Utilities.isNumeric(tds.get(k).getAttributes().getNamedItem("colspan").getNodeValue()) && Utilities.getFirstValue(tds.get(k).getAttributes().getNamedItem("colspan").getNodeValue())>1)
 				{
 					table.setColSpanning(true);
 					Statistics.addColumnSpanningCell();
 					table.stat.AddColSpanningCell();
 					is_colspanning = true;
-					colspanVal =  Integer.parseInt(tds.get(k).getAttributes().getNamedItem("colspan").getNodeValue());					
+					colspanVal = Utilities.getFirstValue(tds.get(k).getAttributes().getNamedItem("colspan").getNodeValue());					
 				}
 				for(int l=0;l<colspanVal;l++)
 				{

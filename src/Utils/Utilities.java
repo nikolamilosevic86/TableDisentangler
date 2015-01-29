@@ -307,8 +307,14 @@ public class Utilities {
 			}	
 		}
 		double num = 0;
+		try{
 		if(numericCount>0)
 		 num = Double.parseDouble(s.substring(numericStart,numericStart+numericCount));
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
 		return num;
 		
 	}

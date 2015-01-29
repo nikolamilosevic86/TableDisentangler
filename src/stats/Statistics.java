@@ -1041,7 +1041,8 @@ public class Statistics {
 		output+="\r\n";
 		output += "Matrix tables: ,"+MatrixTables+ "\r\n";	
 		output += "List tables: ,"+ListTables+ "\r\n";	
-		output += "Subheader tables: ,"+SubheaderTables+ "\r\n";	
+		output += "Subheader tables: ,"+SubheaderTables+ "\r\n";
+		output += "Multi tables: ,"+MultiTables+ "\r\n";
 		
 		return output;
 	}

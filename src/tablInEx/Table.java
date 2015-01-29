@@ -21,6 +21,7 @@ public class Table {
 	public TableStats stat;
 	public boolean isEmptyOnlyHeaders = true;
 	public LinkedList<DataExtractionOutputObj> output = new LinkedList<DataExtractionOutputObj>();
+	public enum StructureType {LIST,MATRIX,SUBHEADER,MULTI};
 	
 	
 	/** The num_of_rows. */
@@ -50,6 +51,7 @@ public class Table {
 	
 	private boolean isColSpanning = false;
 	private int StructureClass = 0; //0 - no class,1- simplest, 2 - simple, 3 - medium, 4 - complex
+	private StructureType TableStructureType;
 	
 	/** The cells. Cell matrix of the table */
 	public Cell[][] cells;
@@ -316,6 +318,20 @@ public class Table {
 
 	public void setStructureClass(int structureClass) {
 		StructureClass = structureClass;
+	}
+
+	/**
+	 * @return the tableStructureType
+	 */
+	public StructureType getTableStructureType() {
+		return TableStructureType;
+	}
+
+	/**
+	 * @param tableStructureType the tableStructureType to set
+	 */
+	public void setTableStructureType(StructureType tableStructureType) {
+		TableStructureType = tableStructureType;
 	}
 
 

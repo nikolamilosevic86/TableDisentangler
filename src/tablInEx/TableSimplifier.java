@@ -74,12 +74,15 @@ public class TableSimplifier {
 	 */
 	public static Table MergeHeaders(Table table)
 	{
-		if(table.stat.getNum_of_header_rows()<2){
+		if(table.cells==null)
+			return table;
+		if(table.stat.getNum_of_header_rows()<2 && table.cells!=null && table.cells[0]!=null){
 			for(int j = 0; j<table.cells[0].length;j++ )
-			table.cells[0][j].headers.add(table.cells[0][j].getCell_content());
+				table.cells[0][j].headers.add(table.cells[0][j].getCell_content());
 			return table;
 		}
 		Cell[][] cells = table.getTable_cells();
+		
 		
 		for(int i = 0;i<cells[0].length;i++)
 		{

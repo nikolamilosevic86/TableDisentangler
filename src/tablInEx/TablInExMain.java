@@ -103,6 +103,27 @@ public class TablInExMain {
 		}
 	return a;
 	}
+	
+	public static Article runReadingloopOneFile(Article a, File file, Class s) {
+		try {
+
+			File f = new File(file.getPath());
+			// Not working with hidden or temp files
+			if (f.isHidden() || file.getPath().endsWith("~"))
+				return a;
+
+			Reader r;
+			r = (Reader) s.newInstance();
+			r.init(file.getPath());
+			a = r.Read();
+
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return a;
+	}
 
 	public static void main(String[] args) {
 		String propsFile = "file_properties.xml";
@@ -195,9 +216,11 @@ public class TablInExMain {
 		File Dir = new File(path);
 		File[] files = Dir.listFiles();
 		Article[] articles = new Article[files.length]; 
+		Article[] articles1 = articles;
+		for(int a = 0;a<files.length;a++){
 		if(runas.toLowerCase().equals("pmc"))
 		{
-			articles = runReadingloop(articles,files, files.length, PMCXMLReader.class);
+			articles[a] = runReadingloopOneFile(articles[a],files[a], PMCXMLReader.class);
 		}
 		SimpleDataExtraction ie = null;
 		TrialIE2 tie = null;
@@ -227,12 +250,11 @@ public class TablInExMain {
 		{
 			concept.ReadPatterns("patterns");
 		}
-		for(int i = 0; i < articles.length;i++)
-		{
-			if(articles[i]!=null && articles[i].getTables()!=null)
-			for(int j = 0; j<articles[i].getTables().length;j++)
+
+			if(articles[a]!=null && articles[a].getTables()!=null)
+			for(int j = 0; j<articles[a].getTables().length;j++)
 			{
-				Table t = articles[i].getTables()[j];
+				Table t = articles[a].getTables()[j];
 		//		t = TableSimplifier.LabelHeaderCells(t);// did not help
 				if(t.isHasHeader()){
 				t = TableSimplifier.MergeHeaders(t);
@@ -243,23 +265,23 @@ public class TablInExMain {
 		if (doIE) 
 		{
 			
-			ie.ExtractData(articles[i]); 		
+			ie.ExtractData(articles[a]); 		
 		}
 		if(IEinSQLTial)
 		{
-			tie.ExtractTrialData(articles[i]);	
+			tie.ExtractTrialData(articles[a]);	
 		}
 		if(IEFreqSQLTial)
 		{
-			tie2.ExtractTrialData(articles[i]);	
+			tie2.ExtractTrialData(articles[a]);	
 		}
 		if(IEFine)
 		{
-			tie3.ExtractTrialData(articles[i]);
+			tie3.ExtractTrialData(articles[a]);
 		}
 		if(Conceptization)
 		{
-			concept.processArticle(articles[i]);	
+			concept.processArticle(articles[a]);	
 		}
 		
 		}
@@ -350,26 +372,27 @@ public class TablInExMain {
 			}
 			
 		}
-		try{
-		PrintWriter writer = new PrintWriter("PMCBMI3.txt", "UTF-8");
-		for(int i=0;i<PMCBMI.size();i++)
-		{
-			writer.println(PMCBMI.get(i));
-		}
-		writer.close();
-		}catch(Exception ex)
-		{
-			ex.printStackTrace();
-		}
+//		try{
+//		PrintWriter writer = new PrintWriter("PMCBMI3.txt", "UTF-8");
+//		for(int i=0;i<PMCBMI.size();i++)
+//		{
+//			writer.println(PMCBMI.get(i));
+//		}
+//		writer.close();
+//		}catch(Exception ex)
+//		{
+//			ex.printStackTrace();
+//		}
 		
-		MetaMapStats.PrintMMStats();
+		
+		//MetaMapStats.PrintMMStats();
 		
 		Statistics.CalculateStatistics();
 		String stats = Statistics.makeOutputStatisticString();
 		System.out.print(stats);
-		System.out.println("BMI alone:"+BMI);
-		System.out.println("Number of weight/BMI:"+weight);
-		System.out.println("PMC documents with weight/BMI:"+PMCBMI.size());
+		//System.out.println("BMI alone:"+BMI);
+		//System.out.println("Number of weight/BMI:"+weight);
+		//System.out.println("PMC documents with weight/BMI:"+PMCBMI.size());
 		concept.PrintConceptizationStats();
 		//concept2.PrintConceptizationStats();
 		

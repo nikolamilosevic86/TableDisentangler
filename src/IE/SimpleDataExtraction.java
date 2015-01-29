@@ -336,6 +336,7 @@ public class SimpleDataExtraction {
 			return cells;
 		}
 		Statistics.addSubheaderTable();
+		table.setTableStructureType(Table.StructureType.SUBHEADER);
 		String[] headerStackA = new String[20];
 		int currentSubHeaderLevel = 0; //number of levels
 		String prevSubheader = "";
@@ -585,6 +586,7 @@ public class SimpleDataExtraction {
 		if((cells[0][0].isIs_columnspanning() && table.getNum_of_columns()>1 && cells[0][0].getCells_columnspanning()>=table.getNum_of_columns())||(table.getNum_of_columns()==1))
 		{
 			Statistics.addListTable();
+			table.setTableStructureType(Table.StructureType.LIST);
 			for(int j=1;j<cells.length;j++)
 			{
 				for(int k=0;k<cells[j].length;k++)
@@ -676,6 +678,7 @@ public class SimpleDataExtraction {
 	public void processRegularTable(Cell[][] cells, Table[] tables, Article art, String tableFileName, int tableindex)
 	{
 		Statistics.addMatrixTable();
+		tables[tableindex].setTableStructureType(Table.StructureType.MATRIX);
 		if(!tables[tableindex].isHasHeader())
 		{
 			tables[tableindex] = checkHeaders(tables[tableindex]);
@@ -817,6 +820,9 @@ public class SimpleDataExtraction {
 			String tableFileName = "/"+tables[i].getDocumentFileName()+tables[i].getTable_title()+"-"+tables[i].tableInTable;
 			Cell[][] cells = tables[i].cells;
 			
+			//Temporaty, don't process Multi tables! TODO: Add processing for multitables;
+			if(tables[i].getTableStructureType()!=null && tables[i].getTableStructureType().equals(Table.StructureType.MULTI))
+				continue;
 			processListTable(cells,tables[i], art, tableFileName);
 			tables[i].cells = processTableWithSubheadersWithoutHeader(cells,tables[i],art,tableFileName);//processTableWithSubheaders(cells,tables[i],art,tableFileName);
 			if(!isListTable(cells, tables[i]) && !hasTableSubheader(cells, tables[i]))
