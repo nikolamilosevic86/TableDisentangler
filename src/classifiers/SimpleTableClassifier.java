@@ -7,6 +7,7 @@ package classifiers;
 
 import Utils.Utilities;
 import tablInEx.Table;
+import tablInEx.Table.StructureType;
 
 /**
  * The Class SimpleTableClassifier. Does couple of simple classifications of table
@@ -25,6 +26,10 @@ public class SimpleTableClassifier {
 	private static String SimpleFolder;
 	private static String MediumFolder;
 	private static String ComplexFolder;
+	private static String ListFolder;
+	private static String MatrixFolder;
+	private static String SuperRowFolder;
+	private static String MultiTableFolder;
 	
 	
 	/**
@@ -71,15 +76,31 @@ public class SimpleTableClassifier {
 		MediumFolder = initFolder + "_medium";
 		ComplexFolder = initFolder + "_complex";
 		
+		ListFolder= initFolder+"_list";
+		MatrixFolder= initFolder+"_matrix";
+		SuperRowFolder= initFolder+"_superrow";;
+		MultiTableFolder= initFolder+"_multitable";;
+		
+		
 		Utilities.DeleteFolderWithContent(SimplestFolder);
 		Utilities.DeleteFolderWithContent(SimpleFolder);
 		Utilities.DeleteFolderWithContent(MediumFolder);
 		Utilities.DeleteFolderWithContent(ComplexFolder);
 		
+		Utilities.DeleteFolderWithContent(ListFolder);
+		Utilities.DeleteFolderWithContent(MatrixFolder);
+		Utilities.DeleteFolderWithContent(SuperRowFolder);
+		Utilities.DeleteFolderWithContent(MultiTableFolder);
+		
 		Utilities.MakeDirectory(SimplestFolder);
 		Utilities.MakeDirectory(SimpleFolder);
 		Utilities.MakeDirectory(MediumFolder);
 		Utilities.MakeDirectory(ComplexFolder);
+		
+		Utilities.MakeDirectory(ListFolder);
+		Utilities.MakeDirectory(MatrixFolder);
+		Utilities.MakeDirectory(SuperRowFolder);
+		Utilities.MakeDirectory(MultiTableFolder);
 	}
 	
 	/**
@@ -94,6 +115,26 @@ public class SimpleTableClassifier {
 			return;
 		
 		String tableFileName = "/"+t.getDocumentFileName()+t.getTable_title()+".xml.html";
+		
+		if(t.getTableStructureType() == StructureType.LIST)
+		{
+			Utilities.WriteFile(ListFolder+tableFileName, t.getXml());
+		}
+		
+		if(t.getTableStructureType() == StructureType.MATRIX)
+		{
+			Utilities.WriteFile(MatrixFolder+tableFileName, t.getXml());
+		}
+		
+		if(t.getTableStructureType() == StructureType.SUBHEADER)
+		{
+			Utilities.WriteFile(SuperRowFolder+tableFileName, t.getXml());
+		}
+		
+		if(t.getTableStructureType() == StructureType.MULTI)
+		{
+			Utilities.WriteFile(MultiTableFolder+tableFileName, t.getXml());
+		}
 		
 		if(t.stat.getNum_of_header_rows()<5 && t.isHasHeader() && !t.isNoXMLTable() && t.stat.getNum_of_empty_cells()==0 && t.stat.getNum_of_part_numeric_cells()==0)
 		{

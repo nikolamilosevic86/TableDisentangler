@@ -31,7 +31,7 @@ import tablInEx.TableSimplifier;
 /**
  * The Class SimpleIE. Does simple Information extraction. 
  */
-public class SimpleDataExtraction {
+public class Decomposition {
 	
 	/** The folder. */
 	private static String folder;
@@ -41,14 +41,58 @@ public class SimpleDataExtraction {
 	 *
 	 * @param inpath the inpath
 	 */
-	public SimpleDataExtraction(String inpath) {
+	public Decomposition(String inpath) {
 		folder = inpath+"_ie";
 		Utilities.DeleteFolderWithContent(folder);
 		Utilities.MakeDirectory(folder);
 	}
 	
+	public Decomposition(String inpath,boolean newrun) {
+		folder = inpath+"_ie";
+		if(newrun){
+		Utilities.DeleteFolderWithContent(folder);
+		Utilities.MakeDirectory(folder);
+		}
+	}
+	
 	//TODO: Think about reading tables like PMC2361090 Table 2
 	
+	
+	/**
+	 * Checks recursively if is sequentially breaking line rows.
+	 *
+	 * @param cells the cells
+	 * @param currentRowIndex the current row index
+	 * @param currentColumnIndex the current column index
+	 * @return true, if is sequentially breaking line
+	 */
+	public boolean isSequentiallyBreakingLine(Cell[][] cells,int currentRowIndex,int currentColumnIndex)
+	{
+		if(cells[currentRowIndex][currentColumnIndex].isBreakingLineOverRow() && currentRowIndex<2)
+			return true;
+		else if(cells[currentRowIndex][currentColumnIndex].isIs_header())
+			return true;
+		else if(cells[currentRowIndex][currentColumnIndex].isBreakingLineOverRow())
+			return isSequentiallyBreakingLine(cells,currentRowIndex-2,currentColumnIndex);
+		
+		return false;
+	}
+	
+	
+	public boolean isMultiTable(Cell[][] cells,Table table)
+	{
+		if(cells==null)
+			return false;
+		for(int i = 0; i<cells.length;i++)
+		{
+			if(cells[i][0].isBreakingLineOverRow())
+			{
+				if(i-2>=0 && !cells[i-2][0].isIs_header() && !isSequentiallyBreakingLine(cells,i-2,0) && cells[i-2][0].isBreakingLineOverRow())
+					return true;
+			}
+		}
+		return false;
+	}
 	
 	/**
 	 * Checks if is list table.
@@ -59,9 +103,20 @@ public class SimpleDataExtraction {
 	 */
 	public boolean isListTable(Cell[][] cells,Table table)
 	{
-		if(cells[0][0].isIs_columnspanning() && table.getNum_of_columns()>1 && cells[0][0].getCells_columnspanning()>=table.getNum_of_columns())
+		if(cells==null || cells.length==0 || cells[0]==null||cells[0].length==0)
+			return false;
+		if((cells[0][0].isIs_columnspanning() && table.getNum_of_columns()>1 && cells[0][0].getCells_columnspanning()>=table.getNum_of_columns())||(table.getNum_of_columns()==1))
 		{
-			return true;
+			boolean isSame =true;
+			for(int i = 0;i<cells[0].length-1;i++)
+			{
+				if(!cells[0][i].getCell_content().equals(cells[0][i+1]))
+					isSame = false;
+			}
+			//TODO: Check whether columns are same type (mainly text) - maybe not necessary... seems to filter fine now!
+			
+			if(isSame)
+				return true;
 		}
 		return false;
 	}
@@ -312,6 +367,8 @@ public class SimpleDataExtraction {
 		}
 		for(int i = 0;i<cells.length;i++)
 		{
+			if(cells[i].length==0)
+				continue;
 			if(cells[i][0].isIs_header())
 				table.stat.setNum_of_header_rows(table.stat.getNum_of_header_rows()+1);
 			if(cells[i][0].isIs_header()==false)
@@ -329,12 +386,17 @@ public class SimpleDataExtraction {
 	 * @param art the art
 	 * @param tableFileName the table file name
 	 */
-	private Cell[][] processTableWithSubheadersWithoutHeader(Cell[][] cells,Table table, Article art, String tableFileName)
+	private Table processTableWithSubheadersWithoutHeader(Cell[][] cells,Table table, Article art, String tableFileName)
 	{
 		if(!hasTableSubheader(cells,table))
 		{
-			return cells;
+			return table;
 		}
+		if(table.getTableStructureType()!=Table.StructureType.SUBHEADER && table.getTableStructureType()!=null)
+		{
+			return table;
+		}
+		
 		Statistics.addSubheaderTable();
 		table.setTableStructureType(Table.StructureType.SUBHEADER);
 		String[] headerStackA = new String[20];
@@ -438,8 +500,12 @@ public class SimpleDataExtraction {
 				continue;
 			}
 
+			if(cells[j][0].getCell_content()==null)
+			{
+				cells[j][0].setCell_content("");
+			}
 			//Other levels of subheaders with possibly filled cells.
-				if((cells[j][0].getCell_content().length()>0 && Utilities.isSpace(cells[j][0].getCell_content().trim().charAt(0)))||Utilities.isSpaceOrEmpty(cells[j][0].getCell_content()) )
+				if((cells!=null&&cells[j]!=null&&cells[j][0]!=null&&cells[j][0].getCell_content()!=null)&&(cells[j][0].getCell_content().length()>0 && Utilities.isSpace(cells[j][0].getCell_content().trim().charAt(0)))||Utilities.isSpaceOrEmpty(cells[j][0].getCell_content()) )
 				{
 					hasSpaceSubheaders = true;
 					SetSubheaderRow(cells[j]);
@@ -558,7 +624,7 @@ public class SimpleDataExtraction {
 					
 										
 					DataExtractionOutputObj dataExtObj = new DataExtractionOutputObj(folder+tableFileName+"e"+j+","+k+".xml", doc);
-					TablInExMain.outputs.add(dataExtObj);
+					//TablInExMain.outputs.add(dataExtObj);
 					table.output.add(dataExtObj);
 					
 				}catch(Exception ex)
@@ -567,11 +633,12 @@ public class SimpleDataExtraction {
 				}
 			}
 		}
-		
-		return cells;
+		table.cells = cells;
+		return table;
 		
 	}
 
+	
 	
 	/**
 	 * Process list table. List table is a table that forms data in a list.
@@ -582,8 +649,15 @@ public class SimpleDataExtraction {
 	 * @param art the Article object
 	 * @param tableFileName the table file name
 	 */
-	public void processListTable(Cell[][] cells,Table table, Article art, String tableFileName){
-		if((cells[0][0].isIs_columnspanning() && table.getNum_of_columns()>1 && cells[0][0].getCells_columnspanning()>=table.getNum_of_columns())||(table.getNum_of_columns()==1))
+	public Table processListTable(Cell[][] cells,Table table, Article art, String tableFileName){
+		if(cells==null || cells.length==0 || cells[0]==null||cells[0].length==0)
+			return table;
+		if(table.getTableStructureType()!=Table.StructureType.LIST && table.getTableStructureType()!=null)
+		{
+			return table;
+		}
+		
+		if(isListTable(cells, table))
 		{
 			Statistics.addListTable();
 			table.setTableStructureType(Table.StructureType.LIST);
@@ -655,7 +729,7 @@ public class SimpleDataExtraction {
 						
 											
 						DataExtractionOutputObj dataExtObj = new DataExtractionOutputObj(folder+tableFileName+"e"+j+","+k+".xml", doc);
-						TablInExMain.outputs.add(dataExtObj);
+						//TablInExMain.outputs.add(dataExtObj);
 						table.output.add(dataExtObj);
 					}catch(Exception ex)
 					{
@@ -664,6 +738,7 @@ public class SimpleDataExtraction {
 				}
 			}
 		}
+		return table;
 	}
 	
 	/**
@@ -675,8 +750,12 @@ public class SimpleDataExtraction {
 	 * @param tableFileName the table file name
 	 * @param tableindex the tableindex
 	 */
-	public void processRegularTable(Cell[][] cells, Table[] tables, Article art, String tableFileName, int tableindex)
+	public Table processRegularTable(Cell[][] cells, Table[] tables, Article art, String tableFileName, int tableindex)
 	{
+		if(tables[tableindex].getTableStructureType()!=Table.StructureType.MATRIX && tables[tableindex].getTableStructureType()!=null)
+		{
+			return tables[tableindex];
+		}
 		Statistics.addMatrixTable();
 		tables[tableindex].setTableStructureType(Table.StructureType.MATRIX);
 		if(!tables[tableindex].isHasHeader())
@@ -687,7 +766,7 @@ public class SimpleDataExtraction {
 
 		for(int j=0;j<cells.length;j++)
 		{
-			if(cells[j][0].isIs_header())
+			if(cells[j].length==0 || cells[j][0].isIs_header())
 				continue;
 			for(int k=1;k<cells[j].length;k++)
 			{
@@ -776,7 +855,7 @@ public class SimpleDataExtraction {
 					document.appendChild(pmc);
 					
 					DataExtractionOutputObj dataExtObj = new DataExtractionOutputObj(folder+tableFileName+"e"+j+","+k+".xml", doc);
-					TablInExMain.outputs.add(dataExtObj);
+					//TablInExMain.outputs.add(dataExtObj);
 					tables[tableindex].output.add(dataExtObj);
 					
 
@@ -788,7 +867,7 @@ public class SimpleDataExtraction {
 				}
 			}
 		}
-
+		return tables[tableindex];
 	}
 	
 	public void SetSubheaderRow(Cell[] row)
@@ -814,20 +893,25 @@ public class SimpleDataExtraction {
 			if(tables[i]==null || tables[i].cells==null || tables[i].cells.length==0)
 				continue;
 			//only simple tables
-			if( tables[i].getStructureClass()!=2 && tables[i].getStructureClass()!=1 && tables[i].getStructureClass()!=3 && tables[i].getStructureClass()!=4)
-				continue;
+			//if( tables[i].getStructureClass()!=2 && tables[i].getStructureClass()!=1 && tables[i].getStructureClass()!=3 && tables[i].getStructureClass()!=4)
+				//continue;
 			
 			String tableFileName = "/"+tables[i].getDocumentFileName()+tables[i].getTable_title()+"-"+tables[i].tableInTable;
 			Cell[][] cells = tables[i].cells;
 			
 			//Temporaty, don't process Multi tables! TODO: Add processing for multitables;
+			if(isMultiTable(cells, tables[i]))
+			{
+				tables[i].setTableStructureType(Table.StructureType.MULTI);
+				Statistics.addMultiTable();
+			}
 			if(tables[i].getTableStructureType()!=null && tables[i].getTableStructureType().equals(Table.StructureType.MULTI))
 				continue;
-			processListTable(cells,tables[i], art, tableFileName);
-			tables[i].cells = processTableWithSubheadersWithoutHeader(cells,tables[i],art,tableFileName);//processTableWithSubheaders(cells,tables[i],art,tableFileName);
+			tables[i] = processListTable(cells,tables[i], art, tableFileName);
+			tables[i] = processTableWithSubheadersWithoutHeader(cells,tables[i],art,tableFileName);//processTableWithSubheaders(cells,tables[i],art,tableFileName);
 			if(!isListTable(cells, tables[i]) && !hasTableSubheader(cells, tables[i]))
 			{
-				processRegularTable(cells,  tables, art, tableFileName, i);
+				tables[i] = processRegularTable(cells,  tables, art, tableFileName, i);
 			}
 		}
 		

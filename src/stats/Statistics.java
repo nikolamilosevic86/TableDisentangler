@@ -7,6 +7,7 @@ package stats;
 
 import Utils.Utilities;
 import tablInEx.Cell;
+import tablInEx.TablInExMain;
 import tablInEx.Table;
 
 /**
@@ -15,6 +16,11 @@ import tablInEx.Table;
  * @author Nikola Milosevic
  */
 public class Statistics {
+	
+	private static float total_num_cells_for_sd = 0;
+	
+	private static float mean_num_of_cells_with_sd = 0;
+	private static float mean_num_of_cells_sd = 0;
 	
 	/** The new table wo head. */
 	private static boolean newTableWOHead = false;
@@ -389,7 +395,20 @@ public class Statistics {
 		percentage_of_numeric_cells = (float) num_of_numeric_cells / total_num_of_cells;
 		percentage_of_pure_text_cells = (float) num_of_pure_text_cells / total_num_of_cells;
 		percentage_of_part_numeric_cells = (float) num_of_part_numeric_cells / total_num_of_cells;
-	
+		
+		
+		
+		for(int i = 0; i<TablInExMain.TStats.size();i++){
+			total_num_cells_for_sd+=TablInExMain.TStats.get(i).getNum_of_cells_unproc();
+		}
+		mean_num_of_cells_with_sd = (float)total_num_cells_for_sd / usefulTables;
+		
+		//float differences[] = new float[TablInExMain.TStats.size()];
+		float sum = 0;
+		for(int i = 0; i<TablInExMain.TStats.size();i++){
+			sum += (float) Math.pow((TablInExMain.TStats.get(i).getNum_of_cells_unproc()-mean_num_of_cells_with_sd),2);
+		}
+		mean_num_of_cells_sd = (float) Math.sqrt((float)sum/TablInExMain.TStats.size());
 		mean_number_of_cells = (float) total_num_of_cells / usefulTables;
 		mean_number_of_header_cells = (float) total_num_of_header_cells / usefulTables;
 		mean_number_of_header_rows = (float) total_num_of_header_rows / (usefulTables-tables_without_head);
@@ -1011,6 +1030,8 @@ public class Statistics {
 		
 		
 		output += "Mean number of cells: ,"+mean_number_of_cells+ "\r\n";
+		output += "Mean number of cells unprocessed: ,"+mean_num_of_cells_with_sd+ "\r\n";
+		output += "Standard deviation for mean number of cells: ,"+mean_num_of_cells_sd+ "\r\n";
 		output += "Mean number of header cells: ,"+mean_number_of_header_cells+ "\r\n";
 		output += "Mean number of header rows: ,"+mean_number_of_header_rows+ "\r\n";
 		output += "Mean number of columns: ,"+mean_number_of_columns+ "\r\n";

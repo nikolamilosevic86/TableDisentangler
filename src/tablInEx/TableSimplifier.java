@@ -84,10 +84,10 @@ public class TableSimplifier {
 		Cell[][] cells = table.getTable_cells();
 		
 		
-		for(int i = 0;i<cells[0].length;i++)
-		{
-			cells[table.stat.getNum_of_header_rows() - 1][i].headers.add(cells[table.stat.getNum_of_header_rows() - 1][i].getCell_content());
-		}
+//		for(int i = 0;i<cells[0].length;i++)
+//		{
+//			cells[table.stat.getNum_of_header_rows() - 1][i].headers.add(cells[table.stat.getNum_of_header_rows() - 1][i].getCell_content());
+//		}
 		
 		for(int i = table.stat.getNum_of_header_rows() - 2; i >= 0;i--)
 		{
@@ -99,7 +99,7 @@ public class TableSimplifier {
 				}
 				if(!Utilities.isSpaceOrEmpty(cells[i][j].getCell_content()) ){
 					//Appending values
-					if(!cells[i][j].getCell_content().equals(cells[i+1][j].getCell_content())){
+					if(cells.length<i+1&& cells[i+1]!=null && cells[i+1][j]!=null && !cells[i][j].getCell_content().equals(cells[i+1][j].getCell_content())){
 						cells[table.stat.getNum_of_header_rows() - 1][j].setCell_content(cells[i][j].getCell_content()+ " "+cells[table.stat.getNum_of_header_rows() - 1][j].getCell_content());
 						cells[table.stat.getNum_of_header_rows() - 1][j].headers.addFirst(cells[i][j].getCell_content());
 					}

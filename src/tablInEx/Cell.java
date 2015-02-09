@@ -28,6 +28,8 @@ public class Cell {
 	
 	private boolean isSubheader = false;
 	
+	private boolean isBreakingLineOverRow = false;
+	
 	/** The row_number. */
 	private int row_number;
 	
@@ -469,6 +471,20 @@ public class Cell {
 
 	public void setSubheader(boolean isSubheader) {
 		this.isSubheader = isSubheader;
+	}
+
+	/**
+	 * @return the isBreakingLineOverRow
+	 */
+	public boolean isBreakingLineOverRow() {
+		return isBreakingLineOverRow;
+	}
+
+	/**
+	 * @param isBreakingLineOverRow the isBreakingLineOverRow to set
+	 */
+	public void setBreakingLineOverRow(boolean isBreakingLineOverRow) {
+		this.isBreakingLineOverRow = isBreakingLineOverRow;
 	}
 	
 }

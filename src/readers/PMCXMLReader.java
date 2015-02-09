@@ -59,6 +59,7 @@ public class PMCXMLReader implements Reader{
 		    xml +=line+'\n';
 		}		
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		
 		factory.setNamespaceAware(true);
 		factory.setValidating(false);
 	    DocumentBuilder builder = factory.newDocumentBuilder();
@@ -148,10 +149,13 @@ public class PMCXMLReader implements Reader{
 	 */
 	public Article ParseMetaData(Article art, Document parse, String xml)
 	{
-	    String title = parse.getElementsByTagName("article-title").item(0).getTextContent();
-	    title = title.replaceAll("\n", "");
-	    title = title.replaceAll("\t", "");
-	    System.out.println(title);
+		String title = "";
+		if(parse.getElementsByTagName("article-title")!=null && parse.getElementsByTagName("article-title").item(0)!=null){
+			title = parse.getElementsByTagName("article-title").item(0).getTextContent();
+			title = title.replaceAll("\n", "");
+			title = title.replaceAll("\t", "");
+			System.out.println(title);
+		}
 	    String[] auths = GetAuthors(parse);
 	    for(int j = 0; j<auths.length; j++)
 	    {
@@ -161,6 +165,8 @@ public class PMCXMLReader implements Reader{
 	    NodeList issn = parse.getElementsByTagName("issn");
 	    for(int j=0;j<issn.getLength();j++)
 	    {
+	    	if(issn==null || issn.item(j)==null || issn.item(j).getAttributes()== null || issn.item(j).getAttributes().getNamedItem("pub-type")==null || issn.item(j).getAttributes().getNamedItem("pub-type").getNodeValue()==null)
+	    		continue;
 	    	if(issn.item(j).getAttributes().getNamedItem("pub-type").getNodeValue().equals("ppub"))
 	    	{
 	    	String issnp = issn.item(j).getTextContent();	
@@ -357,6 +363,7 @@ public class PMCXMLReader implements Reader{
 	{
 		for(int j = 0;j<headrowscount;j++)
 		{
+
 			Statistics.addHeaderRow();
 			table.stat.AddHeaderRow();
 			List<Node> tds = getChildrenByTagName(rowshead.get(j), "td");
@@ -365,7 +372,8 @@ public class PMCXMLReader implements Reader{
 			int index = 0;
 			//read cells
 			for(int k = 0;k<tds.size();k++)
-			{			
+			{		
+				table.stat.AddUnprCell();
 				boolean is_colspanning = false;
 				boolean is_rowspanning = false;
 				int colspanVal = 1;
@@ -436,12 +444,13 @@ public class PMCXMLReader implements Reader{
 			int rowindex = startj;
 			for(int k = 0;k<tds.size();k++)
 			{
+				table.stat.AddUnprCell();
 				List<Node> hr = getChildrenByTagName(tds.get(k), "hr");
-				if(!tablecounted && hr!=null && hr.size()!=0 && hr.get(0)!=null){
-					Statistics.addMultiTable();
-					table.setTableStructureType(Table.StructureType.MULTI);
-					tablecounted = true;
-				}
+//				if(!tablecounted && hr!=null && hr.size()!=0 && hr.get(0)!=null && j>=2){
+//					Statistics.addMultiTable();
+//					table.setTableStructureType(Table.StructureType.MULTI);
+//					tablecounted = true;
+//				}
 				boolean isStub = false;
 				float stubProbability =0;
 				
@@ -483,6 +492,8 @@ public class PMCXMLReader implements Reader{
 							while(cells[rowindex][index].isIs_filled() && index!=num_of_columns)
 								index++;
 							cells[rowindex][index] = Cell.setCellValues(a,cells[rowindex][index], Utilities.getString(tds.get(k)), is_colspanning, colspanVal, is_rowspanning, rowspanVal, false, 0, isStub, stubProbability, index,rowindex, l, s);
+							if(hr!=null && hr.size()!=0 && hr.get(0)!=null)
+								cells[rowindex][index].setBreakingLineOverRow(true);
 							//System.out.println(j+","+index+": "+cells[j][index].getCell_content());
 							table = Statistics.statisticsForCell(table, cells[rowindex][index]);
 						}
@@ -532,8 +543,15 @@ public class PMCXMLReader implements Reader{
 		//Iterate document tables
 		for(int i = 0;i<tablesxml.getLength();i++)
 		{
+			List<Node> inline_formula = null;
 			List<Node> tb = getChildrenByTagName(tablesxml.item(i),"table");
-
+			//check if there is one cell table with reference to the image of the actual table
+			try{
+			inline_formula =  getChildrenByTagName( getChildrenByTagName(getChildrenByTagName(getChildrenByTagName(tb.get(0), "tbody").get(0), "tr").get(0), "td").get(0), "inline-formula");
+			}
+			catch(Exception ex)
+			{}
+			if((inline_formula!=null && inline_formula.size()==0)||inline_formula==null){
 			for(int s = 0;s<tb.size();s++)
 			{
 			Statistics.addTable();
@@ -592,7 +610,8 @@ public class PMCXMLReader implements Reader{
 			Statistics.addColumn(num_of_columns);
 			Statistics.addRow(num_of_rows);
 			tables[tableindex] = ProcessTableBody(article,tables[tableindex],cells, rowsbody, headrowscount, num_of_columns);
-			tables[tableindex].setTable_cells(cells);		
+			tables[tableindex].setTable_cells(cells);
+			tables[tableindex] = FixTablesHeader(tables[tableindex]);
 			//Print cells
 			for(int j = 0; j<cells.length;j++)
 			{
@@ -605,11 +624,13 @@ public class PMCXMLReader implements Reader{
 			System.out.println("Number of columns: "+num_of_columns);
 			tableindex++;
 			}
-			if(tb.size()==0 && tableindex<numOfTables)
+			}
+			//List<Node> inlinegraphic =  getChildrenByTagName(tb.get(0), "inline-graphic");
+			
+			if((tb.size()==0 && tableindex<numOfTables)||(inline_formula!=null && inline_formula.size()==1))
 			{
 				Statistics.addTable();
 				String label = readTableLabel(tablesxml.item(i));
-				
 				tables[tableindex] = new Table(label);
 				tables[tableindex].setDocumentFileName("PMC"+article.getPmc());
 				tables[tableindex].setXml(Utilities.CreateXMLStringFromSubNode(tablesxml.item(i)));
@@ -632,14 +653,45 @@ public class PMCXMLReader implements Reader{
 				tables[i].printTableStatsToFile("TableStats.txt");
 			}
 		}
-		if(TablInExMain.ComplexClassify){
-			for(int i = 0;i<numOfTables;i++)
+
+		return article;
+	}
+	
+	public Table FixTablesHeader(Table table)
+	{
+		Cell[][] cells = table.cells;
+		for(int i = 0; i<cells.length;i++)
+		{
+			if(cells[i][0].isIs_header())
+				continue;
+			if(Utilities.isSpaceOrEmpty(cells[i][0].getCell_content()) && cells[i][0].isBreakingLineOverRow() && i-2>=0 && cells[i-2][0].isIs_header())
 			{
-				SimpleTableClassifier.ClassifyTableByComplexity(tables[i]);
-				//tables[i].printTableStatsToFile("TableStats.txt");
+				for(int k=0;k<cells[i].length;k++)
+				{
+					for(int j=i-2;j<=i;j++)
+					{
+						cells[j][k].setIs_header(true);
+					}
+				}
+				table.stat.setNum_of_header_rows(table.stat.getNum_of_header_rows()+2);
+				table.stat.setNum_of_body_rows(table.stat.getNum_of_body_rows()-2);
+			}
+			else if (Utilities.isSpaceOrEmpty(cells[i][0].getCell_content()) && cells[i][0].isBreakingLineOverRow() && i-3>=0 && cells[i-3][0].isIs_header())
+			{
+				for(int k=0;k<cells[i].length;k++)
+				{
+					for(int j=i-3;j<=i;j++)
+					{
+						cells[j][k].setIs_header(true);
+					}
+				}
+				table.stat.setNum_of_header_rows(table.stat.getNum_of_header_rows()+3);
+				table.stat.setNum_of_body_rows(table.stat.getNum_of_body_rows()-3);
 			}
 		}
-		return article;
+		table.setTable_cells(cells);
+		
+		return table;
 	}
 	
 	/**

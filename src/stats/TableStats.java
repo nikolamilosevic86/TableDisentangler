@@ -10,8 +10,10 @@ package stats;
  */
 public class TableStats {
 	
-	/** The num_of_cells. */
-	private int num_of_cells;
+	/** The num_of_cells. Processed - split */
+	private int num_of_cells_proc;
+	/** The num_of_cells. Unprocessed - nonsplit */
+	private int num_of_cells_unproc;
 	
 	/** The num_of_empty_cells. */
 	private int num_of_empty_cells;
@@ -63,9 +65,18 @@ public class TableStats {
 	/**
 	 * Adds the cell.
 	 */
+	public void AddUnprCell()
+	{
+		num_of_cells_unproc++;
+	}
+	
+	
+	/**
+	 * Adds the cell.
+	 */
 	public void AddCell()
 	{
-		num_of_cells++;
+		num_of_cells_proc++;
 	}
 	
 	/**
@@ -123,7 +134,7 @@ public class TableStats {
 	 * @return the num_of_cells
 	 */
 	public int getNum_of_cells() {
-		return num_of_cells;
+		return num_of_cells_proc;
 	}
 	
 	/**
@@ -132,7 +143,7 @@ public class TableStats {
 	 * @param num_of_cells the new num_of_cells
 	 */
 	public void setNum_of_cells(int num_of_cells) {
-		this.num_of_cells = num_of_cells;
+		this.num_of_cells_proc = num_of_cells;
 	}
 	
 	/**
@@ -287,6 +298,20 @@ public class TableStats {
 
 	public void setHeader_empty_cells(int header_empty_cells) {
 		this.header_empty_cells = header_empty_cells;
+	}
+
+	/**
+	 * @return the num_of_cells_unproc
+	 */
+	public int getNum_of_cells_unproc() {
+		return num_of_cells_unproc;
+	}
+
+	/**
+	 * @param num_of_cells_unproc the num_of_cells_unproc to set
+	 */
+	public void setNum_of_cells_unproc(int num_of_cells_unproc) {
+		this.num_of_cells_unproc = num_of_cells_unproc;
 	}
 
 }
