@@ -374,6 +374,7 @@ public class PMCXMLReader implements Reader{
 			for(int k = 0;k<tds.size();k++)
 			{		
 				table.stat.AddUnprCell();
+				table.stat.AddHeaderCell();
 				boolean is_colspanning = false;
 				boolean is_rowspanning = false;
 				int colspanVal = 1;
@@ -507,6 +508,7 @@ public class PMCXMLReader implements Reader{
 				}
 			}//end for tds.size()
 		}// end for rowheads
+		table.stat.setNum_columns(num_of_columns);
 	//	cells = TableSimplifier.DeleteEmptyRows(cells);
 		return table;
 	}
@@ -657,14 +659,26 @@ public class PMCXMLReader implements Reader{
 		return article;
 	}
 	
+	public boolean isEmptyRow(Cell[] cells)
+	{
+		for(int i = 0;i<cells.length;i++)
+		{
+			if(!Utilities.isSpaceOrEmpty(cells[i].getCell_content()))
+				return false;	
+		}
+		return true;
+	}
+	
 	public Table FixTablesHeader(Table table)
 	{
 		Cell[][] cells = table.cells;
+		int oldNumofHeaderRows = table.stat.getNum_of_header_rows();
+		int oldNumOfBodyRows = table.stat.getNum_of_body_rows();
 		for(int i = 0; i<cells.length;i++)
 		{
 			if(cells[i][0].isIs_header())
 				continue;
-			if(Utilities.isSpaceOrEmpty(cells[i][0].getCell_content()) && cells[i][0].isBreakingLineOverRow() && i-2>=0 && cells[i-2][0].isIs_header())
+			if(isEmptyRow(cells[i]) && cells[i][0].isBreakingLineOverRow() && i-2>=0 && cells[i-2][0].isIs_header())
 			{
 				for(int k=0;k<cells[i].length;k++)
 				{
@@ -676,7 +690,8 @@ public class PMCXMLReader implements Reader{
 				table.stat.setNum_of_header_rows(table.stat.getNum_of_header_rows()+2);
 				table.stat.setNum_of_body_rows(table.stat.getNum_of_body_rows()-2);
 			}
-			else if (Utilities.isSpaceOrEmpty(cells[i][0].getCell_content()) && cells[i][0].isBreakingLineOverRow() && i-3>=0 && cells[i-3][0].isIs_header())
+			
+			else if (isEmptyRow(cells[i]) && cells[i][0].isBreakingLineOverRow() && i-3>=0 && cells[i-3][0].isIs_header())
 			{
 				for(int k=0;k<cells[i].length;k++)
 				{
@@ -689,6 +704,20 @@ public class PMCXMLReader implements Reader{
 				table.stat.setNum_of_body_rows(table.stat.getNum_of_body_rows()-3);
 			}
 		}
+		
+		if(table.stat.getNum_of_header_rows()>cells.length)
+		{
+			for(int i = oldNumofHeaderRows;i<cells.length;i++)
+			{
+				for(int j = 0;j<cells[i].length;j++)
+				{
+					cells[i][j].setIs_header(false);
+				}
+			}
+			table.stat.setNum_of_header_rows(oldNumofHeaderRows);
+			table.stat.setNum_of_body_rows(oldNumOfBodyRows);
+		}
+		
 		table.setTable_cells(cells);
 		
 		return table;

@@ -91,6 +91,8 @@ public class TableSimplifier {
 		
 		for(int i = table.stat.getNum_of_header_rows() - 2; i >= 0;i--)
 		{
+//			if(cells.length<=i)
+//				continue;
 			for(int j = 0; j<cells[i].length;j++)
 			{
 				if(cells[i][j].getCell_content()==null)
@@ -103,7 +105,8 @@ public class TableSimplifier {
 						cells[table.stat.getNum_of_header_rows() - 1][j].setCell_content(cells[i][j].getCell_content()+ " "+cells[table.stat.getNum_of_header_rows() - 1][j].getCell_content());
 						cells[table.stat.getNum_of_header_rows() - 1][j].headers.addFirst(cells[i][j].getCell_content());
 					}
-					
+//					if(cells.length<=table.stat.getNum_of_header_rows() - 1 || cells[table.stat.getNum_of_header_rows() - 1].length<=j)
+//						continue;
 					cells[table.stat.getNum_of_header_rows() - 1][j].setIs_header(true);
 				}
 			}

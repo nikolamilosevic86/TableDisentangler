@@ -19,6 +19,14 @@ public class Statistics {
 	
 	private static float total_num_cells_for_sd = 0;
 	
+	private static float mean_num_of_rows = 0;
+	private static float SD_mean_num_of_rows = 0;
+	private static float mean_num_of_columns = 0;
+	private static float SD_mean_num_of_columns = 0;
+	
+	private static float mean_num_of_header_cells = 0;
+	private static float SD_mean_num_header_cells = 0;
+	
 	private static float mean_num_of_cells_with_sd = 0;
 	private static float mean_num_of_cells_sd = 0;
 	
@@ -383,6 +391,7 @@ public class Statistics {
 		return table;
 	}
 	
+	
 	/**
 	 * Calculate statistics.
 	 */
@@ -396,18 +405,29 @@ public class Statistics {
 		percentage_of_pure_text_cells = (float) num_of_pure_text_cells / total_num_of_cells;
 		percentage_of_part_numeric_cells = (float) num_of_part_numeric_cells / total_num_of_cells;
 		
-		
+		int totalNumOfRows=0;
+		int totalNumOfColumns = 0;
 		
 		for(int i = 0; i<TablInExMain.TStats.size();i++){
 			total_num_cells_for_sd+=TablInExMain.TStats.get(i).getNum_of_cells_unproc();
+			totalNumOfRows+=TablInExMain.TStats.get(i).getNum_of_body_rows()+TablInExMain.TStats.get(i).getNum_of_header_rows();
+			totalNumOfColumns+=TablInExMain.TStats.get(i).getNum_columns();
 		}
-		mean_num_of_cells_with_sd = (float)total_num_cells_for_sd / usefulTables;
+		mean_num_of_cells_with_sd = (float)total_num_cells_for_sd / TablInExMain.TStats.size();
+		mean_num_of_rows = (float)totalNumOfRows / TablInExMain.TStats.size();
+		mean_num_of_columns = (float)totalNumOfColumns / TablInExMain.TStats.size();
 		
 		//float differences[] = new float[TablInExMain.TStats.size()];
 		float sum = 0;
+		float sum_rows = 0;
+		float sum_columns = 0;
 		for(int i = 0; i<TablInExMain.TStats.size();i++){
 			sum += (float) Math.pow((TablInExMain.TStats.get(i).getNum_of_cells_unproc()-mean_num_of_cells_with_sd),2);
+			sum_rows += (float) Math.pow((TablInExMain.TStats.get(i).getNum_of_body_rows()+TablInExMain.TStats.get(i).getNum_of_header_rows()-mean_num_of_rows),2);
+			sum_columns+=(float) Math.pow((TablInExMain.TStats.get(i).getNum_columns()-mean_num_of_columns),2);
 		}
+		SD_mean_num_of_rows = (float) Math.sqrt((float)sum_rows/TablInExMain.TStats.size());
+		SD_mean_num_of_columns = (float) Math.sqrt((float)sum_columns/TablInExMain.TStats.size());
 		mean_num_of_cells_sd = (float) Math.sqrt((float)sum/TablInExMain.TStats.size());
 		mean_number_of_cells = (float) total_num_of_cells / usefulTables;
 		mean_number_of_header_cells = (float) total_num_of_header_cells / usefulTables;
@@ -1034,8 +1054,13 @@ public class Statistics {
 		output += "Standard deviation for mean number of cells: ,"+mean_num_of_cells_sd+ "\r\n";
 		output += "Mean number of header cells: ,"+mean_number_of_header_cells+ "\r\n";
 		output += "Mean number of header rows: ,"+mean_number_of_header_rows+ "\r\n";
-		output += "Mean number of columns: ,"+mean_number_of_columns+ "\r\n";
-		output += "Mean number of rows: ,"+mean_number_of_rows+ "\r\n";
+		//output += "Mean number of columns: ,"+mean_number_of_columns+ "\r\n";
+		//output += "Mean number of rows: ,"+mean_number_of_rows+ "\r\n";
+		//mean_num_of_rows
+		output += "Mean number of rows with SD: ,"+mean_num_of_rows+ "\r\n";
+		output += "SD of number of rows: ,"+SD_mean_num_of_rows+ "\r\n";
+		output += "Mean number of columns with SD: ,"+mean_num_of_columns+ "\r\n";
+		output += "SD of number of columns: ,"+SD_mean_num_of_columns+ "\r\n";
 		
 		output += "Mean number of chars in cells: ,"+mean_number_of_chars_in_cells+ "\r\n";
 		output += "Mean number of chars in part numeric cells: ,"+mean_number_of_chars_in_part_numeric_cells+ "\r\n";
@@ -1217,6 +1242,90 @@ public class Statistics {
 	 */
 	public static void setMultiTables(int multiTables) {
 		MultiTables = multiTables;
+	}
+
+	/**
+	 * @return the mean_num_of_rows
+	 */
+	public static float getMean_num_of_rows() {
+		return mean_num_of_rows;
+	}
+
+	/**
+	 * @param mean_num_of_rows the mean_num_of_rows to set
+	 */
+	public static void setMean_num_of_rows(float mean_num_of_rows) {
+		Statistics.mean_num_of_rows = mean_num_of_rows;
+	}
+
+	/**
+	 * @return the sD_mean_num_of_rows
+	 */
+	public static float getSD_mean_num_of_rows() {
+		return SD_mean_num_of_rows;
+	}
+
+	/**
+	 * @param sD_mean_num_of_rows the sD_mean_num_of_rows to set
+	 */
+	public static void setSD_mean_num_of_rows(float sD_mean_num_of_rows) {
+		SD_mean_num_of_rows = sD_mean_num_of_rows;
+	}
+
+	/**
+	 * @return the mean_num_of_columns
+	 */
+	public static float getMean_num_of_columns() {
+		return mean_num_of_columns;
+	}
+
+	/**
+	 * @param mean_num_of_columns the mean_num_of_columns to set
+	 */
+	public static void setMean_num_of_columns(float mean_num_of_columns) {
+		Statistics.mean_num_of_columns = mean_num_of_columns;
+	}
+
+	/**
+	 * @return the sD_mean_num_of_columns
+	 */
+	public static float getSD_mean_num_of_columns() {
+		return SD_mean_num_of_columns;
+	}
+
+	/**
+	 * @param sD_mean_num_of_columns the sD_mean_num_of_columns to set
+	 */
+	public static void setSD_mean_num_of_columns(float sD_mean_num_of_columns) {
+		SD_mean_num_of_columns = sD_mean_num_of_columns;
+	}
+
+	/**
+	 * @return the mean_num_of_header_cells
+	 */
+	public static float getMean_num_of_header_cells() {
+		return mean_num_of_header_cells;
+	}
+
+	/**
+	 * @param mean_num_of_header_cells the mean_num_of_header_cells to set
+	 */
+	public static void setMean_num_of_header_cells(float mean_num_of_header_cells) {
+		Statistics.mean_num_of_header_cells = mean_num_of_header_cells;
+	}
+
+	/**
+	 * @return the sD_mean_num_header_cells
+	 */
+	public static float getSD_mean_num_header_cells() {
+		return SD_mean_num_header_cells;
+	}
+
+	/**
+	 * @param sD_mean_num_header_cells the sD_mean_num_header_cells to set
+	 */
+	public static void setSD_mean_num_header_cells(float sD_mean_num_header_cells) {
+		SD_mean_num_header_cells = sD_mean_num_header_cells;
 	}
 	
 

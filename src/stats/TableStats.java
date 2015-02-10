@@ -12,9 +12,19 @@ public class TableStats {
 	
 	/** The num_of_cells. Processed - split */
 	private int num_of_cells_proc;
+	
 	/** The num_of_cells. Unprocessed - nonsplit */
 	private int num_of_cells_unproc;
 	
+	/** The num_of_chars. */
+	private int num_of_chars;
+	
+	/** The num_columns. */
+	private int num_columns;
+	
+	/** The num_of_header_cells. */
+	private int num_of_header_cells;
+		
 	/** The num_of_empty_cells. */
 	private int num_of_empty_cells;
 	
@@ -40,6 +50,11 @@ public class TableStats {
 	
 	/** The num_of_body_rows. */
 	private int num_of_body_rows;
+	
+	public void AddHeaderCell()
+	{
+		num_of_header_cells++;
+	}
 	
 	/**
 	 * Adds the header row.
@@ -312,6 +327,48 @@ public class TableStats {
 	 */
 	public void setNum_of_cells_unproc(int num_of_cells_unproc) {
 		this.num_of_cells_unproc = num_of_cells_unproc;
+	}
+
+	/**
+	 * @return the num_of_chars
+	 */
+	public int getNum_of_chars() {
+		return num_of_chars;
+	}
+
+	/**
+	 * @param num_of_chars the num_of_chars to set
+	 */
+	public void setNum_of_chars(int num_of_chars) {
+		this.num_of_chars = num_of_chars;
+	}
+
+	/**
+	 * @return the num_columns
+	 */
+	public int getNum_columns() {
+		return num_columns;
+	}
+
+	/**
+	 * @param num_columns the num_columns to set
+	 */
+	public void setNum_columns(int num_columns) {
+		this.num_columns = num_columns;
+	}
+
+	/**
+	 * @return the num_of_header_cells
+	 */
+	public int getNum_of_header_cells() {
+		return num_of_header_cells;
+	}
+
+	/**
+	 * @param num_of_header_cells the num_of_header_cells to set
+	 */
+	public void setNum_of_header_cells(int num_of_header_cells) {
+		this.num_of_header_cells = num_of_header_cells;
 	}
 
 }
