@@ -1,4 +1,4 @@
-package IE;
+package Decomposition;
 
 import gov.nih.nlm.nls.metamap.Ev;
 import gov.nih.nlm.nls.metamap.Mapping;

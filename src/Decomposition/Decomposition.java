@@ -3,7 +3,7 @@
  * @affiliation: University of Manchester, School of Computer science
  * 
  */
-package IE;
+package Decomposition;
 
 import java.io.File;
 import java.util.Arrays;

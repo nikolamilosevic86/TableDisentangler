@@ -1,4 +1,4 @@
-package IE;
+package Decomposition;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;

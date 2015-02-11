@@ -10,8 +10,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import IE.MetaMapOutput;
-import IE.MetaMapping;
+import Decomposition.MetaMapOutput;
+import Decomposition.MetaMapping;
 import Utils.Token;
 import Utils.Utilities;
 import tablInEx.Article;

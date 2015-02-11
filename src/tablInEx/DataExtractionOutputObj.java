@@ -1,7 +1,7 @@
 package tablInEx;
 
-import IE.MetaMapStats;
-import IE.MetaMapping;
+import Decomposition.MetaMapStats;
+import Decomposition.MetaMapping;
 import gov.nih.nlm.nls.metamap.Position;
 
 import java.io.File;

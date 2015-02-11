@@ -1,4 +1,4 @@
-package IE;
+package Decomposition;
 
 import java.util.LinkedList;
 

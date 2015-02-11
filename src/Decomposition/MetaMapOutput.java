@@ -1,4 +1,4 @@
-package IE;
+package Decomposition;
 
 public class MetaMapOutput {
 	private String ConceptID;

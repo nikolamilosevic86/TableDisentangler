@@ -14,12 +14,12 @@ import java.util.LinkedList;
 
 import net.didion.jwnl.JWNL;
 import ConceptualizationOfValues.ConceptizationStats;
+import Decomposition.Decomposition;
+import Decomposition.MetaMapStats;
+import Decomposition.TrialIE2;
 import ExternalResourceHandlers.InformationClass;
 import ExternalResourceHandlers.ResourceReader;
 import FreqIE.FreqIE;
-import IE.MetaMapStats;
-import IE.Decomposition;
-import IE.TrialIE2;
 import IEArmBased.ArmExtractor;
 import IEArmBased.IEArmBased;
 import IEArmBased.IEArmBased2;
