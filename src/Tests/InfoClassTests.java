@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import IEArmBased.ArmExtractor;
 import InfoClassExtractor.InfoClassFilesReader;
+import InfoClassExtractor.TypeParser;
 import Utils.DecomposedValue;
 import Utils.NumberFormat;
 import Utils.SingleDecomposedValue;
@@ -33,12 +34,28 @@ public class InfoClassTests {
 		if(!fr.InfoClasses.get(1).triggerWords.get(0).equals("bmi"))
 			fail("Trigger Word not read correctly");
 		if(!fr.InfoClasses.get(0).StopWords.get(0).equals("change"))
-			fail("Stop Word not read correctly");
-		
-		
-		
+			fail("Stop Word not read correctly");	
 	}
 	
+	
+	@Test
+	public void TypeParserTest() {
+		String s = TypeParser.getSemiNumeric("abc 17");
+		if(!s.equals("17"))
+			fail();
+		s = TypeParser.getSemiNumeric("abc 17.72 (12-19)");
+		if(!s.equals("17.72 (12-19)"))
+			fail();
+		s = TypeParser.getSemiNumeric("abc 17.72 (12-19) asdwe");
+		if(!s.equals("17.72 (12-19)"))
+			fail();
+		s = TypeParser.getSemiNumeric("abc 17.72 (12/19) asdwe");
+		if(!s.equals("17.72 (12/19)"))
+			fail();
+		s = TypeParser.getSemiNumeric("abc 17.72 (-12 ± 19) asdwe");
+		if(!s.equals("17.72 (-12 ± 19)"))
+			fail();
+	}
 
 
 }

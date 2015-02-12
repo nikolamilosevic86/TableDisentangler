@@ -1,0 +1,17 @@
+InformationClass: BMIA
+Type: SemiNumeric
+FValueMin: 15
+FValueMax: 40
+Triggers
++bmi
++body mass index
+StopWords
++change
++loss
++gain
++p*
++T
++p-value
++%
++range
++significance

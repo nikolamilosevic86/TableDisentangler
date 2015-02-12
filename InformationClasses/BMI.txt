@@ -1,0 +1,30 @@
+InformationClass: BMI
+Type: SemiNumeric
+FValueMin: 15
+FValueMax: 40
+CanBeInCaption: true
+CanBeInFooter: true
+FreeTextPatterns:
++%d patients[3]
+CanBeInNavigation: true
+NavPathPatterns:
++N=%d
++n = %d
+CanBeInData: true
+Triggers:
++bmi
++body mass index
+StopWords
++change
++loss
++gain
++p*
++T
++p-value
++%
++range
++significance
+DataPatterns:
++%f
++%f±%f
++%f ± %f

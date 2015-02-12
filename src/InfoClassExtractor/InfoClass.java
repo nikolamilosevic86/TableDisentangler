@@ -22,9 +22,18 @@ public class InfoClass {
 	private float FValueMin;
 	/** The maximum value of the first approached value of identified value */
 	private float FValueMax;
-	/** List of the trigger words */
+	private boolean canBeInCaption = false;
+	private boolean canBeInFooter = false;
+	public LinkedList<String> FreeTextPatterns = new LinkedList<String>();
+	private boolean canBeInNavigationalCells = false;
+	public LinkedList<String> NavigationalPatterns = new LinkedList<String>();
+	private boolean canBeInDataCells = false;
+	public LinkedList<String> DataCellPatterns = new LinkedList<String>();
+	
+	/** List of the trigger words for data cells. Value lookup is done in navigational cells, but extract value from data cell  */
 	public LinkedList<String> triggerWords;
-	/** List of the words that stops identification of value */
+	/** List of the words that stops identification of value in data cells (it will look for these values in navigation cells, 
+	 * but extract values from data cells) */
 	public LinkedList<String> StopWords;
 	
 	/**
@@ -85,5 +94,69 @@ public class InfoClass {
 	 */
 	public void setFValueMax(float fValueMax) {
 		FValueMax = fValueMax;
+	}
+
+
+	/**
+	 * @return the canBeInCaption
+	 */
+	public boolean isCanBeInCaption() {
+		return canBeInCaption;
+	}
+
+
+	/**
+	 * @param canBeInCaption the canBeInCaption to set
+	 */
+	public void setCanBeInCaption(boolean canBeInCaption) {
+		this.canBeInCaption = canBeInCaption;
+	}
+
+
+	/**
+	 * @return the canBeInFooter
+	 */
+	public boolean isCanBeInFooter() {
+		return canBeInFooter;
+	}
+
+
+	/**
+	 * @param canBeInFooter the canBeInFooter to set
+	 */
+	public void setCanBeInFooter(boolean canBeInFooter) {
+		this.canBeInFooter = canBeInFooter;
+	}
+
+
+	/**
+	 * @return the canBeInNavigationalCells
+	 */
+	public boolean isCanBeInNavigationalCells() {
+		return canBeInNavigationalCells;
+	}
+
+
+	/**
+	 * @param canBeInNavigationalCells the canBeInNavigationalCells to set
+	 */
+	public void setCanBeInNavigationalCells(boolean canBeInNavigationalCells) {
+		this.canBeInNavigationalCells = canBeInNavigationalCells;
+	}
+
+
+	/**
+	 * @return the canBeInDataCells
+	 */
+	public boolean isCanBeInDataCells() {
+		return canBeInDataCells;
+	}
+
+
+	/**
+	 * @param canBeInDataCells the canBeInDataCells to set
+	 */
+	public void setCanBeInDataCells(boolean canBeInDataCells) {
+		this.canBeInDataCells = canBeInDataCells;
 	}
 }

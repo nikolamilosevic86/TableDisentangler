@@ -33,6 +33,11 @@ public class InfoClassFilesReader {
 		    	  float fvaluemax = 0;
 		    	  boolean triggers = false;
 		    	  boolean stopwords = false;
+		    	  boolean canbeincaption = false;
+		    	  boolean canbeinfooter = false;
+		    	  boolean canbeinnav = false;
+		    	  boolean canbeindata = false;
+		    	  //TODO:FREETEXTPATTERNS,NAV AND DATA PATTERNS READING!!!
 		    	  LinkedList<String> triggerList = new LinkedList<String>();
 		    	  LinkedList<String> stopwordList = new LinkedList<String>();
 		    	  ValueType Type1 = null;
@@ -66,6 +71,31 @@ public class InfoClassFilesReader {
 		    	     if(line.toLowerCase().startsWith("fvaluemax")){
 		    	    	 fvaluemax = Float.parseFloat(line.split(":")[1].trim());
 		    	     }
+		    	     
+		    	     if(line.toLowerCase().startsWith("canbeincaption")){
+		    	    	 String canbeincaption_str = line.split(":")[1].trim();
+		    	    	 if(canbeincaption_str.toLowerCase().equals("true"))
+		    	    		 canbeincaption = true;
+		    	     }
+		    	     if(line.toLowerCase().startsWith("canbeinfooter")){
+		    	    	 String canbeinfooter_str = line.split(":")[1].trim();
+		    	    	 if(canbeinfooter_str.toLowerCase().equals("true"))
+		    	    		 canbeinfooter = true;
+		    	     }
+		    	     
+		    	     if(line.toLowerCase().startsWith("canbeinnav")){
+		    	    	 String canbeinnav_str = line.split(":")[1].trim();
+		    	    	 if(canbeinnav_str.toLowerCase().equals("true"))
+		    	    		 canbeinnav = true;
+		    	     }
+		    	     
+		    	     if(line.toLowerCase().startsWith("canbeindata")){
+		    	    	 String canbeindata_str = line.split(":")[1].trim();
+		    	    	 if(canbeindata_str.toLowerCase().equals("true"))
+		    	    		 canbeindata = true;
+		    	     }
+		    	     
+		    	     
 		    	     if(line.toLowerCase().startsWith("triggers")){
 		    	    	 triggers = true;
 		    	    	 continue;
@@ -76,14 +106,20 @@ public class InfoClassFilesReader {
 		    	    	 stopwords = true;
 		    	    	 continue;
 		    	     }
-		    	     if(triggers)
+		    	     if(triggers && line.startsWith("+"))
 		    	     {
 		    	    	 triggerList.add(line.substring(1));
 		    	     }
-		    	     if(stopwords)
+		    	     else{
+		    	    	 triggers = false;
+		    	     }
+		    	     if(stopwords && line.startsWith("+"))
 		    	     {
 		    	    	 stopwordList.add(line.substring(1));
 		    	     } 
+		    	     else{
+		    	    	 stopwords = false;
+		    	     }
 		    	  }
 		    	  br.close();
 		    	  
