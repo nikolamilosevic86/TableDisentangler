@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import org.junit.Test;
 
 import IEArmBased.ArmExtractor;
+import InfoClassExtractor.InfoClassExtractionRule;
 import InfoClassExtractor.InfoClassFilesReader;
 import InfoClassExtractor.TypeParser;
 import Utils.DecomposedValue;
@@ -46,6 +47,19 @@ public class InfoClassTests {
 			fail("Failed reading can be in caption");
 		
 		//%f
+	}
+	
+	@Test
+	public void InfoClassExtractionRuleTest() {
+		InfoClassExtractionRule icer = new InfoClassExtractionRule("%d patients[5]");
+		if(!icer.Rule.get(0).token.equals("\\b\\d*\\b"))
+			fail();
+		 icer = new InfoClassExtractionRule("%d (%d-%d)");
+		if(!icer.Rule.get(0).token.equals("\\b\\d*\\b"))
+			fail();
+		if(!icer.Rule.get(5).token.equals(")"))
+			fail();
+		
 	}
 	
 	
