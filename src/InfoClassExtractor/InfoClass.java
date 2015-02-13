@@ -30,6 +30,10 @@ public class InfoClass {
 	private boolean canBeInDataCells = false;
 	public LinkedList<String> DataCellPatterns = new LinkedList<String>();
 	
+	public LinkedList<InfoClassExtractionRule> FreeTextRules = new LinkedList<InfoClassExtractionRule>();
+	public LinkedList<InfoClassExtractionRule> NavigationalRules = new LinkedList<InfoClassExtractionRule>();
+	public LinkedList<InfoClassExtractionRule> DataCellRules = new LinkedList<InfoClassExtractionRule>();
+	
 	/** List of the trigger words for data cells. Value lookup is done in navigational cells, but extract value from data cell  */
 	public LinkedList<String> triggerWords;
 	/** List of the words that stops identification of value in data cells (it will look for these values in navigation cells, 

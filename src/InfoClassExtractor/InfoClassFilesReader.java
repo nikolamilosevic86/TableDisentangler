@@ -206,8 +206,21 @@ public class InfoClassFilesReader {
 		    	  ic.setCanBeInFooter(canbeinfooter);
 		    	  ic.setCanBeInNavigationalCells(canbeinnav);
 		    	  ic.DataCellPatterns = DataPatterns;
+		    	  //making rules from string presentation
+		    	  for(String d:ic.DataCellPatterns)
+		    	  {
+		    		  ic.DataCellRules.add(new InfoClassExtractionRule(d));
+		    	  }
 		    	  ic.FreeTextPatterns = freeTextPatterns;
+		    	  for(String d:ic.FreeTextPatterns)
+		    	  {
+		    		  ic.FreeTextRules.add(new InfoClassExtractionRule(d));
+		    	  }
 		    	  ic.NavigationalPatterns = NavPatterns;
+		    	  for(String d:ic.NavigationalPatterns)
+		    	  {
+		    		  ic.NavigationalRules.add(new InfoClassExtractionRule(d));
+		    	  }
 		    	  ic.triggerWords = triggerList;
 		    	  ic.StopWords = stopwordList;
 		    	  //Adding info class to list
