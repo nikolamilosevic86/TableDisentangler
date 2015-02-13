@@ -35,6 +35,17 @@ public class InfoClassTests {
 			fail("Trigger Word not read correctly");
 		if(!fr.InfoClasses.get(0).StopWords.get(0).equals("change"))
 			fail("Stop Word not read correctly");	
+		
+		if(!fr.InfoClasses.get(0).NavigationalPatterns.get(0).equals("N=%d"))
+			fail("NavigationalPatterns not read correctly");	
+		if(!fr.InfoClasses.get(0).FreeTextPatterns.get(0).equals("%d patients[3]"))
+			fail("FreeTextPatterns not read correctly");
+		if(!fr.InfoClasses.get(0).DataCellPatterns.get(0).equals("%f"))
+			fail("DataCellPatterns not read correctly");
+		if(!fr.InfoClasses.get(0).isCanBeInCaption())
+			fail("Failed reading can be in caption");
+		
+		//%f
 	}
 	
 	

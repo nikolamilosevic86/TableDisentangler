@@ -37,10 +37,16 @@ public class InfoClassFilesReader {
 		    	  boolean canbeinfooter = false;
 		    	  boolean canbeinnav = false;
 		    	  boolean canbeindata = false;
-		    	  //TODO:FREETEXTPATTERNS,NAV AND DATA PATTERNS READING!!!
+		    	  boolean freetextpatterns_b = false;
+		    	  boolean navpatterns_b = false;
+		    	  boolean datapatterns_b = false;
+		    	  LinkedList<String> freeTextPatterns = new LinkedList<String>();
+		    	  LinkedList<String> NavPatterns = new LinkedList<String>();
+		    	  LinkedList<String> DataPatterns = new LinkedList<String>();
 		    	  LinkedList<String> triggerList = new LinkedList<String>();
 		    	  LinkedList<String> stopwordList = new LinkedList<String>();
 		    	  ValueType Type1 = null;
+		    	  //Reading file and putting into appropriate structures
 		    	  while ((line = br.readLine()) != null) {
 		    	     if(line.startsWith("InformationClass"))
 		    	     {
@@ -73,39 +79,107 @@ public class InfoClassFilesReader {
 		    	     }
 		    	     
 		    	     if(line.toLowerCase().startsWith("canbeincaption")){
+		    	    	  freetextpatterns_b = false;
+				    	  navpatterns_b = false;
+				    	  datapatterns_b = false;
 		    	    	 String canbeincaption_str = line.split(":")[1].trim();
 		    	    	 if(canbeincaption_str.toLowerCase().equals("true"))
 		    	    		 canbeincaption = true;
 		    	     }
 		    	     if(line.toLowerCase().startsWith("canbeinfooter")){
+		    	    	 freetextpatterns_b = false;
+				    	 navpatterns_b = false;
+				    	 datapatterns_b = false;
 		    	    	 String canbeinfooter_str = line.split(":")[1].trim();
 		    	    	 if(canbeinfooter_str.toLowerCase().equals("true"))
 		    	    		 canbeinfooter = true;
 		    	     }
 		    	     
 		    	     if(line.toLowerCase().startsWith("canbeinnav")){
+		    	    	 freetextpatterns_b = false;
+				    	 navpatterns_b = false;
+				    	 datapatterns_b = false;
 		    	    	 String canbeinnav_str = line.split(":")[1].trim();
 		    	    	 if(canbeinnav_str.toLowerCase().equals("true"))
 		    	    		 canbeinnav = true;
 		    	     }
 		    	     
 		    	     if(line.toLowerCase().startsWith("canbeindata")){
+		    	    	 freetextpatterns_b = false;
+				    	 navpatterns_b = false;
+				    	 datapatterns_b = false;
 		    	    	 String canbeindata_str = line.split(":")[1].trim();
 		    	    	 if(canbeindata_str.toLowerCase().equals("true"))
 		    	    		 canbeindata = true;
 		    	     }
+		    	     if(line.toLowerCase().startsWith("freetextpatterns")){
+		    	    	 freetextpatterns_b = true;
+				    	 navpatterns_b = false;
+				    	 datapatterns_b = false;
+				    	 triggers = false;
+		    	    	 stopwords = false;
+		    	    	 continue;
+		    	     }
 		    	     
+		    	     if(line.toLowerCase().startsWith("navpathpatterns")){
+		    	    	 freetextpatterns_b = false;
+				    	 navpatterns_b = true;
+				    	 datapatterns_b = false;
+				    	 triggers = false;
+		    	    	 stopwords = false;
+		    	    	 continue;
+		    	     }
+		    	     
+		    	     if(line.toLowerCase().startsWith("datapatterns")){
+		    	    	 freetextpatterns_b = false;
+				    	 navpatterns_b = false;
+				    	 datapatterns_b = true;
+				    	 triggers = false;
+		    	    	 stopwords = false;
+		    	    	 continue;
+		    	     }
 		    	     
 		    	     if(line.toLowerCase().startsWith("triggers")){
-		    	    	 triggers = true;
+		    	    	 freetextpatterns_b = false;
+				    	 navpatterns_b = false;
+				    	 datapatterns_b = false;
+				    	 triggers = true;
+		    	    	 stopwords = false;
 		    	    	 continue;
 		    	     }
 		    	     if(line.toLowerCase().startsWith("stopwords"))
 		    	     {
-		    	    	 triggers = false;
+		    	    	 freetextpatterns_b = false;
+				    	 navpatterns_b = false;
+				    	 datapatterns_b = false;
+				    	 triggers = false;
 		    	    	 stopwords = true;
 		    	    	 continue;
 		    	     }
+		    	     if(freetextpatterns_b && line.startsWith("+"))
+		    	     {
+		    	    	 freeTextPatterns.add(line.substring(1));
+		    	     }
+		    	     else{
+		    	    	 freetextpatterns_b = false;
+		    	     }
+		    	     
+		    	     if(navpatterns_b && line.startsWith("+"))
+		    	     {
+		    	    	 NavPatterns.add(line.substring(1));
+		    	     }
+		    	     else{
+		    	    	 navpatterns_b = false;
+		    	     }
+		    	     
+		    	     if(datapatterns_b && line.startsWith("+"))
+		    	     {
+		    	    	 DataPatterns.add(line.substring(1));
+		    	     }
+		    	     else{
+		    	    	 datapatterns_b = false;
+		    	     }
+		    	     
 		    	     if(triggers && line.startsWith("+"))
 		    	     {
 		    	    	 triggerList.add(line.substring(1));
@@ -122,13 +196,21 @@ public class InfoClassFilesReader {
 		    	     }
 		    	  }
 		    	  br.close();
-		    	  
+		    	  //Setting InfoClass
 		    	  InfoClass ic = new InfoClass(ClassName);
 		    	  ic.setType(Type1);
 		    	  ic.setFValueMin(fvaluemin);
 		    	  ic.setFValueMax(fvaluemax);
+		    	  ic.setCanBeInCaption(canbeincaption);
+		    	  ic.setCanBeInDataCells(canbeindata);
+		    	  ic.setCanBeInFooter(canbeinfooter);
+		    	  ic.setCanBeInNavigationalCells(canbeinnav);
+		    	  ic.DataCellPatterns = DataPatterns;
+		    	  ic.FreeTextPatterns = freeTextPatterns;
+		    	  ic.NavigationalPatterns = NavPatterns;
 		    	  ic.triggerWords = triggerList;
 		    	  ic.StopWords = stopwordList;
+		    	  //Adding info class to list
 		    	  InfoClasses.add(ic);
 		      }
 		    }
