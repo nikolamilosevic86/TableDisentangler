@@ -18,6 +18,7 @@ public class DecompositionRDFWriter {
 	Property TableCaption;
 	Property TableFooter;
 	Property Table;
+	Property TableXML;
 	Property TableType;
 	Property TablePragmaticType;
 	Property Cell;
@@ -47,6 +48,7 @@ public class DecompositionRDFWriter {
 		Table = model.createProperty( ArticleDefault + "Table" );
 		TableType = model.createProperty( ArticleDefault + "TableType" );
 		TablePragmaticType = model.createProperty( ArticleDefault + "TablePragmaticType" );
+		TableXML= model.createProperty( ArticleDefault + "TableXML" );
 		Cell = model.createProperty( ArticleDefault + "Cell" );
 		CellStub = model.createProperty( ArticleDefault + "CellStub" );
 		CellStubValue = model.createProperty( ArticleDefault + "CellStubValue" );
@@ -68,7 +70,7 @@ public class DecompositionRDFWriter {
 		currentArticle = Article;
 	}
 	
-	public void AddTable(String TableOrderS,String TableCaptionS,String TableTypeS, String TableFooterS)
+	public void AddTable(String TableOrderS,String TableCaptionS,String TableTypeS, String TableTypePragmaticS, String TableFooterS,String TableXMLS)
 	{
 		String TableID = UUID.randomUUID().toString();
 		Resource TableS = model.createResource(ArticleDefault+"Table"+TableID);
@@ -76,6 +78,8 @@ public class DecompositionRDFWriter {
 		model.add(TableS,TableCaption,TableCaptionS);
 		model.add(TableS,TableFooter,TableFooterS);
 		model.add(TableS,TableType,TableTypeS);
+		model.add(TableS,TablePragmaticType,TableTypePragmaticS);
+		model.add(TableS,TableXML,TableXMLS);
 		model.add(currentArticle,Table,TableS);
 		currentTable = TableS;
 	}
@@ -102,7 +106,6 @@ public class DecompositionRDFWriter {
 		model.add(CellS,CellColumn,Columnt+"");
 		model.add(CellS,CellRow,Row+"");
 		model.add(currentTable,Cell,CellS);
-		
 		currentCell = CellS;
 	}
 	
@@ -118,6 +121,7 @@ public class DecompositionRDFWriter {
 		Table = model.createProperty( ArticleDefault + "Table" );
 		TableType = model.createProperty( ArticleDefault + "TableType" );
 		TablePragmaticType = model.createProperty( ArticleDefault + "TablePragmaticType" );
+		TableXML= model.createProperty( ArticleDefault + "TableXML" );
 		Cell = model.createProperty( ArticleDefault + "Cell" );
 		CellStub = model.createProperty( ArticleDefault + "CellStub" );
 		CellStubValue = model.createProperty( ArticleDefault + "CellStubValue" );
