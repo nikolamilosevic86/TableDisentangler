@@ -399,6 +399,9 @@ public class Decomposition {
 		
 		Statistics.addSubheaderTable();
 		table.setTableStructureType(Table.StructureType.SUBHEADER);
+		if(TablInExMain.ExportLinkedData){
+			TablInExMain.linkedData.AddTable(table.getTable_title(), table.getTable_caption(), "SubHeader", "", table.getTable_footer(), table.getXml());
+		}
 		String[] headerStackA = new String[20];
 		int currentSubHeaderLevel = 0; //number of levels
 		String prevSubheader = "";
@@ -556,9 +559,11 @@ public class Decomposition {
 						
 					}
 					String subheaderValues = "";
+					String[] SubHeaders = new String[Stub.getChildNodes().getLength()] ;
 					for(int l=0;l<Stub.getChildNodes().getLength();l++)
 					{
 						subheaderValues+=" "+Stub.getChildNodes().item(l).getTextContent();
+						SubHeaders[l]= Stub.getChildNodes().item(l).getTextContent();
 					}
 					cells[j][k].setSubheader_values(subheaderValues);
 					Element ss = doc.createElement("StubValue");
@@ -574,10 +579,6 @@ public class Decomposition {
 							cells[j][k].setHeader_values(cells[0][k].getCell_content());
 							NavigationPath.appendChild(Header);
 						}
-//					Element s = doc.createElement("HeaderValue");
-//					s.setTextContent(cells[0][k].getCell_content());
-//					cells[j][k].setHeader_values(cells[0][k].getCell_content());
-//					NavigationPath.appendChild(s);
 					}
 					cell.appendChild(NavigationPath);
 					
@@ -621,8 +622,9 @@ public class Decomposition {
 					Element pmc = doc.createElement("PMC");
 					pmc.setTextContent(art.getPmc());
 					document.appendChild(pmc);
-					
-										
+					if(TablInExMain.ExportLinkedData){
+						TablInExMain.linkedData.AddCell(cells[j][0].getCell_content(), SubHeaders, cells[j][k].getCell_content(), cells[j][k].getCellType(),  cells[0][k].headers.toArray(new String[0]), cells[0][0].getCell_content(), j, k);					
+					}
 					DataExtractionOutputObj dataExtObj = new DataExtractionOutputObj(folder+tableFileName+"e"+j+","+k+".xml", doc);
 					//TablInExMain.outputs.add(dataExtObj);
 					table.output.add(dataExtObj);
@@ -661,6 +663,9 @@ public class Decomposition {
 		{
 			Statistics.addListTable();
 			table.setTableStructureType(Table.StructureType.LIST);
+			if(TablInExMain.ExportLinkedData){
+				TablInExMain.linkedData.AddTable(table.getTable_title(), table.getTable_caption(), "List", "", table.getTable_footer(), table.getXml());
+			}
 			for(int j=1;j<cells.length;j++)
 			{
 				for(int k=0;k<cells[j].length;k++)
@@ -726,8 +731,9 @@ public class Decomposition {
 						Element pmc = doc.createElement("PMC");
 						pmc.setTextContent(art.getPmc());
 						document.appendChild(pmc);
-						
-											
+						if(TablInExMain.ExportLinkedData){
+							TablInExMain.linkedData.AddCell("", null, cells[j][k].getCell_content(), cells[j][k].getCellType(), cells[0][k].headers.toArray(new String[0]), "", j, k);
+						}
 						DataExtractionOutputObj dataExtObj = new DataExtractionOutputObj(folder+tableFileName+"e"+j+","+k+".xml", doc);
 						//TablInExMain.outputs.add(dataExtObj);
 						table.output.add(dataExtObj);
@@ -758,6 +764,9 @@ public class Decomposition {
 		}
 		Statistics.addMatrixTable();
 		tables[tableindex].setTableStructureType(Table.StructureType.MATRIX);
+		if(TablInExMain.ExportLinkedData){
+			TablInExMain.linkedData.AddTable(tables[tableindex].getTable_title(), tables[tableindex].getTable_caption(), "Matrix", "", tables[tableindex].getTable_footer(), tables[tableindex].getXml());
+		}
 		if(!tables[tableindex].isHasHeader())
 		{
 			tables[tableindex] = checkHeaders(tables[tableindex]);
@@ -853,7 +862,9 @@ public class Decomposition {
 					Element pmc = doc.createElement("PMC");
 					pmc.setTextContent(art.getPmc());
 					document.appendChild(pmc);
-					
+					if(TablInExMain.ExportLinkedData){
+						TablInExMain.linkedData.AddCell(cells[j][0].getCell_content(), null, cells[j][k].getCell_content(), cells[j][k].getCellType(), cells[0][k].headers.toArray(new String[0]), cells[0][0].getCell_content(), j, k);					
+					}				
 					DataExtractionOutputObj dataExtObj = new DataExtractionOutputObj(folder+tableFileName+"e"+j+","+k+".xml", doc);
 					//TablInExMain.outputs.add(dataExtObj);
 					tables[tableindex].output.add(dataExtObj);
@@ -887,6 +898,7 @@ public class Decomposition {
 	{
 		if(art==null)
 			return;
+		TablInExMain.linkedData.AddArticle(art.getTitle(), art.getPmc());
 		Table[] tables = art.getTables();
 		for(int i = 0; i< tables.length;i++)
 		{

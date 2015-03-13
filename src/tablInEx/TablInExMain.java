@@ -24,6 +24,7 @@ import IEArmBased.ArmExtractor;
 import IEArmBased.IEArmBased;
 import IEArmBased.IEArmBased2;
 import IEArmBased.IEArmBased21;
+import LinkedData.DecompositionRDFWriter;
 import Utils.SemanticType;
 import Utils.Utilities;
 import classifiers.SimpleTableClassifier;
@@ -45,18 +46,17 @@ public class TablInExMain {
 	public static boolean IEFreqSQLTial = false;
 	public static boolean IEFine = false;
 	public static boolean Conceptization = false;
+	public static boolean ExportLinkedData = false;
 	public static String Inpath;
 	public static HashMap<String, Integer> headermap = new HashMap<String, Integer>();
 	public static HashMap<String, Integer> stubmap = new HashMap<String, Integer>();
-	// public static LinkedList<DataExtractionOutputObj> outputs = new
-	// LinkedList<DataExtractionOutputObj>();
 	public static LinkedList<String> PMCBMI = new LinkedList<String>();
 	public static LinkedList<stats.TableStats> TStats = new LinkedList<stats.TableStats>();
 	public static LinkedList<InformationClass> informationClasses = new LinkedList<InformationClass>();
 	public static HashMap<String, SemanticType> semanticTypes = new HashMap<String, SemanticType>();
 	public static ConceptualizationOfValues.ConceptizationStats concept;
+	public static DecompositionRDFWriter linkedData;
 
-	// public static ConceptualizationOfValues.ConceptizationStats concept2;
 
 	public static void ReadSemanticTypes() {
 		try {
@@ -154,6 +154,10 @@ public class TablInExMain {
 		if (Arrays.asList(args).contains("-tag")) {
 			shouldTag = true;
 		}
+		if(Arrays.asList(args).contains("-ld"))
+		{
+			ExportLinkedData = true;
+		}
 		if (Arrays.asList(args).contains("-conceptisation")) {
 			Conceptization = true;
 		}
@@ -200,6 +204,10 @@ public class TablInExMain {
 		// Article[] articles1 = articles;
 		Article article = new Article("");
 		boolean newrun = true;
+		if(ExportLinkedData)
+		{
+			linkedData = new DecompositionRDFWriter();
+		}
 		for (int a = 0; a < files.length; a++) {
 			if (runas.toLowerCase().equals("pmc")) {
 				article = runReadingloopOneFile(article, files[a],
@@ -233,6 +241,8 @@ public class TablInExMain {
 				concept.ReadPatterns("patterns");
 			}
 
+
+			
 			if (article != null && article.getTables() != null)
 				for (int j = 0; j < article.getTables().length; j++) {
 					Table t = article.getTables()[j];
@@ -242,6 +252,7 @@ public class TablInExMain {
 						t = TableSimplifier.MergeStubs(t);
 					}
 				}
+
 
 			if (doIE) {
 
@@ -388,6 +399,10 @@ public class TablInExMain {
 
 		Statistics.CalculateStatistics();
 		String stats = Statistics.makeOutputStatisticString();
+		if(ExportLinkedData)
+		{
+			linkedData.printToFile();
+		}
 		System.out.print(stats);
 		// System.out.println("BMI alone:"+BMI);
 		// System.out.println("Number of weight/BMI:"+weight);
@@ -434,5 +449,7 @@ public class TablInExMain {
 				.println("    -freq - Extract information about trial using frequency algorithm(no of patients, males, females, age range...) and stores it in mySQL database. Has to be executed together with -doIE command");
 		System.out
 				.println("    -iefine - Extract information about trial using fine graned approach (data about each arm) and stores it in mySQL database. Has to be executed together with -doIE command");
+		System.out
+		.println("    -ld - Export table decomposition as RDF linked data file");
 	}
 }
