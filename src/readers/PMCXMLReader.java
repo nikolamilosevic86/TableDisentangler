@@ -10,7 +10,6 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.text.html.HTML;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 

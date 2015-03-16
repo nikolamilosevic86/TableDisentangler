@@ -282,8 +282,10 @@ public class TablInExMain {
 				if (shouldTag) {
 					article.getTables()[t].output.get(0).MetamapTagDocument();
 				}
-				if(article.getTables()[t].output.size()>1)
-					article.getTables()[t].output.get(0).CreateOutput();
+				if(article.getTables()[t].output.size()>1){
+					for(int h = 0;h<article.getTables()[t].output.size();h++)
+					article.getTables()[t].output.get(h).CreateOutput();
+				}
 					
 				TStats.add(article.getTables()[t].stat);
 			}

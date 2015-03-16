@@ -7,6 +7,7 @@ package Decomposition;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.LinkedList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -888,6 +889,140 @@ public class Decomposition {
 			row[i].setSubheader(true);
 		}
 	}
+	
+	
+	public Table processMultiTable(Cell[][] cells,Table table, Article art, String tableFileName){
+		if(table.getTableStructureType()!=Table.StructureType.MULTI && table.getTableStructureType()!=null)
+		{
+			return table;
+		}
+		Statistics.addMultiTable();
+		table.setTableStructureType(Table.StructureType.MULTI);
+		if(TablInExMain.ExportLinkedData){
+			TablInExMain.linkedData.AddTable(table.getTable_title(), table.getTable_caption(), "MultiTable", "", table.getTable_footer(), table.getXml());
+		}
+		if(!table.isHasHeader())
+		{
+			table = checkHeaders(table);
+			cells = table.cells;
+		}
+
+		for(int j=0;j<cells.length;j++)
+		{
+			if(cells[j].length==0 || cells[j][0].isIs_header())
+				continue;
+			for(int k=1;k<cells[j].length;k++)
+			{
+				int headerRow = 0;
+				LinkedList<String> headers = new LinkedList<String>();
+				try{
+					DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+					DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+
+					//root elements
+					Document doc = docBuilder.newDocument();
+
+					Element rootElement = doc.createElement("information");
+					doc.appendChild(rootElement);
+					
+					Element cell = doc.createElement("Cell");
+					rootElement.appendChild(cell);
+					
+					Element NavigationPath = doc.createElement("NavigationPath");
+					if(!Utilities.isSpaceOrEmpty(cells[0][0].getCell_content()) && cells[0][0].isIs_header()){
+					Element TopLeftHeader = doc.createElement("Head00");
+					String topLeft = "";
+					
+					for(int l = j;l>=0;l--)
+					{
+						if(l<cells.length && cells[l]!=null && cells[l].length>0 && cells[l][k]!=null && cells[l][k].isIs_header())
+						{
+							headerRow = l;
+						}
+					}
+					TopLeftHeader.setTextContent(cells[headerRow][0].getCell_content());
+					cells[j][k].setHead00(cells[headerRow][0].getCell_content());
+					NavigationPath.appendChild(TopLeftHeader);
+					}
+					if(!Utilities.isSpaceOrEmpty(cells[j][0].getCell_content())){
+						Element Stub = doc.createElement("Stub");
+						Element StubValue = doc.createElement("StubValue");
+						StubValue.setTextContent(cells[j][0].getCell_content());
+						cells[j][k].setStub_values(cells[j][0].getCell_content());
+						Stub.appendChild(StubValue);
+						NavigationPath.appendChild(Stub);
+						}
+					if(!Utilities.isSpaceOrEmpty(cells[headerRow][k].getCell_content()) && cells[headerRow][k].isIs_header()){
+						int s = 0;
+						while(headerRow>=0 && cells[headerRow][0].isIs_header()){
+							
+							Element Header = doc.createElement("HeaderValue"+s);
+							Header.setTextContent(cells[headerRow][k].getCell_content());
+							headers.add(cells[headerRow][k].getCell_content());
+							cells[j][k].setHeader_values(cells[headerRow][k].getCell_content());
+							NavigationPath.appendChild(Header);
+							headerRow--;
+							s++;
+						}
+						}
+					
+					cell.appendChild(NavigationPath);
+					
+					//info elements
+					Element info = doc.createElement("value");
+					info.setTextContent(cells[j][k].getCell_content());
+					cell.appendChild(info);
+					
+					Element CellType = doc.createElement("CellType");
+					CellType.setTextContent(cells[j][k].getCellType());
+					cell.appendChild(CellType);
+					
+					Element tableA = doc.createElement("Table");
+					rootElement.appendChild(tableA);
+					
+					Element TableType = doc.createElement("TableType");
+					TableType.setTextContent("MultiTable");
+					tableA.appendChild(TableType);
+					
+					
+					Element tname = doc.createElement("tableName");
+					tname.setTextContent(table.getTable_caption());
+					tableA.appendChild(tname);
+					
+					Element torder = doc.createElement("tableOrder");
+					torder.setTextContent(table.getTable_title());
+					tableA.appendChild(torder);
+					
+					Element tfooter = doc.createElement("tableFooter");
+					tfooter.setTextContent(table.getTable_footer());
+					tableA.appendChild(tfooter);
+					
+					Element document = doc.createElement("Document");
+					rootElement.appendChild(document);
+					
+					Element docTitle = doc.createElement("DocumentTitle");
+					docTitle.setTextContent(art.getTitle());
+					document.appendChild(docTitle);
+					
+					Element pmc = doc.createElement("PMC");
+					pmc.setTextContent(art.getPmc());
+					document.appendChild(pmc);
+					if(TablInExMain.ExportLinkedData){
+						TablInExMain.linkedData.AddCell(cells[j][0].getCell_content(), null, cells[j][k].getCell_content(), cells[j][k].getCellType(), headers.toArray(new String[0]), cells[0][0].getCell_content(), j, k);					
+					}				
+					DataExtractionOutputObj dataExtObj = new DataExtractionOutputObj(folder+tableFileName+"e"+j+","+k+".xml", doc);
+					//TablInExMain.outputs.add(dataExtObj);
+					table.output.add(dataExtObj);									
+
+				}catch(Exception ex)
+				{
+					ex.printStackTrace();
+				}
+			}
+		}
+		
+		return table;
+	}
 
 	/**
 	 * Extract information from simple tables.
@@ -914,8 +1049,8 @@ public class Decomposition {
 			//Temporaty, don't process Multi tables! TODO: Add processing for multitables;
 			if(isMultiTable(cells, tables[i]))
 			{
-				tables[i].setTableStructureType(Table.StructureType.MULTI);
-				Statistics.addMultiTable();
+				tables[i] = processMultiTable(cells,tables[i], art, tableFileName);
+				
 			}
 			if(tables[i].getTableStructureType()!=null && tables[i].getTableStructureType().equals(Table.StructureType.MULTI))
 				continue;
