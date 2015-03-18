@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.UUID;
 
+import tablInEx.Article;
+
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
@@ -29,11 +31,18 @@ public class DecompositionRDFWriter {
 	Property CellHeader;
 	Property CellValue;
 	Property CellType;
+	Property hasAuthor;
 	Property CellRow;
 	Property CellColumn;
 	Property HasNavigationalPath;
 	Property Head00;
 	Property HasArticle;
+	Property hasAffiliation;
+	Property Abstract;
+	Property Publisher;
+	Property Keywords;
+	Property ShortAbstract;
+	Property Venue;
 	String outputFileName = "decomposition.rdf";
 	Resource currentArticle;
 	Resource currentTable;
@@ -45,6 +54,13 @@ public class DecompositionRDFWriter {
 		model = ModelFactory.createDefaultModel();
 		ArticleName = model.createProperty( ArticleDefault + "ArticleName" );
 		ArticleID = model.createProperty( ArticleDefault + "ArticleID" );
+		hasAuthor = model.createProperty( ArticleDefault + "hasAuthor" );
+		Publisher =  model.createProperty( ArticleDefault + "Publisher" );
+		Abstract = model.createProperty( ArticleDefault + "Abstract" );
+		Venue = model.createProperty( ArticleDefault + "Venue" );
+		ShortAbstract = model.createProperty( ArticleDefault + "ShortAbstract" );
+		hasAffiliation = model.createProperty( ArticleDefault + "hasAffiliation" );
+		Keywords = model.createProperty( ArticleDefault + "KeyWord" );
 		TableOrder = model.createProperty( ArticleDefault + "TableOrder" );
 		TableCaption = model.createProperty( ArticleDefault + "TableCaption" );
 		TableFooter = model.createProperty( ArticleDefault + "TableFooter" );
@@ -68,11 +84,31 @@ public class DecompositionRDFWriter {
 		HasArticle = model.createProperty( ArticleDefault + "HasArticle" );
 	}
 	
-	public void AddArticle(String ArticleNameS,String ArticleIDS)
+	public void AddArticle(Article art)
 	{
-		Resource Article = model.createResource(ArticleDefault+ArticleIDS);
-		model.add(Article,ArticleName,ArticleNameS);
-		model.add(Article,ArticleID,ArticleIDS);
+		Resource Article = model.createResource(ArticleDefault+art.getPmc());
+		model.add(Article,ArticleName,art.getTitle());
+		model.add(Article,ArticleID,art.getPmc());
+		model.add(Article,Abstract,art.getAbstract());
+		for(int i = 0;i<art.getAuthors().length;i++)
+		{
+			model.add(Article,hasAuthor,art.getAuthors()[i]);
+		}
+		for(int i = 0;i<art.getAffiliation().length;i++)
+		{
+			model.add(Article,hasAffiliation,art.getAffiliation()[i]);
+		}
+		for(int i = 0;i<art.getKeywords().length;i++)
+		{
+			model.add(Article,Publisher,art.getKeywords()[i]);
+		}
+		if(art.getVenue()!=null && !art.getVenue().equals(""))
+			model.add(Article,Venue,art.getVenue());
+		
+		if(art.getShort_abstract()!=null && !art.getShort_abstract().equals(""))
+			model.add(Article,ShortAbstract,art.getShort_abstract());
+		
+		model.add(Article,Keywords,art.getPublisher_name());
 		model.add(Root, HasArticle,Article);
 		currentArticle = Article;
 	}
@@ -152,6 +188,17 @@ public class DecompositionRDFWriter {
 	
 	public void printToFile()
 	{
+		 try {
+				model.write(new FileOutputStream(outputFileName));
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+	
+	public void printToFile(String filename)
+	{
+		outputFileName = filename;
 		 try {
 				model.write(new FileOutputStream(outputFileName));
 			} catch (FileNotFoundException e) {

@@ -1033,7 +1033,7 @@ public class Decomposition {
 	{
 		if(art==null)
 			return;
-		TablInExMain.linkedData.AddArticle(art.getTitle(), art.getPmc());
+		TablInExMain.linkedData.AddArticle(art);
 		Table[] tables = art.getTables();
 		for(int i = 0; i< tables.length;i++)
 		{

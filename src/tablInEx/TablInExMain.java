@@ -204,11 +204,17 @@ public class TablInExMain {
 		// Article[] articles1 = articles;
 		Article article = new Article("");
 		boolean newrun = true;
+		String LinkedDataFolder = "RDFs";
 		if(ExportLinkedData)
 		{
-			linkedData = new DecompositionRDFWriter();
+			//linkedData = new DecompositionRDFWriter();
+			boolean success = (new File(LinkedDataFolder)).mkdirs();
 		}
 		for (int a = 0; a < files.length; a++) {
+			if(ExportLinkedData)
+			{
+				linkedData = new DecompositionRDFWriter();
+			}
 			if (runas.toLowerCase().equals("pmc")) {
 				article = runReadingloopOneFile(article, files[a],
 						PMCXMLReader.class);
@@ -288,6 +294,11 @@ public class TablInExMain {
 				}
 					
 				TStats.add(article.getTables()[t].stat);
+			}
+			
+			if(ExportLinkedData)
+			{
+				linkedData.printToFile(LinkedDataFolder+"\\"+article.getPmc()+".rdf");
 			}
 
 		}
@@ -401,10 +412,7 @@ public class TablInExMain {
 
 		Statistics.CalculateStatistics();
 		String stats = Statistics.makeOutputStatisticString();
-		if(ExportLinkedData)
-		{
-			linkedData.printToFile();
-		}
+
 		System.out.print(stats);
 		// System.out.println("BMI alone:"+BMI);
 		// System.out.println("Number of weight/BMI:"+weight);
