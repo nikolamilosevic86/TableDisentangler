@@ -89,6 +89,7 @@ public class DecompositionRDFWriter {
 		Resource Article = model.createResource(ArticleDefault+art.getPmc());
 		model.add(Article,ArticleName,art.getTitle());
 		model.add(Article,ArticleID,art.getPmc());
+		if(art.getAbstract()!=null && !art.getAbstract().equals(""))
 		model.add(Article,Abstract,art.getAbstract());
 		for(int i = 0;i<art.getAuthors().length;i++)
 		{
@@ -163,6 +164,13 @@ public class DecompositionRDFWriter {
 		model = ModelFactory.createDefaultModel();
 		ArticleName = model.createProperty( ArticleDefault + "ArticleName" );
 		ArticleID = model.createProperty( ArticleDefault + "ArticleID" );
+		hasAuthor = model.createProperty( ArticleDefault + "hasAuthor" );
+		Publisher =  model.createProperty( ArticleDefault + "Publisher" );
+		Abstract = model.createProperty( ArticleDefault + "Abstract" );
+		Venue = model.createProperty( ArticleDefault + "Venue" );
+		ShortAbstract = model.createProperty( ArticleDefault + "ShortAbstract" );
+		hasAffiliation = model.createProperty( ArticleDefault + "hasAffiliation" );
+		Keywords = model.createProperty( ArticleDefault + "KeyWord" );
 		TableOrder = model.createProperty( ArticleDefault + "TableOrder" );
 		TableCaption = model.createProperty( ArticleDefault + "TableCaption" );
 		TableFooter = model.createProperty( ArticleDefault + "TableFooter" );
@@ -172,8 +180,8 @@ public class DecompositionRDFWriter {
 		TableXML= model.createProperty( ArticleDefault + "TableXML" );
 		Cell = model.createProperty( ArticleDefault + "HasCell" );
 		CellStub = model.createProperty( ArticleDefault + "CellStub" );
-		CellStubValue = model.createProperty( ArticleDefault + "CellStubValue");
-		CellSubheadeing = model.createProperty( ArticleDefault + "CellSubheadeing");
+		CellStubValue = model.createProperty( ArticleDefault + "CellStubValue" );
+		CellSubheadeing = model.createProperty( ArticleDefault + "CellSubheadeing" );
 		CellHeader = model.createProperty( ArticleDefault + "CellHeader" );
 		CellValue = model.createProperty( ArticleDefault + "CellValue" );
 		CellType = model.createProperty( ArticleDefault + "CellType" );
