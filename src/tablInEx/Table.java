@@ -19,6 +19,7 @@ public class Table {
 	private String xml;
 	private String documentFileName;
 	public TableStats stat;
+	public String PragmaticClass;
 	public boolean isEmptyOnlyHeaders = true;
 	public LinkedList<DataExtractionOutputObj> output = new LinkedList<DataExtractionOutputObj>();
 	public enum StructureType {LIST,MATRIX,SUBHEADER,MULTI};

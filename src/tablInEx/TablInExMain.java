@@ -31,6 +31,7 @@ import classifiers.SimpleTableClassifier;
 import readers.PMCXMLReader;
 import readers.Reader;
 import stats.Statistics;
+import weka.classifiers.Classifier;
 
 public class TablInExMain {
 
@@ -192,6 +193,7 @@ public class TablInExMain {
 			printHelp();
 			return;
 		}
+		classifiers.PragmaticClassifier pc = new classifiers.PragmaticClassifier("Models/SMOPragmaticModel3.model");
 		if (TypeClassify)
 			SimpleTableClassifier.init(TablInExMain.Inpath);
 		if (ComplexClassify)
@@ -257,6 +259,7 @@ public class TablInExMain {
 						t = TableSimplifier.MergeHeaders(t);
 						t = TableSimplifier.MergeStubs(t);
 					}
+					t.PragmaticClass = pc.Classify(t);
 				}
 
 
@@ -284,17 +287,8 @@ public class TablInExMain {
 				concept.processArticle(article);
 			}
 
-			for (int t = 0; t < article.getTables().length; t++) {
-				if (shouldTag) {
-					article.getTables()[t].output.get(0).MetamapTagDocument();
-				}
-				if(article.getTables()[t].output.size()>1){
-					for(int h = 0;h<article.getTables()[t].output.size();h++)
-					article.getTables()[t].output.get(h).CreateOutput();
-				}
-					
-				TStats.add(article.getTables()[t].stat);
-			}
+			
+			
 			
 			if(ExportLinkedData)
 			{

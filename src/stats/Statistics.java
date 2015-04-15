@@ -178,6 +178,39 @@ public class Statistics {
 	/** The percentage_of_part_numeric_cells. */
 	private static float percentage_of_part_numeric_cells;
 	
+	private static int number_of_setting_tables=0;
+	private static int number_of_findings_tables=0;
+	private static int number_of_support_tables=0;
+	
+	public static void addSettingTable()
+	{
+		number_of_setting_tables++;
+	}
+	public static void addFindingsTable()
+	{
+		number_of_findings_tables++;
+	}
+	public static void addSupportTable()
+	{
+		number_of_support_tables++;
+	}
+	
+	public static void addPragmaticTableType(String tabletype)
+	{
+		if(tabletype.equals("settings"))
+		{
+			number_of_setting_tables++;
+		}
+		if(tabletype.equals("findings"))
+		{
+			number_of_findings_tables++;
+		}
+		if(tabletype.equals("support-knowledge"))
+		{
+			number_of_support_tables++;
+		}
+	}
+	
 	/**
 	 * Adds the cell to statistics.
 	 */
@@ -1089,6 +1122,11 @@ public class Statistics {
 		output += "List tables: ,"+ListTables+ "\r\n";	
 		output += "Subheader tables: ,"+SubheaderTables+ "\r\n";
 		output += "Multi tables: ,"+MultiTables+ "\r\n";
+		output += "\r\n";
+		output += "Table pragmatics\r\n";
+		output += "Settings: ,"+number_of_setting_tables+ "\r\n";
+		output += "Findings: ,"+number_of_findings_tables+ "\r\n";
+		output += "Support: ,"+number_of_support_tables+ "\r\n";
 		
 		return output;
 	}

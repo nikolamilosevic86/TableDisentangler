@@ -19,7 +19,6 @@ import opennlp.tools.tokenize.TokenizerModel;
 import tablInEx.Article;
 import tablInEx.Cell;
 import tablInEx.Table;
-import weka.associations.tertius.Body;
 
 public class IEArmBased {
 	
