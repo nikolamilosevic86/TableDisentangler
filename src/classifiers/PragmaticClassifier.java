@@ -5,10 +5,7 @@ import java.io.PrintWriter;
 
 import Utils.Utilities;
 import stats.Statistics;
-import tablInEx.TablInExMain;
 import tablInEx.Table;
-import weka.classifiers.Classifier;
-import weka.classifiers.meta.FilteredClassifier;
 import weka.classifiers.misc.InputMappedClassifier;
 import weka.core.Attribute;
 import weka.core.DenseInstance;
@@ -17,9 +14,7 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.SelectedTag;
 import weka.core.stemmers.SnowballStemmer;
-import weka.core.stopwords.StopwordsHandler;
 import weka.core.stopwords.WordsFromFile;
-import weka.core.tokenizers.WordTokenizer;
 import weka.filters.Filter;
 import weka.filters.unsupervised.attribute.StringToWordVector;
 
