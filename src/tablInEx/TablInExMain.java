@@ -193,7 +193,9 @@ public class TablInExMain {
 			printHelp();
 			return;
 		}
-		classifiers.PragmaticClassifier pc = new classifiers.PragmaticClassifier("Models/SMOPragmaticModel3.model");
+		classifiers.PragmaticClassifier pc = new classifiers.PragmaticClassifier("Models/SMOPragmaticAll.model");
+	//	classifiers.PragmaticClassifier pc2 = new classifiers.PragmaticClassifier("Models/SMOPragmaticSupportVsAll.model");
+	//	classifiers.PragmaticClassifier pc3 = new classifiers.PragmaticClassifier("Models/SMOPragmaticFindingsVsAll.model");
 		if (TypeClassify)
 			SimpleTableClassifier.init(TablInExMain.Inpath);
 		if (ComplexClassify)
@@ -260,6 +262,12 @@ public class TablInExMain {
 						t = TableSimplifier.MergeStubs(t);
 					}
 					t.PragmaticClass = pc.Classify(t);
+//					if(t.PragmaticClass.equals("other")){
+//					t.PragmaticClass = pc2.Classify2(t,"support","other");
+//					}
+//					if(t.PragmaticClass.equals("other")){
+//					t.PragmaticClass = pc3.Classify2(t,"findings","other");
+//					}
 				}
 
 
@@ -287,12 +295,18 @@ public class TablInExMain {
 				concept.processArticle(article);
 			}
 
-			
-			
-			
 			if(ExportLinkedData)
 			{
 				linkedData.printToFile(LinkedDataFolder+"\\"+article.getPmc()+".rdf");
+			}
+			
+			for(int l = 0;l<article.getTables().length;l++)
+			{
+				LinkedList<DataExtractionOutputObj> outputs = article.getTables()[l].output;
+				for(DataExtractionOutputObj out:outputs)
+				{
+					out.CreateOutput();
+				}
 			}
 
 		}

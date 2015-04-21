@@ -667,10 +667,12 @@ public class Decomposition {
 			if(TablInExMain.ExportLinkedData){
 				TablInExMain.linkedData.AddTable(table.getTable_title(), table.getTable_caption(), "List", "", table.getTable_footer(), table.getXml());
 			}
-			for(int j=1;j<cells.length;j++)
+			for(int j=0;j<cells.length;j++)
 			{
 				for(int k=0;k<cells[j].length;k++)
 				{
+					if(cells[j][k].isIs_header())
+						continue;
 					try{
 						DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 						DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -911,7 +913,7 @@ public class Decomposition {
 		{
 			if(cells[j].length==0 || cells[j][0].isIs_header())
 				continue;
-			for(int k=1;k<cells[j].length;k++)
+			for(int k=0;k<cells[j].length;k++)
 			{
 				int headerRow = 0;
 				LinkedList<String> headers = new LinkedList<String>();
