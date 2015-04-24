@@ -641,7 +641,23 @@ public class Decomposition {
 		
 	}
 
-	
+	public boolean hasSuperRowsListTable(Cell[][] cells, Table table)
+	{
+		boolean hasTopLevel = false;
+		boolean hasLowLevel = false;
+		for(int i = 0; i < cells.length;i++)
+		{
+			if(Utilities.numOfBegeningSpaces(cells[i][0].getCell_content())==0)
+				hasTopLevel = true;
+			if(Utilities.numOfSpaceOrBullets(cells[i][0].getCell_content())>0)
+				hasLowLevel = true;
+		}
+		
+		if(hasLowLevel && hasTopLevel)
+			return true;
+		
+		return false;
+	}
 	
 	/**
 	 * Process list table. List table is a table that forms data in a list.
@@ -667,6 +683,9 @@ public class Decomposition {
 			if(TablInExMain.ExportLinkedData){
 				TablInExMain.linkedData.AddTable(table.getTable_title(), table.getTable_caption(), "List", "", table.getTable_footer(), table.getXml());
 			}
+			boolean hasSubheaders = hasSuperRowsListTable(cells, table);
+			boolean TopLevel = false;
+			String currentSubHeader = "";
 			for(int j=0;j<cells.length;j++)
 			{
 				for(int k=0;k<cells[j].length;k++)
@@ -674,6 +693,27 @@ public class Decomposition {
 					if(cells[j][k].isIs_header())
 						continue;
 					try{
+						
+						if(hasSubheaders)
+						{
+							if(TopLevel==false && Utilities.numOfSpaceOrBullets(cells[j][k].getCell_content())==0 && cells[j+1]!= null && Utilities.numOfSpaceOrBullets(cells[j+1][k].getCell_content())!=0 && currentSubHeader.equals(""))
+							{
+								TopLevel = true;
+								currentSubHeader=cells[j][k].getCell_content();
+								continue;
+							}
+							if(TopLevel==false && Utilities.numOfSpaceOrBullets(cells[j][k].getCell_content())==0 && (cells[j+2]!= null && Utilities.numOfSpaceOrBullets(cells[j+2][k].getCell_content())!=0) && currentSubHeader.equals(""))
+							{
+								TopLevel = true;
+								currentSubHeader=cells[j][k].getCell_content();
+								continue;
+							}
+							if(TopLevel == true && !cells[j][k].isBreakingLineOverRow() && Utilities.numOfSpaceOrBullets(cells[j][k].getCell_content())==0 && !currentSubHeader.equals(""))
+							{
+								currentSubHeader=cells[j][k].getCell_content();
+								continue;
+							}
+						}
 						DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 						DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 
@@ -692,6 +732,11 @@ public class Decomposition {
 							Header.setTextContent(cells[0][k].headers.get(s));
 						
 							NavigationPath.appendChild(Header);
+						}
+						if(currentSubHeader!=""){
+						Element SubHeader = doc.createElement("SubHeader");
+						SubHeader.setTextContent(currentSubHeader);
+						NavigationPath.appendChild(SubHeader);
 						}
 						cell.appendChild(NavigationPath);
 						cells[j][k].setHeader_values(cells[0][k].getCell_content());

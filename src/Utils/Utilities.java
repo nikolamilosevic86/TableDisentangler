@@ -242,6 +242,26 @@ public class Utilities {
 		return num;
 	}
 	
+	public static int  numOfSpaceOrBullets(String s)
+	{
+		int num = 0;
+		if(s==null)
+			return 0;
+		if(s.length()==0)
+			return 0;
+		for(int i = 0;i<s.length();i++)
+		{
+			char ch = s.charAt(i);
+			if(((int)ch)==8195 || (int)ch==160 || (int)ch== ' ' || (int)ch==8194 || (int)ch==8201 || (int)ch=='-'||(int)ch == '•')
+			{
+				num++;
+			}
+			else
+				break;
+		}
+		return num;
+	}
+	
 	public static boolean isSpaceOrEmpty(String s)
 	{
 		if(s==null)
