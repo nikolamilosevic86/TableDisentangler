@@ -83,16 +83,8 @@ public class TableSimplifier {
 		}
 		Cell[][] cells = table.getTable_cells();
 		
-		
-//		for(int i = 0;i<cells[0].length;i++)
-//		{
-//			cells[table.stat.getNum_of_header_rows() - 1][i].headers.add(cells[table.stat.getNum_of_header_rows() - 1][i].getCell_content());
-//		}
-		
-		for(int i = table.stat.getNum_of_header_rows() - 2; i >= 0;i--)
+		for(int i = table.stat.getNum_of_header_rows() - 1; i >= 0;i--)
 		{
-//			if(cells.length<=i)
-//				continue;
 			for(int j = 0; j<cells[i].length;j++)
 			{
 				if(cells[i][j].getCell_content()==null)
@@ -101,16 +93,22 @@ public class TableSimplifier {
 				}
 				if(!Utilities.isSpaceOrEmpty(cells[i][j].getCell_content()) ){
 					//Appending values
-					if(cells.length<i+1&& cells[i+1]!=null && cells[i+1][j]!=null && !cells[i][j].getCell_content().equals(cells[i+1][j].getCell_content())){
-						cells[table.stat.getNum_of_header_rows() - 1][j].setCell_content(cells[i][j].getCell_content()+ " "+cells[table.stat.getNum_of_header_rows() - 1][j].getCell_content());
+					if(cells.length>i+1&& cells[i+1]!=null && cells[i+1][j]!=null && !cells[i][j].getCell_content().equals(cells[i+1][j].getCell_content())){
+						//Appending line - not now used
+						//cells[table.stat.getNum_of_header_rows() - 1][j].setCell_content(cells[i][j].getCell_content()+ " "+cells[table.stat.getNum_of_header_rows() - 1][j].getCell_content());
 						cells[table.stat.getNum_of_header_rows() - 1][j].headers.addFirst(cells[i][j].getCell_content());
 					}
-//					if(cells.length<=table.stat.getNum_of_header_rows() - 1 || cells[table.stat.getNum_of_header_rows() - 1].length<=j)
-//						continue;
 					cells[table.stat.getNum_of_header_rows() - 1][j].setIs_header(true);
+					//cells[0][j].headers.addFirst(cells[i][j].getCell_content());
 				}
 			}
 		}
+//		if(table.stat.getNum_of_header_rows()>2){
+//			for(int j = 0; j<cells[table.stat.getNum_of_header_rows() - 1].length;j++)
+//			{
+//				cells[table.stat.getNum_of_header_rows() - 1][j].headers.add(cells[table.stat.getNum_of_header_rows() - 1][j].getCell_content());
+//			}
+//		}
 		System.out.println("Simplifying "+table.getDocumentFileName());
 		Cell[][] newcells = new Cell[table.cells.length - table.stat.getNum_of_header_rows()+1][table.getNum_of_columns()];
 		for(int i = 0;i<newcells.length;i++)

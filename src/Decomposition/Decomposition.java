@@ -885,9 +885,7 @@ public class Decomposition {
 					Element TableType = doc.createElement("TableType");
 					TableType.setTextContent("Matrix");
 					tableA.appendChild(TableType);
-					
-
-					
+										
 					Element tname = doc.createElement("tableName");
 					tname.setTextContent(tables[tableindex].getTable_caption());
 					tableA.appendChild(tname);
