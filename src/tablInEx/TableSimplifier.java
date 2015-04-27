@@ -99,21 +99,20 @@ public class TableSimplifier {
 						cells[table.stat.getNum_of_header_rows() - 1][j].headers.addFirst(cells[i][j].getCell_content());
 					}
 					cells[table.stat.getNum_of_header_rows() - 1][j].setIs_header(true);
-					//cells[0][j].headers.addFirst(cells[i][j].getCell_content());
 				}
 			}
 		}
-//		if(table.stat.getNum_of_header_rows()>2){
-//			for(int j = 0; j<cells[table.stat.getNum_of_header_rows() - 1].length;j++)
-//			{
-//				cells[table.stat.getNum_of_header_rows() - 1][j].headers.add(cells[table.stat.getNum_of_header_rows() - 1][j].getCell_content());
-//			}
-//		}
+		
 		System.out.println("Simplifying "+table.getDocumentFileName());
 		Cell[][] newcells = new Cell[table.cells.length - table.stat.getNum_of_header_rows()+1][table.getNum_of_columns()];
 		for(int i = 0;i<newcells.length;i++)
 		{
 			newcells[i] = cells[i+table.stat.getNum_of_header_rows()-1].clone();
+		}
+		for(int j = 0;j<newcells[0].length;j++)
+		{
+			for(int s = newcells[0][j].headers.size()-1;s>=0;s--)
+				newcells[0][j].setCell_content(newcells[0][j].headers.get(s)+ " "+newcells[0][j].getCell_content());
 		}
 		table.stat.setNum_of_header_rows(1);
 		table.setNum_of_rows(1+table.stat.getNum_of_body_rows());
