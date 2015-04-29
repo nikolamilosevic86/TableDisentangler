@@ -112,7 +112,8 @@ public class TableSimplifier {
 		for(int j = 0;j<newcells[0].length;j++)
 		{
 			for(int s = newcells[0][j].headers.size()-1;s>=0;s--)
-				newcells[0][j].setCell_content(newcells[0][j].headers.get(s)+ " "+newcells[0][j].getCell_content());
+				if(!newcells[0][j].headers.get(s).equals(newcells[0][j].getCell_content()))
+					newcells[0][j].setCell_content(newcells[0][j].headers.get(s)+ " "+newcells[0][j].getCell_content());
 		}
 		table.stat.setNum_of_header_rows(1);
 		table.setNum_of_rows(1+table.stat.getNum_of_body_rows());
