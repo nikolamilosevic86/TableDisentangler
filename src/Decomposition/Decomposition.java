@@ -95,6 +95,35 @@ public class Decomposition {
 		return false;
 	}
 	
+	private Cell[][] markMultiTableHeaders(Cell[][] cells)
+	{
+		if(cells==null)
+			return cells;
+		for(int i = 0; i<cells.length;i++)
+		{
+			if(cells[i][0].isBreakingLineOverRow())
+			{
+				if(i-2>=0 && !cells[i-2][0].isIs_header() && !isSequentiallyBreakingLine(cells,i-2,0) && cells[i-2][0].isBreakingLineOverRow())
+				{
+					for(int j = 0; j<cells[i].length;j++)
+					{
+						cells[i][j].setIs_header(true);
+					}
+					for(int j = 0; j<cells[i].length;j++)
+					{
+						cells[i-1][j].setIs_header(true);
+					}
+					for(int j = 0; j<cells[i].length;j++)
+					{
+						cells[i-2][j].setIs_header(true);
+					}
+				}
+			}
+		}
+		
+		return cells;
+	}
+	
 	/**
 	 * Checks if is list table.
 	 *
@@ -951,16 +980,143 @@ public class Decomposition {
 			table = checkHeaders(table);
 			cells = table.cells;
 		}
+		
+		cells = markMultiTableHeaders(cells);
+		if(cells[0].length>1){
 
+		String[] headerStackA = new String[20];
+		int currentSubHeaderLevel = 0; //number of levels
+		String prevSubheader = "";
+		boolean hasSpaceSubheaders = false;
+		if(table.isHasHeader()==false)
+		{
+			table = checkHeaders(table);
+		}
+
+		cells = table.cells;
+		boolean firstHeader = true;
 		for(int j=0;j<cells.length;j++)
 		{
-			if(cells[j].length==0 || cells[j][0].isIs_header())
-				continue;
-			for(int k=0;k<cells[j].length;k++)
+			if(cells[j][0].isIs_header()){
+					continue;
+			}
+			boolean emptyLine = true;
+			for(int h = 0;h<cells[j].length;h++)
 			{
-				int headerRow = 0;
-				LinkedList<String> headers = new LinkedList<String>();
-				try{
+				if(!Utilities.isSpaceOrEmpty(cells[j][h].getCell_content()))
+				{
+					emptyLine = false;
+					break;
+				}
+			}
+			if(emptyLine)
+				continue;
+			//Record headers in spanning structure
+			if(cells[j][0].isIs_columnspanning() && table.getNum_of_columns()>1 && cells[j][0].getCells_columnspanning()>=table.getNum_of_columns())
+			{
+				if(Utilities.numOfBegeningSpaces(cells[j][0].getCell_content())==currentSubHeaderLevel)
+					headerStackA[currentSubHeaderLevel++] = cells[j][0].getCell_content();
+				else
+				{
+					currentSubHeaderLevel = Utilities.numOfBegeningSpaces(cells[j][0].getCell_content());
+					headerStackA[currentSubHeaderLevel++] = cells[j][0].getCell_content();
+				}
+				SetSubheaderRow(cells[j]);
+				continue;
+			}
+			boolean emptyCells = true;
+			//check if row has all empty cells except first
+			for(int h=1;h<cells[j].length;h++)
+			{
+				if(cells[j][h].getCell_content()==null)
+				{
+					cells[j][h].setCell_content("");
+				}
+				if(Utilities.isSpaceOrEmpty(cells[j][0].getCell_content()) || !Utilities.isSpaceOrEmpty(cells[j][h].getCell_content()))
+				{
+					emptyCells = false;
+				}
+
+			}
+			//If it has all empty cells, except firts it is header
+			if(emptyCells){
+				
+				if(currentSubHeaderLevel!=0 && currentSubHeaderLevel == j-1)
+				{
+					if(Utilities.numOfBegeningSpaces(cells[j][0].getCell_content())==currentSubHeaderLevel)
+					{
+						headerStackA[currentSubHeaderLevel++] = cells[j][0].getCell_content();
+						SetSubheaderRow(cells[j]);
+						//sequalHeaders++;
+					}
+					else
+					{
+						currentSubHeaderLevel = Utilities.numOfBegeningSpaces(cells[j][0].getCell_content());
+						headerStackA[currentSubHeaderLevel++] = cells[j][0].getCell_content();
+						SetSubheaderRow(cells[j]);
+						//sequalHeaders++;
+					}
+				}
+				else
+				{					
+				if(Utilities.numOfBegeningSpaces(cells[j][0].getCell_content())==currentSubHeaderLevel)
+				{
+					headerStackA[currentSubHeaderLevel++] = cells[j][0].getCell_content();
+					SetSubheaderRow(cells[j]);
+				}
+				else
+				{
+					currentSubHeaderLevel = Utilities.numOfBegeningSpaces(cells[j][0].getCell_content());
+					headerStackA[currentSubHeaderLevel++] = cells[j][0].getCell_content(); 
+					SetSubheaderRow(cells[j]);
+				}
+				if(j>0 && isRowSubheader(cells[j-1], table))
+				{
+					prevSubheader = cells[j-1][0].getCell_content();
+				}
+				continue;					
+				}
+
+			}
+			//If row is a subheader, don't recrod values
+			if(isRowSubheader(cells[j],table))
+			{
+				if(j>0 && isRowSubheader(cells[j-1], table))
+				{
+					prevSubheader = cells[j-1][0].getCell_content();
+				}
+				continue;
+			}
+
+			if(cells[j][0].getCell_content()==null)
+			{
+				cells[j][0].setCell_content("");
+			}
+			//Other levels of subheaders with possibly filled cells.
+				if((cells!=null&&cells[j]!=null&&cells[j][0]!=null&&cells[j][0].getCell_content()!=null)&&(cells[j][0].getCell_content().length()>0 && Utilities.isSpace(cells[j][0].getCell_content().trim().charAt(0)))||Utilities.isSpaceOrEmpty(cells[j][0].getCell_content()) )
+				{
+					hasSpaceSubheaders = true;
+					SetSubheaderRow(cells[j]);
+					if(Utilities.numOfBegeningSpaces(cells[j][0].getCell_content())==currentSubHeaderLevel||Utilities.isSpaceOrEmpty(cells[j][0].getCell_content()))
+						headerStackA[currentSubHeaderLevel] = cells[j][0].getCell_content();
+					else
+					{
+						currentSubHeaderLevel = Utilities.numOfBegeningSpaces(cells[j][0].getCell_content());
+						headerStackA[currentSubHeaderLevel] = cells[j][0].getCell_content();
+					}
+				}
+				else
+				{
+					if(hasSpaceSubheaders)
+						currentSubHeaderLevel = 0;
+					headerStackA[currentSubHeaderLevel] = cells[j][0].getCell_content();
+					
+				}
+
+			for(int k=1;k<cells[j].length;k++)
+			{
+				
+				try{ 
 					DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 					DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 
@@ -969,47 +1125,77 @@ public class Decomposition {
 
 					Element rootElement = doc.createElement("information");
 					doc.appendChild(rootElement);
-					
 					Element cell = doc.createElement("Cell");
 					rootElement.appendChild(cell);
 					
 					Element NavigationPath = doc.createElement("NavigationPath");
-					if(!Utilities.isSpaceOrEmpty(cells[0][0].getCell_content()) && cells[0][0].isIs_header()){
-					Element TopLeftHeader = doc.createElement("Head00");
-					String topLeft = "";
+					String Head00Str = "";
+					if(!Utilities.isSpaceOrEmpty(cells[0][0].getCell_content()) && cells[0][0].isIs_header())
+					{
+						
+						boolean foundHeader = false;
+						for(int l = j;l>=0;l--)
+						{
+							if(cells[l][k].isIs_header())
+							{
+								if(!cells[l][k].getCell_content().equals(""))
+									Head00Str = cells[l][k].getCell_content();
+								foundHeader = true;
+							}
+							if(foundHeader && !cells[l][k].isIs_header())
+							{
+								break;
+							}
+						}
+						
+						Element Head00 = doc.createElement("Head00");
+						Head00.setTextContent(Head00Str);
+						cells[j][k].setHead00(Head00Str);
+						NavigationPath.appendChild(Head00);
+					}
+					Element Stub = doc.createElement("Stub");								
 					
+					if(currentSubHeaderLevel>0)
+					{
+						getStackAsElements(headerStackA,prevSubheader, currentSubHeaderLevel, doc, Stub);
+						
+					}
+					String subheaderValues = "";
+					String[] SubHeaders = new String[Stub.getChildNodes().getLength()] ;
+					for(int l=0;l<Stub.getChildNodes().getLength();l++)
+					{
+						subheaderValues+=" "+Stub.getChildNodes().item(l).getTextContent();
+						SubHeaders[l]= Stub.getChildNodes().item(l).getTextContent();
+					}
+					cells[j][k].setSubheader_values(subheaderValues);
+					Element ss = doc.createElement("StubValue");
+					ss.setTextContent(cells[j][0].getCell_content());
+					cells[j][k].setStub_values(cells[j][0].getCell_content());
+					Stub.appendChild(ss);
+					
+					NavigationPath.appendChild(Stub);
+					LinkedList<String> headers = new LinkedList<String>();
+					boolean foundHeader = false;
 					for(int l = j;l>=0;l--)
 					{
-						if(l<cells.length && cells[l]!=null && cells[l].length>0 && cells[l][k]!=null && cells[l][k].isIs_header())
+						if(cells[l][k].isIs_header())
 						{
-							headerRow = l;
+							if(!cells[l][k].getCell_content().equals(""))
+							headers.addFirst(cells[l][k].getCell_content());
+							foundHeader = true;
+						}
+						if(foundHeader && !cells[l][k].isIs_header())
+						{
+							break;
 						}
 					}
-					TopLeftHeader.setTextContent(cells[headerRow][0].getCell_content());
-					cells[j][k].setHead00(cells[headerRow][0].getCell_content());
-					NavigationPath.appendChild(TopLeftHeader);
-					}
-					if(!Utilities.isSpaceOrEmpty(cells[j][0].getCell_content())){
-						Element Stub = doc.createElement("Stub");
-						Element StubValue = doc.createElement("StubValue");
-						StubValue.setTextContent(cells[j][0].getCell_content());
-						cells[j][k].setStub_values(cells[j][0].getCell_content());
-						Stub.appendChild(StubValue);
-						NavigationPath.appendChild(Stub);
-						}
-					if(!Utilities.isSpaceOrEmpty(cells[headerRow][k].getCell_content()) && cells[headerRow][k].isIs_header()){
-						int s = 0;
-						while(headerRow>=0 && cells[headerRow][0].isIs_header()){
-							
+					
+						for(int s = 0;s<headers.size();s++){
 							Element Header = doc.createElement("HeaderValue"+s);
-							Header.setTextContent(cells[headerRow][k].getCell_content());
-							headers.add(cells[headerRow][k].getCell_content());
-							cells[j][k].setHeader_values(cells[headerRow][k].getCell_content());
+							Header.setTextContent(headers.get(s));
+							cells[j][k].setHeader_values(headers.toString());
 							NavigationPath.appendChild(Header);
-							headerRow--;
-							s++;
-						}
-						}
+						}			
 					
 					cell.appendChild(NavigationPath);
 					
@@ -1022,25 +1208,26 @@ public class Decomposition {
 					CellType.setTextContent(cells[j][k].getCellType());
 					cell.appendChild(CellType);
 					
-					Element tableA = doc.createElement("Table");
-					rootElement.appendChild(tableA);
-					
-					Element TableType = doc.createElement("TableType");
-					TableType.setTextContent("MultiTable");
-					tableA.appendChild(TableType);
-					
+					Element tableEl = doc.createElement("Table");
+					rootElement.appendChild(tableEl);
 					
 					Element tname = doc.createElement("tableName");
 					tname.setTextContent(table.getTable_caption());
-					tableA.appendChild(tname);
+					tableEl.appendChild(tname);
+					
+					Element TableType = doc.createElement("TableType");
+					TableType.setTextContent("Multi-Table");
+					tableEl.appendChild(TableType);
+					
+
 					
 					Element torder = doc.createElement("tableOrder");
 					torder.setTextContent(table.getTable_title());
-					tableA.appendChild(torder);
+					tableEl.appendChild(torder);
 					
 					Element tfooter = doc.createElement("tableFooter");
 					tfooter.setTextContent(table.getTable_footer());
-					tableA.appendChild(tfooter);
+					tableEl.appendChild(tfooter);
 					
 					Element document = doc.createElement("Document");
 					rootElement.appendChild(document);
@@ -1053,19 +1240,154 @@ public class Decomposition {
 					pmc.setTextContent(art.getPmc());
 					document.appendChild(pmc);
 					if(TablInExMain.ExportLinkedData){
-						TablInExMain.linkedData.AddCell(cells[j][0].getCell_content(), null, cells[j][k].getCell_content(), cells[j][k].getCellType(), headers.toArray(new String[0]), cells[0][0].getCell_content(), j, k);					
-					}				
+						TablInExMain.linkedData.AddCell(cells[j][0].getCell_content(), SubHeaders, cells[j][k].getCell_content(), cells[j][k].getCellType(),  cells[0][k].headers.toArray(new String[0]), cells[0][0].getCell_content(), j, k);					
+					}
 					DataExtractionOutputObj dataExtObj = new DataExtractionOutputObj(folder+tableFileName+"e"+j+","+k+".xml", doc);
 					//TablInExMain.outputs.add(dataExtObj);
-					table.output.add(dataExtObj);									
-
+					table.output.add(dataExtObj);
+					
 				}catch(Exception ex)
 				{
 					ex.printStackTrace();
 				}
 			}
 		}
+		}
+		else
+		{
+			//List table
+			boolean hasSubheaders = hasSuperRowsListTable(cells, table);
+			boolean TopLevel = false;
+			String currentSubHeader = "";
+			for(int j=0;j<cells.length;j++)
+			{
+				for(int k=0;k<cells[j].length;k++)
+				{
+					if(cells[j][k].isIs_header())
+						continue;
+					try{
+						
+						if(hasSubheaders)
+						{
+							if(TopLevel==false && Utilities.numOfSpaceOrBullets(cells[j][k].getCell_content())==0 && cells[j+1]!= null && Utilities.numOfSpaceOrBullets(cells[j+1][k].getCell_content())!=0 && currentSubHeader.equals(""))
+							{
+								TopLevel = true;
+								currentSubHeader=cells[j][k].getCell_content();
+								continue;
+							}
+							if(TopLevel==false && Utilities.numOfSpaceOrBullets(cells[j][k].getCell_content())==0 && (cells[j+2]!= null && Utilities.numOfSpaceOrBullets(cells[j+2][k].getCell_content())!=0) && currentSubHeader.equals(""))
+							{
+								TopLevel = true;
+								currentSubHeader=cells[j][k].getCell_content();
+								continue;
+							}
+							if(TopLevel == true && !cells[j][k].isBreakingLineOverRow() && Utilities.numOfSpaceOrBullets(cells[j][k].getCell_content())==0 && !currentSubHeader.equals(""))
+							{
+								currentSubHeader=cells[j][k].getCell_content();
+								continue;
+							}
+						}
+						DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+						DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+
+						//root elements
+						Document doc = docBuilder.newDocument();
+
+						Element rootElement = doc.createElement("information");
+						doc.appendChild(rootElement);
+						
+						Element cell = doc.createElement("Cell");
+						rootElement.appendChild(cell);
+						
+						Element NavigationPath = doc.createElement("NavigationPath");
+						
+						
+						LinkedList<String> headers = new LinkedList<String>();
+						boolean foundHeader = false;
+						for(int l = j;l>=0;l--)
+						{
+							if(cells[l][k].isIs_header())
+							{
+								if(!cells[l][k].getCell_content().equals(""))
+								headers.addFirst(cells[l][k].getCell_content());
+								foundHeader = true;
+							}
+							if(foundHeader && !cells[l][k].isIs_header())
+							{
+								break;
+							}
+						}
+						
+							for(int s = 0;s<headers.size();s++){
+								Element Header = doc.createElement("HeaderValue"+s);
+								Header.setTextContent(headers.get(s));
+								cells[j][k].setHeader_values(headers.toString());
+								NavigationPath.appendChild(Header);
+							}			
+						
+						
+						if(currentSubHeader!=""){
+						Element SubHeader = doc.createElement("SubHeader");
+						SubHeader.setTextContent(currentSubHeader);
+						NavigationPath.appendChild(SubHeader);
+						}
+						cell.appendChild(NavigationPath);
+						cells[j][k].setHeader_values(cells[0][k].getCell_content());
+						
+						//info elements
+						Element info = doc.createElement("value");
+						info.setTextContent(cells[j][k].getCell_content());
+						cell.appendChild(info);
+						
+						Element CellType = doc.createElement("CellType");
+						CellType.setTextContent(cells[j][k].getCellType());
+						cell.appendChild(CellType);
+						
+						Element tableA = doc.createElement("Table");
+						rootElement.appendChild(tableA);
+						
+						Element tname = doc.createElement("tableName");
+						tname.setTextContent(table.getTable_caption());
+						tableA.appendChild(tname);
+						
+						Element TableType = doc.createElement("TableType");
+						TableType.setTextContent("Multi-Table");
+						tableA.appendChild(TableType);			
+						
+						Element torder = doc.createElement("tableOrder");
+						torder.setTextContent(table.getTable_title());
+						tableA.appendChild(torder);
+						
+						Element tfooter = doc.createElement("tableFooter");
+						tfooter.setTextContent(table.getTable_footer());
+						tableA.appendChild(tfooter);
+						
+						Element document = doc.createElement("Document");
+						rootElement.appendChild(document);
+						
+						Element docTitle = doc.createElement("DocumentTitle");
+						docTitle.setTextContent(art.getTitle());
+						document.appendChild(docTitle);
+						
+						Element pmc = doc.createElement("PMC");
+						pmc.setTextContent(art.getPmc());
+						document.appendChild(pmc);
+						if(TablInExMain.ExportLinkedData){
+							TablInExMain.linkedData.AddCell("", null, cells[j][k].getCell_content(), cells[j][k].getCellType(), cells[0][k].headers.toArray(new String[0]), "", j, k);
+						}
+						DataExtractionOutputObj dataExtObj = new DataExtractionOutputObj(folder+tableFileName+"e"+j+","+k+".xml", doc);
+						//TablInExMain.outputs.add(dataExtObj);
+						table.output.add(dataExtObj);
+					}catch(Exception ex)
+					{
+						ex.printStackTrace();
+					}
+				}
+			}
 		
+			
+		}
+		table.cells = cells;
 		return table;
 	}
 

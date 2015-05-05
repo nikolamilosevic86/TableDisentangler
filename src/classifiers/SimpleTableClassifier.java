@@ -206,9 +206,7 @@ public class SimpleTableClassifier {
 		}
 		
 	}
-	public static String getFolder() {
-		return folder;
-	}
+	
 	public static void setFolder(String folder) {
 		SimpleTableClassifier.folder = folder;
 	}
