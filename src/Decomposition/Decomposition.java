@@ -1136,13 +1136,13 @@ public class Decomposition {
 						boolean foundHeader = false;
 						for(int l = j;l>=0;l--)
 						{
-							if(cells[l][k].isIs_header())
+							if(cells[l][0].isIs_header())
 							{
-								if(!cells[l][k].getCell_content().equals(""))
-									Head00Str = cells[l][k].getCell_content();
+								if(!cells[l][0].getCell_content().equals(""))
+									Head00Str = cells[l][0].getCell_content();
 								foundHeader = true;
 							}
-							if(foundHeader && !cells[l][k].isIs_header())
+							if(foundHeader && !cells[l][0].isIs_header())
 							{
 								break;
 							}
