@@ -13,6 +13,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 
 import net.didion.jwnl.JWNL;
+import Annotation.Annotate;
 import ConceptualizationOfValues.ConceptizationStats;
 import Decomposition.Decomposition;
 import Decomposition.MetaMapStats;
@@ -308,6 +309,8 @@ public class TablInExMain {
 					out.CreateOutput();
 				}
 			}
+			Annotate annot = new Annotate();
+			annot.AnnotateArticle(article);
 
 		}
 

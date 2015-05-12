@@ -86,14 +86,17 @@ public class DecompositionRDFWriter {
 	
 	public void AddArticle(Article art)
 	{
+		if(art ==null)
+			return;
 		Resource Article = model.createResource(ArticleDefault+art.getPmc());
 		model.add(Article,ArticleName,art.getTitle());
 		model.add(Article,ArticleID,art.getPmc());
 		if(art.getAbstract()!=null && !art.getAbstract().equals(""))
 		model.add(Article,Abstract,art.getAbstract());
-		for(int i = 0;i<art.getAuthors().length;i++)
+		for(int i = 0;i<art.getAuthors().size();i++)
 		{
-			model.add(Article,hasAuthor,art.getAuthors()[i]);
+			if(art.getAuthors().get(i).name!=null)
+			model.add(Article,hasAuthor,art.getAuthors().get(i).name);
 		}
 		for(int i = 0;i<art.getAffiliation().length;i++)
 		{

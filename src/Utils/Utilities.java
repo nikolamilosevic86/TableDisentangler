@@ -175,7 +175,10 @@ public class Utilities {
 	public static boolean MakeDirectory(String path)
 	{
 		File f = new File(path);
+		if (!f.exists()) {
 		return f.mkdir();
+		}
+		return false;
 	}
 	
 	/**

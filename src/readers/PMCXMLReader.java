@@ -8,16 +8,19 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
+import Utils.Author;
 import Utils.Utilities;
 import classifiers.SimpleTableClassifier;
 import stats.Statistics;
@@ -81,20 +84,58 @@ public class PMCXMLReader implements Reader{
 		FileName = fileName;
 	}
 
-	public String[] GetAuthors(Document parse)
+	public LinkedList<Author> GetAuthors(Document parse)
 	{
+		LinkedList<Author> auths = new LinkedList<Author>();
 		NodeList authors = parse.getElementsByTagName("contrib");
-	    String[] auths = new String[authors.getLength()];
 	    for(int j = 0; j<authors.getLength(); j++)
 	    {
+	    	Author auth = new Author();
 	    	String givenName = "";
 	    	String surname = "";
-	    	NodeList name = authors.item(j).getChildNodes().item(0).getChildNodes();
+	    	String email = "";
+	    	
+	    	for(int k = 0;k<authors.item(j).getChildNodes().getLength();k++){
+	    	if(authors.item(j).getChildNodes().item(k).getNodeName()=="name"){
+	    	NodeList name = authors.item(j).getChildNodes().item(k).getChildNodes();
 	    	if(name.item(1)!=null)
 	    		surname = Utilities.getString(name.item(0));
 	    	if(name.item(1)!=null)
 	    		givenName = Utilities.getString(name.item(1));
-	    	auths[j] = surname+ ", "+givenName;
+	    	auth.name = surname+ ", "+givenName;
+	    	}
+	    	if(authors.item(j).getChildNodes().item(k).getNodeName()=="email"){
+	    		NodeList name = authors.item(j).getChildNodes().item(k).getChildNodes();
+		    	if(name.item(0)!=null)
+		    		email = Utilities.getString(name.item(0));
+		    	auth.email = email;
+	    	}
+	    	
+	    	
+	    	if(authors.item(j).getChildNodes().item(k).getNodeName()=="xref"){
+	    		Node name = authors.item(j).getChildNodes().item(k);
+	    		NamedNodeMap attr = name.getAttributes();
+	    		if (null != attr) {
+	    			Node p = attr.getNamedItem("ref-type");
+	    	        if(p.getNodeValue() == "aff");
+	    	        Node p2 = attr.getNamedItem("rid");
+	    	        String affId = p2.getNodeValue();
+	    	        NodeList affis = parse.getElementsByTagName("aff");
+	    		    String[] affilis = new String[affis.getLength()];
+	    		    for(int s = 0; s<affis.getLength(); s++)
+	    		    {
+	    		    	if(affis.item(s).getAttributes()!=null &&affis.item(s).getAttributes().getNamedItem("id")!=null&& affis.item(s).getAttributes().getNamedItem("id").getNodeValue().equals(affId)){
+	    		    		String affName = Utilities.getString(affis.item(s));
+	    		    		if(affName.contains("1")||affName.contains("2")||affName.contains("3")||affName.contains("4")||affName.contains("5"))
+	    		    			affName = affName.substring(1);
+	    		    		auth.affiliation.add(affName);	
+	    		    	}
+	    		    }
+	    		}
+	    	}
+	    	
+	    	}
+	    auths.add(auth);
 	    }
 	    return auths;
 	}
@@ -149,18 +190,27 @@ public class PMCXMLReader implements Reader{
 	public Article ParseMetaData(Article art, Document parse, String xml)
 	{
 		String title = "";
+		String journal = "";
 		if(parse.getElementsByTagName("article-title")!=null && parse.getElementsByTagName("article-title").item(0)!=null){
 			title = parse.getElementsByTagName("article-title").item(0).getTextContent();
 			title = title.replaceAll("\n", "");
 			title = title.replaceAll("\t", "");
 			System.out.println(title);
 		}
-	    String[] auths = GetAuthors(parse);
-	    for(int j = 0; j<auths.length; j++)
+	    LinkedList<Author> auths = GetAuthors(parse);
+	    for(int j = 0; j<auths.size(); j++)
 	    {
-	    	System.out.println(auths[j]);
+	    	System.out.println(auths.get(j));
 	    }
 
+	    //journal-title
+	    if(parse.getElementsByTagName("journal-title")!=null && parse.getElementsByTagName("journal-title").item(0)!=null){
+			journal = parse.getElementsByTagName("journal-title").item(0).getTextContent();
+			journal = journal.replaceAll("\n", "");
+			journal = journal.replaceAll("\t", "");
+			
+		}
+	    
 	    NodeList issn = parse.getElementsByTagName("issn");
 	    for(int j=0;j<issn.getLength();j++)
 	    {
@@ -244,6 +294,7 @@ public class PMCXMLReader implements Reader{
 	    art.setTitle(title);
 	    art.setXML(xml);
 	    art.setAuthors(auths);
+	    art.setJournal_name(journal);
 		return art;
 	}
 	

@@ -406,9 +406,9 @@ private String jdbcDriver = "com.mysql.jdbc.Driver";
 		int id = -1;
 		try{
 			String articleAuthors = "";
-			for(String auth : art.getAuthors())
+			for(int i = 0; i<art.getAuthors().size();i++)
 			{
-				articleAuthors = articleAuthors+";"+auth;
+				articleAuthors = articleAuthors+";"+art.getAuthors().get(i).name;
 			}
 			if(articleAuthors.length()>1)
 				articleAuthors = articleAuthors.substring(1);	

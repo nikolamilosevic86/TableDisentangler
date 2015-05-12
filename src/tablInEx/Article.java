@@ -5,6 +5,10 @@
  */
 package tablInEx;
 
+import java.util.LinkedList;
+
+import Utils.Author;
+
 
 /**
  * 
@@ -20,7 +24,7 @@ public class Article {
 	private String pissn;
 	private String eissn;
 	private String file_name;
-	private String[] authors;
+	private LinkedList<Author> authors;
 	private String[] affiliation;
 	private String[] keywords;
 	private String article_abstract;
@@ -30,6 +34,7 @@ public class Article {
 	private Table[] tables;
 	private String publisher_name;
 	private String publisher_loc;
+	private String journal_name;
 	
 	
 	//Constructors
@@ -54,11 +59,11 @@ public class Article {
 		this.file_name = file_name;
 	}
 
-	public String[] getAuthors() {
+	public LinkedList<Author> getAuthors() {
 		return authors;
 	}
 
-	public void setAuthors(String[] authors) {
+	public void setAuthors(LinkedList<Author> authors) {
 		this.authors = authors;
 	}
 
@@ -172,6 +177,20 @@ public class Article {
 
 	public void setKeywords(String[] keywords) {
 		this.keywords = keywords;
+	}
+
+	/**
+	 * @return the journal_name
+	 */
+	public String getJournal_name() {
+		return journal_name;
+	}
+
+	/**
+	 * @param journal_name the journal_name to set
+	 */
+	public void setJournal_name(String journal_name) {
+		this.journal_name = journal_name;
 	}
 
 

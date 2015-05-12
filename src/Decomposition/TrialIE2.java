@@ -107,10 +107,10 @@ public class TrialIE2 {
     		float AgeMean;
     		String AgeRange;
     		String articleAuthors = "";
-    		for(String auth : a.getAuthors())
-    		{
-    			articleAuthors = articleAuthors+";"+auth;
-    		}
+    		for(int i = 0; i<a.getAuthors().size();i++)
+			{
+				articleAuthors = articleAuthors+";"+a.getAuthors().get(i).name;
+			}
     		if(articleAuthors.length()>1)
     			articleAuthors = articleAuthors.substring(1);
     		Table[] tables = a.getTables();

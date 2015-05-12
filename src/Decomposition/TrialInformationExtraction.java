@@ -459,9 +459,9 @@ public class TrialInformationExtraction {
 		float AgeMean;
 		String AgeRange;
 		String articleAuthors = "";
-		for(String auth : a.getAuthors())
+		for(int i = 0; i<a.getAuthors().size();i++)
 		{
-			articleAuthors = articleAuthors+";"+auth;
+			articleAuthors = articleAuthors+";"+a.getAuthors().get(i).name;
 		}
 		if(articleAuthors.length()>1)
 			articleAuthors = articleAuthors.substring(1);
