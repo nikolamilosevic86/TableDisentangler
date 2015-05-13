@@ -229,8 +229,7 @@ public class TablInExMain {
 						original_cells[i] = new Cell[article.getTables()[s].cells[i].length];
 						for(int j = 0;j<article.getTables()[s].cells[i].length;j++)
 							original_cells[i][j] = new Cell(article.getTables()[s].cells[i][j]);
-					}
-					
+					}		
 					article.getTables()[s].original_cells = original_cells;
 				}
 			}
@@ -244,8 +243,6 @@ public class TablInExMain {
 			}
 
 			if (IEFreqSQLTial) {
-				// TrialInformationExtraction tie = new
-				// TrialInformationExtraction("");
 				tie2 = new FreqIE();
 			}
 			if (IEinSQLTial) {
