@@ -204,18 +204,10 @@ public class Annotate {
 						
 						CellEl.appendChild(CellColumn);
 						
-						Element IsTopLeft = doc.createElement("IsTopLeftCell");
-						if(j==0&&j==0)
-							IsTopLeft.setTextContent("yes");
-						else
-							IsTopLeft.setTextContent("no");
-						CellEl.appendChild(IsTopLeft);
 					}
 				}
 			}
-			
-				
-				
+						
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
