@@ -19,6 +19,8 @@ public class Cell {
 	
 	private String stub_values;
 	
+	public String CellId;
+	
 	private String header_values;
 	
 	public LinkedList<String>headers = new LinkedList<String>();
@@ -314,6 +316,10 @@ public class Cell {
 		if(proportion<=0.49 && !Utilities.isNumeric(this.getCell_content()))
 		{
 			return "Text";
+		}
+		if(Utilities.isSpaceOrEmpty(this.getCell_content()))
+		{
+			return "Empty";
 		}
 		return "Other";
 	}
