@@ -86,6 +86,41 @@ public class Cell {
 		row_number = j;
 	}
 	
+	public Cell(Cell c)
+	{
+		this.subheader_values = c.subheader_values;
+		this.stub_values = c.stub_values;	
+		this.CellId = c.CellId;
+		this.header_values=c.header_values;
+		this.headers = new LinkedList<String>();
+		for(String head:c.headers)
+		{
+			this.headers.add(head);
+		}
+		this.stubs = new LinkedList<String>();
+		for(String stub:c.stubs)
+		{
+			this.stubs.add(stub);
+		}
+		this.head00 = c.head00;
+		this.isSubheader = c.isSubheader;
+		this.isBreakingLineOverRow = c.isBreakingLineOverRow;
+		this.row_number = c.row_number;
+		this.column_number = c.column_number;
+		this.cell_content = c.cell_content;
+		this.is_header = c.is_header;
+		this.is_stub = c.is_stub;
+		this.is_filled = c.is_filled;
+		this.stub_probability = c.stub_probability;
+		this.header_probability = c.header_probability;
+		this.is_rowspanning = c.is_rowspanning;
+		this.is_columnspanning = c.is_columnspanning;
+		this.cells_rowspanning = c.cells_rowspanning;
+		this.cells_columnspanning = c.cells_columnspanning;
+		this.columnspanning_index = c.columnspanning_index;
+		this.rowspanning_index = c.rowspanning_index;
+	}
+	
 	// Getters and setters
 	/**
 	 * Gets the row_number.

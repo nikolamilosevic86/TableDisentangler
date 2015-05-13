@@ -221,8 +221,18 @@ public class TablInExMain {
 				linkedData = new DecompositionRDFWriter();
 			}
 			if (runas.toLowerCase().equals("pmc")) {
-				article = runReadingloopOneFile(article, files[a],
-						PMCXMLReader.class);
+				article = runReadingloopOneFile(article, files[a], PMCXMLReader.class);
+				for(int s = 0;s<article.getTables().length;s++)
+				{
+					Cell [][] original_cells = new Cell[article.getTables()[s].cells.length][];
+					for(int i = 0; i < article.getTables()[s].cells.length; i++){
+						original_cells[i] = new Cell[article.getTables()[s].cells[i].length];
+						for(int j = 0;j<article.getTables()[s].cells[i].length;j++)
+							original_cells[i][j] = new Cell(article.getTables()[s].cells[i][j]);
+					}
+					
+					article.getTables()[s].original_cells = original_cells;
+				}
 			}
 			Decomposition ie = null;
 			TrialIE2 tie = null;
@@ -257,6 +267,7 @@ public class TablInExMain {
 			if (article != null && article.getTables() != null)
 				for (int j = 0; j < article.getTables().length; j++) {
 					Table t = article.getTables()[j];
+					
 					// t = TableSimplifier.LabelHeaderCells(t);// did not help
 					if (t.isHasHeader()) {
 						t = TableSimplifier.MergeHeaders(t);
@@ -314,14 +325,6 @@ public class TablInExMain {
 
 		}
 
-		// Create output
-		// for(int i = 0;i<outputs.size();i++)
-		// {
-		// if(shouldTag){
-		// outputs.get(i).MetamapTagDocument();
-		// }
-		// outputs.get(i).CreateOutput();
-		// }
 		int weight = 0;
 		int BMI = 0;
 		if (learnheaders) {

@@ -56,6 +56,7 @@ public class Table {
 	
 	/** The cells. Cell matrix of the table */
 	public Cell[][] cells;
+	public Cell[][] original_cells;
 	
 	//Constructors
 	/**

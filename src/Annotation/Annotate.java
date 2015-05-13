@@ -138,7 +138,7 @@ public class Annotate {
 				Element CellsEl = doc.createElement("Cells");
 				tableEl.appendChild(CellsEl);
 				
-				Cell[][] cells = table.getTable_cells();
+				Cell[][] cells = table.original_cells;
 				
 				for(int j = 0;j<cells.length;j++)
 				{
