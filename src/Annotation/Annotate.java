@@ -1,3 +1,8 @@
+/*
+ * @author: Nikola Milosevic
+ * @affiliation: University of Manchester, School of Computer science
+ * 
+ */
 package Annotation;
 
 import java.io.File;
@@ -18,8 +23,17 @@ import tablInEx.Article;
 import tablInEx.Cell;
 import tablInEx.Table;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Annotate.
+ */
 public class Annotate {
 
+	/**
+	 * Annotate article with annotation schema.
+	 *
+	 * @param a the read article
+	 */
 	public void AnnotateArticle(Article a)
 	{
 		try {
@@ -170,6 +184,12 @@ public class Annotate {
 						
 						for(int s = j-1;s>=0;s--)
 						{
+							//Current header not empty, and cell before is not header
+							if(s>=0 && cells[j][k].isIs_header() && !cells[s][k].isIs_header()&&!cells[j][k].getCell_content().equals(""))
+							{
+								break;
+							}
+							
 							if(s>=0&&cells[s][k]!=null && cells[s][k].isIs_header()&&!cells[s][k].getCell_content().equals(""))
 							{
 								Element HeaderRef = doc.createElement("HeaderRef");
