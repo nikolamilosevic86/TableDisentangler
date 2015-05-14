@@ -282,12 +282,10 @@ public class Annotate {
 						Element CellColumn = doc.createElement("CellColumnNum");
 						CellColumn.setTextContent(k+"");//cells[j][k].getColumn_number()
 						
-						CellEl.appendChild(CellColumn);
-						
+						CellEl.appendChild(CellColumn);			
 					}
 				}
-			}
-						
+			}						
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
