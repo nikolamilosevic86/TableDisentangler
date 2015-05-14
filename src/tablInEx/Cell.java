@@ -28,9 +28,12 @@ public class Cell {
 	
 	private String head00;
 	
-	private boolean isSubheader = false;
+	private boolean isUnderSubheader = false;
 	
 	private boolean isBreakingLineOverRow = false;
+	
+	private int subheader_level=0;
+	
 	
 	/** The row_number. */
 	private int row_number;
@@ -46,6 +49,8 @@ public class Cell {
 	
 	/** The is_stub. */
 	private boolean is_stub;
+	
+	private boolean is_subheader=false;
 	
 	private boolean is_filled = false;
 	
@@ -73,6 +78,8 @@ public class Cell {
 	/** The cells_columnspanning. */
 	private int cells_columnspanning;
 	
+	private String superRowIndex;
+	
 	//Constructors
 	/**
 	 * Instantiates a new cell.
@@ -92,6 +99,7 @@ public class Cell {
 		this.stub_values = c.stub_values;	
 		this.CellId = c.CellId;
 		this.header_values=c.header_values;
+		this.superRowIndex = c.superRowIndex;
 		this.headers = new LinkedList<String>();
 		for(String head:c.headers)
 		{
@@ -103,7 +111,7 @@ public class Cell {
 			this.stubs.add(stub);
 		}
 		this.head00 = c.head00;
-		this.isSubheader = c.isSubheader;
+		this.isUnderSubheader = c.isUnderSubheader;
 		this.isBreakingLineOverRow = c.isBreakingLineOverRow;
 		this.row_number = c.row_number;
 		this.column_number = c.column_number;
@@ -115,10 +123,12 @@ public class Cell {
 		this.header_probability = c.header_probability;
 		this.is_rowspanning = c.is_rowspanning;
 		this.is_columnspanning = c.is_columnspanning;
+		this.is_subheader = c.is_subheader;
 		this.cells_rowspanning = c.cells_rowspanning;
 		this.cells_columnspanning = c.cells_columnspanning;
 		this.columnspanning_index = c.columnspanning_index;
 		this.rowspanning_index = c.rowspanning_index;
+		this.subheader_level = c.subheader_level;
 	}
 	
 	// Getters and setters
@@ -506,12 +516,12 @@ public class Cell {
 		this.subheader_values = subheader_values;
 	}
 
-	public boolean isSubheader() {
-		return isSubheader;
+	public boolean isUnderSubheader() {
+		return isUnderSubheader;
 	}
 
-	public void setSubheader(boolean isSubheader) {
-		this.isSubheader = isSubheader;
+	public void setUnderSubheader(boolean isSubheader) {
+		this.isUnderSubheader = isSubheader;
 	}
 
 	/**
@@ -526,6 +536,34 @@ public class Cell {
 	 */
 	public void setBreakingLineOverRow(boolean isBreakingLineOverRow) {
 		this.isBreakingLineOverRow = isBreakingLineOverRow;
+	}
+
+	/**
+	 * @return the is_subheader
+	 */
+	public boolean isIs_subheader() {
+		return is_subheader;
+	}
+
+	/**
+	 * @param is_subheader the is_subheader to set
+	 */
+	public void setIs_subheader(boolean is_subheader) {
+		this.is_subheader = is_subheader;
+	}
+
+	/**
+	 * @return the superRowIndex
+	 */
+	public String getSuperRowIndex() {
+		return superRowIndex;
+	}
+
+	/**
+	 * @param superRowIndex the superRowIndex to set
+	 */
+	public void setSuperRowIndex(String superRowIndex) {
+		this.superRowIndex = superRowIndex;
 	}
 	
 }
