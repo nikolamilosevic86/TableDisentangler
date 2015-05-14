@@ -93,7 +93,7 @@ public class Annotate {
 			}
 			rootElement.appendChild(keywords);
 
-			Element publisher = doc.createElement("Publisher");
+			Element publisher = doc.createElement("JournalInformation");
 			Element publisherName = doc.createElement("PublisherName");
 			publisherName.setTextContent(a.getPublisher_name());
 			publisher.appendChild(publisherName);
@@ -105,21 +105,23 @@ public class Annotate {
 			
 			Element venue = doc.createElement("Venue");
 			venue.setTextContent(a.getVenue());
-			rootElement.appendChild(venue);
+			publisher.appendChild(venue);
 			
 			Element journal = doc.createElement("journal");
 			journal.setTextContent(a.getJournal_name());
-			rootElement.appendChild(journal);
+			publisher.appendChild(journal);
 			
 			Element abstractEl = doc.createElement("Abstract");
 			abstractEl.setTextContent(a.getAbstract());
 			rootElement.appendChild(abstractEl);
 			
 			Table[] tables = a.getTables();
+			Element tablesEl = doc.createElement("Tables");
+			rootElement.appendChild(tablesEl);
 			for(int i = 0;i<tables.length;i++)
 			{
 				Element tableEl = doc.createElement("Table");
-				rootElement.appendChild(tableEl);
+				tablesEl.appendChild(tableEl);
 				Table table = tables[i];
 				
 				Element TabOrder = doc.createElement("TableOrder");
