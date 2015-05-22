@@ -265,6 +265,16 @@ public class Decomposition {
 		return s;
 	}
 	
+	/**
+	 * Gets the stack index. This is needed for annotation
+	 *
+	 * @param headerStackIndexes the header stack indexes
+	 * @param prevSubheaderIndex the prev subheader index
+	 * @param currentSubHeaderLevel the current sub header level
+	 * @param cell the cell
+	 * @param table the table
+	 * @return the stack index
+	 */
 	public void getStackIndex(String[] headerStackIndexes,String prevSubheaderIndex,int currentSubHeaderLevel, Cell cell,Table table)
 	{
 		Cell[][] original_cells = table.original_cells;
