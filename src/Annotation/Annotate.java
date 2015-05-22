@@ -80,7 +80,6 @@ public class Annotate {
 				Element authorEmail = doc.createElement("AuthorEmail");
 				authorEmail.setTextContent(a.getAuthors().get(i).email);
 				author.appendChild(authorEmail);
-				//author.setTextContent(a.getAuthors()[i]);
 				authors.appendChild(author);
 			}
 			rootElement.appendChild(authors);
@@ -192,16 +191,16 @@ public class Annotate {
 								break;
 							}
 							
-							if(s>=0&&cells[s][k]!=null && cells[s][k].isIs_header()&&!cells[s][k].getCell_content().equals(""))
+							if(s>=0&&cells[s][k]!=null && cells[s][k].isIs_header())
 							{
 								Element HeaderRef = doc.createElement("HeaderRef");
 								HeaderRef.setTextContent(""+s+k);
 								CellEl.appendChild(HeaderRef);
-								break;
+								//break;
 							}
-							if(s>=0&&cells[s][k]!=null && cells[s][k].isIs_header()&&cells[s][k].getCell_content().equals(""))
+							if(s>=0&&cells[s][k]!=null && cells[s][k].isIs_header())
 							{
-								Element HeaderCatRef = doc.createElement("HeadCategoryRef");
+								Element HeaderCatRef = doc.createElement("HeadStubRef");
 								HeaderCatRef.setTextContent(""+s+0);
 								CellEl.appendChild(HeaderCatRef);
 								break;
@@ -233,9 +232,7 @@ public class Annotate {
 							CellRole.setTextContent("Stub");
 							CellRoles.appendChild(CellRole);
 							isDataCell = false;
-						}
-						
-						
+						}		
 						
 						boolean isSuperRow = false;
 						for(int l = 0;l<5;l++)
@@ -262,9 +259,9 @@ public class Annotate {
 							CellRoles.appendChild(CellRole);
 						}
 						
-						if(j==0&& k==0 && cells[j][k].isIs_header()){
+						if( k==0 && cells[j][k].isIs_header()){
 							Element CellRole = doc.createElement("CellRole");
-							CellRole.setTextContent("TopLeftHeadCell");
+							CellRole.setTextContent("StubHeadCell");
 							CellRoles.appendChild(CellRole);
 							isDataCell = false;
 						}
