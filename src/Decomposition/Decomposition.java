@@ -278,6 +278,21 @@ public class Decomposition {
 		}
 		for(int i = 0;i<currentSubHeaderLevel;i++)
 		{
+			if(currentSubHeaderLevel>1)
+			{
+				for(int s = 0;s<original_cells.length-1;s++)
+				{
+					if((""+s+"0").equals(headerStackIndexes[i]))
+					{
+						for(int d= 0;d<original_cells[s].length;d++)
+						{
+							if(i-1>=0 && headerStackIndexes[i-1]!=null)
+								original_cells[s][d].setSuperRowIndex(headerStackIndexes[i-1]);
+						}
+					}
+				}
+			}
+			if(headerStackIndexes[i]!=null)
 				OriginalCell.setSuperRowIndex(headerStackIndexes[i]);
 		}
 		
