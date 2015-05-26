@@ -258,10 +258,10 @@ public class Annotate {
 							CellRole.setTextContent("SuperRow");
 							CellRoles.appendChild(CellRole);
 						}
-						
+						//Previously was StubHeaderCell, but makes no sense when since Header is anyway included.
 						if( k==0 && cells[j][k].isIs_header()){
 							Element CellRole = doc.createElement("CellRole");
-							CellRole.setTextContent("StubHeadCell");
+							CellRole.setTextContent("Stub");
 							CellRoles.appendChild(CellRole);
 							isDataCell = false;
 						}
