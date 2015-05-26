@@ -190,6 +190,7 @@ public class TableSimplifier {
 		if(table.getNum_of_columns()<3)
 			return table;
 		Cell[][] cells = table.getTable_cells();
+		Cell[][] originalcells = table.original_cells;
 		String prevVal = "";
 		boolean hasComplexStub = false;
 		int cnt =0 ; 
@@ -226,14 +227,17 @@ public class TableSimplifier {
 					if(Utilities.isSpaceOrEmpty(cells[i][0].getCell_content()) && !Utilities.isSpaceOrEmpty(cells[i][1].getCell_content()))
 					{
 						cells[i][1].setCell_content(cells[i][1].getCell_content());
+						originalcells[cells[i][1].getRow_number()][cells[i][1].getColumn_number()].setIs_stub(true);
 					}
 					if(!Utilities.isSpaceOrEmpty(cells[i][0].getCell_content()) && Utilities.isSpaceOrEmpty(cells[i][1].getCell_content()))
 					{
 						cells[i][1].setCell_content(cells[i][0].getCell_content());
+						originalcells[cells[i][1].getRow_number()][cells[i][1].getColumn_number()].setIs_stub(true);
 					}
 					if(!Utilities.isSpaceOrEmpty(cells[i][0].getCell_content()) && !Utilities.isSpaceOrEmpty(cells[i][1].getCell_content()))
 					{
 						cells[i][1].setCell_content(cells[i][0].getCell_content()+", " +cells[i][1].getCell_content());
+						originalcells[cells[i][1].getRow_number()][cells[i][1].getColumn_number()].setIs_stub(true);
 					}
 //					if(cells[i][0].isIs_rowspanning()){
 //						cells[i][1].setCell_content(cells[i][0].getCell_content()+", " +cells[i][1].getCell_content());
@@ -241,10 +245,14 @@ public class TableSimplifier {
 				}
 				else
 				{
-					if(Utilities.isSpaceOrEmpty(cells[i][1].getCell_content()))
+					if(Utilities.isSpaceOrEmpty(cells[i][1].getCell_content())){
 						cells[i][1].setCell_content(prevVal);
-					else
+						originalcells[cells[i][1].getRow_number()][cells[i][1].getColumn_number()].setIs_stub(true);
+					}
+					else{
 						cells[i][1].setCell_content(prevVal + ", " +cells[i][1].getCell_content());
+						originalcells[cells[i][1].getRow_number()][cells[i][1].getColumn_number()].setIs_stub(true);
+					}
 				}
 			}
 		}
@@ -258,6 +266,7 @@ public class TableSimplifier {
 			table.stat.setNum_of_header_rows(1);
 			table.setNum_of_rows(1+table.stat.getNum_of_body_rows());
 			table.cells = newcells;
+			table.original_cells = originalcells;
 		}
 		
 		return table;
