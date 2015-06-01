@@ -1,9 +1,9 @@
-TablInExj - Table information extraction system
+TableAnnotator - A tool for automatic table annotation
 ===============================================
 
-TablInExj stands for Table Information Extraction (j is for java). TablInExj is a tool for extracting information from tables in PMC clinical documents in XML format.
+TableAnnotator is a tool for annotating tables written in Java. It uses specific annotation schema we proposed that is able to capture information about functions of a cell and inter-cell relationships. TableAnnotator is a tool for extracting annotations from tables in PMC clinical documents in XML format.
 
-Tool does this in a couple of steps. Firstly, tables are decomposed to a matrix of cell objects containing data and information about navigational path (headers, stubs, subheaders). After the table is decomposed, set of rules are applied to extract information about key clinical trial characteristics.
+Tool does this in a couple of steps. Firstly, tables are decomposed to a matrix of cell objects containing data and information about navigational path (headers, stubs, subheaders).
 
 This project is developed on the University of Manchester as a part of my PhD
 
