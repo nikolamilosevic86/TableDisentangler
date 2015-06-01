@@ -224,6 +224,8 @@ public class TablInExMain {
 				article = runReadingloopOneFile(article, files[a], PMCXMLReader.class);
 				for(int s = 0;s<article.getTables().length;s++)
 				{
+					if(article.getTables()[s].cells==null)
+						continue;
 					Cell [][] original_cells = new Cell[article.getTables()[s].cells.length][];
 					for(int i = 0; i < article.getTables()[s].cells.length; i++){
 						original_cells[i] = new Cell[article.getTables()[s].cells[i].length];
