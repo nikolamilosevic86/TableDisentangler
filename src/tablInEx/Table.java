@@ -22,7 +22,7 @@ public class Table {
 	public String PragmaticClass;
 	public boolean isEmptyOnlyHeaders = true;
 	public LinkedList<DataExtractionOutputObj> output = new LinkedList<DataExtractionOutputObj>();
-	public enum StructureType {LIST,MATRIX,SUBHEADER,MULTI};
+	public enum StructureType {LIST,MATRIX,SUBHEADER,MULTI,NULL};
 	
 	
 	/** The num_of_rows. */

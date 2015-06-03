@@ -22,6 +22,7 @@ import Utils.Utilities;
 import tablInEx.Article;
 import tablInEx.Cell;
 import tablInEx.Table;
+import tablInEx.Table.StructureType;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -136,6 +137,10 @@ public class Annotate {
 				tableEl.appendChild(TabFooter);
 				
 				Element TabStructure = doc.createElement("TableStructureType");
+				if(table.getTableStructureType()==null)
+				{
+					table.setTableStructureType(StructureType.NULL);
+				}
 				TabStructure.setTextContent(table.getTableStructureType().toString());
 				tableEl.appendChild(TabStructure);
 				
@@ -154,7 +159,7 @@ public class Annotate {
 				tableEl.appendChild(CellsEl);
 				
 				Cell[][] cells = table.original_cells;
-				
+				if(cells!=null){
 				for(int j = 0;j<cells.length;j++)
 				{
 					for(int k = 0;k<cells[j].length;k++)
@@ -281,6 +286,7 @@ public class Annotate {
 						
 						CellEl.appendChild(CellColumn);			
 					}
+				}
 				}
 			}						
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();

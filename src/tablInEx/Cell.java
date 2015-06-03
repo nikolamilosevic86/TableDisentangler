@@ -333,6 +333,10 @@ public class Cell {
 	
 	public String getCellType()
 	{
+		if(this.getCell_content()==null)
+		{
+			this.setCell_content("");
+		}
 		if(Utilities.isNumeric(this.getCell_content()))
 		{
 			return "Numeric";
