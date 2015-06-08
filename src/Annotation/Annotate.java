@@ -297,8 +297,6 @@ public class Annotate {
 			StreamResult result =  new StreamResult(new File("Annotation/"+a.getPmc()+".xml"));
 			transformer.transform(source, result);
 			
-
-			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
