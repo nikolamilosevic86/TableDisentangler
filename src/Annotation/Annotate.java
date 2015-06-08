@@ -167,7 +167,7 @@ public class Annotate {
 						Element CellEl = doc.createElement("Cell");
 						CellsEl.appendChild(CellEl);
 						Element CellID = doc.createElement("CellID");
-						String cellIDStr = ""+j+k;
+						String cellIDStr = ""+j+"."+k;
 						CellID.setTextContent(cellIDStr);
 						cells[j][k].CellId = cellIDStr;
 						CellEl.appendChild(CellID);
@@ -199,14 +199,14 @@ public class Annotate {
 							if(s>=0&&cells[s][k]!=null && cells[s][k].isIs_header())
 							{
 								Element HeaderRef = doc.createElement("HeaderRef");
-								HeaderRef.setTextContent(""+s+k);
+								HeaderRef.setTextContent(""+s+"."+k);
 								CellEl.appendChild(HeaderRef);
 								//break;
 							}
 							if(s>=0&&cells[s][k]!=null && cells[s][k].isIs_header())
 							{
 								Element HeaderCatRef = doc.createElement("HeadStubRef");
-								HeaderCatRef.setTextContent(""+s+0);
+								HeaderCatRef.setTextContent(""+s+"."+0);
 								CellEl.appendChild(HeaderCatRef);
 								break;
 							}
@@ -217,7 +217,7 @@ public class Annotate {
 							if(s>=0 && cells[j][s]!=null && cells[j][s].isIs_stub())
 							{
 								Element StubRef = doc.createElement("StubRef");
-								StubRef.setTextContent(""+j+s);
+								StubRef.setTextContent(""+j+"."+s);
 								CellEl.appendChild(StubRef);
 								break;
 							}
