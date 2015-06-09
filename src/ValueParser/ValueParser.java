@@ -12,11 +12,6 @@ public class ValueParser {
 	
 	public LinkedList<ValueItem> parseValue(String value)
 	{
-		boolean is_single = false;
-		boolean is_math = false;
-		boolean is_range = false;
-		boolean is_percentage = false;
-		boolean is_text = false;
 		int start = -1;
 		int end = -1;
 		int move = 0;
@@ -33,15 +28,13 @@ public class ValueParser {
 	        if(!found_circle&&matcher.find())
 	        {
 	        	start = matcher.start();
-	        	end= matcher.end();
-	        	is_math = true;        
+	        	end= matcher.end();    
 	        	ValueItem vi = new ValueItem();
 	        	vi.start_position = start;
 	        	vi.end_position = end;
 	        	vi.value = value.substring(start, end);
 	        	vi.type = ValueType.MATH;
 	        	valueList.add(vi);
-	        	is_math = false;
 	        	move+=end;
 	        	found_circle = true;
 	        }
@@ -52,15 +45,13 @@ public class ValueParser {
 	        if(!found_circle&&matcher.find())
 	        {
 	        	start = matcher.start();
-	        	end= matcher.end();
-	        	is_math = true;        
+	        	end= matcher.end();     
 	        	ValueItem vi = new ValueItem();
 	        	vi.start_position = start;
 	        	vi.end_position = end;
 	        	vi.value = value.substring(start, end);
 	        	vi.type = ValueType.MATH;
 	        	valueList.add(vi);
-	        	is_math = false;
 	        	move+=end;
 	        	found_circle = true;
 	        }
@@ -78,15 +69,12 @@ public class ValueParser {
 	        	String[] vals = val.split("[-—–−,]|to|and");
 	        	start_val = Float.parseFloat(vals[0]);
 	        	end_val = Float.parseFloat(vals[1]);
-	        	if(start_val<end_val){
-	        	is_math = true;        
+	        	if(start_val<end_val){      
 	        	ValueItem vi = new ValueItem();
 	        	vi.start_position = start;
 	        	vi.end_position = end;
 	        	vi.value = value.substring(start, end);
 	        	vi.type = ValueType.RANGE;
-	        	valueList.add(vi);
-	        	is_math = false;
 	        	move+=end;
 	        	found_circle = true;
 	        	}
@@ -98,15 +86,13 @@ public class ValueParser {
 	        if(!found_circle&&matcher.find())
 	        {
 	        	start = matcher.start();
-	        	end= matcher.end();
-	        	is_math = true;        
+	        	end= matcher.end();       
 	        	ValueItem vi = new ValueItem();
 	        	vi.start_position = start;
 	        	vi.end_position = end;
 	        	vi.value = value.substring(start, end);
 	        	vi.type = ValueType.PERCENTAGE;
 	        	valueList.add(vi);
-	        	is_math = false;
 	        	move+=end;
 	        	found_circle = true;
 	        }
@@ -117,15 +103,13 @@ public class ValueParser {
 	        if(!found_circle&&matcher.find())
 	        {
 	        	start = matcher.start();
-	        	end= matcher.end();
-	        	is_math = true;        
+	        	end= matcher.end();       
 	        	ValueItem vi = new ValueItem();
 	        	vi.start_position = start;
 	        	vi.end_position = end;
 	        	vi.value = value.substring(start, end);
 	        	vi.type = ValueType.SINGLE;
 	        	valueList.add(vi);
-	        	is_math = false;
 	        	move+=end;
 	        	found_circle = true;
 	        }
