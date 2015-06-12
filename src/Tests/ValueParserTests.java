@@ -81,5 +81,15 @@ public class ValueParserTests {
 			fail();
 	}
 	
+	@Test
+	public void ComplexPercAndRange() {
+		ValueParser parser = new ValueParser();
+		LinkedList<ValueItem> list = parser.parseValue("12%-18%");
+		if(list!=null &&list.size()!=0&& list.get(0).type!=ValueType.PERCENTAGE)
+			fail();
+		if(list!=null &&list.size()<1&& list.get(1).type!=ValueType.PERCENTAGE)
+			fail();
+	}
+	
 
 }

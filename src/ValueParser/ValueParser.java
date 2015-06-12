@@ -56,7 +56,7 @@ public class ValueParser {
 	        	found_circle = true;
 	        }
 	        
-	        patternString = "^[-—–−]*[ ]*\\d{1,}[.·]*\\d*[ ]*([-—–−,;:]|to|and)[ ]*\\d*[.·]*\\d*[ ]*";
+	        patternString = "^[-—–−]*[ ]*\\d{1,}[.·]*\\d*[ ]*[%]{0,1}[ ]*([-—–−,;:]|to|and)[ ]*\\d*[.·]*\\d*[ ]*[%]{0,1}[ ]*";
 	        pattern = Pattern.compile(patternString);
 	        matcher = pattern.matcher(value);
 	        if(!found_circle&&matcher.find())
@@ -67,6 +67,10 @@ public class ValueParser {
 	        	end= matcher.end();
 	        	String val = value.substring(start, end);
 	        	String[] vals = val.split("[-—–−,]|to|and");
+	        	for(int l = 0;l<vals.length;l++)
+	        	{
+	        		vals[l] = vals[l].replace("%", "");
+	        	}
 	        	start_val = Float.parseFloat(vals[0]);
 	        	end_val = Float.parseFloat(vals[1]);
 	        	if(start_val<end_val){      
@@ -75,6 +79,7 @@ public class ValueParser {
 	        	vi.end_position = end;
 	        	vi.value = value.substring(start, end);
 	        	vi.type = ValueType.RANGE;
+	        	valueList.add(vi);
 	        	move+=end;
 	        	found_circle = true;
 	        	}
