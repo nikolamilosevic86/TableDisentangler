@@ -62,6 +62,18 @@ public class ValueParserTests {
 	}
 	
 	@Test
+	public void MeasurementUnit() {
+		ValueParser parser = new ValueParser();
+		LinkedList<ValueItem> list = parser.parseValue("15.6 mmol");
+		if(list!=null &&list.size()!=0&& list.get(0).type!=ValueType.SINGLE)
+			fail();
+		if(list!=null &&list.size()<1&& list.get(1).type!=ValueType.FLOAT)
+			fail();
+		if(list!=null &&list.size()<1&& list.get(2).type!=ValueType.MEASUREMENT_UNIT)
+			fail();
+	}
+	
+	@Test
 	public void SingleAndMath() {
 		ValueParser parser = new ValueParser();
 		LinkedList<ValueItem> list = parser.parseValue("15.6 (24 ± 3)");

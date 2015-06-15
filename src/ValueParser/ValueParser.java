@@ -42,6 +42,25 @@ public class ValueParser {
 	        	found_circle = true;
 	        }
 	        
+	        //(Joule|°C|mmol\\L|month[s]*|mg/kg|mg m−2||mg/m2|mmHg|ug/ml|year[s]*|day[s]*|cmH2O|pts|cm/s|cm2/s|min|sec|kg/m2|per day|ml|μl|g|µg/l|kg|yr|mo[\.]*|mg/ml|yr|d|m|mg|cm|mm|um|ns|hr|Hz|h|mW/cm2|mW)
+	        patternString = "^(Joule|°C|mmol\\\\L|month[s]*|mmol|mg/kg|mg m−2|mg/m2|mmHg|ug/ml|year[s]|day[s]|cmH2O|pts|cm/s|cm2/s|min|sec|kg/m2|per day|ml|μl|g|µg/l|kg|yr|mo[\\.]*|mg/ml|yr|d|mg|cm|mm|um|ns|hr|Hz|h|mW/cm2|mW|m)\\b";
+	        pattern = Pattern.compile(patternString);
+	        matcher = pattern.matcher(value2);
+	        if(!found_circle&&matcher.find())
+	        {
+	        	start = matcher.start();
+	        	end= matcher.end();     
+	        	ValueItem vi = new ValueItem();
+	        	vi.start_position = start;
+	        	vi.end_position = end;
+	        	vi.value = value.substring(start, end);
+	        	vi.type = ValueType.MEASUREMENT_UNIT;
+	        	VL.add(vi);
+	        	move+=end;
+	        	found_circle = true;
+	        }
+	        
+	        
 			patternString = "^[<>≥≤±]*[0-9]*[.·]{0,1}[0-9]*[ ]*[±]{1}[ ]*[0-9]*[.·]{0,1}[0-9]*";
 	        pattern = Pattern.compile(patternString);
 	        matcher = pattern.matcher(value2);
