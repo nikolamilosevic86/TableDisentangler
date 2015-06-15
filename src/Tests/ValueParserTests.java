@@ -69,6 +69,8 @@ public class ValueParserTests {
 			fail();
 		if(list!=null &&list.size()<1&& list.get(1).type!=ValueType.MATH)
 			fail();
+		if(list!=null &&list.size()<1&& list.get(2).type!=ValueType.FLOAT)
+			fail();
 	}
 	
 	@Test
@@ -76,6 +78,8 @@ public class ValueParserTests {
 		ValueParser parser = new ValueParser();
 		LinkedList<ValueItem> list = parser.parseValue("15.6 (18 %)");
 		if(list!=null &&list.size()!=0&& list.get(0).type!=ValueType.SINGLE)
+			fail();
+		if(list!=null &&list.size()<1&& list.get(1).type!=ValueType.FLOAT)
 			fail();
 		if(list!=null &&list.size()<1&& list.get(1).type!=ValueType.PERCENTAGE)
 			fail();
@@ -85,9 +89,11 @@ public class ValueParserTests {
 	public void ComplexPercAndRange() {
 		ValueParser parser = new ValueParser();
 		LinkedList<ValueItem> list = parser.parseValue("12%-18%");
-		if(list!=null &&list.size()!=0&& list.get(0).type!=ValueType.PERCENTAGE)
+		if(list!=null &&list.size()!=0&& list.get(0).type!=ValueType.RANGE)
 			fail();
 		if(list!=null &&list.size()<1&& list.get(1).type!=ValueType.PERCENTAGE)
+			fail();
+		if(list!=null &&list.size()<1&& list.get(2).type!=ValueType.PERCENTAGE)
 			fail();
 	}
 	
