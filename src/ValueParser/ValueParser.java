@@ -16,6 +16,8 @@ public class ValueParser {
 		LinkedList<ValueItem> VL = new LinkedList<ValueItem>();
 		int start = -1;
 		int end = -1;
+		int start_pos = 0;
+		int end_pos = 0;
 		int move = 0;
 		String value2 = value;
 		for(int s=0;s<value.length();s++)
@@ -32,9 +34,11 @@ public class ValueParser {
 	        {
 	        	start = matcher.start();
 	        	end= matcher.end();    
+	        	start_pos+=start;
+	        	end_pos+=end;
 	        	ValueItem vi = new ValueItem();
-	        	vi.start_position = start;
-	        	vi.end_position = end;
+	        	vi.start_position = start_pos;
+	        	vi.end_position = end_pos;
 	        	vi.value = value.substring(start, end);
 	        	vi.type = ValueType.MATH;
 	        	VL.add(vi);
@@ -49,10 +53,12 @@ public class ValueParser {
 	        if(!found_circle&&matcher.find())
 	        {
 	        	start = matcher.start();
-	        	end= matcher.end();     
+	        	end= matcher.end();    
+	        	start_pos+=start;
+	        	end_pos+=end;
 	        	ValueItem vi = new ValueItem();
-	        	vi.start_position = start;
-	        	vi.end_position = end;
+	        	vi.start_position = start_pos;
+	        	vi.end_position = end_pos;
 	        	vi.value = value.substring(start, end);
 	        	vi.type = ValueType.MEASUREMENT_UNIT;
 	        	VL.add(vi);
@@ -67,10 +73,12 @@ public class ValueParser {
 	        if(!found_circle&&matcher.find())
 	        {
 	        	start = matcher.start();
-	        	end= matcher.end();     
+	        	end= matcher.end();   
+	        	start_pos+=start;
+	        	end_pos+=end;
 	        	ValueItem vi = new ValueItem();
-	        	vi.start_position = start;
-	        	vi.end_position = end;
+	        	vi.start_position = start_pos;
+	        	vi.end_position = end_pos;
 	        	vi.value = value.substring(start, end);
 	        	vi.type = ValueType.MATH;
 	        	VL.add(vi);
@@ -78,7 +86,30 @@ public class ValueParser {
 	        	found_circle = true;
 	        }
 	        
-	        patternString = "^[-—–−]*[ ]*\\d{1,}[.·]*\\d*[ ]*[%]{0,1}[ ]*([-—–−,;:]|to|and)[ ]*\\d*[.·]*\\d*[ ]*[%]{0,1}[ ]*";
+	        //ALTERNATIVES ^[-—–−]*[ ]*\d{1,}[.·]{0,1}\d*[ ]*[%]{0,1}[ ]*([\\\/])[ ]*\d*[.·]*\d*[ ]*[%]{0,1}[ ]*([\\\/]){0,1}[ ]*\d*[.·]*\d*[ ]*[%]{0,1}[ ]*([\\\/]){0,1}[ ]*\d*[.·]*\d*[ ]*[%]{0,1}[ ]*([\\\/]){0,1}[ ]*\d*[.·]*\d*[ ]*[%]{0,1}
+	        patternString = "^[-—–−]*[ ]*\\d{1,}[.·]{0,1}\\d*[ ]*[%]{0,1}[ ]*([\\\\\\/])[ ]*\\d*[.·]*\\d*[ ]*[%]{0,1}[ ]*([\\\\\\/]){0,1}[ ]*\\d*[.·]*\\d*[ ]*[%]{0,1}[ ]*([\\\\\\/]){0,1}[ ]*\\d*[.·]*\\d*[ ]*[%]{0,1}[ ]*([\\\\\\/]){0,1}[ ]*\\d*[.·]*\\d*[ ]*[%]{0,1}\\\\b";
+	        pattern = Pattern.compile(patternString);
+	        matcher = pattern.matcher(value2);
+	        
+	        if(!found_circle&&matcher.find())
+	        {
+	        	start = matcher.start();
+	        	end= matcher.end();       
+	        	start_pos+=start;
+	        	end_pos+=end;
+	        	ValueItem vi = new ValueItem();
+	        	vi.start_position = start_pos;
+	        	vi.end_position = end_pos;
+	        	vi.value = value.substring(start, end);
+	        	vi.type = ValueType.ALTERNATIVES;
+	        	VL.add(vi);
+	        	move+=end;
+	        	found_circle = true;
+	        	
+	        }
+	        
+	        	        
+	        patternString = "^[-—–−]*[ ]*\\d{1,}[.·]*\\d*[ ]*[%]{0,1}[ ]*([-—–−,;:]|to|and)[ ]*\\d*[.·]*\\d*[ ]*[%]{0,1}[ ]*(\\)|\\\\b)";
 	        pattern = Pattern.compile(patternString);
 	        matcher = pattern.matcher(value2);
 	        
@@ -88,36 +119,50 @@ public class ValueParser {
 	        	float end_val = -999;
 	        	start = matcher.start();
 	        	end= matcher.end();
+	        	start_pos+=start;
+	        	end_pos+=end;
+	        	boolean isFloat = true;
 	        	String val = value2.substring(start, end);
-	        	String[] vals = val.split("[-—–−,]|to|and");
+	        	String[] vals = val.split("[-—–−,;:]|to|and");
 	        	for(int l = 0;l<vals.length;l++)
 	        	{
 	        		vals[l] = vals[l].replace("%", "");
 	        	}
+	        	if(vals.length>1&&vals[0]!=null&&!vals[0].equals("")&&vals[1]!=null&&!vals[1].equals("")){
+	        	try{
 	        	start_val = Float.parseFloat(vals[0]);
 	        	end_val = Float.parseFloat(vals[1]);
+	        	}
+	        	catch(Exception ex){
+	        		isFloat = false;
+	        	}
+	        	if(isFloat){
 	        	if(start_val<end_val){      
 	        	ValueItem vi = new ValueItem();
-	        	vi.start_position = start;
-	        	vi.end_position = end;
+	        	vi.start_position = start_pos;
+	        	vi.end_position = end_pos;
 	        	vi.value = value.substring(start, end);
 	        	vi.type = ValueType.RANGE;
 	        	VL.add(vi);
 	        	move+=end;
 	        	found_circle = true;
 	        	}
+	        	}
+	        	}
 	        }
 	        	
-		        patternString = "^[-—–−+]{0,1}[ ]*(\\d*[.· ]{0,1}\\d{1,}|[Ii]{1,3}|[iI][vV]|[Vv][Ii]{1,3}|[Vv])";
+		        patternString = "^[-—–−+]{0,1}[ ]*(\\d{1,}[\\.· ]{0,1}\\d{1,}|[Ii]{1,3}|[iI][vV]|[Vv][Ii]{1,3}|[Vv])\\\\b";
 		        pattern = Pattern.compile(patternString);
 		        matcher = pattern.matcher(value2);
 		        if(!found_circle&&matcher.find())
 		        {
 		        	start = matcher.start();
 		        	end= matcher.end();       
+		        	start_pos+=start;
+		        	end_pos+=end;
 		        	ValueItem vi = new ValueItem();
-		        	vi.start_position = start;
-		        	vi.end_position = end;
+		        	vi.start_position = start_pos;
+		        	vi.end_position = end_pos;
 		        	vi.value = value.substring(start, end);
 		        	vi.type = ValueType.SINGLE;
 		        	VL.add(vi);
@@ -128,8 +173,11 @@ public class ValueParser {
 	        
 	       
 	        
-	        if(move == 0)
+	        if(move == 0){
 	        	move = 1;
+	        	end_pos++;
+	        }
+	        start_pos +=move;
 	        
 		}
 		
@@ -141,6 +189,8 @@ public class ValueParser {
 		LinkedList<ValueItem> VL = new LinkedList<ValueItem>();
 		int start = -1;
 		int end = -1;
+		int start_pos = 0;
+		int end_pos = 0;
 		int move = 0;
 		String value2 = value;
 	    for(int s=0;s<value.length();s++)
@@ -150,16 +200,18 @@ public class ValueParser {
 			if(move>1)
 				s+=move-1;
 			move = 0;
-			String patternString = "^[-—–−+]{0,1}[ ]*(\\d*[.· ]{0,1}\\d{1,})[  ]*[%]";
+			String patternString = "^[-—–−+]{0,1}[ ]*(\\d*[\\.· ]{0,1}\\d{1,})[  ]*[%]";
 			Pattern pattern = Pattern.compile(patternString);
 		    Matcher  matcher = pattern.matcher(value2);
 	        if(!found_circle&&matcher.find())
 	        {
 	        	start = matcher.start();
-	        	end= matcher.end();       
+	        	end= matcher.end();   
+	        	start_pos+=start;
+	        	end_pos+=end;
 	        	ValueItem vi = new ValueItem();
-	        	vi.start_position = start;
-	        	vi.end_position = end;
+	        	vi.start_position = start_pos;
+	        	vi.end_position = end_pos;
 	        	vi.value = value.substring(start, end);
 	        	vi.type = ValueType.PERCENTAGE;
 	        	VL.add(vi);
@@ -173,28 +225,32 @@ public class ValueParser {
 	        if(!found_circle&&matcher.find())
 	        {
 	        	start = matcher.start();
-	        	end= matcher.end();       
+	        	end= matcher.end();   
+	        	start_pos+=start;
+	        	end_pos+=end;
 	        	ValueItem vi = new ValueItem();
-	        	vi.start_position = start;
-	        	vi.end_position = end;
-	        	vi.value = value.substring(start, end);
+	        	vi.start_position = start_pos;
+	        	vi.end_position = end_pos;
+	        	vi.value = value2.substring(start, end);
 	        	vi.type = ValueType.ROMAN;
 	        	VL.add(vi);
 	        	move+=end;
 	        	found_circle = true;
 	        }
 	        
-	        patternString = "^\\d*[\\.]\\d*";
+	        patternString = "^\\d{1,}[\\.]\\d{1,}";
 	        pattern = Pattern.compile(patternString);
 	        matcher = pattern.matcher(value2);
 	        if(!found_circle&&matcher.find())
 	        {
 	        	start = matcher.start();
-	        	end= matcher.end();       
+	        	end= matcher.end();   
+	        	start_pos+=start;
+	        	end_pos+=end;
 	        	ValueItem vi = new ValueItem();
-	        	vi.start_position = start;
-	        	vi.end_position = end;
-	        	vi.value = value.substring(start, end);
+	        	vi.start_position = start_pos;
+	        	vi.end_position = end_pos;
+	        	vi.value = value2.substring(start, end);
 	        	vi.type = ValueType.FLOAT;
 	        	VL.add(vi);
 	        	move+=end;
@@ -207,18 +263,24 @@ public class ValueParser {
 	        if(!found_circle&&matcher.find())
 	        {
 	        	start = matcher.start();
-	        	end= matcher.end();       
+	        	end= matcher.end();     
+	        	start_pos+=start;
+	        	end_pos+=end;
 	        	ValueItem vi = new ValueItem();
-	        	vi.start_position = start;
-	        	vi.end_position = end;
-	        	vi.value = value.substring(start, end);
+	        	vi.start_position = start_pos;
+	        	vi.end_position = end_pos;
+	        	vi.value = value2.substring(start, end);
 	        	vi.type = ValueType.INTEGER;
 	        	VL.add(vi);
 	        	move+=end;
 	        	found_circle = true;
 	        }
-	        if(move == 0)
+	        if(move == 0){
 	        	move = 1;
+	        	end_pos++;
+	        }
+	        start_pos +=move;
+	       
 		}
 	    return VL;
 	}
@@ -226,8 +288,10 @@ public class ValueParser {
 	
 	public LinkedList<ValueItem> parseValue(String value)
 	{
+		if(value!=null&&!value.equals("")){
 		valueList.addAll(parseCompex(value));
 		valueList.addAll(parseSimple(value));
+		} 
 				
 		return valueList;
 	}

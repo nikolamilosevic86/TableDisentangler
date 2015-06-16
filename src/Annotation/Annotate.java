@@ -6,6 +6,9 @@
 package Annotation;
 
 import java.io.File;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -19,6 +22,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import Utils.Utilities;
+import ValueParser.ValueItem;
+import ValueParser.ValueParser;
 import tablInEx.Article;
 import tablInEx.Cell;
 import tablInEx.Table;
@@ -182,6 +187,23 @@ public class Annotate {
 						Element CellValue = doc.createElement("CellValue");
 						CellValue.setTextContent(cells[j][k].getCell_content());
 						CellEl.appendChild(CellValue);
+						
+						ValueParser vp = new ValueParser();
+						String valueToParse = cells[j][k].getCell_content();
+						LinkedList<ValueItem> valueTags = vp.parseValue(valueToParse);
+						Element CellSemantics = doc.createElement("CellSemantics");
+						CellEl.appendChild(CellSemantics);
+						for(int p = 0; p<valueTags.size();p++)
+						{
+							Element CellValueSemantics = doc.createElement("CellValueSem");
+							CellValueSemantics.setAttribute("Type", valueTags.get(p).type.toString());
+							CellValueSemantics.setAttribute("Start", valueTags.get(p).start_position+"");
+							CellValueSemantics.setAttribute("End", valueTags.get(p).end_position+"");
+							CellValueSemantics.setTextContent(valueTags.get(p).value);
+							CellSemantics.appendChild(CellValueSemantics);
+							
+						}
+						
 						
 						Element CellType = doc.createElement("CellType");
 						CellType.setTextContent(cells[j][k].getCellType());

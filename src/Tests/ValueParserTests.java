@@ -86,6 +86,20 @@ public class ValueParserTests {
 	}
 	
 	@Test
+	public void AlternativesTest() {
+		ValueParser parser = new ValueParser();
+		LinkedList<ValueItem> list = parser.parseValue("18 (15.6/12.3/123.3)");
+		if(list!=null &&list.size()!=0&& list.get(0).type!=ValueType.SINGLE)
+			fail();
+		if(list!=null &&list.size()<1&& list.get(1).type!=ValueType.ALTERNATIVES)
+			fail();
+		if(list!=null &&list.size()<1&& list.get(2).type!=ValueType.INTEGER)
+			fail();
+		if(list!=null &&list.size()<1&& list.get(3).type!=ValueType.FLOAT)
+			fail();
+	}
+	
+	@Test
 	public void SingleAndPerc() {
 		ValueParser parser = new ValueParser();
 		LinkedList<ValueItem> list = parser.parseValue("15.6 (18 %)");
