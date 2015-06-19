@@ -38,7 +38,7 @@ public class ValueParser {
 		String value2 = value;
 		value2 = value2.substring(move);
 		move = 0;
-		String patternString = "\\b[<>≥≤±]{1}[0-9]*[.]{0,1}[0-9]*[ ±]*[0-9]*[.]{0,1}[0-9]*\\b";
+		String patternString = "(\\b|^)[<>≥≤±]{1}[0-9]*[.]{0,1}[0-9]*[ ±]*[0-9]*[.]{0,1}[0-9]*\\b";
         Pattern pattern = Pattern.compile(patternString);
         Matcher matcher = pattern.matcher(value2);
         while(matcher.find())
@@ -51,12 +51,12 @@ public class ValueParser {
 	        	vi.value = value2.substring(start, end);
 	        	vi.type = ValueType.MATH;
 	        	VL.add(vi);
-	        }
+	     }
 	        
 
 	        
 	        
-			patternString = "\\b[<>≥≤±]*[0-9]*[.·]{0,1}[0-9]*[ ]*[±]{1}[ ]*[0-9]*[.·]{0,1}[0-9]*\\b";
+			patternString = "(\\b|^)[<>≥≤±]*[0-9]*[.·]{0,1}[0-9]*[ ]*[±]{1}[ ]*[0-9]*[.·]{0,1}[0-9]*\\b";
 	        pattern = Pattern.compile(patternString);
 	        matcher = pattern.matcher(value2);
 	        while(matcher.find())
@@ -71,7 +71,7 @@ public class ValueParser {
 	        	VL.add(vi);
 	        }
 	        
-	        patternString = "\\b[-—–−]*[ ]*\\d{1,}[\\.·]{0,1}\\d*[ \\t]*[%]{0,1}[ \\t]*([\\\\\\/])[ \\t]*\\d{1,}[.·]*\\d*[ \\t]*[%]{0,1}[ \\t]*([\\\\\\/]){0,1}[ \\t]*\\d*[.·]*\\d*[ \\t]*[%]{0,1}[ \\t]*([\\\\\\/]){0,1}[ \\t]*\\d*[\\.·]*\\d*[ \\t]*[%]{0,1}[ \\t]*([\\\\\\/]){0,1}[ \\t]*\\d*[\\.·]*\\d*[ \\t]*[%]{0,1}\\b";
+	        patternString = "(\\b|^)[-—–−]*[ ]*\\d{1,}[\\.·]{0,1}\\d*[ \\t]*[%]{0,1}[ \\t]*([\\\\\\/])[ \\t]*\\d{1,}[.·]*\\d*[ \\t]*[%]{0,1}[ \\t]*([\\\\\\/]){0,1}[ \\t]*\\d*[.·]*\\d*[ \\t]*[%]{0,1}[ \\t]*([\\\\\\/]){0,1}[ \\t]*\\d*[\\.·]*\\d*[ \\t]*[%]{0,1}[ \\t]*([\\\\\\/]){0,1}[ \\t]*\\d*[\\.·]*\\d*[ \\t]*[%]{0,1}\\b";
 	        pattern = Pattern.compile(patternString);
 	        matcher = pattern.matcher(value2);
 	        
@@ -89,7 +89,7 @@ public class ValueParser {
 	        }
 	        
 	        	        
-	        patternString = "\\b[-—–−]*[ ]*\\d{1,}[.·]*\\d*[ ]*[%]{0,1}[ ]*([-—–−,;:]|to|and)[ ]*\\d*[.·]*\\d*[ ]*[%]{0,1}[ ]*\\b";
+	        patternString = "(\\b|^)[-—–−]*[ ]*\\d{1,}[.·]*\\d*[ ]*[%]{0,1}[ ]*([-—–−,;:]|to|and)[ ]*\\d*[.·]*\\d*[ ]*[%]{0,1}[ ]*\\b";
 	        pattern = Pattern.compile(patternString);
 	        matcher = pattern.matcher(value2);
 	        
@@ -127,7 +127,7 @@ public class ValueParser {
 	        	}
 	        }
 	        	
-		        patternString = "\\b[-—–−+]{0,1}[ ]*(\\d{1,}[\\.· ]{0,1}\\d{1,}|\\d{1,}|[Ii]{1,3}|[iI][vV]|[Vv][Ii]{1,3}|[Vv])\\b";
+		        patternString = "(\\b|^)[-—–−+]{0,1}[ ]*(\\d{1,}[\\.· ]{0,1}\\d{1,}|\\d{1,}|[Ii]{1,3}|[iI][vV]|[Vv][Ii]{1,3}|[Vv])\\b";
 		        pattern = Pattern.compile(patternString);
 		        matcher = pattern.matcher(value2);
 		        while(matcher.find())
@@ -155,7 +155,7 @@ public class ValueParser {
 		String value2 = value;
 		value2 = value2.substring(move);
 		move = 0;
-		String patternString = "\\b[-—–−+]{0,1}[ ]*(\\d*[\\.· ]{0,1}\\d{1,})[  ]*[%]\\b";
+		String patternString = "(\\b|^)[-—–−+]{0,1}[ ]*(\\d*[\\.· ]{0,1}\\d{1,})[  ]*[%]\\b";
 		Pattern pattern = Pattern.compile(patternString);
 		Matcher  matcher = pattern.matcher(value2);
 	    while(matcher.find())
@@ -170,7 +170,7 @@ public class ValueParser {
 	       	VL.add(vi);
 	        }
 	        
-	        patternString = "\\b([Ii]{1,3}|[iI][vV]|[Vv][Ii]{0,3})\\b";
+	        patternString = "(\\b|^)([Ii]{1,3}|[iI][vV]|[Vv][Ii]{0,3})\\b";
 	        pattern = Pattern.compile(patternString);
 	        matcher = pattern.matcher(value2);
 	        while(matcher.find())
@@ -185,7 +185,7 @@ public class ValueParser {
 	        	VL.add(vi);
 	        }
 	        
-	        patternString = "\\b\\d{1,}[\\.]{0,}\\d{0,}\\b";
+	        patternString = "(\\b|^)\\d{1,}[\\.]{0,}\\d{0,}\\b";
 	        pattern = Pattern.compile(patternString);
 	        matcher = pattern.matcher(value2);
 	        while(matcher.find())
@@ -220,7 +220,7 @@ public class ValueParser {
 		int move = 0;
 		String value2 = value;
 		String[] tokens = tokenizer.tokenize(value);
-		String patternString = "\\b(Joule|°C|mmol\\\\L|month[s]*|mmol|mg/kg|mg m−2|mg/m2|mmHg|ug/ml|U/ml|year[s]|day[s]|cmH2O|pts|cm/s|cm2/s|min|sec|kg/m2|per day|ml|μl|g|µg/l|kg|yr|mo[\\.]*|mg/ml|yr|d|mg|cm|mm|um|ns|hr|Hz|h|mW/cm2|mW|m)\\b";
+		String patternString = "(\\b|^)(Joule|°C|mmol\\\\L|month[s]*|mmol|mg/kg|mg m−2|mg/m2|mmHg|ug/ml|U/ml|year[s]|day[s]|cmH2O|pts|cm/s|cm2/s|min|sec|kg/m2|per day|ml|μl|g|µg/l|kg|yr|mo[\\.]*|mg/ml|yr|d|mg|cm|mm|um|ns|hr|Hz|h|mW/cm2|mW|m)\\b";
 		Pattern pattern = Pattern.compile(patternString);
 		Matcher matcher = pattern.matcher(value);
 		while ( matcher.find()) {
@@ -244,6 +244,7 @@ public class ValueParser {
 		if(value!=null&&!value.equals("")){
 		valueList.addAll(parseCompex(value));
 		valueList.addAll(parseSimple(value));
+		valueList.addAll(parseString(value));
 		} 
 				
 		return valueList;

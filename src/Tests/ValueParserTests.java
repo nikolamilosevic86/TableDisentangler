@@ -112,6 +112,14 @@ public class ValueParserTests {
 	}
 	
 	@Test
+	public void Units() {
+		ValueParser parser = new ValueParser();
+		LinkedList<ValueItem> list = parser.parseValue("Follow up (months)");
+		if(list!=null &&list.size()!=0&& list.get(0).type!=ValueType.MEASUREMENT_UNIT)
+			fail();
+	}
+	
+	@Test
 	public void ComplexPercAndRange() {
 		ValueParser parser = new ValueParser();
 		LinkedList<ValueItem> list = parser.parseValue("12%-18%");
