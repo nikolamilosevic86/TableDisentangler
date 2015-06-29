@@ -207,27 +207,27 @@ public class Annotate {
 						}
 						//annotating by MARVIN
 						//TODO: ADD This bit when DBPedia is installed locally
-//						LinkedList<Word> words = TablInExMain.marvin.annotate(valueToParse);
-//						if(words!=null){
-//						for(int p = 0;p<words.size();p++){
-//							Element CellValueSemantics = doc.createElement("CellValueSem");
-//							CellValueSemantics.setAttribute("Type", ValueType.TEXT.toString());
-//							CellValueSemantics.setAttribute("Start", words.get(p).starting+"");
-//							CellValueSemantics.setAttribute("End", words.get(p).ending+"");
-//							CellValueSemantics.setTextContent(words.get(p).word);
-//							CellSemantics.appendChild(CellValueSemantics);
-//							for(int s = 0;s<words.get(p).wordmeanings.size();s++){
-//								Element Meaning = doc.createElement("ValueMeaning");
-//								Meaning.setAttribute("Source", words.get(p).wordmeanings.get(s).Source);
-//								Meaning.setAttribute("ID", words.get(p).wordmeanings.get(s).id);
-//								Meaning.setAttribute("URL", words.get(p).wordmeanings.get(s).URL);
-//								Meaning.setAttribute("Start", words.get(p).wordmeanings.get(s).startAt+"");
-//								Meaning.setAttribute("End", words.get(p).wordmeanings.get(s).endAt+"");
-//								Meaning.setAttribute("AppearingWord", words.get(p).wordmeanings.get(s).appearingWord);
-//								CellValueSemantics.appendChild(Meaning);				
-//							}
-//						}
-//						}
+						LinkedList<Word> words = TablInExMain.marvin.annotateWordNetOnly(valueToParse);
+						if(words!=null){
+						for(int p = 0;p<words.size();p++){
+							Element CellValueSemantics = doc.createElement("CellValueSem");
+							CellValueSemantics.setAttribute("Type", ValueType.TEXT.toString());
+							CellValueSemantics.setAttribute("Start", words.get(p).starting+"");
+							CellValueSemantics.setAttribute("End", words.get(p).ending+"");
+							CellValueSemantics.setTextContent(words.get(p).word);
+							CellSemantics.appendChild(CellValueSemantics);
+							for(int s = 0;s<words.get(p).wordmeanings.size();s++){
+								Element Meaning = doc.createElement("ValueMeaning");
+								Meaning.setAttribute("Source", words.get(p).wordmeanings.get(s).Source);
+								Meaning.setAttribute("ID", words.get(p).wordmeanings.get(s).id);
+								Meaning.setAttribute("URL", words.get(p).wordmeanings.get(s).URL);
+								Meaning.setAttribute("Start", words.get(p).wordmeanings.get(s).startAt+"");
+								Meaning.setAttribute("End", words.get(p).wordmeanings.get(s).endAt+"");
+								Meaning.setAttribute("AppearingWord", words.get(p).wordmeanings.get(s).appearingWord);
+								CellValueSemantics.appendChild(Meaning);				
+							}
+						}
+						}
 						
 						
 						
