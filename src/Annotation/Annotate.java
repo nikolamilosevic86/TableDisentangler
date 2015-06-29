@@ -21,11 +21,14 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import Main.Word;
 import Utils.Utilities;
 import ValueParser.ValueItem;
+import ValueParser.ValueItem.ValueType;
 import ValueParser.ValueParser;
 import tablInEx.Article;
 import tablInEx.Cell;
+import tablInEx.TablInExMain;
 import tablInEx.Table;
 import tablInEx.Table.StructureType;
 
@@ -188,9 +191,9 @@ public class Annotate {
 						CellValue.setTextContent(cells[j][k].getCell_content());
 						CellEl.appendChild(CellValue);
 						
-						ValueParser vp = new ValueParser();
+						
 						String valueToParse = cells[j][k].getCell_content();
-						LinkedList<ValueItem> valueTags = vp.parseValue(valueToParse);
+						LinkedList<ValueItem> valueTags = TablInExMain.vp.parseValue(valueToParse);
 						Element CellSemantics = doc.createElement("CellSemantics");
 						CellEl.appendChild(CellSemantics);
 						for(int p = 0; p<valueTags.size();p++)
@@ -201,8 +204,32 @@ public class Annotate {
 							CellValueSemantics.setAttribute("End", valueTags.get(p).end_position+"");
 							CellValueSemantics.setTextContent(valueTags.get(p).value);
 							CellSemantics.appendChild(CellValueSemantics);
-							
 						}
+						//annotating by MARVIN
+						//TODO: ADD This bit when DBPedia is installed locally
+//						LinkedList<Word> words = TablInExMain.marvin.annotate(valueToParse);
+//						if(words!=null){
+//						for(int p = 0;p<words.size();p++){
+//							Element CellValueSemantics = doc.createElement("CellValueSem");
+//							CellValueSemantics.setAttribute("Type", ValueType.TEXT.toString());
+//							CellValueSemantics.setAttribute("Start", words.get(p).starting+"");
+//							CellValueSemantics.setAttribute("End", words.get(p).ending+"");
+//							CellValueSemantics.setTextContent(words.get(p).word);
+//							CellSemantics.appendChild(CellValueSemantics);
+//							for(int s = 0;s<words.get(p).wordmeanings.size();s++){
+//								Element Meaning = doc.createElement("ValueMeaning");
+//								Meaning.setAttribute("Source", words.get(p).wordmeanings.get(s).Source);
+//								Meaning.setAttribute("ID", words.get(p).wordmeanings.get(s).id);
+//								Meaning.setAttribute("URL", words.get(p).wordmeanings.get(s).URL);
+//								Meaning.setAttribute("Start", words.get(p).wordmeanings.get(s).startAt+"");
+//								Meaning.setAttribute("End", words.get(p).wordmeanings.get(s).endAt+"");
+//								Meaning.setAttribute("AppearingWord", words.get(p).wordmeanings.get(s).appearingWord);
+//								CellValueSemantics.appendChild(Meaning);				
+//							}
+//						}
+//						}
+						
+						
 						
 						
 						Element CellType = doc.createElement("CellType");

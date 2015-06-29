@@ -16,23 +16,20 @@ import net.didion.jwnl.JWNL;
 import Annotation.Annotate;
 import ConceptualizationOfValues.ConceptizationStats;
 import Decomposition.Decomposition;
-import Decomposition.MetaMapStats;
 import Decomposition.TrialIE2;
 import ExternalResourceHandlers.InformationClass;
 import ExternalResourceHandlers.ResourceReader;
 import FreqIE.FreqIE;
-import IEArmBased.ArmExtractor;
-import IEArmBased.IEArmBased;
-import IEArmBased.IEArmBased2;
 import IEArmBased.IEArmBased21;
 import LinkedData.DecompositionRDFWriter;
+import Main.MarvinSemAnnotator;
 import Utils.SemanticType;
 import Utils.Utilities;
+import ValueParser.ValueParser;
 import classifiers.SimpleTableClassifier;
 import readers.PMCXMLReader;
 import readers.Reader;
 import stats.Statistics;
-import weka.classifiers.Classifier;
 
 public class TablInExMain {
 
@@ -58,6 +55,8 @@ public class TablInExMain {
 	public static HashMap<String, SemanticType> semanticTypes = new HashMap<String, SemanticType>();
 	public static ConceptualizationOfValues.ConceptizationStats concept;
 	public static DecompositionRDFWriter linkedData;
+	public static MarvinSemAnnotator marvin = new MarvinSemAnnotator();
+	public static ValueParser vp = new ValueParser();
 
 
 	public static void ReadSemanticTypes() {

@@ -125,9 +125,19 @@ public class ValueParser {
 			ValueItem vi = new ValueItem();
 			vi.start_position = start;
 			vi.end_position = end;
-			vi.value = value2.substring(start, end);
-			vi.type = ValueType.SINGLE;
-			VL.add(vi);
+			boolean is_in = false;
+			for (int i = 0; i < VL.size(); i++) {
+				if (VL.get(i).start_position <= start
+						&& VL.get(i).end_position >= end) {
+					is_in = true;
+					break;
+				}
+			}
+			if (!is_in) {
+				vi.value = value2.substring(start, end);
+				vi.type = ValueType.SINGLE;
+				VL.add(vi);
+			}
 		}
 
 		return VL;
@@ -141,7 +151,7 @@ public class ValueParser {
 		String value2 = value;
 		value2 = value2.substring(move);
 		move = 0;
-		String patternString = "(\\b|^)[-—–−+]{0,1}[ ]*(\\d*[\\.· ]{0,1}\\d{1,})[  ]*[%]\\b";
+		String patternString = "(\\b|^)[-—–−+]{0,1}[ ]*(\\d*[\\.· ]{0,1}\\d{1,})[  ]*[%]";
 		Pattern pattern = Pattern.compile(patternString);
 		Matcher matcher = pattern.matcher(value2);
 		while (matcher.find()) {
@@ -195,8 +205,6 @@ public class ValueParser {
 	public LinkedList<ValueItem> parseString(String value) {
 		LinkedList<ValueItem> VL = new LinkedList<ValueItem>();
 		boolean found_circle = false;
-		int start = -1;
-		int end = -1;
 		int start_pos = 0;
 		int end_pos = 0;
 		int move = 0;
@@ -211,7 +219,7 @@ public class ValueParser {
 			ValueItem vi = new ValueItem();
 			vi.start_position = start_pos;
 			vi.end_position = end_pos;
-			vi.value = value2.substring(start, end);
+			vi.value = value2.substring(start_pos, end_pos);
 			vi.type = ValueType.MEASUREMENT_UNIT;
 			VL.add(vi);
 		}
@@ -220,6 +228,7 @@ public class ValueParser {
 	}
 
 	public LinkedList<ValueItem> parseValue(String value) {
+		valueList = new LinkedList<ValueItem>();
 		if (value != null && !value.equals("")) {
 			valueList.addAll(parseCompex(value));
 			valueList.addAll(parseSimple(value));
