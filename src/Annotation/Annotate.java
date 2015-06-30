@@ -207,6 +207,11 @@ public class Annotate {
 						}
 						//annotating by MARVIN
 						//TODO: ADD This bit when DBPedia is installed locally
+						int mathTypeIndex = valueToParse.indexOf("MathType@");
+						if(mathTypeIndex>0)
+						{
+							valueToParse = valueToParse.substring(0, mathTypeIndex);
+						}
 						LinkedList<Word> words = TablInExMain.marvin.annotateWordNetOnly(valueToParse);
 						if(words!=null){
 						for(int p = 0;p<words.size();p++){
