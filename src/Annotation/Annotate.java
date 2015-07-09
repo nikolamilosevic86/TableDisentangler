@@ -6,9 +6,17 @@
 package Annotation;
 
 import java.io.File;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CharsetEncoder;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -212,7 +220,23 @@ public class Annotate {
 						{
 							valueToParse = valueToParse.substring(0, mathTypeIndex);
 						}
-						LinkedList<Word> words = TablInExMain.marvin.annotateWordNetOnly(valueToParse);
+						LinkedList<Word> words = null;
+						if(valueToParse!=null){
+							System.out.println(valueToParse);
+							valueToParse = valueToParse.trim();
+							valueToParse = valueToParse.replace("\n", "");
+							String patternString = "[a-zA-Z0-9 +-=~\\/()\\[\\]@\"\'.%£^&\\*{};:]*";
+							Pattern pattern = Pattern.compile(patternString);
+							Matcher matcher = pattern.matcher(valueToParse);
+							String s = "";
+							while (matcher.find()) {
+								s += matcher.group();
+							}
+							valueToParse = s;
+							if(!Utilities.isSpaceOrEmpty(valueToParse)){
+								words = TablInExMain.marvin.annotate(valueToParse);
+								}
+						}
 						if(words!=null){
 						for(int p = 0;p<words.size();p++){
 							Element CellValueSemantics = doc.createElement("CellValueSem");
@@ -232,10 +256,7 @@ public class Annotate {
 								CellValueSemantics.appendChild(Meaning);				
 							}
 						}
-						}
-						
-						
-						
+						}	
 						
 						Element CellType = doc.createElement("CellType");
 						CellType.setTextContent(cells[j][k].getCellType());
