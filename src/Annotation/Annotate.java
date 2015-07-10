@@ -210,7 +210,7 @@ public class Annotate {
 							CellValueSemantics.setAttribute("Type", valueTags.get(p).type.toString());
 							CellValueSemantics.setAttribute("Start", valueTags.get(p).start_position+"");
 							CellValueSemantics.setAttribute("End", valueTags.get(p).end_position+"");
-							CellValueSemantics.setTextContent(valueTags.get(p).value);
+							CellValueSemantics.setAttribute("Content",valueTags.get(p).value);
 							CellSemantics.appendChild(CellValueSemantics);
 						}
 						//annotating by MARVIN
@@ -224,15 +224,6 @@ public class Annotate {
 						if(valueToParse!=null){
 							System.out.println(valueToParse);
 							valueToParse = valueToParse.trim();
-							valueToParse = valueToParse.replace("\n", "");
-							String patternString = "[a-zA-Z0-9 +-=~\\/()\\[\\]@\"\'.%£^&\\*{};:]*";
-							Pattern pattern = Pattern.compile(patternString);
-							Matcher matcher = pattern.matcher(valueToParse);
-							String s = "";
-							while (matcher.find()) {
-								s += matcher.group();
-							}
-							valueToParse = s;
 							if(!Utilities.isSpaceOrEmpty(valueToParse)){
 								words = TablInExMain.marvin.annotate(valueToParse);
 								}
@@ -243,7 +234,7 @@ public class Annotate {
 							CellValueSemantics.setAttribute("Type", ValueType.TEXT.toString());
 							CellValueSemantics.setAttribute("Start", words.get(p).starting+"");
 							CellValueSemantics.setAttribute("End", words.get(p).ending+"");
-							CellValueSemantics.setTextContent(words.get(p).word);
+							CellValueSemantics.setAttribute("Content",words.get(p).word);
 							CellSemantics.appendChild(CellValueSemantics);
 							for(int s = 0;s<words.get(p).wordmeanings.size();s++){
 								Element Meaning = doc.createElement("ValueMeaning");
