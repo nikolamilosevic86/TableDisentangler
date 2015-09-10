@@ -202,15 +202,19 @@ public class Annotate {
 						
 						String valueToParse = cells[j][k].getCell_content();
 						LinkedList<ValueItem> valueTags = TablInExMain.vp.parseValue(valueToParse);
-						Element CellSemantics = doc.createElement("CellSemantics");
+						Element CellSemantics = doc.createElement("Annotations");
 						CellEl.appendChild(CellSemantics);
 						for(int p = 0; p<valueTags.size();p++)
 						{
-							Element CellValueSemantics = doc.createElement("CellValueSem");
-							CellValueSemantics.setAttribute("Type", valueTags.get(p).type.toString());
+							Element CellValueSemantics = doc.createElement("Annotation");
+							CellValueSemantics.setAttribute("Type", "ValueType");
+							CellValueSemantics.setAttribute("TypeVal", valueTags.get(p).type.toString());
 							CellValueSemantics.setAttribute("Start", valueTags.get(p).start_position+"");
 							CellValueSemantics.setAttribute("End", valueTags.get(p).end_position+"");
 							CellValueSemantics.setAttribute("Content",valueTags.get(p).value);
+							CellValueSemantics.setAttribute("ID","");
+							CellValueSemantics.setAttribute("URL","");
+							CellValueSemantics.setAttribute("Source","TableAnnotatorSyntacticAnalizer");
 							CellSemantics.appendChild(CellValueSemantics);
 						}
 						//annotating by MARVIN
@@ -230,21 +234,23 @@ public class Annotate {
 						}
 						if(words!=null){
 						for(int p = 0;p<words.size();p++){
-							Element CellValueSemantics = doc.createElement("CellValueSem");
-							CellValueSemantics.setAttribute("Type", ValueType.TEXT.toString());
-							CellValueSemantics.setAttribute("Start", words.get(p).starting+"");
-							CellValueSemantics.setAttribute("End", words.get(p).ending+"");
-							CellValueSemantics.setAttribute("Content",words.get(p).word);
-							CellSemantics.appendChild(CellValueSemantics);
+//							Element CellValueSemantics = doc.createElement("CellValueSem");
+//							CellValueSemantics.setAttribute("Type", ValueType.TEXT.toString());
+//							CellValueSemantics.setAttribute("Start", words.get(p).starting+"");
+//							CellValueSemantics.setAttribute("End", words.get(p).ending+"");
+//							CellValueSemantics.setAttribute("Content",words.get(p).word);
+//							CellSemantics.appendChild(CellValueSemantics);
 							for(int s = 0;s<words.get(p).wordmeanings.size();s++){
-								Element Meaning = doc.createElement("ValueMeaning");
+								Element Meaning = doc.createElement("Annotation");
+								Meaning.setAttribute("Type", "ValueSemantic");
+								Meaning.setAttribute("TypeVal", "");
 								Meaning.setAttribute("Source", words.get(p).wordmeanings.get(s).Source);
 								Meaning.setAttribute("ID", words.get(p).wordmeanings.get(s).id);
 								Meaning.setAttribute("URL", words.get(p).wordmeanings.get(s).URL);
 								Meaning.setAttribute("Start", words.get(p).wordmeanings.get(s).startAt+"");
 								Meaning.setAttribute("End", words.get(p).wordmeanings.get(s).endAt+"");
-								Meaning.setAttribute("AppearingWord", words.get(p).wordmeanings.get(s).appearingWord);
-								CellValueSemantics.appendChild(Meaning);				
+								Meaning.setAttribute("Content", words.get(p).wordmeanings.get(s).appearingWord);
+								CellSemantics.appendChild(Meaning);				
 							}
 						}
 						}	
