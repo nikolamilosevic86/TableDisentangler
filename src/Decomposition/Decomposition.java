@@ -1061,7 +1061,9 @@ public class Decomposition {
 			cells = table.cells;
 		}
 		
-		cells = markMultiTableHeaders(cells);
+		table.cells = markMultiTableHeaders(cells);
+		table.original_cells = table.cells;
+		cells = table.cells;
 		Cell[][] original_cells = table.original_cells;
 		if(cells[0].length>1){
 
@@ -1537,6 +1539,7 @@ public class Decomposition {
 				tables[i] = processRegularTable(cells,  tables, art, tableFileName, i);
 			}
 		}
+		art.setTables(tables);
 		
 	}
 

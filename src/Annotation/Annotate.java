@@ -226,7 +226,7 @@ public class Annotate {
 						}
 						LinkedList<Word> words = null;
 						if(valueToParse!=null){
-							System.out.println(valueToParse);
+							//System.out.println(valueToParse);
 							valueToParse = valueToParse.trim();
 							if(!Utilities.isSpaceOrEmpty(valueToParse)){
 								words = TablInExMain.marvin.annotate(valueToParse);
@@ -268,6 +268,11 @@ public class Annotate {
 								break;
 							}
 							
+							if(s>=0 && cells[s][k]!=null && cells[j][k].isIs_header()&&!cells[j-1][k].isIs_header())
+							{
+								break;
+							}
+							
 							if(s>=0&&cells[s][k]!=null && cells[s][k].isIs_header())
 							{
 								Element HeaderRef = doc.createElement("HeaderRef");
@@ -304,7 +309,7 @@ public class Annotate {
 							CellRoles.appendChild(CellRole);
 							isDataCell = false;
 						}
-						if(cells[j][k].isIs_stub()){
+						if(cells[j][k].isIs_stub()&&cells[j][k].getCells_columnspanning()==0){
 							Element CellRole = doc.createElement("CellRole");
 							CellRole.setTextContent("Stub");
 							CellRoles.appendChild(CellRole);
