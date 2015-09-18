@@ -309,7 +309,7 @@ public class Annotate {
 							CellRoles.appendChild(CellRole);
 							isDataCell = false;
 						}
-						if(cells[j][k].isIs_stub()&&cells[j][k].getCells_columnspanning()==0){
+						if(cells[j][k].isIs_stub()&& cells[j][k].getColumnspanning_index()==0){
 							Element CellRole = doc.createElement("CellRole");
 							CellRole.setTextContent("Stub");
 							CellRoles.appendChild(CellRole);
@@ -341,12 +341,12 @@ public class Annotate {
 							CellRoles.appendChild(CellRole);
 						}
 						//Previously was StubHeaderCell, but makes no sense when since Header is anyway included.
-						if( k==0 && cells[j][k].isIs_header()){
-							Element CellRole = doc.createElement("CellRole");
-							CellRole.setTextContent("Stub");
-							CellRoles.appendChild(CellRole);
-							isDataCell = false;
-						}
+//						if( k==0 && cells[j][k].isIs_header()){
+//							Element CellRole = doc.createElement("CellRole");
+//							CellRole.setTextContent("Stub");
+//							CellRoles.appendChild(CellRole);
+//							isDataCell = false;
+//						}
 						if(isDataCell)
 						{
 							Element CellRole = doc.createElement("CellRole");
