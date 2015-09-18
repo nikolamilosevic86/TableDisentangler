@@ -224,7 +224,7 @@ public class TableSimplifier {
 			{
 				if(prevVal==null || Utilities.isSpaceOrEmpty(prevVal) || !Utilities.isSpaceOrEmpty(cells[i][0].getCell_content()))
 				{
-					if(Utilities.isSpaceOrEmpty(cells[i][0].getCell_content()) && !Utilities.isSpaceOrEmpty(cells[i][1].getCell_content()))
+					if(!cells[i][1].isBreakingLineOverRow() && Utilities.isSpaceOrEmpty(cells[i][0].getCell_content()) && !Utilities.isSpaceOrEmpty(cells[i][1].getCell_content()))
 					{
 						cells[i][1].setCell_content(cells[i][1].getCell_content());
 						originalcells[cells[i][1].getRow_number()][cells[i][1].getColumn_number()].setIs_stub(true);
