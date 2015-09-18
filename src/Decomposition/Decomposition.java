@@ -455,7 +455,7 @@ public class Decomposition {
 			if(cells[i][0].isIs_header()==false)
 				break;
 		}
-		table = TableSimplifier.MergeHeaders(table);
+		//table = TableSimplifier.MergeHeaders(table);
 		return table;
 	}
 	

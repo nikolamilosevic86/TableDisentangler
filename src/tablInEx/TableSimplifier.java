@@ -72,78 +72,78 @@ public class TableSimplifier {
 	 * @param cells - Cell[][] - Table
 	 * @return cells - Cell[][] - Table with simplified header
 	 */
-	public static Table MergeHeaders(Table table)
-	{
-		table.original_cells = table.cells;
-		if(table.cells==null)
-			return table;
-		if(table.stat.getNum_of_header_rows()<2 && table.cells!=null && table.cells[0]!=null){
-			for(int j = 0; j<table.cells[0].length;j++ )
-				table.cells[0][j].headers.add(table.cells[0][j].getCell_content());
-			return table;
-		}
-		Cell[][] cells = table.getTable_cells();
-		
-		for(int i = table.stat.getNum_of_header_rows() - 1; i >= 0;i--)
-		{
-			for(int j = 0; j<cells[i].length;j++)
-			{
-				if(cells[i][j].getCell_content()==null)
-				{
-					cells[i][j].setCell_content("");
-				}
-				if(!Utilities.isSpaceOrEmpty(cells[i][j].getCell_content()) ){
-					//Appending values
-					if(cells.length>i+1&& cells[i+1]!=null && cells[i+1][j]!=null && !cells[i][j].getCell_content().equals(cells[i+1][j].getCell_content())){
-						//Appending line - not now used
-						//cells[table.stat.getNum_of_header_rows() - 1][j].setCell_content(cells[i][j].getCell_content()+ " "+cells[table.stat.getNum_of_header_rows() - 1][j].getCell_content());
-						cells[table.stat.getNum_of_header_rows() - 1][j].headers.addFirst(cells[i][j].getCell_content());
-					}
-					cells[table.stat.getNum_of_header_rows() - 1][j].setIs_header(true);
-				}
-			}
-		}
-		
-		System.out.println("Simplifying "+table.getDocumentFileName());
-		Cell[][] newcells = new Cell[table.cells.length - table.stat.getNum_of_header_rows()+1][table.getNum_of_columns()];
-		for(int i = 0;i<newcells.length;i++)
-		{
-			newcells[i] = cells[i+table.stat.getNum_of_header_rows()-1].clone();
-		}
-		for(int j = 0;j<newcells[0].length;j++)
-		{
-			for(int s = newcells[0][j].headers.size()-1;s>=0;s--)
-				if(!newcells[0][j].headers.get(s).equals(newcells[0][j].getCell_content()))
-					newcells[0][j].setCell_content(newcells[0][j].headers.get(s)+ " "+newcells[0][j].getCell_content());
-		}
-		table.stat.setNum_of_header_rows(1);
-		table.setNum_of_rows(1+table.stat.getNum_of_body_rows());
-		table.cells = newcells;
-		for(int i = 0;i<table.cells.length;i++){
-			int num_of_empty = 0;
-			for(int j = 0;j<table.cells[i].length;j++)
-			{
-				
-				if(table.cells[i][j].getCell_content()==null)
-				{
-					table.cells[i][j].setCell_content("");
-				}
-				if(table.cells[i][j]==null)
-				{
-					table.cells[i][j] = new Cell(i, j);
-					table.cells[i][j].setCell_content("");
-				}
-				if(Utilities.isSpaceOrEmpty(table.cells[i][j].getCell_content()))
-				{
-					num_of_empty++;
-				}
-			}
-			if(table.getNum_of_columns()-num_of_empty>1)
-				table.isEmptyOnlyHeaders = false;
-		}
-		
-		return table;
-	}
+//	public static Table MergeHeaders(Table table)
+//	{
+//		table.original_cells = table.cells;
+//		if(table.cells==null)
+//			return table;
+//		if(table.stat.getNum_of_header_rows()<2 && table.cells!=null && table.cells[0]!=null){
+//			for(int j = 0; j<table.cells[0].length;j++ )
+//				table.cells[0][j].headers.add(table.cells[0][j].getCell_content());
+//			return table;
+//		}
+//		Cell[][] cells = table.getTable_cells();
+//		
+//		for(int i = table.stat.getNum_of_header_rows() - 1; i >= 0;i--)
+//		{
+//			for(int j = 0; j<cells[i].length;j++)
+//			{
+//				if(cells[i][j].getCell_content()==null)
+//				{
+//					cells[i][j].setCell_content("");
+//				}
+//				if(!Utilities.isSpaceOrEmpty(cells[i][j].getCell_content()) ){
+//					//Appending values
+//					if(cells.length>i+1&& cells[i+1]!=null && cells[i+1][j]!=null && !cells[i][j].getCell_content().equals(cells[i+1][j].getCell_content())){
+//						//Appending line - not now used
+//						//cells[table.stat.getNum_of_header_rows() - 1][j].setCell_content(cells[i][j].getCell_content()+ " "+cells[table.stat.getNum_of_header_rows() - 1][j].getCell_content());
+//						cells[table.stat.getNum_of_header_rows() - 1][j].headers.addFirst(cells[i][j].getCell_content());
+//					}
+//					cells[table.stat.getNum_of_header_rows() - 1][j].setIs_header(true);
+//				}
+//			}
+//		}
+//		
+//		System.out.println("Simplifying "+table.getDocumentFileName());
+//		Cell[][] newcells = new Cell[table.cells.length - table.stat.getNum_of_header_rows()+1][table.getNum_of_columns()];
+//		for(int i = 0;i<newcells.length;i++)
+//		{
+//			newcells[i] = cells[i+table.stat.getNum_of_header_rows()-1].clone();
+//		}
+//		for(int j = 0;j<newcells[0].length;j++)
+//		{
+//			for(int s = newcells[0][j].headers.size()-1;s>=0;s--)
+//				if(!newcells[0][j].headers.get(s).equals(newcells[0][j].getCell_content()))
+//					newcells[0][j].setCell_content(newcells[0][j].headers.get(s)+ " "+newcells[0][j].getCell_content());
+//		}
+//		table.stat.setNum_of_header_rows(1);
+//		table.setNum_of_rows(1+table.stat.getNum_of_body_rows());
+//		table.cells = newcells;
+//		for(int i = 0;i<table.cells.length;i++){
+//			int num_of_empty = 0;
+//			for(int j = 0;j<table.cells[i].length;j++)
+//			{
+//				
+//				if(table.cells[i][j].getCell_content()==null)
+//				{
+//					table.cells[i][j].setCell_content("");
+//				}
+//				if(table.cells[i][j]==null)
+//				{
+//					table.cells[i][j] = new Cell(i, j);
+//					table.cells[i][j].setCell_content("");
+//				}
+//				if(Utilities.isSpaceOrEmpty(table.cells[i][j].getCell_content()))
+//				{
+//					num_of_empty++;
+//				}
+//			}
+//			if(table.getNum_of_columns()-num_of_empty>1)
+//				table.isEmptyOnlyHeaders = false;
+//		}
+//		
+//		return table;
+//	}
 	/**
 	 * Function that labels header cells in case header 
 	 * is wrongly wrapped in thead tags. This can be case in headers with more 

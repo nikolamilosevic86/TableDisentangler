@@ -268,8 +268,8 @@ public class TablInExMain {
 					
 					// t = TableSimplifier.LabelHeaderCells(t);// did not help
 					if (t.isHasHeader()) {
-						t = TableSimplifier.MergeHeaders(t);
-						t = TableSimplifier.MergeStubs(t);
+					//	t = TableSimplifier.MergeHeaders(t);
+					//	t = TableSimplifier.MergeStubs(t);
 					}
 					t.PragmaticClass = pc.Classify(t);
 //					if(t.PragmaticClass.equals("other")){
