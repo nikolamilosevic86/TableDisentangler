@@ -74,6 +74,7 @@ public class TableSimplifier {
 	 */
 	public static Table MergeHeaders(Table table)
 	{
+		table.original_cells = table.cells;
 		if(table.cells==null)
 			return table;
 		if(table.stat.getNum_of_header_rows()<2 && table.cells!=null && table.cells[0]!=null){

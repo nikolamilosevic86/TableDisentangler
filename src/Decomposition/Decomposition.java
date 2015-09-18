@@ -1061,8 +1061,9 @@ public class Decomposition {
 			cells = table.cells;
 		}
 		
-		table.cells = markMultiTableHeaders(cells);
-		table.original_cells = table.cells;
+		table.original_cells = markMultiTableHeaders(table.original_cells);
+		table.cells = markMultiTableHeaders(table.cells);
+		//table.original_cells = table.cells;
 		cells = table.cells;
 		Cell[][] original_cells = table.original_cells;
 		if(cells[0].length>1){
