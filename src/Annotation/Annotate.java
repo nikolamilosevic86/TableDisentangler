@@ -180,6 +180,10 @@ public class Annotate {
 				{
 					for(int k = 0;k<cells[j].length;k++)
 					{
+						if(k == 0 && cells[j][k].isIs_header())
+						{
+							cells[j][k].setIs_stub(true);
+						}
 						Element CellEl = doc.createElement("Cell");
 						CellsEl.appendChild(CellEl);
 						Element CellID = doc.createElement("CellID");
