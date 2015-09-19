@@ -210,6 +210,9 @@ public class Decomposition {
 			return false;
 		for(int i = 1; i < cells.length;i++)
 		{
+			if(cells[i][0].isIs_header())
+				continue;
+			
 			if(cells[i][0].isIs_columnspanning() && table.getNum_of_columns()>1 && cells[i][0].getCells_columnspanning()>=table.getNum_of_columns() && !Utilities.isSpaceOrEmpty(cells[i][0].getCell_content()))
 			{
 				hasSubheader = true;
