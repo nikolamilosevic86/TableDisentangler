@@ -795,12 +795,15 @@ public class Decomposition {
 			boolean hasSubheaders = hasSuperRowsListTable(cells, table);
 			boolean TopLevel = false;
 			String currentSubHeader = "";
+			String SubHeaderIndex = "";
 			for(int j=0;j<cells.length;j++)
 			{
 				for(int k=0;k<cells[j].length;k++)
 				{
 					if(cells[j][k].isIs_header())
 						continue;
+					if(cells[j][k].isIs_stub())
+						cells[j][k].setIs_stub(false);
 					try{
 						
 						if(hasSubheaders)
@@ -809,17 +812,23 @@ public class Decomposition {
 							{
 								TopLevel = true;
 								currentSubHeader=cells[j][k].getCell_content();
+								cells[j][k].setIs_subheader(true);
+								SubHeaderIndex = j+"."+k;
 								continue;
 							}
 							if(TopLevel==false && Utilities.numOfSpaceOrBullets(cells[j][k].getCell_content())==0 && (cells[j+2]!= null && Utilities.numOfSpaceOrBullets(cells[j+2][k].getCell_content())!=0) && currentSubHeader.equals(""))
 							{
 								TopLevel = true;
 								currentSubHeader=cells[j][k].getCell_content();
+								cells[j][k].setIs_subheader(true);
+								SubHeaderIndex = j+"."+k;
 								continue;
 							}
 							if(TopLevel == true && !cells[j][k].isBreakingLineOverRow() && Utilities.numOfSpaceOrBullets(cells[j][k].getCell_content())==0 && !currentSubHeader.equals(""))
 							{
 								currentSubHeader=cells[j][k].getCell_content();
+								cells[j][k].setIs_subheader(true);
+								SubHeaderIndex = j+"."+k;
 								continue;
 							}
 						}
@@ -845,6 +854,7 @@ public class Decomposition {
 						if(currentSubHeader!=""){
 						Element SubHeader = doc.createElement("SubHeader");
 						SubHeader.setTextContent(currentSubHeader);
+						cells[j][k].setSuperRowIndex(SubHeaderIndex);
 						NavigationPath.appendChild(SubHeader);
 						}
 						cell.appendChild(NavigationPath);
@@ -901,6 +911,8 @@ public class Decomposition {
 				}
 			}
 		}
+		table.cells = cells;
+		table.original_cells = cells;
 		return table;
 	}
 	
