@@ -614,7 +614,7 @@ public class Decomposition {
 				cells[j][0].setCell_content("");
 			}
 			//Other levels of subheaders with possibly filled cells.
-				if((cells!=null&&cells[j]!=null&&cells[j][0]!=null&&cells[j][0].getCell_content()!=null)&&(cells[j][0].getCell_content().length()>0 && Utilities.isSpace(cells[j][0].getCell_content().trim().charAt(0)))||Utilities.isSpaceOrEmpty(cells[j][0].getCell_content()) )
+				if((cells!=null&&cells[j]!=null&&cells[j][0]!=null&&cells[j][0].getCell_content()!=null)&&(cells[j][0].getCell_content().length()>0 && Utilities.isSpace(cells[j][0].getCell_content().trim().charAt(0))) )
 				{
 					hasSpaceSubheaders = true;
 					SetUnderSubheaderRow(cells[j]);
@@ -635,9 +635,16 @@ public class Decomposition {
 				{
 					if(hasSpaceSubheaders)
 						currentSubHeaderLevel = 0;
+					if(Utilities.isSpaceOrEmpty(cells[j][0].getCell_content()))
+					{
+						SetUnderSubheaderRow(cells[j],headerStackIndexes[currentSubHeaderLevel]);
+						SetUnderSubheaderRow(original_cells[cells[j][0].getRow_number()],headerStackIndexes[currentSubHeaderLevel]);
+					}
+					else
+					{
 					headerStackA[currentSubHeaderLevel] = cells[j][0].getCell_content();
 					headerStackIndexes[currentSubHeaderLevel] = ""+original_cells[cells[j][0].getRow_number()][cells[j][0].getColumn_number()].getRow_number()+"."+original_cells[cells[j][0].getRow_number()][cells[j][0].getColumn_number()].getColumn_number();
-					
+					}
 				}
 
 			for(int k=1;k<cells[j].length;k++)
@@ -1057,6 +1064,17 @@ public class Decomposition {
 		{
 			row[i].setUnderSubheader(true);
 		}
+	}
+	
+	public Cell[] SetUnderSubheaderRow(Cell[] row,String superRowIndex)
+	{
+		for(int i = 0; i < row.length;i++)
+		{
+			row[i].setUnderSubheader(true);
+			row[i].setSuperRowIndex(superRowIndex);
+		}
+		
+		return row;
 	}
 	
 	
