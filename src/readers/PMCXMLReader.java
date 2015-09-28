@@ -543,8 +543,10 @@ public class PMCXMLReader implements Reader{
 							while(cells[rowindex][index].isIs_filled() && index!=num_of_columns)
 								index++;
 							cells[rowindex][index] = Cell.setCellValues(a,cells[rowindex][index], Utilities.getString(tds.get(k)), is_colspanning, colspanVal, is_rowspanning, rowspanVal, false, 0, isStub, stubProbability, index,rowindex, l, s);
-							if(hr!=null && hr.size()!=0 && hr.get(0)!=null)
+							if(hr!=null && hr.size()!=0 && hr.get(0)!=null){
 								cells[rowindex][index].setBreakingLineOverRow(true);
+								isStub=false;
+							}
 							//System.out.println(j+","+index+": "+cells[j][index].getCell_content());
 							table = Statistics.statisticsForCell(table, cells[rowindex][index]);
 						}
