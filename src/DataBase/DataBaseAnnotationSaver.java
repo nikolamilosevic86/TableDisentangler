@@ -64,7 +64,7 @@ public class DataBaseAnnotationSaver {
 	        
             //-----------------------------------------------
             Statement stmt12 = conn.createStatement();
-	  		String insertTableSQL12 = "INSERT INTO OriginalArticle (PMID,PMCID,pissn,essn,xml,Article_idArticle) VALUES (?,?,?,?,?,?)";
+	  		String insertTableSQL12 = "INSERT INTO OriginalArticle (PMID,PMCID,pissn,eissn,xml,Article_idArticle) VALUES (?,?,?,?,?,?)";
 	  		PreparedStatement preparedStatement12 = conn.prepareStatement(insertTableSQL12,Statement.RETURN_GENERATED_KEYS);
 	  		preparedStatement12.setString(1,art.getPmid());
 	  		preparedStatement12.setString(2, art.getPmid());
@@ -172,7 +172,7 @@ public class DataBaseAnnotationSaver {
 	            {
 	             for(int k = 0;k<cells.length;k++){
 	            	Statement stmt7 = conn.createStatement();
-	    	  		String insertTableSQL7 = "INSERT INTO Cell (CellID,CellType,Table_idTable,RowN,ColumnN,HeaderRef,StubRef,SuperRowRef,Content) VALUES (?,?,?,?,?,?,?,?,?)";
+	    	  		String insertTableSQL7 = "INSERT INTO Cell (CellID,CellType,Table_idTable,RowN,ColumnN,HeaderRef,StubRef,SuperRowRef,Content,WholeHeader,WholeStub,WholeSuperRow) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 	    	  		PreparedStatement preparedStatement7 = conn.prepareStatement(insertTableSQL7,Statement.RETURN_GENERATED_KEYS);
 	    	  		preparedStatement7.setString(1,""+j+"."+k);
 	    	  		preparedStatement7.setString(2, cells[j][k].getCellType());
@@ -183,7 +183,9 @@ public class DataBaseAnnotationSaver {
 	    	  		preparedStatement7.setString(7,cells[j][k].getStub_ref());
 	    	  		preparedStatement7.setString(8,cells[j][k].getSuper_row_ref());
 	    	  		preparedStatement7.setString(9,cells[j][k].getCell_content());
-
+	    	  		preparedStatement7.setString(10,cells[j][k].getHeader_values());
+	    	  		preparedStatement7.setString(11,cells[j][k].getStub_values());
+	    	  		preparedStatement7.setString(12,cells[j][k].getSubheader_values());
 	    	  		
 	    	  		// execute insert SQL stetement
 	    	  		int CellId = preparedStatement7.executeUpdate();
