@@ -255,7 +255,7 @@ public class Utilities {
 		for(int i = 0;i<s.length();i++)
 		{
 			char ch = s.charAt(i);
-			if(((int)ch)==8195 || (int)ch==160 || (int)ch== ' ' || (int)ch==8194 || (int)ch==8201 || (int)ch=='-'||(int)ch == '•')
+			if(((int)ch)==8195 || (int)ch==160 || (int)ch== ' ' || (int)ch==8194 || (int)ch==8201 || (int)ch=='-'||(int)ch == 8226)
 			{
 				num++;
 			}

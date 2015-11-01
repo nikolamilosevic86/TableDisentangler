@@ -15,6 +15,7 @@ import java.util.LinkedList;
 import net.didion.jwnl.JWNL;
 import Annotation.Annotate;
 import ConceptualizationOfValues.ConceptizationStats;
+import DataBase.DataBaseAnnotationSaver;
 import Decomposition.Decomposition;
 import Decomposition.TrialIE2;
 import ExternalResourceHandlers.InformationClass;
@@ -57,7 +58,6 @@ public class TablInExMain {
 	public static DecompositionRDFWriter linkedData;
 	public static MarvinSemAnnotator marvin = new MarvinSemAnnotator();
 	public static ValueParser vp = new ValueParser();
-
 
 	public static void ReadSemanticTypes() {
 		try {
@@ -155,8 +155,7 @@ public class TablInExMain {
 		if (Arrays.asList(args).contains("-tag")) {
 			shouldTag = true;
 		}
-		if(Arrays.asList(args).contains("-ld"))
-		{
+		if (Arrays.asList(args).contains("-ld")) {
 			ExportLinkedData = true;
 		}
 		if (Arrays.asList(args).contains("-conceptisation")) {
@@ -193,9 +192,12 @@ public class TablInExMain {
 			printHelp();
 			return;
 		}
-		classifiers.PragmaticClassifier pc = new classifiers.PragmaticClassifier("Models/SMOPragmaticAll.model");
-	//	classifiers.PragmaticClassifier pc2 = new classifiers.PragmaticClassifier("Models/SMOPragmaticSupportVsAll.model");
-	//	classifiers.PragmaticClassifier pc3 = new classifiers.PragmaticClassifier("Models/SMOPragmaticFindingsVsAll.model");
+		classifiers.PragmaticClassifier pc = new classifiers.PragmaticClassifier(
+				"Models/SMOPragmaticAll.model");
+		// classifiers.PragmaticClassifier pc2 = new
+		// classifiers.PragmaticClassifier("Models/SMOPragmaticSupportVsAll.model");
+		// classifiers.PragmaticClassifier pc3 = new
+		// classifiers.PragmaticClassifier("Models/SMOPragmaticFindingsVsAll.model");
 		if (TypeClassify)
 			SimpleTableClassifier.init(TablInExMain.Inpath);
 		if (ComplexClassify)
@@ -209,28 +211,28 @@ public class TablInExMain {
 		Article article = new Article("");
 		boolean newrun = true;
 		String LinkedDataFolder = "RDFs";
-		if(ExportLinkedData)
-		{
-			//linkedData = new DecompositionRDFWriter();
+		if (ExportLinkedData) {
+			// linkedData = new DecompositionRDFWriter();
 			boolean success = (new File(LinkedDataFolder)).mkdirs();
 		}
+		DataBaseAnnotationSaver dbas = new DataBaseAnnotationSaver();
 		for (int a = 0; a < files.length; a++) {
-			if(ExportLinkedData)
-			{
+			if (ExportLinkedData) {
 				linkedData = new DecompositionRDFWriter();
 			}
 			if (runas.toLowerCase().equals("pmc")) {
-				article = runReadingloopOneFile(article, files[a], PMCXMLReader.class);
-				for(int s = 0;s<article.getTables().length;s++)
-				{
-					if(article.getTables()[s].cells==null)
+				article = runReadingloopOneFile(article, files[a],
+						PMCXMLReader.class);
+				for (int s = 0; s < article.getTables().length; s++) {
+					if (article.getTables()[s].cells == null)
 						continue;
-					Cell [][] original_cells = new Cell[article.getTables()[s].cells.length][];
-					for(int i = 0; i < article.getTables()[s].cells.length; i++){
+					Cell[][] original_cells = new Cell[article.getTables()[s].cells.length][];
+					for (int i = 0; i < article.getTables()[s].cells.length; i++) {
 						original_cells[i] = new Cell[article.getTables()[s].cells[i].length];
-						for(int j = 0;j<article.getTables()[s].cells[i].length;j++)
-							original_cells[i][j] = new Cell(article.getTables()[s].cells[i][j]);
-					}		
+						for (int j = 0; j < article.getTables()[s].cells[i].length; j++)
+							original_cells[i][j] = new Cell(
+									article.getTables()[s].cells[i][j]);
+					}
 					article.getTables()[s].original_cells = original_cells;
 				}
 			}
@@ -260,36 +262,33 @@ public class TablInExMain {
 				concept.ReadPatterns("patterns");
 			}
 
-
-			
 			if (article != null && article.getTables() != null)
 				for (int j = 0; j < article.getTables().length; j++) {
 					Table t = article.getTables()[j];
-					
+
 					// t = TableSimplifier.LabelHeaderCells(t);// did not help
 					if (t.isHasHeader()) {
-					//	t = TableSimplifier.MergeHeaders(t);
-					//	t = TableSimplifier.MergeStubs(t);
+						// t = TableSimplifier.MergeHeaders(t);
+						// t = TableSimplifier.MergeStubs(t);
 					}
 					t.PragmaticClass = pc.Classify(t);
-//					if(t.PragmaticClass.equals("other")){
-//					t.PragmaticClass = pc2.Classify2(t,"support","other");
-//					}
-//					if(t.PragmaticClass.equals("other")){
-//					t.PragmaticClass = pc3.Classify2(t,"findings","other");
-//					}
+					// if(t.PragmaticClass.equals("other")){
+					// t.PragmaticClass = pc2.Classify2(t,"support","other");
+					// }
+					// if(t.PragmaticClass.equals("other")){
+					// t.PragmaticClass = pc3.Classify2(t,"findings","other");
+					// }
 				}
-
 
 			if (doIE) {
 
 				ie.ExtractData(article);
 			}
-			if(TablInExMain.ComplexClassify){
-				for(int i = 0;i<article.getTables().length;i++)
-				{
-					SimpleTableClassifier.ClassifyTableByComplexity(article.getTables()[i]);
-					//tables[i].printTableStatsToFile("TableStats.txt");
+			if (TablInExMain.ComplexClassify) {
+				for (int i = 0; i < article.getTables().length; i++) {
+					SimpleTableClassifier.ClassifyTableByComplexity(article
+							.getTables()[i]);
+					// tables[i].printTableStatsToFile("TableStats.txt");
 				}
 			}
 			if (IEinSQLTial) {
@@ -305,23 +304,24 @@ public class TablInExMain {
 				concept.processArticle(article);
 			}
 
-			if(ExportLinkedData)
-			{
-				linkedData.printToFile(LinkedDataFolder+"\\"+article.getPmc()+".rdf");
+			if (ExportLinkedData) {
+				linkedData.printToFile(LinkedDataFolder + "\\"
+						+ article.getPmc() + ".rdf");
 			}
-			
-			for(int l = 0;l<article.getTables().length;l++)
-			{
-				LinkedList<DataExtractionOutputObj> outputs = article.getTables()[l].output;
-				for(DataExtractionOutputObj out:outputs)
-				{
+
+			for (int l = 0; l < article.getTables().length; l++) {
+				LinkedList<DataExtractionOutputObj> outputs = article
+						.getTables()[l].output;
+				for (DataExtractionOutputObj out : outputs) {
 					out.CreateOutput();
 				}
 			}
 			Annotate annot = new Annotate();
 			annot.AnnotateArticle(article);
+			dbas.SaveArticleAnnotationToDB(article);
 
 		}
+		dbas.CloseDBConnection();
 
 		int weight = 0;
 		int BMI = 0;
@@ -472,6 +472,6 @@ public class TablInExMain {
 		System.out
 				.println("    -iefine - Extract information about trial using fine graned approach (data about each arm) and stores it in mySQL database. Has to be executed together with -doIE command");
 		System.out
-		.println("    -ld - Export table decomposition as RDF linked data file");
+				.println("    -ld - Export table decomposition as RDF linked data file");
 	}
 }

@@ -34,6 +34,7 @@ import Utils.Utilities;
 import ValueParser.ValueItem;
 import ValueParser.ValueItem.ValueType;
 import ValueParser.ValueParser;
+import tablInEx.Annotation;
 import tablInEx.Article;
 import tablInEx.Cell;
 import tablInEx.TablInExMain;
@@ -210,15 +211,25 @@ public class Annotate {
 						CellEl.appendChild(CellSemantics);
 						for(int p = 0; p<valueTags.size();p++)
 						{
+							Annotation annot = new Annotation();
 							Element CellValueSemantics = doc.createElement("Annotation");
 							CellValueSemantics.setAttribute("Type", "ValueType");
+							annot.setType("ValueType");
 							CellValueSemantics.setAttribute("TypeVal", valueTags.get(p).type.toString());
+							annot.setTypeVal(valueTags.get(p).type.toString());
 							CellValueSemantics.setAttribute("Start", valueTags.get(p).start_position+"");
+							annot.setStart(valueTags.get(p).start_position);
 							CellValueSemantics.setAttribute("End", valueTags.get(p).end_position+"");
+							annot.setEnd(valueTags.get(p).end_position);
 							CellValueSemantics.setAttribute("Content",valueTags.get(p).value);
+							annot.setContent(valueTags.get(p).value);
 							CellValueSemantics.setAttribute("ID","");
+							annot.setID("");
 							CellValueSemantics.setAttribute("URL","");
+							annot.setURL("");
 							CellValueSemantics.setAttribute("Source","TableAnnotatorSyntacticAnalizer");
+							annot.setSource("TableAnnotatorSyntacticAnalizer");
+							cells[j][k].annotations.add(annot);
 							CellSemantics.appendChild(CellValueSemantics);
 						}
 						//annotating by MARVIN
@@ -246,14 +257,24 @@ public class Annotate {
 //							CellSemantics.appendChild(CellValueSemantics);
 							for(int s = 0;s<words.get(p).wordmeanings.size();s++){
 								Element Meaning = doc.createElement("Annotation");
+								Annotation annot = new Annotation();
 								Meaning.setAttribute("Type", "ValueSemantic");
+								annot.setType("ValueSemantic");
 								Meaning.setAttribute("TypeVal", "");
+								annot.setTypeVal("");
 								Meaning.setAttribute("Source", words.get(p).wordmeanings.get(s).Source);
+								annot.setSource( words.get(p).wordmeanings.get(s).Source);
 								Meaning.setAttribute("ID", words.get(p).wordmeanings.get(s).id);
+								annot.setID(words.get(p).wordmeanings.get(s).id);
 								Meaning.setAttribute("URL", words.get(p).wordmeanings.get(s).URL);
+								annot.setURL(words.get(p).wordmeanings.get(s).URL);
 								Meaning.setAttribute("Start", words.get(p).wordmeanings.get(s).startAt+"");
+								annot.setStart(words.get(p).wordmeanings.get(s).startAt);
 								Meaning.setAttribute("End", words.get(p).wordmeanings.get(s).endAt+"");
+								annot.setEnd(words.get(p).wordmeanings.get(s).endAt);
 								Meaning.setAttribute("Content", words.get(p).wordmeanings.get(s).appearingWord);
+								annot.setContent( words.get(p).wordmeanings.get(s).appearingWord);
+								cells[j][k].annotations.add(annot);
 								CellSemantics.appendChild(Meaning);				
 							}
 						}
@@ -280,14 +301,18 @@ public class Annotate {
 							if(s>=0&&cells[s][k]!=null && cells[s][k].isIs_header())
 							{
 								Element HeaderRef = doc.createElement("HeaderRef");
-								HeaderRef.setTextContent(""+s+"."+k);
+								String href = ""+s+"."+k;
+								HeaderRef.setTextContent(href);
+								cells[j][k].setHeader_ref(href);
 								CellEl.appendChild(HeaderRef);
 								//break;
 							}
 							if(s>=0&&cells[s][k]!=null && cells[s][k].isIs_header())
 							{
 								Element HeaderCatRef = doc.createElement("HeadStubRef");
-								HeaderCatRef.setTextContent(""+s+"."+0);
+								String hsref = ""+s+"."+0;
+								HeaderCatRef.setTextContent(hsref);
+								cells[j][k].setHead_stub_ref(hsref);
 								CellEl.appendChild(HeaderCatRef);
 								break;
 							}
@@ -298,7 +323,9 @@ public class Annotate {
 							if(s>=0 && cells[j][s]!=null && cells[j][s].isIs_stub())
 							{
 								Element StubRef = doc.createElement("StubRef");
-								StubRef.setTextContent(""+j+"."+s);
+								String sref = ""+j+"."+s;
+								StubRef.setTextContent(sref);
+								cells[j][k].setStub_ref(sref);
 								CellEl.appendChild(StubRef);
 								break;
 							}
@@ -310,12 +337,14 @@ public class Annotate {
 						if(cells[j][k].isIs_header()){
 							Element CellRole = doc.createElement("CellRole");
 							CellRole.setTextContent("Header");
+							cells[j][k].CellRoles.add("Header");
 							CellRoles.appendChild(CellRole);
 							isDataCell = false;
 						}
 						if(cells[j][k].isIs_stub()&& cells[j][k].getColumnspanning_index()==0){
 							Element CellRole = doc.createElement("CellRole");
 							CellRole.setTextContent("Stub");
+							cells[j][k].CellRoles.add("Stub");
 							CellRoles.appendChild(CellRole);
 							isDataCell = false;
 						}		
@@ -342,6 +371,7 @@ public class Annotate {
 						if(cells[j][k].isIs_subheader()){
 							Element CellRole = doc.createElement("CellRole");
 							CellRole.setTextContent("SuperRow");
+							cells[j][k].CellRoles.add("SuperRow");
 							CellRoles.appendChild(CellRole);
 						}
 						//Previously was StubHeaderCell, but makes no sense when since Header is anyway included.
@@ -355,6 +385,7 @@ public class Annotate {
 						{
 							Element CellRole = doc.createElement("CellRole");
 							CellRole.setTextContent("Data");
+							cells[j][k].CellRoles.add("Data");
 							CellRoles.appendChild(CellRole);
 						}	
 						

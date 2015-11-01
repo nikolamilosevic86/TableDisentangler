@@ -22,7 +22,12 @@ public class Cell {
 	public String CellId;
 	
 	private String header_values;
-	
+	private String header_ref;
+	private String stub_ref;
+	private String head_stub_ref;
+	private String super_row_ref;
+	public LinkedList<String> CellRoles = new LinkedList<String>();
+	public LinkedList<Annotation> annotations = new LinkedList<Annotation>();
 	public LinkedList<String>headers = new LinkedList<String>();
 	public LinkedList<String>stubs = new LinkedList<String>();
 	
@@ -568,6 +573,62 @@ public class Cell {
 	 */
 	public void setSuperRowIndex(String superRowIndex) {
 		this.superRowIndex = superRowIndex;
+	}
+
+	/**
+	 * @return the header_ref
+	 */
+	public String getHeader_ref() {
+		return header_ref;
+	}
+
+	/**
+	 * @param header_ref the header_ref to set
+	 */
+	public void setHeader_ref(String header_ref) {
+		this.header_ref = header_ref;
+	}
+
+	/**
+	 * @return the stub_ref
+	 */
+	public String getStub_ref() {
+		return stub_ref;
+	}
+
+	/**
+	 * @param stub_ref the stub_ref to set
+	 */
+	public void setStub_ref(String stub_ref) {
+		this.stub_ref = stub_ref;
+	}
+
+	/**
+	 * @return the super_row_ref
+	 */
+	public String getSuper_row_ref() {
+		return super_row_ref;
+	}
+
+	/**
+	 * @param super_row_ref the super_row_ref to set
+	 */
+	public void setSuper_row_ref(String super_row_ref) {
+		this.super_row_ref = super_row_ref;
+	}
+
+	/**
+	 * @return the head_stub_ref
+	 */
+	public String getHead_stub_ref() {
+		return head_stub_ref;
+	}
+
+	/**
+	 * @param head_stub_ref the head_stub_ref to set
+	 */
+	public void setHead_stub_ref(String head_stub_ref) {
+		this.head_stub_ref = head_stub_ref;
 	}
 	
 }
