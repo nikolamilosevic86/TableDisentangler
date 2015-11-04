@@ -351,6 +351,34 @@ public class Decomposition {
 	
 	
 	/**
+	 * Gets full header path and saves it to header property of the cell.
+	 *
+	 * @param table - the table we are getting header values for.
+	 */
+	public static void getFullHeaderValues(Table table)
+	{
+		Cell[][] cells = table.cells;
+		for(int i = 0;i<cells.length;i++)
+		{
+			for(int j = 0; j<cells[i].length;j++)
+			{
+				String WholeHeader = "";
+				if(i>=1){
+				for(int k =i-1;k>=0;k--)
+				{
+					if(cells[k][j].isIs_header())
+					{
+						WholeHeader=cells[k][j].getCell_content()+" ; "+WholeHeader;
+					}
+				}
+				}
+				cells[i][j].setHeader_values(WholeHeader);
+			}
+		}
+	}
+	
+	
+	/**
 	 * Check headers. This function adds is header flag to the cells that are incorrectly marked (not marked as headers) and simplifies the table
 	 *
 	 * @param cells the cells
@@ -582,12 +610,18 @@ public class Decomposition {
 				}
 				else
 				{
+					try{
 					currentSubHeaderLevel = Utilities.numOfBegeningSpaces(cells[j][0].getCell_content());
 					headerStackA[currentSubHeaderLevel] = cells[j][0].getCell_content(); 
 					headerStackIndexes[currentSubHeaderLevel] = ""+original_cells[cells[j][0].getRow_number()][cells[j][0].getColumn_number()].getRow_number()+"."+original_cells[cells[j][0].getRow_number()][cells[j][0].getColumn_number()].getColumn_number();
 					currentSubHeaderLevel++;
 					SetUnderSubheaderRow(cells[j]);
 					SetUnderSubheaderRow(original_cells[cells[j][0].getRow_number()]);
+					}
+					catch(Exception ex)
+					{
+						ex.printStackTrace();
+					}
 				}
 				if(j>0 && isRowSubheader(cells[j-1], table))
 				{
@@ -647,7 +681,7 @@ public class Decomposition {
 					}
 				}
 
-			for(int k=1;k<cells[j].length;k++)
+			for(int k=0;k<cells[j].length;k++)
 			{
 				
 				try{ 
@@ -696,7 +730,7 @@ public class Decomposition {
 						for(int s = 0;s<cells[0][k].headers.size();s++){
 							Element Header = doc.createElement("HeaderValue"+s);
 							Header.setTextContent(cells[0][k].headers.get(s));
-							cells[j][k].setHeader_values(cells[0][k].getCell_content());
+							//cells[j][k].setHeader_values(cells[0][k].getCell_content());
 							NavigationPath.appendChild(Header);
 						}
 					}
@@ -855,12 +889,14 @@ public class Decomposition {
 						rootElement.appendChild(cell);
 						
 						Element NavigationPath = doc.createElement("NavigationPath");
+						String WholeHeader = "";
 						for(int s = 0;s<cells[0][k].headers.size();s++){
 							Element Header = doc.createElement("HeaderValue"+s);
 							Header.setTextContent(cells[0][k].headers.get(s));
-						
+							WholeHeader+=cells[0][k].headers.get(s)+" ";
 							NavigationPath.appendChild(Header);
 						}
+						//cells[0][k].setHeader_values(WholeHeader);
 						if(currentSubHeader!=""){
 						Element SubHeader = doc.createElement("SubHeader");
 						SubHeader.setTextContent(currentSubHeader);
@@ -868,7 +904,7 @@ public class Decomposition {
 						NavigationPath.appendChild(SubHeader);
 						}
 						cell.appendChild(NavigationPath);
-						cells[j][k].setHeader_values(cells[0][k].getCell_content());
+						//cells[j][k].setHeader_values(cells[0][k].getCell_content());
 						
 						//info elements
 						Element info = doc.createElement("value");
@@ -956,7 +992,7 @@ public class Decomposition {
 		{
 			if(cells[j].length==0 || cells[j][0].isIs_header())
 				continue;
-			for(int k=1;k<cells[j].length;k++)
+			for(int k=0;k<cells[j].length;k++)
 			{
 				try{
 					DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -991,12 +1027,15 @@ public class Decomposition {
 						//HeaderValue.setTextContent(cells[0][k].getCell_content());
 						//cells[j][k].setHeader_values(cells[0][k].getCell_content());
 						//NavigationPath.appendChild(HeaderValue);
+						String WholeHeader = "";
 						for(int s = 0;s<cells[0][k].headers.size();s++){
 							Element Header = doc.createElement("HeaderValue"+s);
 							Header.setTextContent(cells[0][k].headers.get(s));
-							cells[j][k].setHeader_values(cells[0][k].getCell_content());
+							WholeHeader +=cells[0][k].headers.get(s)+" ";
+							
 							NavigationPath.appendChild(Header);
 						}
+						//cells[j][k].setHeader_values(WholeHeader);
 						}
 					
 					cell.appendChild(NavigationPath);
@@ -1150,7 +1189,7 @@ public class Decomposition {
 			}
 			boolean emptyCells = true;
 			//check if row has all empty cells except first
-			for(int h=1;h<cells[j].length;h++)
+			for(int h=0;h<cells[j].length;h++)
 			{
 				if(cells[j][h].getCell_content()==null)
 				{
@@ -1257,7 +1296,7 @@ public class Decomposition {
 					
 				}
 
-			for(int k=1;k<cells[j].length;k++)
+			for(int k=0;k<cells[j].length;k++)
 			{
 				
 				try{ 
@@ -1335,13 +1374,15 @@ public class Decomposition {
 						}
 					}
 					
+					String WholeHeader="";
 						for(int s = 0;s<headers.size();s++){
 							Element Header = doc.createElement("HeaderValue"+s);
 							Header.setTextContent(headers.get(s));
-							cells[j][k].setHeader_values(headers.toString());
+							WholeHeader += headers.get(s)+" ";
+							//cells[j][k].setHeader_values(headers.toString());
 							NavigationPath.appendChild(Header);
 						}			
-					
+						//cells[j][k].setHeader_values(WholeHeader);
 					cell.appendChild(NavigationPath);
 					
 					//info elements
@@ -1463,12 +1504,15 @@ public class Decomposition {
 							}
 						}
 						
+						String WholeHeader = "";
 							for(int s = 0;s<headers.size();s++){
 								Element Header = doc.createElement("HeaderValue"+s);
 								Header.setTextContent(headers.get(s));
-								cells[j][k].setHeader_values(headers.toString());
+								WholeHeader +=headers.get(s)+" ";
+								//cells[j][k].setHeader_values(headers.toString());
 								NavigationPath.appendChild(Header);
-							}			
+							}	
+							//cells[j][k].setHeader_values(WholeHeader);
 						
 						
 						if(currentSubHeader!=""){
@@ -1477,7 +1521,7 @@ public class Decomposition {
 						NavigationPath.appendChild(SubHeader);
 						}
 						cell.appendChild(NavigationPath);
-						cells[j][k].setHeader_values(cells[0][k].getCell_content());
+						//cells[j][k].setHeader_values(cells[0][k].getCell_content());
 						
 						//info elements
 						Element info = doc.createElement("value");
@@ -1556,6 +1600,7 @@ public class Decomposition {
 				//continue;
 			
 			String tableFileName = "/"+tables[i].getDocumentFileName()+tables[i].getTable_title()+"-"+tables[i].tableInTable;
+			getFullHeaderValues(tables[i]);
 			Cell[][] cells = tables[i].cells;
 			
 			//Temporaty, don't process Multi tables! TODO: Add processing for multitables;

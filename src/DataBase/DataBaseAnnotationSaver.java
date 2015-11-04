@@ -170,7 +170,7 @@ public class DataBaseAnnotationSaver {
 	            Cell[][] cells = Tables[i].cells;
 	            for(int j = 0;j<cells.length;j++)
 	            {
-	             for(int k = 0;k<cells.length;k++){
+	             for(int k = 0;k<cells[j].length;k++){
 	            	Statement stmt7 = conn.createStatement();
 	    	  		String insertTableSQL7 = "INSERT INTO Cell (CellID,CellType,Table_idTable,RowN,ColumnN,HeaderRef,StubRef,SuperRowRef,Content,WholeHeader,WholeStub,WholeSuperRow) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 	    	  		PreparedStatement preparedStatement7 = conn.prepareStatement(insertTableSQL7,Statement.RETURN_GENERATED_KEYS);

@@ -34,6 +34,7 @@ import stats.Statistics;
 
 public class TablInExMain {
 
+	public static boolean databaseSave = false;
 	public static boolean doStats = false;
 	public static boolean TypeClassify = false;
 	public static boolean ComplexClassify = false;
@@ -161,6 +162,9 @@ public class TablInExMain {
 		if (Arrays.asList(args).contains("-conceptisation")) {
 			Conceptization = true;
 		}
+		if (Arrays.asList(args).contains("-databasesave")) {
+			databaseSave = true;
+		}
 		if (Arrays.asList(args).contains("-freq")) {
 			IEFreqSQLTial = true;
 		}
@@ -215,8 +219,13 @@ public class TablInExMain {
 			// linkedData = new DecompositionRDFWriter();
 			boolean success = (new File(LinkedDataFolder)).mkdirs();
 		}
-		DataBaseAnnotationSaver dbas = new DataBaseAnnotationSaver();
+		int articlecount = 0;
+		DataBaseAnnotationSaver dbas = null;
+		if(databaseSave){
+		dbas = new DataBaseAnnotationSaver();
+		}
 		for (int a = 0; a < files.length; a++) {
+			articlecount++;
 			if (ExportLinkedData) {
 				linkedData = new DecompositionRDFWriter();
 			}
@@ -318,10 +327,20 @@ public class TablInExMain {
 			}
 			Annotate annot = new Annotate();
 			annot.AnnotateArticle(article);
+			if(databaseSave){
 			dbas.SaveArticleAnnotationToDB(article);
+			if(articlecount>10)
+			{
+				dbas.CloseDBConnection();
+				dbas = new DataBaseAnnotationSaver();
+				articlecount = 0;
+			}
+			}
 
 		}
+		if(databaseSave){
 		dbas.CloseDBConnection();
+		}
 
 		int weight = 0;
 		int BMI = 0;

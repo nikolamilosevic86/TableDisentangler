@@ -197,6 +197,7 @@ public class Annotate {
 						{
 							Element SuperRowRef = doc.createElement("SuperRowRef");
 							SuperRowRef.setTextContent(cells[j][k].getSuperRowIndex());
+							cells[j][k].setSuper_row_ref(cells[j][k].getSuperRowIndex());
 							CellEl.appendChild(SuperRowRef);
 						}
 						
@@ -326,6 +327,10 @@ public class Annotate {
 								String sref = ""+j+"."+s;
 								StubRef.setTextContent(sref);
 								cells[j][k].setStub_ref(sref);
+								if(cells[j][k].isIs_header()||cells[j][k].isIs_subheader())
+								{
+									cells[j][k].setStub_values(cells[j][s].getCell_content());
+								}
 								CellEl.appendChild(StubRef);
 								break;
 							}
