@@ -82,13 +82,17 @@ public class Decomposition {
 	
 	public boolean isMultiTable(Cell[][] cells,Table table)
 	{
+		
 		if(cells==null)
 			return false;
+		
+		table.original_cells = markMultiTableHeaders(table.original_cells);
+		table.cells = markMultiTableHeaders(table.cells);
 		for(int i = 0; i<cells.length;i++)
 		{
 			if(cells[i][0].isBreakingLineOverRow())
 			{
-				if(i-2>=0 && !cells[i-2][0].isIs_header() && !isSequentiallyBreakingLine(cells,i-2,0) && cells[i-2][0].isBreakingLineOverRow())
+				if(i-2>=0 && !cells[i-2][0].isIs_header() && !isSequentiallyBreakingLine(cells,i-2,0) && cells[i-2][0].isBreakingLineOverRow()&&!Utilities.isOneCellFilledRow(cells[i-1]))
 					return true;
 			}
 		}
@@ -103,7 +107,25 @@ public class Decomposition {
 		{
 			if(cells[i][0].isBreakingLineOverRow())
 			{
-				if(i-2>=0 && !cells[i-2][0].isIs_header() && !isSequentiallyBreakingLine(cells,i-2,0) && cells[i-2][0].isBreakingLineOverRow())
+				
+				if(i-2>=0 && !cells[i-2][0].isIs_header() && !isSequentiallyBreakingLine(cells,i-2,0) && cells[i-2][0].isBreakingLineOverRow()&& Utilities.isOneCellFilledRow(cells[i-1]))
+				{
+					for(int j = 0; j<cells[i].length;j++)
+					{
+						//cells[i][j].setIs_subheader(true);
+					}
+					for(int j = 0; j<cells[i].length;j++)
+					{
+						cells[i-1][j].setIs_subheader(true);
+					}
+					for(int j = 0; j<cells[i].length;j++)
+					{
+						//cells[i-2][j].setIs_subheader(true);
+					}
+				}
+				
+				
+				else if(i-2>=0 && !cells[i-2][0].isIs_header() && !isSequentiallyBreakingLine(cells,i-2,0) && cells[i-2][0].isBreakingLineOverRow())
 				{
 					for(int j = 0; j<cells[i].length;j++)
 					{
@@ -196,6 +218,48 @@ public class Decomposition {
 	}
 	
 	
+	public boolean isRowSubheader(Cell[][] cellsAll, int row,Cell [] cells, Table table)
+	{
+		boolean emptyLine = true;
+		for(int h = 0;h<cells.length;h++)
+		{
+			if(!Utilities.isSpaceOrEmpty(cells[h].getCell_content()))
+			{
+				emptyLine = false;
+				break;
+			}
+		}
+		if(emptyLine)
+			return false;
+		boolean isSubheader = false;
+ 		if(cells[0].isIs_columnspanning() && table.getNum_of_columns()>1 && cells[0].getCells_columnspanning()>=table.getNum_of_columns() && !cells[0].getCell_content().trim().equalsIgnoreCase("") && !cells[0].getCell_content().trim().equalsIgnoreCase(" ") && !(((int)cells[0].getCell_content().trim().charAt(0))== 160))
+		{
+			isSubheader = true;
+		}
+		boolean emptyCells = true;
+		for(int j=1;j<cells.length;j++)
+		{
+			if(cells[j].getCell_content()==null)
+			{
+				cells[j].setCell_content("");
+			}
+			if((!Utilities.isSpaceOrEmpty(cells[0].getCell_content())  && !Utilities.isSpaceOrEmpty(cells[j].getCell_content())) || (Utilities.isSpaceOrEmpty(cells[0].getCell_content())  && !Utilities.isSpaceOrEmpty(cells[j].getCell_content())))
+			{
+				emptyCells = false;
+			}
+		}
+		if(emptyCells == true)
+		{
+			isSubheader = true;
+		}
+		if(cellsAll.length>row+1 && cellsAll[row+1][0].getCell_content().length()>0 && Utilities.numOfBegeningSpaces(cellsAll[row+1][0].getCell_content())>Utilities.numOfBegeningSpaces(cellsAll[row][0].getCell_content()))
+		{
+			isSubheader = true;
+		}
+		return isSubheader;
+	}
+	
+	
 	/**
 	 * Checks for table subheader.
 	 *
@@ -214,6 +278,11 @@ public class Decomposition {
 				continue;
 			
 			if(cells[i][0].isIs_columnspanning() && table.getNum_of_columns()>1 && cells[i][0].getCells_columnspanning()>=table.getNum_of_columns() && !Utilities.isSpaceOrEmpty(cells[i][0].getCell_content()))
+			{
+				hasSubheader = true;
+				break;
+			}
+			if(cells[i][0].isIs_subheader())
 			{
 				hasSubheader = true;
 				break;
@@ -498,7 +567,7 @@ public class Decomposition {
 	 * @param art the art
 	 * @param tableFileName the table file name
 	 */
-	private Table processTableWithSubheadersWithoutHeader(Cell[][] cells,Table table, Article art, String tableFileName)
+	private Table processTableWithSubheaders(Cell[][] cells,Table table, Article art, String tableFileName)
 	{
 		if(!hasTableSubheader(cells,table))
 		{
@@ -526,6 +595,9 @@ public class Decomposition {
 		}
 		cells = table.cells;
 		Cell[][] original_cells = table.original_cells;
+		boolean wasTopLevelSuperRow = false;
+		String TopLevelSuperRow = "";
+		String TopLevelSuperRowIndex = "";
 		for(int j=0;j<cells.length;j++)
 		{
 			if(cells[j][0].isIs_header())
@@ -541,6 +613,14 @@ public class Decomposition {
 			}
 			if(emptyLine)
 				continue;
+			
+			if(cells[j][0].isIs_subheader())
+			{
+				TopLevelSuperRow = cells[j][0].getCell_content();
+				TopLevelSuperRowIndex = ""+original_cells[cells[j][0].getRow_number()][cells[j][0].getColumn_number()].getRow_number()+"."+original_cells[cells[j][0].getRow_number()][cells[j][0].getColumn_number()].getColumn_number();
+				wasTopLevelSuperRow = true;
+				currentSubHeaderLevel--;
+			}
 			//Record headers in spanning structure
 			if(cells[j][0].isIs_columnspanning() && table.getNum_of_columns()>1 && cells[j][0].getCells_columnspanning()>=table.getNum_of_columns())
 			{
@@ -600,7 +680,7 @@ public class Decomposition {
 				}
 				else
 				{					
-				if(Utilities.numOfBegeningSpaces(cells[j][0].getCell_content())==currentSubHeaderLevel)
+				if(Utilities.numOfBegeningSpaces(cells[j][0].getCell_content())==currentSubHeaderLevel && !cells[j][0].isIs_subheader())
 				{
 					headerStackA[currentSubHeaderLevel] = cells[j][0].getCell_content();
 					headerStackIndexes[currentSubHeaderLevel] = ""+original_cells[cells[j][0].getRow_number()][cells[j][0].getColumn_number()].getRow_number()+"."+original_cells[cells[j][0].getRow_number()][cells[j][0].getColumn_number()].getColumn_number();
@@ -615,6 +695,8 @@ public class Decomposition {
 					headerStackA[currentSubHeaderLevel] = cells[j][0].getCell_content(); 
 					headerStackIndexes[currentSubHeaderLevel] = ""+original_cells[cells[j][0].getRow_number()][cells[j][0].getColumn_number()].getRow_number()+"."+original_cells[cells[j][0].getRow_number()][cells[j][0].getColumn_number()].getColumn_number();
 					currentSubHeaderLevel++;
+					if(wasTopLevelSuperRow)
+						currentSubHeaderLevel--;
 					SetUnderSubheaderRow(cells[j]);
 					SetUnderSubheaderRow(original_cells[cells[j][0].getRow_number()]);
 					}
@@ -627,6 +709,11 @@ public class Decomposition {
 				{
 					prevSubheader = cells[j-1][0].getCell_content();
 					prevSubheaderIndex = cells[j-1][0].getRow_number()+cells[j-1][0].getColumn_number()+"";
+				}
+				if(cells[j][0].getSuperRowIndex()==null)
+				{
+					SetUnderSubheaderRow(cells[j],TopLevelSuperRowIndex);
+					SetUnderSubheaderRow(original_cells[cells[j][0].getRow_number()],TopLevelSuperRowIndex);
 				}
 				continue;					
 				}
@@ -651,8 +738,9 @@ public class Decomposition {
 				if((cells!=null&&cells[j]!=null&&cells[j][0]!=null&&cells[j][0].getCell_content()!=null)&&(cells[j][0].getCell_content().length()>0 && Utilities.isSpace(cells[j][0].getCell_content().trim().charAt(0))) )
 				{
 					hasSpaceSubheaders = true;
-					SetUnderSubheaderRow(cells[j]);
-					SetUnderSubheaderRow(original_cells[cells[j][0].getRow_number()]);
+					SetUnderSubheaderRow(cells[j],headerStackIndexes[currentSubHeaderLevel]);
+					SetUnderSubheaderRow(original_cells[cells[j][0].getRow_number()],headerStackIndexes[currentSubHeaderLevel]);
+					
 					if(Utilities.numOfBegeningSpaces(cells[j][0].getCell_content())==currentSubHeaderLevel||Utilities.isSpaceOrEmpty(cells[j][0].getCell_content()))
 						{
 						headerStackA[currentSubHeaderLevel] = cells[j][0].getCell_content();
@@ -671,6 +759,8 @@ public class Decomposition {
 						currentSubHeaderLevel = 0;
 					if(Utilities.isSpaceOrEmpty(cells[j][0].getCell_content()))
 					{
+						if(currentSubHeaderLevel<0)
+							currentSubHeaderLevel = 0;
 						SetUnderSubheaderRow(cells[j],headerStackIndexes[currentSubHeaderLevel]);
 						SetUnderSubheaderRow(original_cells[cells[j][0].getRow_number()],headerStackIndexes[currentSubHeaderLevel]);
 					}
@@ -679,6 +769,12 @@ public class Decomposition {
 					headerStackA[currentSubHeaderLevel] = cells[j][0].getCell_content();
 					headerStackIndexes[currentSubHeaderLevel] = ""+original_cells[cells[j][0].getRow_number()][cells[j][0].getColumn_number()].getRow_number()+"."+original_cells[cells[j][0].getRow_number()][cells[j][0].getColumn_number()].getColumn_number();
 					}
+				}
+				
+				if(cells[j][0].getSuperRowIndex()==null)
+				{
+					SetUnderSubheaderRow(cells[j],TopLevelSuperRowIndex);
+					SetUnderSubheaderRow(original_cells[cells[j][0].getRow_number()],TopLevelSuperRowIndex);
 				}
 
 			for(int k=0;k<cells[j].length;k++)
@@ -1133,8 +1229,7 @@ public class Decomposition {
 			cells = table.cells;
 		}
 		
-		table.original_cells = markMultiTableHeaders(table.original_cells);
-		table.cells = markMultiTableHeaders(table.cells);
+		
 		//table.original_cells = table.cells;
 		cells = table.cells;
 		Cell[][] original_cells = table.original_cells;
@@ -1595,15 +1690,10 @@ public class Decomposition {
 		{
 			if(tables[i]==null || tables[i].cells==null || tables[i].cells.length==0)
 				continue;
-			//only simple tables
-			//if( tables[i].getStructureClass()!=2 && tables[i].getStructureClass()!=1 && tables[i].getStructureClass()!=3 && tables[i].getStructureClass()!=4)
-				//continue;
-			
 			String tableFileName = "/"+tables[i].getDocumentFileName()+tables[i].getTable_title()+"-"+tables[i].tableInTable;
 			getFullHeaderValues(tables[i]);
 			Cell[][] cells = tables[i].cells;
 			
-			//Temporaty, don't process Multi tables! TODO: Add processing for multitables;
 			if(isMultiTable(cells, tables[i]))
 			{
 				tables[i] = processMultiTable(cells,tables[i], art, tableFileName);
@@ -1612,7 +1702,7 @@ public class Decomposition {
 			if(tables[i].getTableStructureType()!=null && tables[i].getTableStructureType().equals(Table.StructureType.MULTI))
 				continue;
 			tables[i] = processListTable(cells,tables[i], art, tableFileName);
-			tables[i] = processTableWithSubheadersWithoutHeader(cells,tables[i],art,tableFileName);//processTableWithSubheaders(cells,tables[i],art,tableFileName);
+			tables[i] = processTableWithSubheaders(cells,tables[i],art,tableFileName);//processTableWithSubheaders(cells,tables[i],art,tableFileName);
 			if(!isListTable(cells, tables[i]) && !hasTableSubheader(cells, tables[i]))
 			{
 				tables[i] = processRegularTable(cells,  tables, art, tableFileName, i);

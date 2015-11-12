@@ -31,7 +31,9 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import tablInEx.Cell;
 import tablInEx.TablInExMain;
+import tablInEx.Table;
 
 /**
  * The Class Utilities.
@@ -68,6 +70,111 @@ public class Utilities {
 		   }
 		   return sortedMap;
 		}
+	
+	
+	public static boolean isEmptyRow(Cell[] cells)
+	{
+		for(int i = 0;i<cells.length;i++)
+		{
+			if(!Utilities.isSpaceOrEmpty(cells[i].getCell_content()))
+				return false;	
+		}
+		return true;
+	}
+	
+	public static boolean isOneCellFilledRow(Cell[] cells)
+	{
+		int filledCells = 0;
+		if(cells.length==1)
+			return false;
+		
+		for(int i = 0;i<cells.length;i++)
+		{
+			if(cells[i].isIs_columnspanning())
+				return true;
+			if(!isSpaceOrEmpty(cells[i].getCell_content()))
+			{
+				filledCells++;
+			}
+		}
+		if(filledCells==1)
+			return true;
+		else return false;
+			
+	}
+	
+	public static Table FixTablesHeader(Table table)
+	{
+		Cell[][] cells = table.cells;
+		int oldNumofHeaderRows = table.stat.getNum_of_header_rows();
+		int oldNumOfBodyRows = table.stat.getNum_of_body_rows();
+		if(cells==null)
+			return table;
+		for(int i = 0; i<cells.length;i++)
+		{
+			if(cells[i][0].isIs_header())
+				continue;
+			if(isEmptyRow(cells[i]) && cells[i][0].isBreakingLineOverRow() && i-2>=0 && cells[i-2][0].isIs_header() && isOneCellFilledRow(cells[i-1]))
+			{
+				for(int k=0;k<cells[i].length;k++)
+				{
+					for(int j=i-2;j<=i;j++)
+					{
+						if(cells[j][k].isIs_header())
+							continue;
+						cells[j][k].setIs_header(false);
+						cells[j][k].setIs_subheader(true);
+					}
+				}
+				table.stat.setNum_of_header_rows(table.stat.getNum_of_header_rows()+2);
+				table.stat.setNum_of_body_rows(table.stat.getNum_of_body_rows()-2);
+			}
+			
+			else if(isEmptyRow(cells[i]) && cells[i][0].isBreakingLineOverRow() && i-2>=0 && cells[i-2][0].isIs_header())
+			{
+				for(int k=0;k<cells[i].length;k++)
+				{
+					for(int j=i-2;j<=i;j++)
+					{
+						cells[j][k].setIs_header(true);
+					}
+				}
+				table.stat.setNum_of_header_rows(table.stat.getNum_of_header_rows()+2);
+				table.stat.setNum_of_body_rows(table.stat.getNum_of_body_rows()-2);
+			}
+			
+			else if (isEmptyRow(cells[i]) && cells[i][0].isBreakingLineOverRow() && i-3>=0 && cells[i-3][0].isIs_header())
+			{
+				for(int k=0;k<cells[i].length;k++)
+				{
+					for(int j=i-3;j<=i;j++)
+					{
+						cells[j][k].setIs_header(true);
+					}
+				}
+				table.stat.setNum_of_header_rows(table.stat.getNum_of_header_rows()+3);
+				table.stat.setNum_of_body_rows(table.stat.getNum_of_body_rows()-3);
+			}
+		}
+		
+		if(table.stat.getNum_of_header_rows()>cells.length)
+		{
+			for(int i = oldNumofHeaderRows;i<cells.length;i++)
+			{
+				for(int j = 0;j<cells[i].length;j++)
+				{
+					cells[i][j].setIs_header(false);
+				}
+			}
+			table.stat.setNum_of_header_rows(oldNumofHeaderRows);
+			table.stat.setNum_of_body_rows(oldNumOfBodyRows);
+		}
+		
+		table.setTable_cells(cells);
+		
+		return table;
+	}
+	
 	
 	/**
 	 * Checks if is string numeric.

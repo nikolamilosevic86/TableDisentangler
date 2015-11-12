@@ -112,6 +112,10 @@ public class TablInExMain {
 			r = (Reader) s.newInstance();
 			r.init(file.getPath());
 			a = r.Read();
+			
+			for(int i = 0;i<a.getTables().length;i++){
+				a.getTables()[i] = Utilities.FixTablesHeader(a.getTables()[i]);
+			}
 
 		} catch (InstantiationException e) {
 			e.printStackTrace();
@@ -275,18 +279,9 @@ public class TablInExMain {
 				for (int j = 0; j < article.getTables().length; j++) {
 					Table t = article.getTables()[j];
 
-					// t = TableSimplifier.LabelHeaderCells(t);// did not help
 					if (t.isHasHeader()) {
-						// t = TableSimplifier.MergeHeaders(t);
-						// t = TableSimplifier.MergeStubs(t);
 					}
 					t.PragmaticClass = pc.Classify(t);
-					// if(t.PragmaticClass.equals("other")){
-					// t.PragmaticClass = pc2.Classify2(t,"support","other");
-					// }
-					// if(t.PragmaticClass.equals("other")){
-					// t.PragmaticClass = pc3.Classify2(t,"findings","other");
-					// }
 				}
 
 			if (doIE) {

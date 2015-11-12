@@ -497,11 +497,6 @@ public class PMCXMLReader implements Reader{
 			{
 				table.stat.AddUnprCell();
 				List<Node> hr = getChildrenByTagName(tds.get(k), "hr");
-//				if(!tablecounted && hr!=null && hr.size()!=0 && hr.get(0)!=null && j>=2){
-//					Statistics.addMultiTable();
-//					table.setTableStructureType(Table.StructureType.MULTI);
-//					tablecounted = true;
-//				}
 				boolean isStub = false;
 				float stubProbability =0;
 				
@@ -547,7 +542,6 @@ public class PMCXMLReader implements Reader{
 								cells[rowindex][index].setBreakingLineOverRow(true);
 								isStub=false;
 							}
-							//System.out.println(j+","+index+": "+cells[j][index].getCell_content());
 							table = Statistics.statisticsForCell(table, cells[rowindex][index]);
 						}
 						catch(Exception ex)
@@ -561,7 +555,6 @@ public class PMCXMLReader implements Reader{
 			}//end for tds.size()
 		}// end for rowheads
 		table.stat.setNum_columns(num_of_columns);
-	//	cells = TableSimplifier.DeleteEmptyRows(cells);
 		return table;
 	}
 	
@@ -665,7 +658,7 @@ public class PMCXMLReader implements Reader{
 			Statistics.addRow(num_of_rows);
 			tables[tableindex] = ProcessTableBody(article,tables[tableindex],cells, rowsbody, headrowscount, num_of_columns);
 			tables[tableindex].setTable_cells(cells);
-			tables[tableindex] = FixTablesHeader(tables[tableindex]);
+			
 			//Print cells
 			for(int j = 0; j<cells.length;j++)
 			{
@@ -700,80 +693,18 @@ public class PMCXMLReader implements Reader{
 				continue;
 			}
 		}// end for tables
-		if(TablInExMain.TypeClassify){
-			for(int i = 0;i<numOfTables;i++)
-			{
-				SimpleTableClassifier.ClassifyTableByType(tables[i]);
-				tables[i].printTableStatsToFile("TableStats.txt");
-			}
-		}
+//		if(TablInExMain.TypeClassify){
+//			for(int i = 0;i<numOfTables;i++)
+//			{
+//				SimpleTableClassifier.ClassifyTableByType(tables[i]);
+//				tables[i].printTableStatsToFile("TableStats.txt");
+//			}
+//		}
 
 		return article;
 	}
 	
-	public boolean isEmptyRow(Cell[] cells)
-	{
-		for(int i = 0;i<cells.length;i++)
-		{
-			if(!Utilities.isSpaceOrEmpty(cells[i].getCell_content()))
-				return false;	
-		}
-		return true;
-	}
 	
-	public Table FixTablesHeader(Table table)
-	{
-		Cell[][] cells = table.cells;
-		int oldNumofHeaderRows = table.stat.getNum_of_header_rows();
-		int oldNumOfBodyRows = table.stat.getNum_of_body_rows();
-		for(int i = 0; i<cells.length;i++)
-		{
-			if(cells[i][0].isIs_header())
-				continue;
-			if(isEmptyRow(cells[i]) && cells[i][0].isBreakingLineOverRow() && i-2>=0 && cells[i-2][0].isIs_header())
-			{
-				for(int k=0;k<cells[i].length;k++)
-				{
-					for(int j=i-2;j<=i;j++)
-					{
-						cells[j][k].setIs_header(true);
-					}
-				}
-				table.stat.setNum_of_header_rows(table.stat.getNum_of_header_rows()+2);
-				table.stat.setNum_of_body_rows(table.stat.getNum_of_body_rows()-2);
-			}
-			
-			else if (isEmptyRow(cells[i]) && cells[i][0].isBreakingLineOverRow() && i-3>=0 && cells[i-3][0].isIs_header())
-			{
-				for(int k=0;k<cells[i].length;k++)
-				{
-					for(int j=i-3;j<=i;j++)
-					{
-						cells[j][k].setIs_header(true);
-					}
-				}
-				table.stat.setNum_of_header_rows(table.stat.getNum_of_header_rows()+3);
-				table.stat.setNum_of_body_rows(table.stat.getNum_of_body_rows()-3);
-			}
-		}
-		
-		if(table.stat.getNum_of_header_rows()>cells.length)
-		{
-			for(int i = oldNumofHeaderRows;i<cells.length;i++)
-			{
-				for(int j = 0;j<cells[i].length;j++)
-				{
-					cells[i][j].setIs_header(false);
-				}
-			}
-			table.stat.setNum_of_header_rows(oldNumofHeaderRows);
-			table.stat.setNum_of_body_rows(oldNumOfBodyRows);
-		}
-		
-		table.setTable_cells(cells);
-		
-		return table;
-	}
 	
 	/**
 	 * Gets the children by tag name.

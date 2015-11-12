@@ -55,7 +55,7 @@ public class Annotate {
 	public void AnnotateArticle(Article a)
 	{
 		try {
-			Utilities.MakeDirectory("Annotation");
+			Utilities.MakeDirectory(TablInExMain.Inpath +"_Annotation");
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 
@@ -411,7 +411,7 @@ public class Annotate {
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 			DOMSource source;
 			source = new DOMSource(doc);
-			StreamResult result =  new StreamResult(new File("Annotation/"+a.getPmc()+".xml"));
+			StreamResult result =  new StreamResult(new File(TablInExMain.Inpath+"_Annotation/"+a.getPmc()+".xml"));
 			transformer.transform(source, result);
 			
 		} catch (Exception ex) {

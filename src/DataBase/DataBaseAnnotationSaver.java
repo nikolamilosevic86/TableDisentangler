@@ -22,7 +22,7 @@ public class DataBaseAnnotationSaver {
 	public DataBaseAnnotationSaver(){
 		 try {
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
-				String connectionUrl = "jdbc:mysql://localhost:3306/table_db";
+				String connectionUrl = "jdbc:mysql://localhost:3306/table_db_mock";
 				String connectionUser = "root";
 				String connectionPassword = "";
 				conn = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);	
