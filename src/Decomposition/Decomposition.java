@@ -766,8 +766,10 @@ public class Decomposition {
 					}
 					else
 					{
-					headerStackA[currentSubHeaderLevel] = cells[j][0].getCell_content();
-					headerStackIndexes[currentSubHeaderLevel] = ""+original_cells[cells[j][0].getRow_number()][cells[j][0].getColumn_number()].getRow_number()+"."+original_cells[cells[j][0].getRow_number()][cells[j][0].getColumn_number()].getColumn_number();
+						if(currentSubHeaderLevel<0)
+							currentSubHeaderLevel = 0;
+						headerStackA[currentSubHeaderLevel] = cells[j][0].getCell_content();
+						headerStackIndexes[currentSubHeaderLevel] = ""+original_cells[cells[j][0].getRow_number()][cells[j][0].getColumn_number()].getRow_number()+"."+original_cells[cells[j][0].getRow_number()][cells[j][0].getColumn_number()].getColumn_number();
 					}
 				}
 				

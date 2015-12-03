@@ -29,6 +29,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import Main.MarvinSemAnnotator;
 import Main.Word;
 import Utils.Utilities;
 import ValueParser.ValueItem;
@@ -275,6 +276,8 @@ public class Annotate {
 								annot.setEnd(words.get(p).wordmeanings.get(s).endAt);
 								Meaning.setAttribute("Content", words.get(p).wordmeanings.get(s).appearingWord);
 								annot.setContent( words.get(p).wordmeanings.get(s).appearingWord);
+								annot.setDescription(words.get(p).wordmeanings.get(s).Description);
+								Meaning.setAttribute("Description", words.get(p).wordmeanings.get(s).Description);
 								cells[j][k].annotations.add(annot);
 								CellSemantics.appendChild(Meaning);				
 							}
@@ -416,6 +419,7 @@ public class Annotate {
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
+			TablInExMain.marvin = new MarvinSemAnnotator();
 		}
 		
 	}

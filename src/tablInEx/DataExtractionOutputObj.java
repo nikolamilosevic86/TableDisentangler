@@ -5,6 +5,7 @@ import Decomposition.MetaMapping;
 import gov.nih.nlm.nls.metamap.Position;
 
 import java.io.File;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Map;
 

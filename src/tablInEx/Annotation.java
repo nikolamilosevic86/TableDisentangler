@@ -9,6 +9,7 @@ public class Annotation {
 	private String TypeVal;
 	private String URL;
 	private String Source;
+	private String Description; //Semantyc type for MetaMap, Definition for WordNet and abstract for BDPedia
 	/**
 	 * @return the content
 	 */
@@ -104,6 +105,19 @@ public class Annotation {
 	 */
 	public void setSource(String source) {
 		Source = source;
+	}
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return Description;
+	}
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		Description = description;
 	}
 
 }

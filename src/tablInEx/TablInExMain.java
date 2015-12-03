@@ -228,7 +228,14 @@ public class TablInExMain {
 		if(databaseSave){
 		dbas = new DataBaseAnnotationSaver();
 		}
+		Thread[] threads = new Thread[files.length];
 		for (int a = 0; a < files.length; a++) {
+//			Thread threads[a] = (new Thread(){
+//				public void run(){
+//					
+//				}
+//			});
+			
 			articlecount++;
 			if (ExportLinkedData) {
 				linkedData = new DecompositionRDFWriter();
@@ -308,18 +315,18 @@ public class TablInExMain {
 				concept.processArticle(article);
 			}
 
-			if (ExportLinkedData) {
-				linkedData.printToFile(LinkedDataFolder + "\\"
-						+ article.getPmc() + ".rdf");
-			}
+//			if (ExportLinkedData) {
+//				linkedData.printToFile(LinkedDataFolder + "\\"
+//						+ article.getPmc() + ".rdf");
+//			}
 
-			for (int l = 0; l < article.getTables().length; l++) {
-				LinkedList<DataExtractionOutputObj> outputs = article
-						.getTables()[l].output;
-				for (DataExtractionOutputObj out : outputs) {
-					out.CreateOutput();
-				}
-			}
+//			for (int l = 0; l < article.getTables().length; l++) {
+//				LinkedList<DataExtractionOutputObj> outputs = article
+//						.getTables()[l].output;
+//				for (DataExtractionOutputObj out : outputs) {
+//					out.CreateOutput();
+//				}
+//			}
 			Annotate annot = new Annotate();
 			annot.AnnotateArticle(article);
 			if(databaseSave){

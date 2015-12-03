@@ -50,6 +50,7 @@ public class PMCXMLReader implements Reader{
 	public Article Read()
 	{
 		Article art =  new Article(FileName);
+		art.setSource("PMC");
 		try{
 		@SuppressWarnings("resource")
 		BufferedReader reader = new BufferedReader(new FileReader(FileName));
@@ -245,6 +246,7 @@ public class PMCXMLReader implements Reader{
 	    	{
 	    		String pmc = article_id.item(j).getTextContent();	
 		    	art.setPmc(pmc);
+		    	art.setSpec_id(pmc);
 		    	if(pmc!=null)
 		    		System.out.println(pmc);
 	    	}

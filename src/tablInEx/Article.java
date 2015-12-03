@@ -35,6 +35,8 @@ public class Article {
 	private String publisher_name;
 	private String publisher_loc;
 	private String journal_name;
+	private String spec_id;
+	private String source;
 	
 	
 	//Constructors
@@ -191,6 +193,34 @@ public class Article {
 	 */
 	public void setJournal_name(String journal_name) {
 		this.journal_name = journal_name;
+	}
+
+	/**
+	 * @return the spec_id
+	 */
+	public String getSpec_id() {
+		return spec_id;
+	}
+
+	/**
+	 * @param spec_id the spec_id to set
+	 */
+	public void setSpec_id(String spec_id) {
+		this.spec_id = spec_id;
+	}
+
+	/**
+	 * @return the source
+	 */
+	public String getSource() {
+		return source;
+	}
+
+	/**
+	 * @param source the source to set
+	 */
+	public void setSource(String source) {
+		this.source = source;
 	}
 
 

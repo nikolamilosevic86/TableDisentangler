@@ -22,7 +22,7 @@ public class DataBaseAnnotationSaver {
 	public DataBaseAnnotationSaver(){
 		 try {
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
-				String connectionUrl = "jdbc:mysql://localhost:3306/table_db_mock";
+				String connectionUrl = "jdbc:mysql://localhost:3306/table_db";
 				String connectionUser = "root";
 				String connectionPassword = "";
 				conn = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);	
@@ -43,7 +43,7 @@ public class DataBaseAnnotationSaver {
 	{
 		try {
 			Statement stmt = conn.createStatement();
-			String insertTableSQL = "INSERT INTO Article (PMCID,PMID,pissn,eissn,Title,Abstract,JournalName,JournalPublisherName,JournalPublisherLocation) VALUES (?,?,?,?,?,?,?,?,?)";
+			String insertTableSQL = "INSERT INTO Article (PMCID,PMID,pissn,eissn,Title,Abstract,JournalName,JournalPublisherName,JournalPublisherLocation,Source,SpecId) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement(insertTableSQL,Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setString(1, art.getPmc());
 			preparedStatement.setString(2, art.getPmid());
@@ -54,6 +54,8 @@ public class DataBaseAnnotationSaver {
 			preparedStatement.setString(7, art.getJournal_name());
 			preparedStatement.setString(8, art.getPublisher_name());
 			preparedStatement.setString(9, art.getPublisher_loc());
+			preparedStatement.setString(10, art.getSource());
+			preparedStatement.setString(11, art.getSpec_id());
 			// execute insert SQL stetement
 			int articleId = preparedStatement.executeUpdate();
 			ResultSet rs1 = preparedStatement.getGeneratedKeys();
@@ -224,7 +226,7 @@ public class DataBaseAnnotationSaver {
 	    	  		for(int l = 0; l<annot.size();l++)
 	    	  		{
 	    	  			Statement stmt8 = conn.createStatement();
-	        	  		String insertTableSQL8 = "INSERT INTO Annotation (Content,Start,End,ID,Type,TypeVal,URL,Source,Cell_idCell) VALUES (?,?,?,?,?,?,?,?,?)";
+	        	  		String insertTableSQL8 = "INSERT INTO Annotation (Content,Start,End,ID,Type,TypeVal,URL,Source,Cell_idCell,Description) VALUES (?,?,?,?,?,?,?,?,?,?)";
 	        	  		PreparedStatement preparedStatement8 = conn.prepareStatement(insertTableSQL8,Statement.RETURN_GENERATED_KEYS);
 	        	  		preparedStatement8.setString(1,annot.get(l).getContent());
 	        	  		preparedStatement8.setInt(2,annot.get(l).getStart());
@@ -235,6 +237,7 @@ public class DataBaseAnnotationSaver {
 	        	  		preparedStatement8.setString(7,annot.get(l).getURL());
 	        	  		preparedStatement8.setString(8,annot.get(l).getSource());
 	        	  		preparedStatement8.setInt(9,CellId);
+	        	  		preparedStatement8.setString(10,annot.get(l).getDescription());
 	        	  		// execute insert SQL stetement
 	        	  		preparedStatement8.executeUpdate();
 	    	  		}
