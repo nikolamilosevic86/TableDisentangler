@@ -88,9 +88,9 @@ public class DecompositionRDFWriter {
 	{
 		if(art ==null)
 			return;
-		Resource Article = model.createResource(ArticleDefault+art.getPmc());
+		Resource Article = model.createResource(ArticleDefault+art.getSpec_id());
 		model.add(Article,ArticleName,art.getTitle());
-		model.add(Article,ArticleID,art.getPmc());
+		model.add(Article,ArticleID,art.getSpec_id());
 		if(art.getAbstract()!=null && !art.getAbstract().equals(""))
 		model.add(Article,Abstract,art.getAbstract());
 		for(int i = 0;i<art.getAuthors().size();i++)
@@ -98,21 +98,23 @@ public class DecompositionRDFWriter {
 			if(art.getAuthors().get(i).name!=null)
 			model.add(Article,hasAuthor,art.getAuthors().get(i).name);
 		}
+		if(art.getAffiliation()!=null)
 		for(int i = 0;i<art.getAffiliation().length;i++)
 		{
 			model.add(Article,hasAffiliation,art.getAffiliation()[i]);
 		}
+		if(art.getKeywords()!=null)
 		for(int i = 0;i<art.getKeywords().length;i++)
 		{
-			model.add(Article,Publisher,art.getKeywords()[i]);
+			model.add(Article,Keywords,art.getKeywords()[i]);
 		}
 		if(art.getVenue()!=null && !art.getVenue().equals(""))
 			model.add(Article,Venue,art.getVenue());
 		
 		if(art.getShort_abstract()!=null && !art.getShort_abstract().equals(""))
 			model.add(Article,ShortAbstract,art.getShort_abstract());
-		
-		model.add(Article,Keywords,art.getPublisher_name());
+		if(art.getPublisher_name()!=null)
+			model.add(Article,Publisher,art.getPublisher_name());
 		model.add(Root, HasArticle,Article);
 		currentArticle = Article;
 	}

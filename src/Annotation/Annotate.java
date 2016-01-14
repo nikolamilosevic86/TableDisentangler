@@ -104,6 +104,7 @@ public class Annotate {
 			rootElement.appendChild(authors);
 					
 			Element keywords = doc.createElement("KeyWords");
+			if(a.getKeywords()!=null)
 			for(int i = 0; i<a.getKeywords().length;i++){
 				Element keyword = doc.createElement("KeyWord");
 				keyword.setTextContent(a.getKeywords()[i]);
