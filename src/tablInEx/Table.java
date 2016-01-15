@@ -25,6 +25,7 @@ public class Table {
 	public enum StructureType {LIST,MATRIX,SUBHEADER,MULTI,NULL};
 	
 	
+	private String SectionOfTable;
 	/** The num_of_rows. */
 	private int num_of_rows;
 	
@@ -334,6 +335,20 @@ public class Table {
 	 */
 	public void setTableStructureType(StructureType tableStructureType) {
 		TableStructureType = tableStructureType;
+	}
+
+	/**
+	 * @return the sectionOfTable
+	 */
+	public String getSectionOfTable() {
+		return SectionOfTable;
+	}
+
+	/**
+	 * @param sectionOfTable the sectionOfTable to set
+	 */
+	public void setSectionOfTable(String sectionOfTable) {
+		SectionOfTable = sectionOfTable;
 	}
 
 

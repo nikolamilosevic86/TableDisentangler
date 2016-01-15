@@ -530,6 +530,7 @@ public class DailyMedReader implements Reader {
 		// Iterate document tables
 		for (int i = 0; i < tablesxml.getLength(); i++) {
 			List<Node> inline_formula = null;
+			
 			// check if there is one cell table with reference to the image of
 			// the actual table
 
@@ -547,6 +548,22 @@ public class DailyMedReader implements Reader {
 							+ tables[tableindex].getTable_title());
 					String caption =readTableLabel(tablesxml.item(i)) ;
 					tables[tableindex].setTable_caption(caption);
+					try{
+					Node sibling = tablesxml.item(i).getParentNode().getPreviousSibling();
+					 System.out.println(sibling.getTextContent());
+					while (sibling != null) {
+					  sibling = sibling.getPreviousSibling();
+					  if(sibling.getNodeName()=="title"){
+						  tables[tableindex].setSectionOfTable(sibling.getTextContent().replaceAll("\n","").replaceAll("\\s{2,}", ""));
+						  break;
+					  }
+					}
+					}catch(Exception ex)
+					{
+						ex.printStackTrace();
+						System.out.println("ERROR: Could not read section");
+					}
+					System.out.println(tables[tableindex].getSectionOfTable());
 					String foot = ReadTableFooter(tablesxml.item(i));
 					tables[tableindex].setTable_footer(foot);
 					System.out.println("Foot: " + foot);
@@ -555,7 +572,7 @@ public class DailyMedReader implements Reader {
 					int headsize = 0;
 					List<Node> thead = null;
 					if (tablesxml.getLength() > 0) {
-						thead = getChildrenByTagName(tablesxml.item(0), "thead");
+						thead = getChildrenByTagName(tablesxml.item(i), "thead");
 						headsize = thead.size();
 					}
 					List<Node> rowshead = null;
@@ -565,7 +582,7 @@ public class DailyMedReader implements Reader {
 						tables[tableindex].setHasHeader(false);
 						Statistics.TableWithoutHead();
 					}
-					List<Node> tbody = getChildrenByTagName(tablesxml.item(0), "tbody");
+					List<Node> tbody = getChildrenByTagName(tablesxml.item(i), "tbody");
 					if (tbody.size() == 0) {
 						Statistics.TableWithoutBody();
 						tables[tableindex].setHasBody(false);
