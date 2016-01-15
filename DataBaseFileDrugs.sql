@@ -63,6 +63,7 @@ CREATE TABLE IF NOT EXISTS `table_db_drugs`.`ArtTable` (
   `idTable` INT NOT NULL AUTO_INCREMENT,
   `TableOrder` VARCHAR(145) NULL,
   `TableCaption` VARCHAR(545) NULL,
+  `Section` VARCHAR(545) NULL,
   `TableFooter` VARCHAR(1445) NULL,
   `StructureType` VARCHAR(45) NULL,
   `PragmaticType` VARCHAR(45) NULL,

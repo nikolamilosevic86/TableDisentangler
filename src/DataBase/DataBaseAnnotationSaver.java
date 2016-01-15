@@ -148,18 +148,20 @@ public class DataBaseAnnotationSaver {
 			for(int i = 0;i<Tables.length;i++)
 			{
 				Statement stmt6 = conn.createStatement();
-		  		String insertTableSQL6 = "INSERT INTO ArtTable (TableOrder,TableCaption,TableFooter,StructureType,PragmaticType,HasXML,Article_idArticle) VALUES (?,?,?,?,?,?,?)";
+		  		String insertTableSQL6 = "INSERT INTO ArtTable (TableOrder,TableCaption,TableFooter,StructureType,PragmaticType,HasXML,Article_idArticle,Section) VALUES (?,?,?,?,?,?,?,?)";
 		  		PreparedStatement preparedStatement6 = conn.prepareStatement(insertTableSQL6,Statement.RETURN_GENERATED_KEYS);
 		  		preparedStatement6.setString(1,Tables[i].getTable_title());
 		  		preparedStatement6.setString(2, Tables[i].getTable_caption());
 		  		preparedStatement6.setString(3, Tables[i].getTable_footer());
 		  		preparedStatement6.setString(4, Tables[i].getTableStructureType().name());
 		  		preparedStatement6.setString(5, Tables[i].PragmaticClass);
+		  		
 		  		if(Tables[i].isNoXMLTable())
 		  			preparedStatement6.setString(6, "no"); //maybe change
 		  		else 
 		  			preparedStatement6.setString(6, "yes");
 		  		preparedStatement6.setInt(7,articleId);
+		  		preparedStatement6.setString(8, Tables[i].getSectionOfTable());
 		  		
 		  		// execute insert SQL stetement
 		  		int TableId = preparedStatement6.executeUpdate();
