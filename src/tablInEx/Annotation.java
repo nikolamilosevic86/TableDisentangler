@@ -10,6 +10,11 @@ public class Annotation {
 	private String URL;
 	private String Source;
 	private String Description; //Semantyc type for MetaMap, Definition for WordNet and abstract for BDPedia
+	private String Location;
+	private String Environment;
+	private String AgentName;
+	private String AgentVersion;
+	
 	/**
 	 * @return the content
 	 */
@@ -118,6 +123,54 @@ public class Annotation {
 	 */
 	public void setDescription(String description) {
 		Description = description;
+	}
+	/**
+	 * @return the location
+	 */
+	public String getLocation() {
+		return Location;
+	}
+	/**
+	 * @param location the location to set
+	 */
+	public void setLocation(String location) {
+		Location = location;
+	}
+	/**
+	 * @return the environment
+	 */
+	public String getEnvironment() {
+		return Environment;
+	}
+	/**
+	 * @param environment the environment to set
+	 */
+	public void setEnvironment(String environment) {
+		Environment = environment;
+	}
+	/**
+	 * @return the agentName
+	 */
+	public String getAgentName() {
+		return AgentName;
+	}
+	/**
+	 * @param agentName the agentName to set
+	 */
+	public void setAgentName(String agentName) {
+		AgentName = agentName;
+	}
+	/**
+	 * @return the agentVersion
+	 */
+	public String getAgentVersion() {
+		return AgentVersion;
+	}
+	/**
+	 * @param agentVersion the agentVersion to set
+	 */
+	public void setAgentVersion(String agentVersion) {
+		AgentVersion = agentVersion;
 	}
 
 }

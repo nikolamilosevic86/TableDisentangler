@@ -7,6 +7,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 
 import tablInEx.Annotation;
@@ -228,18 +231,23 @@ public class DataBaseAnnotationSaver {
 	    	  		for(int l = 0; l<annot.size();l++)
 	    	  		{
 	    	  			Statement stmt8 = conn.createStatement();
-	        	  		String insertTableSQL8 = "INSERT INTO Annotation (Content,Start,End,ID,Type,TypeVal,URL,Source,Cell_idCell,Description) VALUES (?,?,?,?,?,?,?,?,?,?)";
+	        	  		String insertTableSQL8 = "INSERT INTO Annotation (Content,Start,End,AnnotationID,AgentType,AgentName,AnnotationURL,EnvironmentDescription,Cell_idCell,AnnotationDescription,AnnotationSchemaVersion,DateOfAction, Location) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	        	  		PreparedStatement preparedStatement8 = conn.prepareStatement(insertTableSQL8,Statement.RETURN_GENERATED_KEYS);
 	        	  		preparedStatement8.setString(1,annot.get(l).getContent());
 	        	  		preparedStatement8.setInt(2,annot.get(l).getStart());
 	        	  		preparedStatement8.setInt(3,annot.get(l).getEnd());
 	        	  		preparedStatement8.setString(4,annot.get(l).getID());
-	        	  		preparedStatement8.setString(5,annot.get(l).getType());
-	        	  		preparedStatement8.setString(6,annot.get(l).getTypeVal());
+	        	  		preparedStatement8.setString(5,"Software");
+	        	  		preparedStatement8.setString(6,annot.get(l).getSource());
 	        	  		preparedStatement8.setString(7,annot.get(l).getURL());
-	        	  		preparedStatement8.setString(8,annot.get(l).getSource());
+	        	  		preparedStatement8.setString(8,annot.get(l).getEnvironment()); 
 	        	  		preparedStatement8.setInt(9,CellId);
 	        	  		preparedStatement8.setString(10,annot.get(l).getDescription());
+	        	  		preparedStatement8.setString(11,annot.get(l).getAgentVersion());// Should be version
+	        	  		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	        	  		Date date = new Date();
+	        	  		preparedStatement8.setString(12,dateFormat.format(date));
+	        	  		preparedStatement8.setString(13,annot.get(l).getLocation()); // Should be location
 	        	  		// execute insert SQL stetement
 	        	  		preparedStatement8.executeUpdate();
 	    	  		}

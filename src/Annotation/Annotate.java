@@ -219,7 +219,7 @@ public class Annotate {
 							CellValueSemantics.setAttribute("Type", "ValueType");
 							annot.setType("ValueType");
 							CellValueSemantics.setAttribute("TypeVal", valueTags.get(p).type.toString());
-							annot.setTypeVal(valueTags.get(p).type.toString());
+							annot.setDescription(valueTags.get(p).type.toString());
 							CellValueSemantics.setAttribute("Start", valueTags.get(p).start_position+"");
 							annot.setStart(valueTags.get(p).start_position);
 							CellValueSemantics.setAttribute("End", valueTags.get(p).end_position+"");
@@ -232,6 +232,11 @@ public class Annotate {
 							annot.setURL("");
 							CellValueSemantics.setAttribute("Source","TableAnnotatorSyntacticAnalizer");
 							annot.setSource("TableAnnotatorSyntacticAnalizer");
+							annot.setLocation(MarvinSemAnnotator.Location);
+							annot.setEnvironment(MarvinSemAnnotator.Environment);
+							annot.setAgentName("TableAnnotatorSyntacticAnalizer");
+							annot.setAgentVersion("1.0");
+							
 							cells[j][k].annotations.add(annot);
 							CellSemantics.appendChild(CellValueSemantics);
 						}
@@ -278,6 +283,10 @@ public class Annotate {
 								Meaning.setAttribute("Content", words.get(p).wordmeanings.get(s).appearingWord);
 								annot.setContent( words.get(p).wordmeanings.get(s).appearingWord);
 								annot.setDescription(words.get(p).wordmeanings.get(s).Description);
+								annot.setLocation(words.get(p).wordmeanings.get(s).Location);
+								annot.setEnvironment(words.get(p).wordmeanings.get(s).EnvironmentDesc);
+								annot.setAgentName(words.get(p).wordmeanings.get(s).AgentName);
+								annot.setAgentVersion(words.get(p).wordmeanings.get(s).AgentVersion);
 								Meaning.setAttribute("Description", words.get(p).wordmeanings.get(s).Description);
 								cells[j][k].annotations.add(annot);
 								CellSemantics.appendChild(Meaning);				
