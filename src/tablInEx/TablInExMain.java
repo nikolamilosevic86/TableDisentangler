@@ -229,7 +229,7 @@ public class TablInExMain {
 		if(databaseSave){
 		dbas = new DataBaseAnnotationSaver();
 		}
-		Thread[] threads = new Thread[files.length];
+		//Thread[] threads = new Thread[files.length];
 		for (int a = 0; a < files.length; a++) {			
 			articlecount++;
 			if (ExportLinkedData) {
