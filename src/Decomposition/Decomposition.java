@@ -92,7 +92,7 @@ public class Decomposition {
 		{
 			if(cells[i][0].isBreakingLineOverRow())
 			{
-				if(i-2>=0 && !cells[i-2][0].isIs_header() && !isSequentiallyBreakingLine(cells,i-2,0) && cells[i-2][0].isBreakingLineOverRow()&&!Utilities.isOneCellFilledRow(cells[i-1]))
+				if(i-2>=0 && cells[i-2][0].isIs_header() && isSequentiallyBreakingLine(cells,i-2,0) && cells[i-2][0].isBreakingLineOverRow()&&!Utilities.isOneCellFilledRow(cells[i-1]))
 					return true;
 			}
 		}

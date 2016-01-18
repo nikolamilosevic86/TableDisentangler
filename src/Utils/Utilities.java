@@ -90,7 +90,7 @@ public class Utilities {
 		
 		for(int i = 0;i<cells.length;i++)
 		{
-			if(cells[i].isIs_columnspanning())
+			if(cells[i].isIs_columnspanning() && cells[i].getCells_columnspanning()==cells.length)
 				return true;
 			if(!isSpaceOrEmpty(cells[i].getCell_content()))
 			{
