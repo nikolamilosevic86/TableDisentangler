@@ -1,5 +1,7 @@
 package DataBase;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Connection;
@@ -12,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 
+import Main.KeyValue;
 import tablInEx.Annotation;
 import tablInEx.Article;
 import tablInEx.Cell;
@@ -24,10 +27,43 @@ public class DataBaseAnnotationSaver {
 	
 	public DataBaseAnnotationSaver(){
 		 try {
+			 BufferedReader br = new BufferedReader(new FileReader(
+						"settings.cfg"));
+				// StringBuilder sb = new StringBuilder();
+				String line = br.readLine();
+				String host="";
+				String database_name= "";
+				String database_username = "";
+				String database_password = "";
+				String database_port = "";
+				while (line != null) {
+					KeyValue kv = new KeyValue();
+					String[] parts = line.split(";");
+					kv.key = parts[0];
+					kv.value = parts[1];
+					if (kv.key.equals("database_host")) {
+						host = kv.value;
+					}
+					if (kv.key.equals("database_name")) {
+						database_name = kv.value;
+					}
+					if (kv.key.equals("database_username")) {
+						database_username = kv.value;
+					}
+					if (kv.key.equals("database_password")) {
+						database_password = kv.value;
+					}
+					if (kv.key.equals("database_port")) {
+						database_port = kv.value;
+					}
+					line = br.readLine();
+				}
+			 	
+				database_password = database_password.replace("\"", "");
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
-				String connectionUrl = "jdbc:mysql://localhost:3306/table_db_drugs";
-				String connectionUser = "root";
-				String connectionPassword = "";
+				String connectionUrl = "jdbc:mysql://"+host+":"+database_port+"/"+database_name;
+				String connectionUser = database_username;
+				String connectionPassword = database_password;
 				conn = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);	
 		 }catch(SQLException ex)
 		 {
