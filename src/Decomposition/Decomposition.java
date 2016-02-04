@@ -105,6 +105,13 @@ public class Decomposition {
 			return cells;
 		for(int i = 0; i<cells.length;i++)
 		{
+			try{
+				cells[i][0].isBreakingLineOverRow();
+			}
+			catch(ArrayIndexOutOfBoundsException ex)
+			{
+				continue;
+			}
 			if(cells[i][0].isBreakingLineOverRow())
 			{
 				
