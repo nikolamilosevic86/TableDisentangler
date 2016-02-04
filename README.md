@@ -28,7 +28,11 @@ The tool is under GNU/GPL 3 license. Licence agreement may be read here: http://
 Referencing
 ------------
 Extracting patient data from tables in clinical literature: Case study on extraction of BMI, weight and number of patients; 
+
 Nikola Milosevic, Cassie Gregson, Rober Hernandez, Goran Nenadic; 
+
 In Proceedings of the 9th International Joint Conference on Biomedical Engineering Systems and Technologies (BIOSTEC 2016) - Volume 5: HEALTHINF, pages 223-228
+
 ISBN: 978-989-758-170-0
+
 https://www.academia.edu/19974490/Extracting_patient_data_from_tables_in_clinical_literature_Case_study_on_extraction_of_BMI_weight_and_number_of_patients
