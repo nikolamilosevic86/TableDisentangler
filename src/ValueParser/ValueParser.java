@@ -230,9 +230,9 @@ public class ValueParser {
 	public LinkedList<ValueItem> parseValue(String value) {
 		valueList = new LinkedList<ValueItem>();
 		if (value != null && !value.equals("")) {
-			valueList.addAll(parseCompex(value));
-			valueList.addAll(parseSimple(value));
-			valueList.addAll(parseString(value));
+			valueList.addAll(parseCompex(value.trim()));
+			valueList.addAll(parseSimple(value.trim()));
+			valueList.addAll(parseString(value.trim()));
 		}
 
 		return valueList;

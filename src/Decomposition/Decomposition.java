@@ -90,6 +90,13 @@ public class Decomposition {
 		table.cells = markMultiTableHeaders(table.cells);
 		for(int i = 0; i<cells.length;i++)
 		{
+			try{
+				cells[i][0].isBreakingLineOverRow();
+			}
+			catch(ArrayIndexOutOfBoundsException Ex)
+			{
+				continue;
+			}
 			if(cells[i][0].isBreakingLineOverRow())
 			{
 				if(i-2>=0 && cells[i-2][0].isIs_header() && isSequentiallyBreakingLine(cells,i-2,0) && cells[i-2][0].isBreakingLineOverRow()&&!Utilities.isOneCellFilledRow(cells[i-1]))
@@ -487,7 +494,13 @@ public class Decomposition {
 				for(int j = 0;j<cells[i].length;j++)
 				{
 					cells[i][j].setIs_header(true);
+					try{
 					original_cells[cells[i][j].getRow_number()][cells[i][j].getColumn_number()].setIs_header(true);
+					}catch(ArrayIndexOutOfBoundsException ex)
+					{
+						//TODO: Fix this once
+						System.out.println("Here is wierd exception out of bound");
+					}
 				}
 			}
 			if(isColSpanHeader)
@@ -526,7 +539,13 @@ public class Decomposition {
 			for(int j=0;j<cells[i].length;j++)
 			{
 				cells[i][j].setIs_header(true);
+				try{
 				original_cells[cells[i][j].getRow_number()][cells[i][j].getColumn_number()].setIs_header(true);
+				}
+				catch(ArrayIndexOutOfBoundsException ex)
+				{
+					//ex.printStackTrace();
+				}
 				table.setHasHeader(true);
 			}
 		}
@@ -550,7 +569,12 @@ public class Decomposition {
 		if (areSimilar) {
 			for (int j = 0; j < cells[0].length; j++) {
 				cells[0][j].setIs_header(true);
+				try{
 				original_cells[cells[0][j].getRow_number()][cells[0][j].getColumn_number()].setIs_header(true);
+				}catch(ArrayIndexOutOfBoundsException ex)
+				{
+					ex.printStackTrace();
+				}
 			}
 		}
 		for(int i = 0;i<cells.length;i++)
@@ -690,7 +714,14 @@ public class Decomposition {
 				if(Utilities.numOfBegeningSpaces(cells[j][0].getCell_content())==currentSubHeaderLevel && !cells[j][0].isIs_subheader())
 				{
 					headerStackA[currentSubHeaderLevel] = cells[j][0].getCell_content();
-					headerStackIndexes[currentSubHeaderLevel] = ""+original_cells[cells[j][0].getRow_number()][cells[j][0].getColumn_number()].getRow_number()+"."+original_cells[cells[j][0].getRow_number()][cells[j][0].getColumn_number()].getColumn_number();
+					try{
+						headerStackIndexes[currentSubHeaderLevel] = ""+original_cells[cells[j][0].getRow_number()][cells[j][0].getColumn_number()].getRow_number()+"."+original_cells[cells[j][0].getRow_number()][cells[j][0].getColumn_number()].getColumn_number();
+					}
+					catch(Exception ex)
+					{
+						ex.printStackTrace();
+					}
+					//headerStackIndexes[currentSubHeaderLevel] = ""+original_cells[cells[j][0].getRow_number()][cells[j][0].getColumn_number()].getRow_number()+"."+original_cells[cells[j][0].getRow_number()][cells[j][0].getColumn_number()].getColumn_number();
 					currentSubHeaderLevel++;
 					SetUnderSubheaderRow(cells[j]);
 					SetUnderSubheaderRow(original_cells[cells[j][0].getRow_number()]);

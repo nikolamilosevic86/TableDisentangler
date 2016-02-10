@@ -140,7 +140,12 @@ public class DecompositionRDFWriter {
 		model.add(CellS,CellValue,valueS);
 		model.add(CellS,CellType,CellTypeS);
 		Resource NavigationalPath = model.createResource();
+		try{
 		model.add(NavigationalPath,Head00,Head00S);
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
 		if(HeaderS!=null)
 		for(int i = 0;i<HeaderS.length;i++)
 		{

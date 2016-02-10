@@ -121,7 +121,7 @@ public class DailyMedReader implements Reader {
 		for (int j = 0; j < affis.getLength(); j++) {
 			String affiliation = Utilities.getString(affis.item(j));
 			affilis[j] = affiliation;
-			System.out.println("Affiliation:" + affiliation);
+			//System.out.println("Affiliation:" + affiliation);
 		}
 		return affilis;
 	}
@@ -140,7 +140,7 @@ public class DailyMedReader implements Reader {
 			if (keywords.item(j).getTextContent().length() > 1) {
 				String Keyword = keywords.item(j).getTextContent().substring(1);
 				keywords_str[j] = Keyword;
-				System.out.println("Keyword:" + Keyword);
+				//System.out.println("Keyword:" + Keyword);
 			}
 		}
 		return keywords_str;
@@ -544,19 +544,20 @@ public class DailyMedReader implements Reader {
 							+ article.getSpec_id());
 					tables[tableindex].setXml(Utilities
 							.CreateXMLStringFromSubNode(tablesxml.item(i)));
-					System.out.println("Table title:"
-							+ tables[tableindex].getTable_title());
+//					System.out.println("Table title:"
+//							+ tables[tableindex].getTable_title());
 					String caption =readTableLabel(tablesxml.item(i)) ;
 					tables[tableindex].setTable_caption(caption);
 					try{
 					Node sibling = tablesxml.item(i).getParentNode().getPreviousSibling();
-					 System.out.println(sibling.getTextContent());
+					// System.out.println(sibling.getTextContent());
 					while (sibling != null) {
-					  sibling = sibling.getPreviousSibling();
+					
 					  if(sibling.getNodeName()=="title"){
 						  tables[tableindex].setSectionOfTable(sibling.getTextContent().replaceAll("\n","").replaceAll("\\s{2,}", ""));
 						  break;
 					  }
+					  sibling = sibling.getPreviousSibling();
 					}
 					}catch(Exception ex)
 					{

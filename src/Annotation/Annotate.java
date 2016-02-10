@@ -242,6 +242,10 @@ public class Annotate {
 						}
 						//annotating by MARVIN
 						//TODO: ADD This bit when DBPedia is installed locally
+						if(valueToParse==null)
+						{
+							valueToParse = "";
+						}
 						int mathTypeIndex = valueToParse.indexOf("MathType@");
 						if(mathTypeIndex>0)
 						{
