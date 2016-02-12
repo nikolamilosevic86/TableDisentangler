@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
@@ -207,10 +209,6 @@ public class TablInExMain {
 		// classifiers.PragmaticClassifier("Models/SMOPragmaticSupportVsAll.model");
 		// classifiers.PragmaticClassifier pc3 = new
 		// classifiers.PragmaticClassifier("Models/SMOPragmaticFindingsVsAll.model");
-		if (TypeClassify)
-			SimpleTableClassifier.init(TablInExMain.Inpath);
-		if (ComplexClassify)
-			SimpleTableClassifier.initComplexity(Inpath);
 
 		System.out.println("Reading " + path);
 		File Dir = new File(path);
@@ -220,10 +218,7 @@ public class TablInExMain {
 		Article article = new Article("");
 		boolean newrun = true;
 		String LinkedDataFolder = "RDFs";
-		if (ExportLinkedData) {
-			// linkedData = new DecompositionRDFWriter();
-			boolean success = (new File(LinkedDataFolder)).mkdirs();
-		}
+
 		int articlecount = 0;
 		DataBaseAnnotationSaver dbas = null;
 		if(databaseSave){
@@ -291,6 +286,15 @@ public class TablInExMain {
 			}
 			if (Conceptization) {
 				concept.ReadPatterns("patterns");
+			}
+			
+			if (TypeClassify)
+				SimpleTableClassifier.init(TablInExMain.Inpath);
+			if (ComplexClassify)
+				SimpleTableClassifier.initComplexity(Inpath);
+			if (ExportLinkedData) {
+				// linkedData = new DecompositionRDFWriter();
+				boolean success = (new File(LinkedDataFolder)).mkdirs();
 			}
 
 			if (article != null && article.getTables() != null)
@@ -450,7 +454,14 @@ public class TablInExMain {
 		// System.out.println("PMC documents with weight/BMI:"+PMCBMI.size());
 		concept.PrintConceptizationStats();
 		// concept2.PrintConceptizationStats();
-
+		/*PrintStream out = null;
+		try {
+			out = new PrintStream(new FileOutputStream("output.txt"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.setOut(out);*/
 	}
 
 	/**

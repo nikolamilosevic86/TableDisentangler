@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `table_db_drugs`.`Cell` (
   `HeaderRef` VARCHAR(45) NULL,
   `StubRef` VARCHAR(45) NULL,
   `SuperRowRef` VARCHAR(45) NULL,
-  `Content` VARCHAR(545) NULL,
+  `Content` VARCHAR(1096) NULL,
   `WholeHeader` VARCHAR(645) NULL,
   `WholeStub` VARCHAR(655) NULL,
   `WholeSuperRow` VARCHAR(645) NULL,
