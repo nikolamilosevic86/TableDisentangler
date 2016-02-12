@@ -1733,19 +1733,38 @@ public class Decomposition {
 			String tableFileName = "/"+tables[i].getDocumentFileName()+tables[i].getTable_title()+"-"+tables[i].tableInTable;
 			getFullHeaderValues(tables[i]);
 			Cell[][] cells = tables[i].cells;
-			
+			try{
 			if(isMultiTable(cells, tables[i]))
 			{
 				tables[i] = processMultiTable(cells,tables[i], art, tableFileName);
 				
 			}
+			}catch(Exception ex)
+			{
+				ex.printStackTrace();
+			}
 			if(tables[i].getTableStructureType()!=null && tables[i].getTableStructureType().equals(Table.StructureType.MULTI))
 				continue;
+			try{
 			tables[i] = processListTable(cells,tables[i], art, tableFileName);
+			}catch(Exception ex)
+			{
+				ex.printStackTrace();
+			}
+			try{
 			tables[i] = processTableWithSubheaders(cells,tables[i],art,tableFileName);//processTableWithSubheaders(cells,tables[i],art,tableFileName);
+			}catch(Exception ex)
+			{
+				ex.printStackTrace();
+			}
+			try{
 			if(!isListTable(cells, tables[i]) && !hasTableSubheader(cells, tables[i]))
 			{
 				tables[i] = processRegularTable(cells,  tables, art, tableFileName, i);
+			}
+			}catch(Exception ex)
+			{
+				ex.printStackTrace();
 			}
 		}
 		art.setTables(tables);
