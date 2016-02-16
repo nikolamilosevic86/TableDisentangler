@@ -82,7 +82,7 @@ public class DataBaseAnnotationSaver {
 	{
 		try {
 			Statement stmt = conn.createStatement();
-			String insertTableSQL = "INSERT INTO Article (PMCID,PMID,pissn,eissn,Title,Abstract,JournalName,JournalPublisherName,JournalPublisherLocation,Source,SpecId) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+			String insertTableSQL = "INSERT INTO Article (PMCID,PMID,pissn,eissn,Title,Abstract,JournalName,JournalPublisherName,JournalPublisherLocation,Source,SpecId,PlainText) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement(insertTableSQL,Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setString(1, art.getPmc());
 			preparedStatement.setString(2, art.getPmid());
@@ -95,6 +95,7 @@ public class DataBaseAnnotationSaver {
 			preparedStatement.setString(9, art.getPublisher_loc());
 			preparedStatement.setString(10, art.getSource());
 			preparedStatement.setString(11, art.getSpec_id());
+			preparedStatement.setString(12, art.getPlain_text());
 			// execute insert SQL stetement
 			int articleId = preparedStatement.executeUpdate();
 			ResultSet rs1 = preparedStatement.getGeneratedKeys();
