@@ -49,4 +49,38 @@ cnx = mysql.connector.connect(
 	user='std30', password='5bboys',
     host='127.0.0.1', database='table_db_drugs')
 
-cursor = cnx.cursor()
+for row in annots_to_insert:
+	cursor = cnx.cursor()
+	row[2].split('/')
+
+	insert_query = (
+	"INSERT INTO Annotation "
+	"(Content,Start,End,AnnotationID,AgentType, "
+		"AgentName,AnnotationURL,EnvironmentDescription, "
+		"Cell_idCell,AnnotationDescription,AnnotationSchemaVersion, "
+		"DateOfAction,Location) "
+	"VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s); "
+	)
+
+	'''anno_info = {
+	'Content': row[1],
+	'Start': 0,
+	'End': 0,
+	'AnnotationID': 'HOLD',
+	'AgentType': 'Software',
+	'AgentName': 'DBMI-NER',
+	'AnnotationURL': row[2],
+	'EnvironmentDescription': 'HOLD',
+	'Cell_idCell': int(float(row[0])),
+	'AnnotationDescription': 'HOLD',
+	'AnnotationSchemaVersion': 'HOLD',
+	'DateOfAction': '12/23/1993',
+	'Location': 'Pittsburgh, PA'
+	}'''
+	anno_info = (row[1], 0, 0, 'HOLD', 'Software', 'DBMI-NER', row[2], 'HOLD', int(float(row[0])), 'HOLD', 'HOLD', '12/23/1993', 'Pittsburgh, PA')
+
+	cursor.execute(insert_query, anno_info)
+
+cnx.commit()
+cursor.close()
+cnx.close()
