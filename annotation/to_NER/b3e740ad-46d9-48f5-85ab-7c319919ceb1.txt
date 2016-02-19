@@ -1,0 +1,108 @@
+980	0.0	Drug Name	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+981	0.1	Effect on Concentration of Nevirapine or Concomitant Drug	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+982	0.2	Clinical Comment	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+983	1.0	HIV Antiviral Agents: Protease Inhibitors (PIs)	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1010	10.0	Efavirenz	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1011	10.1	? Efavirenz	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1012	10.2	The appropriate doses of these combinations with respect to safety and efficacy have not been established.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1013	11.0	DelavirdineEtravirineRilpivirine	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1015	11.2	Plasma concentrations may be altered. Nevirapine should not be coadministered with another NNRTI as this combination has not been shown to be beneficial.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1016	12.0	Hepatitis C Antiviral Agents	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1019	13.0	Boceprevir	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1020	13.1	Plasma concentrations of boceprevir may be decreased due to induction of CYP3A4/5 by nevirapine.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1021	13.2	Nevirapine and boceprevir should not be coadministered because decreases in boceprevir plasma concentrations may result in a reduction in efficacy.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1022	14.0	Telaprevir	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1023	14.1	Plasma concentrations of telaprevir may be decreased due to induction of CYP3A4  by nevirapine and plasma concentrations of nevirapine may be increased due to inhibition of CYP3A4 by telaprevir.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1024	14.2	Nevirapine and telaprevir should not be coadministered because changes in plasma concentrations of nevirapine, telaprevir, or both may result in a reduction in telaprevir efficacy or an increase in nevirapine-associated adverse events.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1025	15.0	Other Agents	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1028	16.0	Analgesics:	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1031	17.0	Methadone	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1032	17.1	? Methadone	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1033	17.2	Methadone levels were decreased; increased dosages may be required to prevent symptoms of opiate withdrawal. Methadone-maintained patients beginning nevirapine therapy should be monitored for evidence of withdrawal and methadone dose should be adjusted accordingly.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1034	18.0	Antiarrhythmics:	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1037	19.0	Amiodarone, disopyramide, lidocaine	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1038	19.1	Plasma concentrations may be decreased.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1039	19.2	Appropriate doses for this combination have not been established.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+986	2.0	Atazanavir/RitonavirThe interaction between Nevirapine and the drug was evaluated in a clinical study. All other drug interactions shown are predicted.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+987	2.1	? Atazanavir? Nevirapine	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+988	2.2	Do not co-administer nevirapine with atazanavir because nevirapine substantially decreases atazanavir exposure and there is a potential risk for nevirapine-associated toxicity due to increased nevirapine exposures.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1040	20.0	"Antibiotics:
+                              Clarithromycin"	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1041	20.1	? Clarithromycin? 14-OH clarithromycin	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1042	20.2	Clarithromycin exposure was significantly decreased by nevirapine; however, 14-OH metabolite concentrations were increased. Because clarithromycin active metabolite has reduced activity against Mycobacterium avium-intracellulare complex, overall activity against this pathogen may be altered. Alternatives to clarithromycin, such as azithromycin, should be considered.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1043	21.0	Antibiotics:	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1046	22.0	Rifabutin	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1047	22.1	? Rifabutin	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1048	22.2	Rifabutin and its metabolite concentrations were moderately increased. Due to high intersubject variability, however, some patients may experience large increases in rifabutin exposure and may be at higher risk for rifabutin toxicity. Therefore, caution should be used in concomitant administration.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1049	23.0	Rifampin	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1050	23.1	? Nevirapine	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1051	23.2	Nevirapine and rifampin should not be administered concomitantly because decreases in nevirapine plasma concentrations may reduce the efficacy of the drug. Physicians needing to treat patients co-infected with tuberculosis and using a nevirapine-containing regimen may use rifabutin instead.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1052	24.0	"Anticonvulsants:
+                              Carbamazepine, clonazepam, ethosuximide"	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1053	24.1	Plasma concentrations of nevirapine and the anticonvulsant may be decreased.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1054	24.2	Use with caution and monitor virologic response and levels of anticonvulsants.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1055	25.0	Antifungals:	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1058	26.0	Fluconazole	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1059	26.1	?Nevirapine	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1060	26.2	Because of the risk of increased exposure to nevirapine, caution should be used in concomitant administration, and patients should be monitored closely for nevirapine-associated adverse events.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1061	27.0	Ketoconazole	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1062	27.1	? Ketoconazole	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1063	27.2	Nevirapine and ketoconazole should not be administered concomitantly because decreases in ketoconazole plasma concentrations may reduce the efficacy of the drug.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1064	28.0	Itraconazole	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1065	28.1	? Itraconazole	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1066	28.2	Nevirapine and itraconazole should not be administered concomitantly due to potential decreases in itraconazole plasma concentrations that may reduce efficacy of the drug.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1067	29.0	"Antithrombotics:
+                              Warfarin"	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1068	29.1	Plasma concentrations may be increase.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1069	29.2	Potential effect on anticoagulation. Monitoring of anticoagulation levels is recommended.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+989	3.0	Fosamprenavir	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+990	3.1	? Amprenavir? Nevirapine	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+991	3.2	Co-administration of nevirapine and fosamprenavir without ritonavir is not recommended.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1070	30.0	"Calcium channel blockers:
+                              Diltiazem, nifedipine, verapamil"	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1071	30.1	Plasma concentrations may be decreased.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1072	30.2	Appropriate doses for these combinations have not been established.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1073	31.0	"Cancer chemotherapy:
+                              Cyclophosphamide"	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1074	31.1	Plasma concentrations may be decreased.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1075	31.2	Appropriate doses for this combination have not been established.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1076	32.0	"Ergot alkaloids:
+                              Ergotamine"	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1077	32.1	Plasma concentrations may be decreased.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1078	32.2	Appropriate doses for this combination have not been established.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1079	33.0	"Immunosuppressants:
+                              Cyclosporine, tacrolimus, sirolimus"	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1080	33.1	Plasma concentrations may be decreased.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1081	33.2	Appropriate doses for these combinations have not been established.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1082	34.0	"Motility agents:
+                              Cisapride"	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1083	34.1	Plasma concentrations may be decreased.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1084	34.2	Appropriate doses for this combinations have not been established.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1085	35.0	"Opiate agonists:
+                              Fentanyl"	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1086	35.1	Plasma concentrations may be decreased.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1087	35.2	Appropriate doses for this combinations have not been established.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1088	36.0	Oral contraceptives:	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1091	37.0	Ethinyl estradiol and Norethindrone	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1092	37.1	? Ethinyl estradiol? Norethindrone	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1093	37.2	Oral contraceptives and other hormonal methods of birth control should not be used as the sole method of contraception in women taking nevirapine, since nevirapine may lower the plasma levels of these medications. An alternative or additional method of contraception is recommended.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+992	4.0	Fosamprenavir/Ritonavir	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+993	4.1	"? Amprenavir
+                              ? Nevirapine"	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+994	4.2	No dosing adjustments are required when nevirapine is co-administered with 700/100 mg of fosamprenavir/ritonavir twice daily. The combination of nevirapine administered with fosamprenavir/ritonavir once daily has not been studied.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+995	5.0	Indinavir	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+996	5.1	? Indinavir	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+997	5.2	The appropriate doses of this combination of indinavir and nevirapine with respect to efficacy and safety have not been established.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+998	6.0	Lopinavir/Ritonavir	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+999	6.1	?Lopinavir	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1000	6.2	"Dosing in adult patients:
+                              A dose adjustment of lopinavir/ritonavir to 500/125 mg tablets twice daily or 533/133 mg (6.5 mL) oral solution twice daily is recommended when used in combination with nevirapine. Neither lopinavir/ritonavir tablets nor oral solution should be administered once daily in combination with nevirapine.
+                              Dosing in pediatric patients:
+                              Please refer to the Kaletra® prescribing information for dosing recommendations based on body surface area and body weight. Neither lopinavir/ritonavir tablets nor oral solution should be administered once daily in combination with nevirapine."	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1001	7.0	Nelfinavir	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1002	7.1	?Nelfinavir M8 Metabolite?Nelfinavir Cmin	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1003	7.2	The appropriate doses of the combination of nevirapine and nelfinavir with respect to safety and efficacy have not been established.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1004	8.0	Saquinavir/ritonavir	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1005	8.1	The interaction between nevirapine and saquinavir/ritonavir has not been evaluated	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1006	8.2	The appropriate doses of the combination of nevirapine and saquinavir/ritonavir with respect to safety and efficacy have not been established.	b3e740ad-46d9-48f5-85ab-7c319919ceb1
+1007	9.0	HIV Antiviral Agents: Non-Nucleoside Reverse Transcriptase Inhibitors (NNRTIs)	b3e740ad-46d9-48f5-85ab-7c319919ceb1
