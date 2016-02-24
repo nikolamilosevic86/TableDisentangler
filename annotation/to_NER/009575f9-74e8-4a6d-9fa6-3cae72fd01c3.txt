@@ -1,0 +1,231 @@
+1536	Appropriate doses of the combinations with respect to safety and efficacy have not been established.	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1566	"A complete blood count should be performed weekly and as clinically indicated to monitor for neutropenia. 
+                                    
+                                       LEXIVA:
+                                    
+                                    A dosage reduction of rifabutin by at least half the recommended dose is required. 
+                                    
+                                       LEXIVA/ritonavir:
+                                    
+Dosage reduction of rifabutin by at least 75% of the usual dose of 300 mg/day is recommended (a maximum dose of 150 mg every other day or 3 times per week)."	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1580	"?Atorvastatin
+?Rosuvastatin"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1573	Corticosteroid: Dexamethasone	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1529	"LEXIVA:
+                                    
+                                    ?Amprenavir
+                                    
+                                       LEXIVA/ritonavir:
+                                    
+?Amprenavir"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1559	"?Paroxetine
+?Trazodone"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1598	"LEXIVA:
+                                    
+                                    ?Amprenavir
+                                    ?Esomeprazole
+                                    
+                                       LEXIVA/ritonavir:
+                                    
+                                    ?Amprenavir
+?Esomeprazole"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1525	HIV-Antiviral Agents	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1551	Use with caution. Increased exposure may be associated with life-threatening reactions such as cardiac arrhythmias. Therapeutic concentration monitoring, if available, is recommended for antiarrhythmics.	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1546	Other Agents	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1591	"Oral contraceptives:
+                                    
+Ethinyl estradiol/norethin-dronea"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1540	"HIV protease inhibitors:
+                                    
+Lopinavir/ritonavira"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1584	Therapeutic concentration monitoring is recommended for immunosuppressant agents.	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1533	"Coadministration of nevirapine and LEXIVA without ritonavir is not recommended.
+                                    No dosage adjustment required when nevirapine is administered with LEXIVA/ritonavir twice daily. 
+The combination of nevirapine administered with LEXIVA/ritonavir once-daily regimen has not been studied."	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1563	"Increase monitoring for adverse events. 
+                                    
+                                       LEXIVA:
+                                    
+                                    Dose reduction of ketoconazole or itraconazole may be needed for patients receiving more than 400 mg ketoconazole or itraconazole per day. 
+                                    
+                                       LEXIVA/ritonavir:
+                                    
+High doses of ketoconazole or itraconazole (>200 mg/day) are not recommended."	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1577	"LEXIVA:
+                                    
+                                    ?Amprenavir
+                                    
+                                       LEXIVA/ritonavir:
+                                    
+Interaction not evaluated"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1570	"Calcium channel blockers:
+                                    
+Diltiazem, felodipine, nifedipine, nicardipine, nimodipine, verapamil, amlodipine, nisoldipine, isradipine"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1602	Therapeutic concentration monitoring is recommended for tricyclic antidepressants.	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1527	HIV-Antiviral Agents	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1556	"LEXIVA:
+                                    
+                                    ?Amprenavir
+                                    
+                                       LEXIVA/ritonavir:
+                                    
+                                    ?Amprenavir
+                                    ?Phenytoin"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1595	"?Sildenafil
+                                    ?Tadalafil
+                                    ?Vardenafil"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1522	Concomitant Drug Class: Drug Name	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1548	Other Agents	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1544	"LEXIVA:
+                                    
+                                    ?Amprenavir
+                                    Effect on saquinavir is not well established.
+                                    LEXIVA/ritonavir: Interaction has not been evaluated."	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1588	"Narcotic analgesic:
+                                    
+Methadone"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1537	"HIV protease inhibitors:
+                                    
+Indinavira, nelfinavira"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1567	"Benzodiazepines: 
+                                    
+Alprazolam, clorazepate, diazepam, flurazepam"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1581	Use the lowest possible dose of atorvastatin or rosuvastatin with careful monitoring, or consider other HMG-CoA reductase inhibitors such as fluvastatin or pravastatin.	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1574	?Amprenavir	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1530	"Appropriate doses of the combinations with respect to safety and efficacy have not been established. 
+An additional 100 mg/day (300 mg total) of ritonavir is recommended when efavirenz is administered with LEXIVA/ritonavir once daily. No change in the ritonavir dose is required when efavirenz is administered with LEXIVA plus ritonavir twice daily."	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1560	"Coadministration of paroxetine with LEXIVA/ritonavir significantly decreased plasma levels of paroxetine. Any paroxetine dose adjustment should be guided by clinical effect (tolerability and efficacy).
+Concomitant use of trazodone and LEXIVA with or without ritonavir may increase plasma concentrations of trazodone. Adverse events of nausea, dizziness, hypotension, and syncope have been observed following coadministration of trazodone and ritonavir. If trazodone is used with a CYP3A4 inhibitor such as LEXIVA, the combination should be used with caution and a lower dose of trazodone should be considered."	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1599	Proton pump inhibitors can be administered at the same time as a dose of LEXIVA with no change in plasma amprenavir concentrations.	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1552	"Anticoagulant:
+                                    
+Warfarin"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1592	"LEXIVA:
+                                    
+                                    ?Amprenavir
+                                    ?Ethinyl estradiol
+                                    
+                                       LEXIVA/ritonavir:
+                                    
+                                    ?Ethinyl estradiol"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1547	Other Agents	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1541	"?Amprenavir
+                                    ?Lopinavir"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1585	"Inhaled/nasal steroid:
+                                    
+Fluticasone"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1534	"HIV protease inhibitor:
+                                    
+Atazanavira"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1564	"Antimycobacterial:
+                                    
+Rifabutina"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1578	Use with caution. LEXIVA may be less effective due to decreased amprenavir plasma concentrations.	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1571	?Calcium channel blockers	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1557	"Use with caution. LEXIVA may be less effective due to decreased amprenavir plasma concentrations in patients taking these agents concomitantly. 
+Plasma phenytoin concentrations should be monitored and phenytoin dose should be increased as appropriate. No change in LEXIVA/ritonavir dose is recommended."	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1596	"May result in an increase in PDE5 inhibitor-associated adverse events, including hypotension, visual changes, and priapism.
+                                    
+                                       LEXIVA:
+                                    
+                                    Sildenafil: 25 mg every 48 hours. 
+                                    Tadalafil: no more than 10 mg every 72 hours. 
+                                    Vardenafil: no more than 2.5 mg every 24 hours. 
+                                    
+                                       LEXIVA/ritonavir:
+                                    
+                                    Sildenafil: 25 mg every 48 hours.
+                                    Tadalafil: no more than 10 mg every 72 hours.
+Vardenafil: no more than 2.5 mg every 72 hours."	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1523	Effect on Concentration of Amprenavir or Concomitant Drug	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1549	"Antiarrhythmics:
+                                    
+Amiodarone, bepridil, lidocaine (systemic), and quinidine"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1545	Appropriate doses of the combination with respect to safety and efficacy have not been established.	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1589	?Methadone	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1538	"LEXIVA:
+                                    
+                                    ?Amprenavir
+                                    Effect on indinavir and nelfinavir is not well established.
+                                    LEXIVA/ritonavir: Interaction has not been evaluated."	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1568	?Benzodiazepines	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1582	"Immunosuppressants:
+                                    
+Cyclosporine, tacrolimus, rapamycin"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1561	"Antifungals:
+                                    
+Ketoconazolea, itraconazole"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1575	Use with caution. LEXIVA may be less effective due to decreased amprenavir plasma concentrations.	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1531	"Non-nucleoside reverse transcriptase inhibitor:
+                                    
+Nevirapinea"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1600	"Tricyclic antidepressants:
+                                    
+Amitriptyline, imipramine"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1526	HIV-Antiviral Agents	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1554	Concentrations of warfarin may be affected. It is recommended that INR (international normalized ratio) be monitored.	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1593	"Alternative methods of non-hormonal contraception are recommended.
+                                    May lead to loss of virologic response. *
+                                    
+Increased risk of transaminase elevations. No data are available on the use of LEXIVA/ritonavir with other hormonal therapies, such as hormone replacement therapy (HRT) for postmenopausal women."	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1542	An increased rate of adverse events has been observed. Appropriate doses of the combinations with respect to safety and efficacy have not been established.	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1586	"LEXIVA:
+                                    
+                                    ?Fluticasone
+                                    
+                                       LEXIVA/ritonavir:
+                                    
+                                    ?Fluticasone"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1535	"LEXIVA:
+                                    
+                                    Interaction has not been evaluated.
+                                    
+                                       LEXIVA/ritonavir:
+                                    
+                                    ?Atazanavir
+?Amprenavir"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1565	?Rifabutin and rifabutin metabolite	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1579	"HMG-CoA reductase inhibitor:
+                                    
+Atorvastatina, rosuvastatin"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1572	Use with caution. Clinical monitoring of patients is recommended.	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1528	Non-nucleoside reverse transcriptase inhibitor: Efavirenza	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1558	"Antidepressant:
+                                    
+Paroxetine, trazodone"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1597	"Proton pump inhibitors:
+                                    
+                                    Esomeprazolea, lansoprazole, omeprazole, pantoprazole, rabeprazole"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1524	Clinical Comment	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1550	?Antiarrhythmics	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1590	Data suggest that the interaction is not clinically relevant; however, patients should be monitored for opiate withdrawal symptoms.	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1539	Appropriate doses of the combinations with respect to safety and efficacy have not been established.	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1569	Clinical significance is unknown. A decrease in benzodiazepine dose may be needed.	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1583	?Immunosuppressants	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1532	"LEXIVA:
+                                    
+                                    ?Amprenavir 
+                                    ?Nevirapine
+                                    
+                                       LEXIVA/ritonavir:
+                                    
+                                    ?Amprenavir
+                                    ?Nevirapine"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1562	"?Ketoconazole
+?Itraconazole"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1576	"Histamine H2-receptor antagonists:
+                                    
+                                    Cimetidine, famotidine, nizatidine, ranitidinea"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1601	?Tricyclics	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1555	"Anticonvulsants:
+                                    
+                                    Carbamazepine, phenobarbital, phenytoin
+                                    Phenytoina"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1594	"PDE5 inhibitors:
+                                    
+                                    Sildenafil, tadalafil, vardenafil"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1543	"HIV protease inhibitor:
+                                    
+Saquinavira"	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
+1587	"Use with caution. Consider alternatives to fluticasone, particularly for long-term use.
+May result in significantly reduced serum cortisol concentrations. Systemic corticosteroid effects including Cushings syndrome and adrenal suppression have been reported during postmarketing use in patients receiving ritonavir and inhaled or intranasally administered fluticasone. Coadministration of fluticasone and LEXIVA/ritonavir is not recommended unless the potential benefit to the patient outweighs the risk of systemic corticosteroid side effects."	009575f9-74e8-4a6d-9fa6-3cae72fd01c3
