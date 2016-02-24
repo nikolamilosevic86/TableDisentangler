@@ -1,3 +1,5 @@
+# Insert NER annotations into the MySQL schema
+
 import json
 from pprint import pprint
 import csv
@@ -7,9 +9,29 @@ from os import listdir
 from os.path import isfile, join
 import mysql.connector
 
-cnx = mysql.connector.connect(
-	user='std30', password='5bboys',
-    host='127.0.0.1', database='table_db_drugs')
+settings = []
+with open("settings.cfg", "r+") as config_file:
+	hold = config_file.readlines()
+	for h in hold:
+		splits = h.split(";")
+		line = []
+		line.append(splits[0])
+		line.append(splits[1])
+		settings.append(line)
+
+for line in settings:
+	if "database_username" in line[0]:
+		usr = line[1]
+	if "database_password" in line[0]:
+		pword = line[1]
+	if "database_host" in line[0]:
+		hst = line[1]
+	if "database_name" in line[0]:
+		dbname = line[1]
+	if "database_port" in line[0]:
+		dbport = line[1]
+
+cnx = mysql.connector.connect(user=usr, password=pword, host=hst, database=dbname)
 
 
 table_content = []
