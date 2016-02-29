@@ -25,7 +25,7 @@ ORDER BY CellID ASC;
 
 # Get all annotations from each setID that comes from Drug Int or Clin Pharm sections,
 # where the annotation agent was either MetaMap or DBMI-NER
-SELECT idAnnotation, SpecId, Cell.idCell, Cell.CellID, Annotation.Content, Annotation.Start, Annotation.End, AnnotationID, AnnotationURL, AgentName, AgentType 
+SELECT idAnnotation, SpecId, Cell.idCell, Cell.CellID, Annotation.Content, AnnotationURL, AgentName, Annotation.Start, Annotation.End, AnnotationID, AgentType 
 FROM Annotation INNER JOIN Cell ON Cell.idCell=Annotation.Cell_idCell
 INNER JOIN ArtTable ON ArtTable.idTable=Cell.Table_idTable
 INNER JOIN Article ON Article.idArticle=ArtTable.Article_idArticle
