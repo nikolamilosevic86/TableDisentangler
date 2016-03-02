@@ -1,4 +1,4 @@
-SELECT idArticle, SpecId
+SELECT DISTINCT SpecId
 FROM `table_db_drugs`.`Article`;
 
 SELECT idTable, TableCaption, Section, WholeHeader, Content, CellID, idCell, CellRoleName, CellType, SpecId 
@@ -35,3 +35,22 @@ OR Section LIKE "%CLINICAL PHARMACOLOGY%")
 AND (AgentName = "DBMI-NER"
 OR AgentName = "MetaMap")
 ORDER BY idCell;
+
+SELECT SpecId FROM Article WHERE SpecId NOT IN (SELECT DISTINCT SpecId
+FROM Annotation INNER JOIN Cell ON Cell.idCell=Annotation.Cell_idCell
+INNER JOIN ArtTable ON ArtTable.idTable=Cell.Table_idTable
+INNER JOIN Article ON Article.idArticle=ArtTable.Article_idArticle
+WHERE AgentName = 'MetaMap');
+
+# Number of distinct setIDs that have been annotated by MetaMap
+SELECT count(DISTINCT SpecId)
+FROM Annotation INNER JOIN Cell ON Cell.idCell=Annotation.Cell_idCell
+INNER JOIN ArtTable ON ArtTable.idTable=Cell.Table_idTable
+INNER JOIN Article ON Article.idArticle=ArtTable.Article_idArticle
+WHERE AgentName = 'MetaMap';
+
+SELECT idAnnotation, SpecId, Cell.idCell, Cell.CellID, Annotation.Content, AnnotationURL, AgentName, Annotation.Start, Annotation.End, AnnotationID, AgentType 
+FROM Annotation INNER JOIN Cell ON Cell.idCell=Annotation.Cell_idCell
+INNER JOIN ArtTable ON ArtTable.idTable=Cell.Table_idTable
+INNER JOIN Article ON Article.idArticle=ArtTable.Article_idArticle
+WHERE SpecID = '80beab2c-396e-4a37-a4dc-40fdb62859cf';
