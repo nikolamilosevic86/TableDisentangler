@@ -29,4 +29,19 @@ cnx = mysql.connector.connect(user=usr, password=pword, host=hst, database=dbnam
 
 cursor = cnx.cursor()
 
+setIDs_already_annotated = []
+
+check_query = (
+	"SELECT DISTINCT SpecId "
+	"FROM Annotation INNER JOIN Cell ON Cell.idCell=Annotation.Cell_idCell "
+	"INNER JOIN ArtTable ON ArtTable.idTable=Cell.Table_idTable "
+	"INNER JOIN Article ON Article.idArticle=ArtTable.Article_idArticle "
+	"WHERE AgentName = 'MetaMap'; ")
+
+cursor.execute(check_query)
+
+
+with open('setIDs-already-annotated.txt', 'wb') as outfile:
+	for s in cursor:
+		outfile.write("%s\n" % s)
 

@@ -32,19 +32,20 @@ cnx = mysql.connector.connect(user=usr, password=pword, host=hst, database='link
 cursor = cnx.cursor()
 
 setIDs = [line.rstrip('\n') for line in open('set-ids-for-spls-with-tables-ddi-or-clin-pharm.txt')]
+setIDs_already_annotated = [line.rstrip('\n') for line in open('setIDs-already-annotated.txt')]
 
 file_names = []
 
 for sid in setIDs:
+	if sid not in setIDs_already_annotated:
+		drugInt_clinPharm_query = (
+			"SELECT filename FROM structuredProductLabelMetadata WHERE setId = %(setId)s ;"
+		)
 
-	drugInt_clinPharm_query = (
-		"SELECT filename FROM structuredProductLabelMetadata WHERE setId = %(setId)s ;"
-	)
+		cursor.execute(drugInt_clinPharm_query, { 'setId': sid })
 
-	cursor.execute(drugInt_clinPharm_query, { 'setId': sid })
-
-	for fn in cursor:
-		file_names.append(fn)
+		for fn in cursor:
+			file_names.append(fn)
 
 cursor.close()
 cnx.close()

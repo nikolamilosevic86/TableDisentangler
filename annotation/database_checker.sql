@@ -43,7 +43,7 @@ INNER JOIN Article ON Article.idArticle=ArtTable.Article_idArticle
 WHERE AgentName = 'MetaMap');
 
 # Number of distinct setIDs that have been annotated by MetaMap
-SELECT count(DISTINCT SpecId)
+SELECT DISTINCT SpecId
 FROM Annotation INNER JOIN Cell ON Cell.idCell=Annotation.Cell_idCell
 INNER JOIN ArtTable ON ArtTable.idTable=Cell.Table_idTable
 INNER JOIN Article ON Article.idArticle=ArtTable.Article_idArticle
