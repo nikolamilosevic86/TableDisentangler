@@ -31,7 +31,7 @@ cnx = mysql.connector.connect(user=usr, password=pword, host=hst, database='link
 
 cursor = cnx.cursor()
 
-setIDs = [line.rstrip('\n') for line in open('set-ids-for-spls-with-tables-ddi-or-clin-pharm.txt')]
+setIDs = [line.rstrip('\n') for line in open('ddi-setIDs.txt')]
 setIDs_already_annotated = [line.rstrip('\n') for line in open('setIDs-already-annotated.txt')]
 
 file_names = []

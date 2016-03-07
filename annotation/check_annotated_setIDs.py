@@ -32,11 +32,7 @@ cursor = cnx.cursor()
 setIDs_already_annotated = []
 
 check_query = (
-	"SELECT DISTINCT SpecId "
-	"FROM Annotation INNER JOIN Cell ON Cell.idCell=Annotation.Cell_idCell "
-	"INNER JOIN ArtTable ON ArtTable.idTable=Cell.Table_idTable "
-	"INNER JOIN Article ON Article.idArticle=ArtTable.Article_idArticle "
-	"WHERE AgentName = 'MetaMap'; ")
+	"SELECT DISTINCT SpecId FROM Article; ")
 
 cursor.execute(check_query)
 
