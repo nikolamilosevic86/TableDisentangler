@@ -12,16 +12,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import classifiers.SpecPragmatic;
 import weka.classifiers.misc.InputMappedClassifier;
 import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.FastVector;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.SelectedTag;
 import weka.core.stemmers.SnowballStemmer;
-import weka.core.stopwords.WordsFromFile;
 import weka.filters.Filter;
 import weka.filters.unsupervised.attribute.StringToWordVector;
 import Main.KeyValue;
