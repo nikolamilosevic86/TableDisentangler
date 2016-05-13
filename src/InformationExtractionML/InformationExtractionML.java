@@ -1,5 +1,6 @@
 package InformationExtractionML;
 
+import java.awt.BufferCapabilities.FlipContents;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -12,13 +13,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.hp.hpl.jena.util.Tokenizer;
+
 import weka.classifiers.misc.InputMappedClassifier;
+import weka.classifiers.trees.RandomForest;
 import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.FastVector;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.stemmers.SnowballStemmer;
+import weka.core.stopwords.StopwordsHandler;
+import weka.core.tokenizers.WordTokenizer;
 import weka.filters.Filter;
 import weka.filters.unsupervised.attribute.StringToWordVector;
 import Main.KeyValue;
@@ -91,13 +97,21 @@ public class InformationExtractionML {
 		try {
 			classifier.setModelPath(ClassifierPath);
 			classifier.setTrim(true);
+			classifier.setIgnoreCaseForNames(true);
+			//classifier.setSuppressMappingReport(true);
+			//RandomForest rf  = new RandomForest();
+			//rf.setMaxDepth(0);
+			//rf.setNumExecutionSlots(1);
+			//rf.setNumFeatures(0);
+			//rf.setNumTrees(100);	
+			//classifier.setClassifier(rf);
 			String SQL = "select * from cell inner join arttable on cell.Table_idTable=arttable.idTable where arttable.SpecPragmatic='BaselineCharacteristic'";
 			Statement st = conn.createStatement();
 
 			rs = st.executeQuery(SQL);
 			while (rs.next()) {
 				String classification = classifyCell(rs.getInt(1));
-				String text = rs.getInt(1)+"  "+rs.getString(10)+"   "+ rs.getString(11)+rs.getString(12)+rs.getString(13)+"    class:" +classification+"\r\n";
+				String text = rs.getInt(1)+"  "+rs.getInt(4)+"  "+rs.getString(10)+"   "+ rs.getString(11)+rs.getString(12)+"   "+rs.getString(13)+"    class:" +classification+"\r\n";
 				Files.write(Paths.get("gender.txt"), text.getBytes(), StandardOpenOption.APPEND);
 				// SQL = "Update arttable set SpecPragmatic='" + classification
 				// + "' where idTable=" + rs.getInt(1);
@@ -153,15 +167,19 @@ public class InformationExtractionML {
 				else
 					SuperRowContent = "";
 			}
-			SQL = "select * from cell where idCell=" + cellid;
+			SQL = "select * from cellroles where Cell_idCell=" + cellid;
 			Statement st1 = conn.createStatement();
 
 			ResultSet rs2 = st1.executeQuery(SQL);
 			String s = "";
 			while (rs2.next()) {
-				s += rs2.getInt(1);
+				s += rs2.getInt(2);
 			}
+			try{
 			function = Integer.parseInt(s);
+			}catch(Exception ex){
+				function = 0;
+			}
 
 			// iterate through the java resultset
 
@@ -174,13 +192,13 @@ public class InformationExtractionML {
 			Attribute rowNAttribute = new Attribute("rowN");
 			Attribute columnNAttribute = new Attribute("columnN");
 			Attribute FunctionAttribute = new Attribute("function");
-			FastVector fvClassVal = new FastVector(4);
+			FastVector fvClassVal = new FastVector(2);
 			// AdverseEvent,InclusionExclusion,DontCare,BaselineCharacteristic
 			fvClassVal.addElement("yes");
 			fvClassVal.addElement("no");
 			Attribute ClassAttribute = new Attribute("hasGender", fvClassVal);
 			// Declare the feature vector
-			FastVector fvWekaAttributes = new FastVector(26);
+			FastVector fvWekaAttributes = new FastVector(8);
 
 			fvWekaAttributes.addElement(CellContentAttribute);
 			fvWekaAttributes.addElement(HeaderAttribute);
@@ -194,7 +212,7 @@ public class InformationExtractionML {
 			Instances Instances = new Instances("Rel", fvWekaAttributes, 0);
 
 			Instance iExample = new DenseInstance(8);
-			Attribute attribute = (Attribute) fvWekaAttributes.elementAt(0);
+			//Attribute attribute = (Attribute) fvWekaAttributes.elementAt(0);
 			iExample.setValue((Attribute) fvWekaAttributes.elementAt(0),
 					CellContent);
 			iExample.setValue((Attribute) fvWekaAttributes.elementAt(1),
@@ -217,8 +235,10 @@ public class InformationExtractionML {
 			filter.setMinTermFreq(1);
 			filter.setAttributeNamePrefix("feat_");
 			filter.setWordsToKeep(2000);
+			filter.setStopwordsHandler(null);
 			filter.setLowerCaseTokens(true);
 			SnowballStemmer stemmer = new SnowballStemmer();
+			filter.setTokenizer(new WordTokenizer());
 			// stemmer.setStemmer("English");
 			filter.setStemmer(stemmer);
 			
@@ -249,8 +269,7 @@ public class InformationExtractionML {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		InformationExtractionML sp = new InformationExtractionML();
-		sp.processCells("Models/RandomForestsGenderDetection.model");
+		sp.processCells("Models/NaiveBayesGenderDetection.model");
 
 	}
-
 }
