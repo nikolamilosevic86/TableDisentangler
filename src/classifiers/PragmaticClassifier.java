@@ -23,7 +23,7 @@ public class PragmaticClassifier {
 	private String ClassifierPath="";
 	//private Classifier classifier;
 	
-	InputMappedClassifier classifier = new InputMappedClassifier() ;
+	InputMappedClassifier classifier = new InputMappedClassifier();
 	public PragmaticClassifier(String path)
 	{
 		ClassifierPath = path;

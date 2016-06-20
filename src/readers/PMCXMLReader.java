@@ -118,7 +118,7 @@ public class PMCXMLReader implements Reader{
 	    		NamedNodeMap attr = name.getAttributes();
 	    		if (null != attr) {
 	    			Node p = attr.getNamedItem("ref-type");
-	    	        if(p.getNodeValue() == "aff");
+	    	        //if(p.getNodeValue() == "aff");
 	    	        Node p2 = attr.getNamedItem("rid");
 	    	        String affId = p2.getNodeValue();
 	    	        NodeList affis = parse.getElementsByTagName("aff");
