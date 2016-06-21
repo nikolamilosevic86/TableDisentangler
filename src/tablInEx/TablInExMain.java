@@ -35,6 +35,10 @@ import readers.PMCXMLReader;
 import readers.Reader;
 import stats.Statistics;
 
+// Import log4j classes.
+import org.apache.log4j.Logger;
+import org.apache.log4j.BasicConfigurator;
+
 public class TablInExMain {
 
 	public static boolean databaseSave = false;
@@ -129,6 +133,9 @@ public class TablInExMain {
 	}
 
 	public static void main(String[] args) {
+    	        // Set up a simple configuration that logs on the console.
+	        BasicConfigurator.configure();
+	    
 		String propsFile = "file_properties.xml";
 		try {
 			JWNL.initialize(new FileInputStream(propsFile));

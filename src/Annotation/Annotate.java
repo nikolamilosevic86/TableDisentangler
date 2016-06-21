@@ -274,8 +274,10 @@ public class Annotate {
 								annot.setType("ValueSemantic");
 								Meaning.setAttribute("TypeVal", "");
 								annot.setTypeVal("");
-								Meaning.setAttribute("Source", words.get(p).wordmeanings.get(s).Source);
-								annot.setSource( words.get(p).wordmeanings.get(s).Source);
+								//Meaning.setAttribute("Source", words.get(p).wordmeanings.get(s).Source);
+								Meaning.setAttribute("Source", words.get(p).wordmeanings.get(s).AnnotatorSystem);
+								//annot.setSource( words.get(p).wordmeanings.get(s).Source);
+								annot.setSource( words.get(p).wordmeanings.get(s).AnnotatorSystem);
 								Meaning.setAttribute("ID", words.get(p).wordmeanings.get(s).id);
 								annot.setID(words.get(p).wordmeanings.get(s).id);
 								Meaning.setAttribute("URL", words.get(p).wordmeanings.get(s).URL);
