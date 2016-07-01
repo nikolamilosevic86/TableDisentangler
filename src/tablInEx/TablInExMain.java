@@ -109,10 +109,11 @@ public class TablInExMain {
 
 	public static Article runReadingloopOneFile(Article a, File file, Class s) {
 		try {
-
+		    System.out.println("File: " + file.getPath());
+		    
 			File f = new File(file.getPath());
-			// Not working with hidden or temp files
-			if (f.isHidden() || file.getPath().endsWith("~"))
+			// Not working with hidde,  temp files, or zip
+			if (f.isHidden() || file.getPath().endsWith("~") || file.getPath().endsWith("zip"))
 				return a;
 
 			Reader r;
