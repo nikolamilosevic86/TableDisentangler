@@ -1,0 +1,532 @@
+162	Protease inhibitor:  saquinavir	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+199	? clarithromycin concentration? 14-OH metabolite concentration	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+214	"? atorvastatin concentration?	pravastatin concentration? simvastatin concentration"	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+155	The optimal dose of indinavir, when given in combination with efavirenz, is not known. Increasing the indinavir dose to 1000 mg every 8 hours does not compensate for the increased indinavir metabolism due to efavirenz.	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+190	? itraconazole concentration? hydroxy-itraconazole concentration	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+182	Potential for reduction in anticonvulsant and/or efavirenz plasma levels; periodic monitoring of anticonvulsant plasma levels should be conducted.	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+148	?atazanavir concentration? tenofovir concentration	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+226	? immuno-suppressant	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+174	Anticoagulant:  warfarin	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+219	Oral:  ethinyl  estradiol/norgestimate	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+166	? maraviroc concentration	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+203	Increase daily dose of rifabutin by 50%. Consider doubling the rifabutin dose in regimens where rifabutin is given 2 or 3 times a week.	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+159	Protease inhibitor:  ritonavir	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+196	? posaconazole concentration	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+211	? calcium channel blocker	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+152	"Fosamprenavir (unboosted):  Appropriate doses of fosamprenavir and ATRIPLA with respect to safety and efficacy have not been established.
+                              Fosamprenavir/ritonavir:  An additional 100 mg/day (300 mg total) of ritonavir is recommended when ATRIPLA is administered with fosamprenavir/ritonavir once daily. No change in the ritonavir dose is required when ATRIPLA is administered with fosamprenavir plus ritonavir twice daily."	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+187	? sertraline concentration	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+230	Coadministration of efavirenz in HIV-1 infected individuals with a history of injection drug use resulted in decreased plasma levels of methadone and signs of opiate withdrawal. Methadone dose was increased by a mean of 22% to alleviate withdrawal symptoms. Patients should be monitored for signs of withdrawal and their methadone dose increased as required to alleviate withdrawal symptoms.	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+144	Antiretroviral agents	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+178	? carbamazepine concentration? efavirenz concentration	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+223	? etonogestrel	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+170	Higher didanosine concentrations could potentiate didanosine-associated adverse reactions, including pancreatitis and neuropathy. In patients weighing >60 kg, the didanosine dose should be reduced to 250 mg if coadministered with ATRIPLA. Data are not available to recommend a dose adjustment of didanosine for patients weighing <60 kg. Coadministration of ATRIPLA and didanosine should be undertaken with caution and patients receiving this combination should be monitored closely for didanosine-associated adverse reactions. For additional information, please consult the Videx / Videx EC (didanosine) prescribing information.	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+207	Calcium channel blockers:  diltiazem	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+163	? saquinavir concentration	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+200	Clinical significance unknown. In uninfected volunteers, 46% developed rash while receiving efavirenz and clarithromycin. No dose adjustment of ATRIPLA is recommended when given with clarithromycin. Alternatives to clarithromycin, such as azithromycin, should be considered. Other macrolide antibiotics, such as erythromycin, have not been studied in combination with ATRIPLA.	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+215	Plasma concentrations of atorvastatin, pravastatin, and simvastatin decreased with efavirenz. Consult the full prescribing information for the HMG-CoA reductase inhibitor for guidance on individualizing the dose.	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+156	Protease inhibitor:  lopinavir/ritonavir	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+191	Since no dose recommendation for itraconazole can be made, alternative antifungal treatment should be considered.	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+149	Coadministration of atazanavir with ATRIPLA is not recommended. Coadministration of atazanavir with either efavirenz or tenofovir DF decreases plasma concentrations of atazanavir. The combined effect of efavirenz plus tenofovir DF on atazanavir plasma concentrations is not known. Also, atazanavir has been shown to increase tenofovir concentrations. There are insufficient data to support dosing recommendations for atazanavir or atazanavir/ritonavir in combination with ATRIPLA.	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+183	Antidepressants:  bupropion	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+227	Decreased exposure of the immunosuppressant may be expected due to CYP3A induction by efavirenz. These immunosuppressants are not anticipated to affect exposure of efavirenz. Dose adjustments of the immunosuppressant may be required. Close monitoring of immunosuppressant concentrations for at least 2 weeks (until stable concentrations are reached) is recommended when starting or stopping treatment with ATRIPLA.	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+175	? or ? warfarin concentration	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+220	? active metabolites of norgestimate	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+167	Efavirenz decreases plasma concentrations of maraviroc. Refer to the full prescribing information for maraviroc for guidance on coadministration with ATRIPLA.	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+204	Antimycobacterial:  rifampin	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+160	? ritonavir concentration? efavirenz concentration	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+197	Avoid concomitant use unless the benefit outweighs the risks.	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+212	No data are available on the potential interactions of efavirenz with other calcium channel blockers that are substrates of CYP3A. The potential exists for reduction in plasma concentrations of the calcium channel blocker. Dose adjustments should be guided by clinical response (refer to the full prescribing information for the calcium channel blocker).	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+153	Protease inhibitor:  indinavir	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+188	Increases in sertraline dose should be guided by clinical response.	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+147	Protease inhibitor:  atazanavir	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+179	There are insufficient data to make a dose recommendation for ATRIPLA. Alternative anticonvulsant treatment should be used.	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+224	A reliable method of barrier contraception must be used in addition to hormonal contraceptives. The interaction between etonogestrel and efavirenz has not been studied. Decreased exposure of etonogestrel may be expected. There have been postmarketing reports of contraceptive failure with etonogestrel in efavirenz-exposed patients.	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+171	Other agents	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+208	? diltiazem concentration? desacetyl diltiazem concentration? N-monodes-methyl diltiazem concentration	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+164	Should not be used as sole protease inhibitor in combination with ATRIPLA.	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+201	Antimycobacterial:  rifabutin	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+216	Hormonal contraceptives:	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+157	? lopinavir concentration? tenofovir concentration	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+193	? ketoconazole concentration	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+150	Protease inhibitor:  fosamprenavir calcium	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+184	? buproprion concentration	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+228	Narcotic analgesic:  methadone	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+176	Plasma concentrations and effects potentially increased or decreased by efavirenz.	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+221	A reliable method of barrier contraception must be used in addition to hormonal contraceptives. Efavirenz had no effect on ethinyl estradiol concentrations, but progestin levels (norelgestromin and levonorgestrel) were markedly decreased. No effect of ethinyl estradiol/norgestimate on efavirenz plasma concentrations was observed.	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+168	NRTI:  didanosine	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+205	? efavirenz concentration	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+161	When ritonavir 500 mg every 12 hours was coadministered with efavirenz 600 mg once daily, the combination was associated with a higher frequency of adverse clinical experiences (e.g., dizziness, nausea, paresthesia) and laboratory abnormalities (elevated liver enzymes). Monitoring of liver enzymes is recommended when ATRIPLA is used in combination with ritonavir.	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+198	Anti-infective:  clarithromycin	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+213	HMG-CoA reductase inhibitors:  atorvastatin  pravastatin  simvastatin	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+154	? indinavir concentration	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+189	Antifungals:  itraconazole	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+181	? anticonvulsant concentration? efavirenz concentration	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+225	Immunosuppressants:  cyclosporine,   tacrolimus, sirolimus,   and others   metabolized by   CYP3A	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+165	CCR5 co-receptor antagonist:  maraviroc	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+202	? rifabutin concentration	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+158	A dose increase of lopinavir/ritonavir to 600/150 mg (3 tablets) twice daily may be considered when used in combination with efavirenz in treatment-experienced patients where decreased susceptibility to lopinavir is clinically suspected (by treatment history or laboratory evidence). Patients should be monitored for tenofovir-associated adverse reactions. ATRIPLA should be discontinued in patients who develop tenofovir-associated adverse reactions.	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+194	Drug interaction trials with ATRIPLA and ketoconazole have not been conducted. Efavirenz has the potential to decrease plasma concentrations of ketoconazole.	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+209	Diltiazem dose adjustments should be guided by clinical response (refer to the full prescribing information for diltiazem). No dose adjustment of ATRIPLA is necessary when administered with diltiazem.	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+151	? amprenavir concentration	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+185	The effect of efavirenz on bupropion exposure is thought to be due to the induction of bupropion metabolism. Increases in bupropion dosage should be guided by clinical response, but the maximum recommended dose of bupropion should not be exceeded.	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+229	? methadone concentration	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+177	Anticonvulsants:  carbamazepine	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+222	Implant:  etonogestrel	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+169	? didanosine concentration	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+206	If ATRIPLA is coadministered with rifampin to patients weighing 50 kg or more, an additional 200 mg/day of efavirenz is recommended.	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+302	600 mg × 7 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+334	? 36(? 32 to ? 40)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+345	600 mg qd × 14 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+259	Nelfinavir	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+368	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+295	300 mg qd × 14 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+327	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+341	? 11(? 5 to? 18)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+252	Lopinavir/ritonavir	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+362	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+288	200 mg q12h × 14 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+320	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+246	800 mg q8h × 14 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+358	300 mg po q12h days 2–7	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+274	1200 mg q8h × 10 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+353	NA	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+268	600 mg qd × 10 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+281	500 mg q12h × 7 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+313	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+347	? 11(? 6 to ? 16)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+262	10	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+306	? 26(? 15 to ? 36)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+338	600 mg qd × 28 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+299	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+331	600 mg qd × 35 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+344	50 mg qd × 14 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+256	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+365	400 mg po q12h days 2–7	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+292	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+324	600 mg qd × 15 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+250	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+360	NA	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+278	? 12(? 4 to ? 19)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+357	Voriconazole	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+272	? 25(? 7 to? 46)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+285	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+317	600 mg qd × 15 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+349	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+266	Ritonavir	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+310	600 mg qd × 15 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+369	"? 17
+                              (? 6 to? 29)"	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+303	600 mg qd × 7 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+335	? 47(? 41 to ? 53)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+346	13	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+296	600 mg qd × 14 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+328	? 12(? 25 to? 3)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+342	? 13(? 1 to? 26)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+253	400/100 mg q12h × 9 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+289	600 mg qd × 28 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+321	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+247	200 mg qd × 14 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+359	300 mg qd × 7 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+275	600 mg qd × 10 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+354	? 38¶	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+269	9	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+282	400 mg qd × 7 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+314	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+348	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+263	? 12(? 32 to ? 13)‡	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+307	? 32(? 15 to ? 46)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+339	12	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+300	? 12(? 24 to? 1)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+332	14	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+257	? 16(? 38 to ? 15)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+366	300 mg qd × 7 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+293	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+325	14	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+251	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+361	"? 14#
+                              (? 7 to? 21)"	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+279	? 14(? 2 to ? 24)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+245	Indinavir	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+273	Saquinavir SGC§	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+286	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+318	11	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+351	400 mg po q12h × 1 day then 200 mg po q12h × 8 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+311	14	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+260	750 mg q8h × 7 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+370	NA	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+304	12	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+336	Diltiazem	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+297	11	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+329	Carbamazepine	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+343	Sertraline	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+254	600 mg qd × 9 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+363	NA	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+290	16	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+322	Simvastatin	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+248	11	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+276	13	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+355	? 44	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+270	? 14(? 4 to ? 26)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+283	12	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+315	Pravastatin	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+264	? 12(? 35 to ? 18)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+308	Atorvastatin	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+301	Rifampin	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+333	? 21(? 15 to ? 26)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+258	? 16(? 42 to ? 20)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+367	NA	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+294	Rifabutin	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+326	? 12(? 28 to? 8)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+340	? 16(? 6 to? 26)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+319	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+287	Itraconazole	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+352	400 mg qd × 9 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+267	500 mg q12h × 8 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+280	Clarithromycin	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+312	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+261	600 mg qd × 7 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+305	? 20(? 11 to ? 28)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+337	240 mg × 14 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+298	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+330	200 mg qd × 3 days, 200 mg bid × 3 days, then 400 mg qd × 15 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+255	11, 12†	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+291	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+323	40 mg qd × 4 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+249	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+277	? 13(? 5 to ? 20)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+356	NA	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+271	? 21(? 10 to ? 34)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+284	? 11(? 3 to ? 19)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+316	40 mg qd × 4 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+265	? 21(? 53 to ? 33)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+309	10 mg qd × 4 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+494	? 26(? 15 to ? 35)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+532	Atorvastatin	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+651	Sertraline	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+671	NA	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+440	"? 39
+                              (? 3 to ? 62)"	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+480	? 50(? 28 to ? 66)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+587	? 63(? 44 to? 75)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+432	"? 57
+                              (? 50 to? 63)"	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+472	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+580	? 13(? 30 to? 7)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+628	? 83(?79 to? 87)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+487	? 51(? 37 to ? 62)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+525	Rifabutin	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+642	? 55(?48 to ?62)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+668	NA	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+421	After afternoon dose	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+458	11	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+570	12	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+619	21	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+401	600 mg qd with a light snack d 11–24 (pm)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+518	Posaconazole	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+635	? 52(? 33 to? 66)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+664	NA	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+393	400 mg qd d 1–6, then 300 mg qd d 7–20 with ritonavir 100 mg qd and a light meal	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+508	? 37(? 20 to ? 51)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+546	Pravastatin	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+657	? 46(? 31 to? 58)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+407	1000 mg q8h × 10 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+454	? 43(? 21 to ? 59)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+560	Total active (including metabolites)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+604	600 mg qd × 14 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+385	Atazanavir	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+501	? 49(? 32 to ? 69)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+536	? 14(? 1 to? 26)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+653	600 mg qd × 14 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+676	"? 23
+                              (? 1 to ? 53"	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+444	10	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+553	Simvastatin	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+594	? 62(? 44 to? 75)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+437	11, 7§	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+477	1200 mg q8h × 10 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+584	13	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+632	600 mg qd × 14–21 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+491	500 mg q12h × 7 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+529	? 32(? 15 to? 46)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+649	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+670	"? 55
+                              (? 45 to ? 62)"	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+428	After evening dose	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+466	? 18(? 6 to ? 33)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+574	Epoxide metabolite	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+623	Levonorgestrel	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+484	100 mg bid	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+522	? 45(? 34 to? 53)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+639	600 mg qd × 14 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+666	300 mg po q12h days 2–7	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+614	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+397	"? 39
+                              (? 2 to? 88)"	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+515	? 35(? 12 to ? 52)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+550	? 32(? 59 to? 12)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+661	NA	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+416	?‡	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+456	500 mg q12h × 8 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+567	Carbamazepine	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+389	? 59(? 49 to? 67)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+505	200 mg q12h × 28 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+543	? 15(? 2 to? 26)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+655	? 29(? 15 to ? 40)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+405	? 42(? 31 to ? 51)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+448	MetaboliteAG-1402	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+557	? 72(? 63 to? 79)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+601	? 37(? 17 to? 52)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+495	? 39(? 30 to? 46)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+533	10 mg qd × 4 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+652	50 mg qd × 14 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+673	400 mg po q12h days 2–7	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+441	Nelfinavir	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+481	? 62(? 45 to ? 74)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+588	Desacetyl diltiazem	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+434	Lopinavir/ritonavir	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+473	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+581	Diltiazem	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+629	? 86(?80 to? 90)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+488	? 45(? 38 to ? 51)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+526	300 mg qd × 14 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+643	NA	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+423	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+571	? 20(? 15 to? 24)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+620	? 46(?39 to? 52)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+402	14	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+519	400 mg (oral suspension) bid × 10 and 20 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+636	NA	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+665	Voriconazole	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+394	600 mg qd 2 h after atazanavir and ritonavir d 7–20	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+509	? 39(? 21 to? 53)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+547	40 mg qd × 4 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+408	600 mg qd × 10 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+455	Ritonavir	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+564	? 68(? 55 to? 78)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+609	Ethinyl estradiol	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+386	400 mg qd with a light meal d 1–20	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+502	? 34(? 18 to? 53)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+537	? 43(? 34 to? 50)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+654	13	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+677	"? 7
+                              (? 23 to ? 13)"	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+445	? 21(? 10 to? 33)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+554	40 mg qd × 4 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+595	N-monodesmethyl diltiazem	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+438	?¶	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+478	600 mg qd × 10 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+585	? 60(? 50 to? 68)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+492	400 mg qd × 7 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+530	? 38(? 28 to? 47)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+650	NA	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+430	"? 29
+                              (? 11 to? 43)"	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+467	? 42(? 9 to ? 86)#	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+578	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+626	6	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+485	600 mg qd	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+523	? 50(? 40 to? 57)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+640	13	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+667	300 mg qd × 7 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+457	600 mg qd × 10 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+568	200 mg qd × 3 days, 200 mg bid × 3 days, then 400 mg qd × 29 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+615	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+398	"? 48
+                              (? 24 to? 76)"	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+516	? 37(? 14 to? 55)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+633	11	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+662	? 61à	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+417	"? 33
+                              (? 26 to? 39)"	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+390	? 74(? 68 to? 78)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+506	600 mg qd × 14 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+544	? 32(? 21 to? 41)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+656	? 39(? 27 to? 50)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+406	Indinavir	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+452	? 40(? 30 to? 48)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+558	? 68(? 62 to? 73)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+602	Ethinyl estradiol/ Norgestimate	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+496	? 53(? 42 to? 63)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+534	600 mg qd × 15 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+674	300 mg qd × 7 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+442	750 mg q8h × 7 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+551	? 44(? 26 to? 57)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+592	? 64(? 57 to? 69)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+435	400/100 mg q12h × 9 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+474	? 24(? 3 to? 50)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+582	240 mg × 21 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+630	Methadone	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+489	? 45(? 28 to ? 57)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+527	600 mg qd × 14 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+644	Hydroxybupropion	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+669	"? 36è
+                              (? 21 to ? 49)"	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+424	"? 37
+                              (? 26 to? 46)"	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+463	After AM dose	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+572	? 27(? 20 to? 33)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+621	? 64(? 62 to? 67)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+482	? 56(? 16 to ? 77)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+520	400 mg qd × 10 and 20 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+637	Bupropion	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+395	13	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+510	? 44(? 27 to? 58)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+548	600 mg qd × 15 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+659	400 mg po q12h × 1 day then 200 mg po q12h × 8 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+409	20	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+565	? 60(? 52 to? 68)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+612	21	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+387	600 mg qd with a light meal d 7–20	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+503	? 26(? 9 to? 45)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+538	? 69(? 49 to? 81)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+678	NA	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+403	? 17(? 8 to ? 27)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+446	? 20(? 8 to? 34)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+555	600 mg qd × 15 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+599	? 28(? 7 to? 44)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+531	? 45(? 31 to? 56)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+439	"? 19
+                              (? 36 to ? 3)"	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+479	12	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+586	? 69(? 55 to? 79)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+493	11	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+431	"? 46
+                              (? 37 to? 54)"	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+470	After PM dose	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+579	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+627	? 80(?77 to? 83)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+486	12	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+524	NA	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+641	? 34(?21 to ?47)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+418	"? 39
+                              (? 24 to? 51)"	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+569	600 mg qd × 14 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+616	Norelgestromin	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+400	300 mg qd/ritonavir 100 mg qd d 1–10 (pm), then 400 mg qd/ritonavir 100 mg qd d 11–24 (pm) (simultaneous with efavirenz)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+517	? 43(? 18 to? 60)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+634	? 45(? 25 to? 59)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+663	? 77	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+391	? 93(? 90 to? 95)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+507	18	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+545	? 48(? 23 to? 64)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+453	? 37(? 25 to ? 48)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+559	? 45(? 20 to? 62)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+603	0.035 mg/0.25 mg × 14 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+497	14-OH metabolite	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+535	14	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+675	NA	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+443	600 mg qd × 7 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+552	? 19(? 0 to? 35)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+593	? 75(? 59 to? 84)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+436	600 mg qd × 9 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+476	SaquinavirSGCÞ	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+583	600 mg qd × 14 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+631	Stable maintenance 35–100 mg daily	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+490	Clarithromycin	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+528	9	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+648	? 50(? 20 to? 80)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+425	"? 52
+                              (? 47 to? 57)"	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+465	? 24(? 12 to? 38)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+573	? 35(? 24 to? 44)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+622	? 82(? 79 to? 85)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+483	Maraviroc	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+521	11	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+638	150 mg single dose(sustained-release)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+396	"? 14†
+                              (? 17 to? 58)"	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+511	Hydroxy-itraconazole	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+549	13	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+660	400 mg qd × 9 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+414	After morning dose	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+566	NAß	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+613	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+388	27	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+504	Itraconazole	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+539	Total active (including metabolites)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+404	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+447	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+556	14	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+600	? 37(? 17 to? 52)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+697	Didanosine (enteric-coated)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+712	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+694	? 14(? 8 to ? 20)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+706	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+700	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+709	Lopinavir/ ritonavir	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+691	Atazanavir§	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+703	Didanosine (buffered)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+713	? 32(? 25 to ? 38)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+707	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+701	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+695	? 24(? 21 to ? 28)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+710	400/100 twice daily × 14 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+692	400 once daily × 14 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+704	250 or 400 once daily × 7 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+698	400 once	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+714	? 51(? 37 to ? 66)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+708	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+702	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+696	? 22(? 15 to ? 30)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+711	24	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+693	33	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+705	14	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+699	25	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+738	"? 23
+                              (? 46 to ? 10)"	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+730	? 21(? 27 to ? 14)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+747	24	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+741	24	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+735	10	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+727	Atazanavir§	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+745	Ritonavir	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+739	Lopinavir	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+731	? 25(? 30 to ? 19)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+748	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+742	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+736	? 28(? 50 to ? 5)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+728	400 once daily × 14 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+732	? 40(? 48 to ? 32)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+749	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+743	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+737	"? 25¶
+                              (? 42 to ? 3)"	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+729	34	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+746	Lopinavir/ritonavir 400/100 twice daily × 14 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+740	Lopinavir/ritonavir 400/100 twice daily × 14 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+734	Atazanavir/ritonavir 300/100 once daily × 42 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+750	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+744	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+797	Simultaneously with didanosine	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+776	400 once, fasted	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+790	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+766	400 once daily¶ × 7 days	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+783	26	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+794	?	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+770	? 44(? 31 to ? 59)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+787	With food, 2 hr after didanosine	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+761	Buffered tablets	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+780	? 48(? 31 to ? 67)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+798	28	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+791	250 once, fasted	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+767	Fasted 1 hour after didanosine	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+784	? 64(? 41 to ? 89)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+777	With food, 2 hr after didanosine	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+795	? 14(0 to ? 31)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+771	Enteric coated capsules	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+788	28	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+781	400 once, with food	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+799	? 29(? 39 to ? 18)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+792	Simultaneously with didanosine	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+768	14	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+785	? 60(? 44 to ? 79)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+778	26	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+796	250 once, with food	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+789	? 10(? 22 to ? 3)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+782	Simultaneously with didanosine	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+800	? 11(? 23 to ? 2)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+793	28	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+769	? 28(? 11 to ? 48)	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+786	250 once, fasted	01243d39-ccf2-43ce-b9bf-b445b9c22c75
+779	? 48(? 25 to ? 76)	01243d39-ccf2-43ce-b9bf-b445b9c22c75

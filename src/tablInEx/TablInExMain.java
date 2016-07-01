@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
@@ -32,6 +34,10 @@ import readers.DailyMedReader;
 import readers.PMCXMLReader;
 import readers.Reader;
 import stats.Statistics;
+
+// Import log4j classes.
+import org.apache.log4j.Logger;
+import org.apache.log4j.BasicConfigurator;
 
 public class TablInExMain {
 
@@ -103,10 +109,11 @@ public class TablInExMain {
 
 	public static Article runReadingloopOneFile(Article a, File file, Class s) {
 		try {
-
+		    System.out.println("File: " + file.getPath());
+		    
 			File f = new File(file.getPath());
-			// Not working with hidden or temp files
-			if (f.isHidden() || file.getPath().endsWith("~"))
+			// Not working with hidde,  temp files, or zip
+			if (f.isHidden() || file.getPath().endsWith("~") || file.getPath().endsWith("zip"))
 				return a;
 
 			Reader r;
@@ -127,6 +134,9 @@ public class TablInExMain {
 	}
 
 	public static void main(String[] args) {
+    	        // Set up a simple configuration that logs on the console.
+	        BasicConfigurator.configure();
+	    
 		String propsFile = "file_properties.xml";
 		try {
 			JWNL.initialize(new FileInputStream(propsFile));
@@ -207,10 +217,6 @@ public class TablInExMain {
 		// classifiers.PragmaticClassifier("Models/SMOPragmaticSupportVsAll.model");
 		// classifiers.PragmaticClassifier pc3 = new
 		// classifiers.PragmaticClassifier("Models/SMOPragmaticFindingsVsAll.model");
-		if (TypeClassify)
-			SimpleTableClassifier.init(TablInExMain.Inpath);
-		if (ComplexClassify)
-			SimpleTableClassifier.initComplexity(Inpath);
 
 		System.out.println("Reading " + path);
 		File Dir = new File(path);
@@ -220,10 +226,7 @@ public class TablInExMain {
 		Article article = new Article("");
 		boolean newrun = true;
 		String LinkedDataFolder = "RDFs";
-		if (ExportLinkedData) {
-			// linkedData = new DecompositionRDFWriter();
-			boolean success = (new File(LinkedDataFolder)).mkdirs();
-		}
+
 		int articlecount = 0;
 		DataBaseAnnotationSaver dbas = null;
 		if(databaseSave){
@@ -291,6 +294,15 @@ public class TablInExMain {
 			}
 			if (Conceptization) {
 				concept.ReadPatterns("patterns");
+			}
+			
+			if (TypeClassify)
+				SimpleTableClassifier.init(TablInExMain.Inpath);
+			if (ComplexClassify)
+				SimpleTableClassifier.initComplexity(Inpath);
+			if (ExportLinkedData) {
+				// linkedData = new DecompositionRDFWriter();
+				boolean success = (new File(LinkedDataFolder)).mkdirs();
 			}
 
 			if (article != null && article.getTables() != null)
@@ -450,7 +462,14 @@ public class TablInExMain {
 		// System.out.println("PMC documents with weight/BMI:"+PMCBMI.size());
 		concept.PrintConceptizationStats();
 		// concept2.PrintConceptizationStats();
-
+		/*PrintStream out = null;
+		try {
+			out = new PrintStream(new FileOutputStream("output.txt"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.setOut(out);*/
 	}
 
 	/**
