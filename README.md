@@ -20,6 +20,8 @@ Some manipulation on dataset (splitting data to training, testing and cross-vali
   
 Database output of this system may be used as input database for the MedCurator project
 
+You need also to checkout [Marvin project](https://github.com/nikolamilosevic86/Marvin) and include reference to it in a project. 
+
 License
 -------
 
