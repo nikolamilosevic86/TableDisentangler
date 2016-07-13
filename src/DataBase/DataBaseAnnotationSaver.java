@@ -21,7 +21,7 @@ import tablInEx.Cell;
 import tablInEx.Table;
 
 public class DataBaseAnnotationSaver {
-	Connection conn = null;
+	public Connection conn = null;
 	Statement stmt = null;
 	ResultSet rs = null;
 	
