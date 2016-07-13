@@ -21,8 +21,9 @@ public class MetaMapAnnotatorMain {
 		// TODO Auto-generated method stub
 		DataBaseAnnotationSaver dbas = new DataBaseAnnotationSaver();
 		try {
+			int CellId = Integer.parseInt(args[0]);
 			Statement stmt = dbas.conn.createStatement();
-			String insertTableSQL = "SELECT * FROM Cell where idCell > 489245"; // change this to be idCell that was available before running the last TableAnnotator load. Currently 489245.
+			String insertTableSQL = "SELECT * FROM Cell where idCell > "+CellId; // change this to be idCell that was available before running the last TableAnnotator load. Currently 489245.
 			ResultSet rs = stmt.executeQuery(insertTableSQL);
 			MarvinSemAnnotator marvin = new MarvinSemAnnotator();
 			while (rs.next()) {
