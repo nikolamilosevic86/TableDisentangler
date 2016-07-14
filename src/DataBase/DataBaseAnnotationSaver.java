@@ -64,6 +64,7 @@ public class DataBaseAnnotationSaver {
 				String connectionUser = database_username;
 				String connectionPassword = database_password;
 				conn = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);	
+				//stmt = conn.createStatement();
 		 }catch(SQLException ex)
 		 {
 			 ex.printStackTrace();
