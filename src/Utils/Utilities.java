@@ -100,7 +100,7 @@ public class Utilities {
 	}
 
 	public static Table FixTablesHeader(Table table) {
-		if (table.cells==null)
+		if (table==null || table.cells==null)
 			return table;
 		try{
 		Cell[][] cells = table.cells;
