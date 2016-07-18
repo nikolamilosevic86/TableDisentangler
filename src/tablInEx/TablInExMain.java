@@ -308,6 +308,9 @@ public class TablInExMain {
 			if (article != null && article.getTables() != null)
 				for (int j = 0; j < article.getTables().length; j++) {
 					Table t = article.getTables()[j];
+					if(t==null){
+						continue;
+					}
 
 					if (t.isHasHeader()) {
 					}
@@ -325,6 +328,7 @@ public class TablInExMain {
 					// tables[i].printTableStatsToFile("TableStats.txt");
 				}
 			}
+			try{
 			if (IEinSQLTial) {
 				tie.ExtractTrialData(article);
 			}
@@ -336,6 +340,10 @@ public class TablInExMain {
 			}
 			if (Conceptization) {
 				concept.processArticle(article);
+			}
+			}catch(Exception ex)
+			{
+				ex.printStackTrace();
 			}
 			Annotate annot = new Annotate();
 			annot.AnnotateArticle(article);
@@ -439,37 +447,13 @@ public class TablInExMain {
 			}
 
 		}
-		// try{
-		// PrintWriter writer = new PrintWriter("PMCBMI3.txt", "UTF-8");
-		// for(int i=0;i<PMCBMI.size();i++)
-		// {
-		// writer.println(PMCBMI.get(i));
-		// }
-		// writer.close();
-		// }catch(Exception ex)
-		// {
-		// ex.printStackTrace();
-		// }
 
-		// MetaMapStats.PrintMMStats();
 
 		Statistics.CalculateStatistics();
 		String stats = Statistics.makeOutputStatisticString();
 
 		System.out.print(stats);
-		// System.out.println("BMI alone:"+BMI);
-		// System.out.println("Number of weight/BMI:"+weight);
-		// System.out.println("PMC documents with weight/BMI:"+PMCBMI.size());
 		concept.PrintConceptizationStats();
-		// concept2.PrintConceptizationStats();
-		/*PrintStream out = null;
-		try {
-			out = new PrintStream(new FileOutputStream("output.txt"));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.setOut(out);*/
 	}
 
 	/**

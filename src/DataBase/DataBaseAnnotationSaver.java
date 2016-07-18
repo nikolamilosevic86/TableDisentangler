@@ -187,6 +187,9 @@ public class DataBaseAnnotationSaver {
 			Table[] Tables = art.getTables();
 			for(int i = 0;i<Tables.length;i++)
 			{
+				if(Tables[i]==null){
+					continue;
+				}
 				Statement stmt6 = conn.createStatement();
 		  		String insertTableSQL6 = "INSERT INTO ArtTable (TableOrder,TableCaption,TableFooter,StructureType,PragmaticType,HasXML,Article_idArticle,Section) VALUES (?,?,?,?,?,?,?,?)";
 		  		PreparedStatement preparedStatement6 = conn.prepareStatement(insertTableSQL6,Statement.RETURN_GENERATED_KEYS);

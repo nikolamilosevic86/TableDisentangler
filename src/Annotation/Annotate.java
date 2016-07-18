@@ -142,6 +142,8 @@ public class Annotate {
 				Element tableEl = doc.createElement("Table");
 				tablesEl.appendChild(tableEl);
 				Table table = tables[i];
+				if(table == null)
+					continue;
 				
 				Element TabOrder = doc.createElement("TableOrder");
 				TabOrder.setTextContent(table.getTable_title());
