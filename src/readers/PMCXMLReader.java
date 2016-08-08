@@ -19,6 +19,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXParseException;
 
 import Utils.Author;
 import Utils.Utilities;
@@ -70,7 +71,9 @@ public class PMCXMLReader implements Reader{
 	    Document parse =  builder.parse(is);
 	    art = ParseMetaData(art, parse, xml);
 		art = ParseTables(art,parse);
-		
+		}catch(SAXParseException sex)
+		{
+			sex.printStackTrace();
 		}catch(Exception ex)
 		{
 			ex.printStackTrace();
