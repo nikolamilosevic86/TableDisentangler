@@ -130,6 +130,9 @@ public class TablInExMain {
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		}
+		catch (Exception ex){
+			ex.printStackTrace();
+		}
 		return a;
 	}
 

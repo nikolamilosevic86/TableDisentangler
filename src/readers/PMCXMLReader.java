@@ -54,7 +54,10 @@ public class PMCXMLReader implements Reader{
 		art.setSource("PMC");
 		try{
 		@SuppressWarnings("resource")
-		BufferedReader reader = new BufferedReader(new FileReader(FileName));
+		FileReader fr = new FileReader(FileName);
+		if(fr==null)
+			return art;
+		BufferedReader reader = new BufferedReader(fr);
 		String line = null;
 		String xml = "";
 		while ((line = reader.readLine()) != null) {
