@@ -215,6 +215,10 @@ public class DataBaseAnnotationSaver {
 	            }
 	                        
 	            Cell[][] cells = Tables[i].cells;
+	            if(cells==null)
+	            {
+	            	continue;
+	            }
 	            for(int j = 0;j<cells.length;j++)
 	            {
 	             for(int k = 0;k<cells[j].length;k++){

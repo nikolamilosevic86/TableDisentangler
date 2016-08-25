@@ -53,6 +53,8 @@ public class PMCXMLReader implements Reader{
 		Article art =  new Article(FileName);
 		art.setSource("PMC");
 		try{
+		if(FileName == null || FileName.equals(""))
+			return art;
 		@SuppressWarnings("resource")
 		FileReader fr = new FileReader(FileName);
 		if(fr==null)
