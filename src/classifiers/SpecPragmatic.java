@@ -84,14 +84,14 @@ public class SpecPragmatic {
 		try {
 			classifier.setModelPath(ClassifierPath);
 			classifier.setTrim(true);
-			String SQL = "SELECT * from arttable where HasXML='yes'";
+			String SQL = "SELECT * from ArtTable where HasXML='yes'";
 			Statement st = conn.createStatement();
 
 			rs = st.executeQuery(SQL);
 			while (rs.next()) {
 				String classification = classifyTable(rs.getInt(1));
 				System.out.println(rs.getInt(1) + "  " + classification);
-				SQL = "Update arttable set SpecPragmatic='" + classification
+				SQL = "Update ArtTable set SpecPragmatic='" + classification
 						+ "' where idTable=" + rs.getInt(1);
 				Statement st2 = conn.createStatement();
 
@@ -134,7 +134,7 @@ public class SpecPragmatic {
 			int containsCriteria = 0;
 			String Caption = "";
 
-			String SQL = "select * from arttable where idTable=" + tableid;
+			String SQL = "select * from ArtTable where idTable=" + tableid;
 			Statement st = conn.createStatement();
 
 			ResultSet rs = st.executeQuery(SQL);
