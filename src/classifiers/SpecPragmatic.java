@@ -25,6 +25,9 @@ public class SpecPragmatic {
 	Connection conn = null;
 	Statement stmt = null;
 	ResultSet rs = null;
+	String connectionUrl;
+	String connectionUser;
+	String connectionPassword;
 
 	public void DataBase() {
 		try {
@@ -37,6 +40,7 @@ public class SpecPragmatic {
 			String database_username = "";
 			String database_password = "";
 			String database_port = "";
+
 			while (line != null) {
 				KeyValue kv = new KeyValue();
 				String[] parts = line.split(";");
@@ -62,10 +66,10 @@ public class SpecPragmatic {
 
 			database_password = database_password.replace("\"", "");
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			String connectionUrl = "jdbc:mysql://" + host + ":" + database_port
+			connectionUrl = "jdbc:mysql://" + host + ":" + database_port
 					+ "/" + database_name;
-			String connectionUser = database_username;
-			String connectionPassword = database_password;
+			connectionUser = database_username;
+			connectionPassword = database_password;
 			conn = DriverManager.getConnection(connectionUrl, connectionUser,
 					connectionPassword);
 		} catch (SQLException ex) {
@@ -81,6 +85,7 @@ public class SpecPragmatic {
 	public void processTables(String pathOfModel) {
 		DataBase();
 		ClassifierPath = pathOfModel;
+		int execCount = 0;
 		try {
 			classifier.setModelPath(ClassifierPath);
 			classifier.setTrim(true);
@@ -96,6 +101,12 @@ public class SpecPragmatic {
 				Statement st2 = conn.createStatement();
 
 				int res = st2.executeUpdate(SQL);
+				execCount ++;
+				if(execCount>10000){
+					conn.close();
+					DataBase();
+					execCount = 0;	
+				}
 
 			}
 		} catch (Exception ex) {
@@ -144,7 +155,7 @@ public class SpecPragmatic {
 				Caption = rs.getString(3);
 			}
 
-			SQL = "select * from cell where Table_idTable=" + tableid;
+			SQL = "select * from Cell where Table_idTable=" + tableid;
 			Statement st2 = conn.createStatement();
 
 			ResultSet rs2 = st2.executeQuery(SQL);
@@ -214,7 +225,7 @@ public class SpecPragmatic {
 			if (Caption.toLowerCase().contains("criteria"))
 				containsCriteria = 1;
 
-			SQL = "select * from annotation inner join cell on cell.idCell=annotation.Cell_idCell where  annotation.AgentName='MetaMap' and AnnotationDescription LIKE '%Symptom%' and Table_idTable="
+			SQL = "select * from Annotation inner join Cell on Cell.idCell=Annotation.Cell_idCell where  Annotation.AgentName='MetaMap' and AnnotationDescription LIKE '%Symptom%' and Table_idTable="
 					+ tableid;
 			Statement st3 = conn.createStatement();
 			ResultSet rs3 = st3.executeQuery(SQL);
