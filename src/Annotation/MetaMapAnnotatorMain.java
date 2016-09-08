@@ -21,12 +21,30 @@ public class MetaMapAnnotatorMain {
 		// TODO Auto-generated method stub
 		DataBaseAnnotationSaver dbas = new DataBaseAnnotationSaver();
 		try {
+			long countCellsNum = 0;
 			int CellId = Integer.parseInt(args[0]);
+			Statement stmt2 = dbas.conn.createStatement();
+			String countCells = "SELECT count(*) FROM Cell where idCell > "+CellId;
+			ResultSet rs1 = stmt2.executeQuery(countCells);
+			System.out.println("Excecuted get count query");
+			while (rs1.next()) {
+				countCellsNum = rs1.getInt(1);
+			}
+			rs1.close();
+			stmt2.close();
+			System.out.println("Got count:"+countCellsNum);
+			//rs1.close();
+			long currentSelected = 0;
+			while(currentSelected<countCellsNum){
+			String insertTableSQL = "SELECT * FROM Cell where idCell > "+CellId+" limit 100000;"; // change this to be idCell that was available before running the last TableAnnotator load. Currently 489245.
+			currentSelected+=100000;
 			Statement stmt = dbas.conn.createStatement();
-			String insertTableSQL = "SELECT * FROM Cell where idCell > "+CellId; // change this to be idCell that was available before running the last TableAnnotator load. Currently 489245.
 			ResultSet rs = stmt.executeQuery(insertTableSQL);
 			MarvinSemAnnotator marvin = new MarvinSemAnnotator();
+			int count = 0;
+			System.out.println("currentSelected:"+currentSelected);
 			while (rs.next()) {
+				System.out.println("In rs.next()");
 				int idCell = rs.getInt("idCell");
 				String CellID = rs.getString("CellID");
 				String CellType = rs.getString("CellType");
@@ -91,9 +109,21 @@ public class MetaMapAnnotatorMain {
 						}
 					}
 				} 
+				count++;
+				
 			  }
-			
+			if(count == 10000)
+			{
+				dbas.CloseDBConnection();
+				dbas = new DataBaseAnnotationSaver();
+				count = 0;
+			}
+			CellId = (int) currentSelected;
+			System.out.println("Processed:"+currentSelected);
+			//rs.close();
+			}
 			dbas.CloseDBConnection();
+			System.out.println("Processed all");
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
