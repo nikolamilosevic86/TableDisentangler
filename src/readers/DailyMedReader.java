@@ -579,7 +579,14 @@ public class DailyMedReader implements Reader {
 							}
 						}
 						// END GET SECTION BY CODE
+						Node prevSibl = sibling;
 						sibling = sibling.getPreviousSibling();
+						if(sibling == null && (tables[tableindex].getSectionOfTable()==null || tables[tableindex].getSectionOfTable()==""))
+						{
+							sibling = prevSibl.getParentNode();
+						}
+						
+						
 					}
 				} catch (Exception ex) {
 					ex.printStackTrace();
