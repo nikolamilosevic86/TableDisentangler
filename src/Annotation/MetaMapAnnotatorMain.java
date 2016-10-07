@@ -110,19 +110,23 @@ public class MetaMapAnnotatorMain {
 					}
 				} 
 				count++;
+				if(count == 10000)
+				{
+					//dbas.CloseDBConnection();
+					//dbas = new DataBaseAnnotationSaver();
+					stmt2 = dbas.conn.createStatement();
+					count = 0;
+				}
 				
 			  }
-			if(count == 10000)
-			{
-				dbas.CloseDBConnection();
-				dbas = new DataBaseAnnotationSaver();
-				count = 0;
-			}
+			dbas.CloseDBConnection();
+			dbas = new DataBaseAnnotationSaver();
+			stmt2 = dbas.conn.createStatement();
 			CellId = (int) currentSelected;
 			System.out.println("Processed:"+currentSelected);
 			//rs.close();
 			}
-			dbas.CloseDBConnection();
+			//dbas.CloseDBConnection();
 			System.out.println("Processed all");
 			
 		} catch (SQLException e) {
