@@ -9,13 +9,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import Main.KeyValue;
 import weka.classifiers.misc.InputMappedClassifier;
 import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.FastVector;
 import weka.core.Instance;
 import weka.core.Instances;
-import Main.KeyValue;
 
 public class SpecPragmatic {
 	private String ClassifierPath = "";
