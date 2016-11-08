@@ -100,6 +100,9 @@ public class Utilities {
 	}
 
 	public static Table FixTablesHeader(Table table) {
+		if (table==null || table.cells==null)
+			return table;
+		try{
 		Cell[][] cells = table.cells;
 		int oldNumofHeaderRows = table.stat.getNum_of_header_rows();
 		int oldNumOfBodyRows = table.stat.getNum_of_body_rows();
@@ -171,8 +174,12 @@ public class Utilities {
 			table.stat.setNum_of_header_rows(oldNumofHeaderRows);
 			table.stat.setNum_of_body_rows(oldNumOfBodyRows);
 		}
-
 		table.setTable_cells(cells);
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		
 
 		return table;
 	}

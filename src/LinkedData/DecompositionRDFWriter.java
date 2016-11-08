@@ -86,6 +86,7 @@ public class DecompositionRDFWriter {
 	
 	public void AddArticle(Article art)
 	{
+		try{
 		if(art ==null)
 			return;
 		Resource Article = model.createResource(ArticleDefault+art.getSpec_id());
@@ -117,6 +118,10 @@ public class DecompositionRDFWriter {
 			model.add(Article,Publisher,art.getPublisher_name());
 		model.add(Root, HasArticle,Article);
 		currentArticle = Article;
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
+		}
 	}
 	
 	public void AddTable(String TableOrderS,String TableCaptionS,String TableTypeS, String TableTypePragmaticS, String TableFooterS,String TableXMLS)

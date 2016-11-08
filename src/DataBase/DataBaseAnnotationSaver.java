@@ -1,3 +1,4 @@
+
 package DataBase;
 
 import java.io.BufferedReader;
@@ -64,6 +65,7 @@ public class DataBaseAnnotationSaver {
 				String connectionUser = database_username;
 				String connectionPassword = database_password;
 				conn = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);	
+				//stmt = conn.createStatement();
 		 }catch(SQLException ex)
 		 {
 			 ex.printStackTrace();
@@ -186,6 +188,9 @@ public class DataBaseAnnotationSaver {
 			Table[] Tables = art.getTables();
 			for(int i = 0;i<Tables.length;i++)
 			{
+				if(Tables[i]==null){
+					continue;
+				}
 				Statement stmt6 = conn.createStatement();
 		  		String insertTableSQL6 = "INSERT INTO ArtTable (TableOrder,TableCaption,TableFooter,StructureType,PragmaticType,HasXML,Article_idArticle,Section) VALUES (?,?,?,?,?,?,?,?)";
 		  		PreparedStatement preparedStatement6 = conn.prepareStatement(insertTableSQL6,Statement.RETURN_GENERATED_KEYS);
@@ -211,6 +216,10 @@ public class DataBaseAnnotationSaver {
 	            }
 	                        
 	            Cell[][] cells = Tables[i].cells;
+	            if(cells==null)
+	            {
+	            	continue;
+	            }
 	            for(int j = 0;j<cells.length;j++)
 	            {
 	             for(int k = 0;k<cells[j].length;k++){
@@ -317,3 +326,4 @@ public class DataBaseAnnotationSaver {
 	}
 
 }
+

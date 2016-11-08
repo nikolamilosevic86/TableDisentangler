@@ -47,14 +47,12 @@ public class DailyMedReader implements Reader {
 		try {
 			File[] files = (new File(FileName)).listFiles();
 			File XMLFile = null;
-			for(File file : files)
-			{
-				if(file.getName().contains(".xml"))
-				{
+			for (File file : files) {
+				if (file.getName().contains(".xml")) {
 					XMLFile = file;
 				}
 			}
-			if (XMLFile==null)
+			if (XMLFile == null)
 				return null;
 			@SuppressWarnings("resource")
 			BufferedReader reader = new BufferedReader(new FileReader(XMLFile));
@@ -89,7 +87,8 @@ public class DailyMedReader implements Reader {
 
 	public LinkedList<Author> GetAuthors(Document parse) {
 		LinkedList<Author> auths = new LinkedList<Author>();
-		NodeList authors = parse.getElementsByTagName("representedOrganization");
+		NodeList authors = parse
+				.getElementsByTagName("representedOrganization");
 		for (int j = 0; j < authors.getLength(); j++) {
 			Author auth = new Author();
 			String surname = "";
@@ -121,7 +120,7 @@ public class DailyMedReader implements Reader {
 		for (int j = 0; j < affis.getLength(); j++) {
 			String affiliation = Utilities.getString(affis.item(j));
 			affilis[j] = affiliation;
-			//System.out.println("Affiliation:" + affiliation);
+			// System.out.println("Affiliation:" + affiliation);
 		}
 		return affilis;
 	}
@@ -140,7 +139,7 @@ public class DailyMedReader implements Reader {
 			if (keywords.item(j).getTextContent().length() > 1) {
 				String Keyword = keywords.item(j).getTextContent().substring(1);
 				keywords_str[j] = Keyword;
-				//System.out.println("Keyword:" + Keyword);
+				// System.out.println("Keyword:" + Keyword);
 			}
 		}
 		return keywords_str;
@@ -182,17 +181,17 @@ public class DailyMedReader implements Reader {
 					|| setId.item(j).getAttributes().getNamedItem("root")
 							.getNodeValue() == null)
 				continue;
-			
+
 			String setIdA = setId.item(j).getAttributes().getNamedItem("root")
 					.getNodeValue();
 			art.setSpec_id(setIdA);
 		}
 		System.out.println(art.getSpec_id());
 
-		
 		try {
 			if (parse.getElementsByTagName("structuredBody").item(0) != null) {
-				String plain_text = parse.getElementsByTagName("structuredBody").item(0)
+				String plain_text = parse
+						.getElementsByTagName("structuredBody").item(0)
 						.getTextContent();
 				plain_text = plain_text.replace("\n", "");
 				plain_text = plain_text.replace("\t", " ");
@@ -262,8 +261,8 @@ public class DailyMedReader implements Reader {
 		List<Node> nl = getChildrenByTagName(tablesxmlNode, "tfoot");
 		if (nl.size() >= 1) {
 			foot = Utilities.getString(nl.get(0));
-			foot  = foot.replaceAll("\\s+", " ");
-			foot = foot.replaceAll("\n+","\n");
+			foot = foot.replaceAll("\\s+", " ");
+			foot = foot.replaceAll("\n+", "\n");
 		}
 		return foot;
 	}
@@ -530,108 +529,136 @@ public class DailyMedReader implements Reader {
 		// Iterate document tables
 		for (int i = 0; i < tablesxml.getLength(); i++) {
 			List<Node> inline_formula = null;
-			
+
 			// check if there is one cell table with reference to the image of
 			// the actual table
 
 			if ((inline_formula != null && inline_formula.size() == 0)
 					|| inline_formula == null) {
-					Statistics.addTable();
-					String label = "Table "+tableindex;
+				Statistics.addTable();
+				String label = "Table " + tableindex;
 
-					tables[tableindex] = new Table(label);
-					tables[tableindex].setDocumentFileName("DailyMed"
-							+ article.getSpec_id());
-					tables[tableindex].setXml(Utilities
-							.CreateXMLStringFromSubNode(tablesxml.item(i)));
-//					System.out.println("Table title:"
-//							+ tables[tableindex].getTable_title());
-					String caption =readTableLabel(tablesxml.item(i)) ;
-					tables[tableindex].setTable_caption(caption);
-					try{
-					Node sibling = tablesxml.item(i).getParentNode().getPreviousSibling();
+				tables[tableindex] = new Table(label);
+				tables[tableindex].setDocumentFileName("DailyMed"
+						+ article.getSpec_id());
+				tables[tableindex].setXml(Utilities
+						.CreateXMLStringFromSubNode(tablesxml.item(i)));
+				// System.out.println("Table title:"
+				// + tables[tableindex].getTable_title());
+				String caption = readTableLabel(tablesxml.item(i));
+				tables[tableindex].setTable_caption(caption);
+				try {
+					Node sibling = tablesxml.item(i).getParentNode()
+							.getPreviousSibling();
 					// System.out.println(sibling.getTextContent());
 					while (sibling != null) {
-					
-					  if(sibling.getNodeName()=="title"){
-						  tables[tableindex].setSectionOfTable(sibling.getTextContent().replaceAll("\n","").replaceAll("\\s{2,}", ""));
-						  break;
-					  }
-					  sibling = sibling.getPreviousSibling();
-					}
-					}catch(Exception ex)
-					{
-						ex.printStackTrace();
-						System.out.println("ERROR: Could not read section");
-					}
-					System.out.println(tables[tableindex].getSectionOfTable());
-					String foot = ReadTableFooter(tablesxml.item(i));
-					tables[tableindex].setTable_footer(foot);
-					System.out.println("Foot: " + foot);
-
-					// count rows
-					int headsize = 0;
-					List<Node> thead = null;
-					if (tablesxml.getLength() > 0) {
-						thead = getChildrenByTagName(tablesxml.item(i), "thead");
-						headsize = thead.size();
-					}
-					List<Node> rowshead = null;
-					if (headsize > 0) {
-						rowshead = getChildrenByTagName(thead.get(0), "tr");
-					} else {
-						tables[tableindex].setHasHeader(false);
-						Statistics.TableWithoutHead();
-					}
-					List<Node> tbody = getChildrenByTagName(tablesxml.item(i), "tbody");
-					if (tbody.size() == 0) {
-						Statistics.TableWithoutBody();
-						tables[tableindex].setHasBody(false);
-						tableindex++;
-						continue;
-					}
-					List<Node> rowsbody = getChildrenByTagName(tbody.get(0),
-							"tr");
-					// int num_of_rows = headrowscount+rowsbody.size();
-					int headrowscount = 0;
-					if (rowshead != null)
-						headrowscount = rowshead.size();
-					int num_of_rows = rowsbody.size() + headrowscount;
-					int cols = CountColumns(rowsbody, rowshead);
-
-					int num_of_columns = cols;
-					tables[tableindex].setNum_of_columns(num_of_columns);
-					tables[tableindex].setNum_of_rows(num_of_rows);
-					tables[tableindex].CreateCells(num_of_columns, num_of_rows);
-					Cell[][] cells = tables[tableindex].getTable_cells();
-					tables[tableindex] = ProcessTableHeader(article,
-							tables[tableindex], cells, rowshead, headrowscount,
-							num_of_columns);
-					Statistics.addColumn(num_of_columns);
-					Statistics.addRow(num_of_rows);
-					tables[tableindex] = ProcessTableBody(article,
-							tables[tableindex], cells, rowsbody, headrowscount,
-							num_of_columns);
-					tables[tableindex].setTable_cells(cells);
-
-					// Print cells
-					for (int j = 0; j < cells.length; j++) {
-						for (int k = 0; k < cells[j].length; k++) {
-							System.out.println(j + "," + k + ": "
-									+ cells[j][k].getCell_content());
+						boolean sectionFound = false;
+						// BEGIN GET SECTION BY NAME
+						// if(sibling.getNodeName()=="title"){
+						// tables[tableindex].setSectionOfTable(sibling.getTextContent().replaceAll("\n","").replaceAll("\\s{2,}",
+						// ""));
+						// break;
+						// }
+						// END OF GET SECTION BY NAME
+						// BEGIN GET SECTION BY CODE
+						if (sibling.getNodeName() == "code") {
+							for (int a = 0; a < sibling.getAttributes()
+									.getLength(); a++) {
+								if (sibling.getAttributes().item(a)
+										.getNodeName().equals("code")) {
+									tables[tableindex]
+											.setSectionOfTable(sibling
+													.getAttributes().item(a)
+													.getNodeValue());
+									sectionFound = true;
+									break;
+								}
+							}
+							if (sectionFound) {
+								break;
+							}
 						}
+						// END GET SECTION BY CODE
+						Node prevSibl = sibling;
+						sibling = sibling.getPreviousSibling();
+						if(sibling == null && (tables[tableindex].getSectionOfTable()==null || tables[tableindex].getSectionOfTable()==""))
+						{
+							sibling = prevSibl.getParentNode();
+						}
+						
+						
 					}
-					System.out.println("Number of rows: " + num_of_rows);
-					System.out.println("Number of columns: " + num_of_columns);
-					tableindex++;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+					System.out.println("ERROR: Could not read section");
 				}
-			}
-			// List<Node> inlinegraphic = getChildrenByTagName(tb.get(0),
-			// "inline-graphic");
+				System.out.println(tables[tableindex].getSectionOfTable());
+				String foot = ReadTableFooter(tablesxml.item(i));
+				tables[tableindex].setTable_footer(foot);
+				System.out.println("Foot: " + foot);
 
-	
+				// count rows
+				int headsize = 0;
+				List<Node> thead = null;
+				if (tablesxml.getLength() > 0) {
+					thead = getChildrenByTagName(tablesxml.item(i), "thead");
+					headsize = thead.size();
+				}
+				List<Node> rowshead = null;
+				if (headsize > 0) {
+					rowshead = getChildrenByTagName(thead.get(0), "tr");
+				} else {
+					tables[tableindex].setHasHeader(false);
+					Statistics.TableWithoutHead();
+				}
+				List<Node> tbody = getChildrenByTagName(tablesxml.item(i),
+						"tbody");
+				if (tbody.size() == 0) {
+					Statistics.TableWithoutBody();
+					tables[tableindex].setHasBody(false);
+					tableindex++;
+					continue;
+				}
+				List<Node> rowsbody = getChildrenByTagName(tbody.get(0), "tr");
+				// int num_of_rows = headrowscount+rowsbody.size();
+				int headrowscount = 0;
+				if (rowshead != null)
+					headrowscount = rowshead.size();
+				int num_of_rows = rowsbody.size() + headrowscount;
+				int cols = CountColumns(rowsbody, rowshead);
+
+				int num_of_columns = cols;
+				tables[tableindex].setNum_of_columns(num_of_columns);
+				tables[tableindex].setNum_of_rows(num_of_rows);
+				tables[tableindex].CreateCells(num_of_columns, num_of_rows);
+				Cell[][] cells = tables[tableindex].getTable_cells();
+				tables[tableindex] = ProcessTableHeader(article,
+						tables[tableindex], cells, rowshead, headrowscount,
+						num_of_columns);
+				Statistics.addColumn(num_of_columns);
+				Statistics.addRow(num_of_rows);
+				tables[tableindex] = ProcessTableBody(article,
+						tables[tableindex], cells, rowsbody, headrowscount,
+						num_of_columns);
+				tables[tableindex].setTable_cells(cells);
+
+				// Print cells
+				for (int j = 0; j < cells.length; j++) {
+					for (int k = 0; k < cells[j].length; k++) {
+						System.out.println(j + "," + k + ": "
+								+ cells[j][k].getCell_content());
+					}
+				}
+				System.out.println("Number of rows: " + num_of_rows);
+				System.out.println("Number of columns: " + num_of_columns);
+				tableindex++;
+			}
+		}
+		// List<Node> inlinegraphic = getChildrenByTagName(tb.get(0),
+		// "inline-graphic");
+
 		// end for tables
-			// if(TablInExMain.TypeClassify){
+		// if(TablInExMain.TypeClassify){
 		// for(int i = 0;i<numOfTables;i++)
 		// {
 		// SimpleTableClassifier.ClassifyTableByType(tables[i]);
