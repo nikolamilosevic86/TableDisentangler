@@ -35,7 +35,7 @@ public class RefTextExtractor {
 					if(sentence.contains("ref-type=\"table\"")){
 						sentence = sentence.replaceAll("\\<[^>]*>","");
 						System.out.println(sentence);
-						 String pattern = "Table[ ]*[\\dIV]+";
+						 String pattern = "Table[s ]*[\\dIV,]+";
 						 if(sentence.length()>2200)
 						 {
 							 sentence=sentence.substring(0, 2199);
@@ -47,13 +47,41 @@ public class RefTextExtractor {
 					      Matcher m = r.matcher(sentence);
 					      int count = 0;
 					      while (m.find())
-					    	    count++;
+					      {
+					    	  String match = m.group(0);
+					    	  if(match.contains(",")){
+					    		  String newVal ="";
+					    		  String[] tokens = match.split("[ ,]");
+					    		  String tabToken = "";
+					    		  for(int k=0;k<tokens.length;k++)
+					    		  {
+					    			  String token = tokens[k];
+					    			  if(token.equals("Tables"))
+					    			  {
+					    				  token = "Table";
+					    			  }
+					    			  if(k==0)
+					    			  {
+					    				  tabToken = token;
+					    			  }
+					    			  else{
+					    				  newVal+=tabToken+" "+token+",";
+					    			  }
+					    		  }
+					    		  sentence=sentence.replace(match, newVal);
+					    	  }
+					    	 
+					      }
+					      m = r.matcher(sentence);
+					      if(m.find())
+					    	  count++;
 					      m.reset();
 				    	  
 					      for(int j=0;j<count;j++)
 					      {
 					    	  m.find();
 					    	  TableOrder = m.group(0);
+					    	  TableOrder=TableOrder.replace(",", "");
 					    	  String SelectTab = "Select * from arttable where article_idarticle="+Articleid+" and TableOrder=\'"+TableOrder+"\'";
 					    	  Statement stmt3 = dbas.conn.createStatement();
 					    	  ResultSet rs2 = stmt3.executeQuery(SelectTab);
