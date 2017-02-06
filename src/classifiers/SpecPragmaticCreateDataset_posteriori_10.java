@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
 
 import Main.KeyValue;
 import weka.classifiers.misc.InputMappedClassifier;
@@ -18,7 +19,7 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ArffSaver;
 
-public class SpecPragmaticCreateDataset_posteriori {
+public class SpecPragmaticCreateDataset_posteriori_10 {
 
 	Connection conn = null;
 	Statement stmt = null;
@@ -28,9 +29,11 @@ public class SpecPragmaticCreateDataset_posteriori {
 	String connectionPassword;
 
 	public static void main(String[] args) {
-		SpecPragmaticCreateDataset_posteriori sp = new SpecPragmaticCreateDataset_posteriori();
-		sp.ProcessTables("NotInteresting");
+		SpecPragmaticCreateDataset_posteriori_10 sp = new SpecPragmaticCreateDataset_posteriori_10();
+		int[] table_array = {8929,5409,3286,3623,3020,3357,8266,1887,2914,5230,9895,9271,11081,5396,12031,8454,3472,2588,2186,6461,12513,4319,11237,169,262,2544,6936,7798,4505,4787,585,10154,4090,7574,1282,10317,11573,4838,9745,795,5905,8141,6466,1496,8121,10681,12193,5049,4429,7906,12621,7455,1463,5753,8516,604,1645,6212,7154,4271,5652,3777,4949,11019,6066,4120,821,5287,6403,1940,3421,845,1074,3236,11668,12249,7641,3219,4176,6310,7979,10274,1939,151,8912,10566,12663,2904,2747,5175,10258,9669,11743,3469,9870,7296,6597,1941,6677,538,9700,3505,7815,2473,6435,3717,11334,4220,11252,11300,1331,4151,5556,4875,7155,3041,4234,7712,12040,6712,8259,5729,481,8377,4092,8947,9528,2538,1328,1773,3619,1034,11430,2922,8663,10376,2647,4449,3704,6338,7500,5417,879,3493,11560,8416,8513,4243,9400,4037,4919,11843,7535,5707,2015,1257,4075,5919,647,6539,6886,7635,6732,8662,2207,3573,7060,8799,8198,1018,498,3962,411,4018,8485,801,7224,3168,5354,8369,4493,10290,3614,6877,7091,132,2090,10429,7348,1859,732,6385,424,220,11978,1136,546,5765,2883,8543,8666,7947,16,4519,8076,11375,12771,3101,5080,1808,1493,2050,11525,5318,3821};
+		sp.ProcessTables(table_array);
 	}
+	
 	
 	public Instances CreateInstances(){
 		Attribute PMCAttribute = new Attribute("PMC");
@@ -93,46 +96,7 @@ public class SpecPragmaticCreateDataset_posteriori {
 		Attribute caption_topic8= new Attribute("Caption_topic8");
 		Attribute caption_topic9= new Attribute("Caption_topic9");
 		Attribute caption_topic10= new Attribute("Caption_topic10");
-		Attribute caption_topic11= new Attribute("Caption_topic11");
-		Attribute caption_topic12= new Attribute("Caption_topic12");
-		Attribute caption_topic13= new Attribute("Caption_topic13");
-		Attribute caption_topic14= new Attribute("Caption_topic14");
-		Attribute caption_topic15= new Attribute("Caption_topic15");
-		Attribute caption_topic16= new Attribute("Caption_topic16");
-		Attribute caption_topic17= new Attribute("Caption_topic17");
-		Attribute caption_topic18= new Attribute("Caption_topic18");
-		Attribute caption_topic19= new Attribute("Caption_topic19");
-		Attribute caption_topic20= new Attribute("Caption_topic20");
-		Attribute caption_topic21= new Attribute("Caption_topic21");
-		Attribute caption_topic22= new Attribute("Caption_topic22");
-		Attribute caption_topic23= new Attribute("Caption_topic23");
-		Attribute caption_topic24= new Attribute("Caption_topic24");
-		Attribute caption_topic25= new Attribute("Caption_topic25");
-		Attribute caption_topic26= new Attribute("Caption_topic26");
-		Attribute caption_topic27= new Attribute("Caption_topic27");
-		Attribute caption_topic28= new Attribute("Caption_topic28");
-		Attribute caption_topic29= new Attribute("Caption_topic29");
-		Attribute caption_topic30= new Attribute("Caption_topic30");
-		Attribute caption_topic31= new Attribute("Caption_topic31");
-		Attribute caption_topic32= new Attribute("Caption_topic32");
-		Attribute caption_topic33= new Attribute("Caption_topic33");
-		Attribute caption_topic34= new Attribute("Caption_topic34");
-		Attribute caption_topic35= new Attribute("Caption_topic35");
-		Attribute caption_topic36= new Attribute("Caption_topic36");
-		Attribute caption_topic37= new Attribute("Caption_topic37");
-		Attribute caption_topic38= new Attribute("Caption_topic38");
-		Attribute caption_topic39= new Attribute("Caption_topic39");
-		Attribute caption_topic40= new Attribute("Caption_topic40");
-		Attribute caption_topic41= new Attribute("Caption_topic41");
-		Attribute caption_topic42= new Attribute("Caption_topic42");
-		Attribute caption_topic43= new Attribute("Caption_topic43");
-		Attribute caption_topic44= new Attribute("Caption_topic44");
-		Attribute caption_topic45= new Attribute("Caption_topic45");
-		Attribute caption_topic46= new Attribute("Caption_topic46");
-		Attribute caption_topic47= new Attribute("Caption_topic47");
-		Attribute caption_topic48= new Attribute("Caption_topic48");
-		Attribute caption_topic49= new Attribute("Caption_topic49");
-		Attribute caption_topic50= new Attribute("Caption_topic50");
+
 		Attribute sentence_topic1= new Attribute("sentence_topic1");
 		Attribute sentence_topic2= new Attribute("sentence_topic2");
 		Attribute sentence_topic3= new Attribute("sentence_topic3");
@@ -143,46 +107,7 @@ public class SpecPragmaticCreateDataset_posteriori {
 		Attribute sentence_topic8= new Attribute("sentence_topic8");
 		Attribute sentence_topic9= new Attribute("sentence_topic9");
 		Attribute sentence_topic10= new Attribute("sentence_topic10");
-		Attribute sentence_topic11= new Attribute("sentence_topic11");
-		Attribute sentence_topic12= new Attribute("sentence_topic12");
-		Attribute sentence_topic13= new Attribute("sentence_topic13");
-		Attribute sentence_topic14= new Attribute("sentence_topic14");
-		Attribute sentence_topic15= new Attribute("sentence_topic15");
-		Attribute sentence_topic16= new Attribute("sentence_topic16");
-		Attribute sentence_topic17= new Attribute("sentence_topic17");
-		Attribute sentence_topic18= new Attribute("sentence_topic18");
-		Attribute sentence_topic19= new Attribute("sentence_topic19");
-		Attribute sentence_topic20= new Attribute("sentence_topic20");
-		Attribute sentence_topic21= new Attribute("sentence_topic21");
-		Attribute sentence_topic22= new Attribute("sentence_topic22");
-		Attribute sentence_topic23= new Attribute("sentence_topic23");
-		Attribute sentence_topic24= new Attribute("sentence_topic24");
-		Attribute sentence_topic25= new Attribute("sentence_topic25");
-		Attribute sentence_topic26= new Attribute("sentence_topic26");
-		Attribute sentence_topic27= new Attribute("sentence_topic27");
-		Attribute sentence_topic28= new Attribute("sentence_topic28");
-		Attribute sentence_topic29= new Attribute("sentence_topic29");
-		Attribute sentence_topic30= new Attribute("sentence_topic30");
-		Attribute sentence_topic31= new Attribute("sentence_topic31");
-		Attribute sentence_topic32= new Attribute("sentence_topic32");
-		Attribute sentence_topic33= new Attribute("sentence_topic33");
-		Attribute sentence_topic34= new Attribute("sentence_topic34");
-		Attribute sentence_topic35= new Attribute("sentence_topic35");
-		Attribute sentence_topic36= new Attribute("sentence_topic36");
-		Attribute sentence_topic37= new Attribute("sentence_topic37");
-		Attribute sentence_topic38= new Attribute("sentence_topic38");
-		Attribute sentence_topic39= new Attribute("sentence_topic39");
-		Attribute sentence_topic40= new Attribute("sentence_topic40");
-		Attribute sentence_topic41= new Attribute("sentence_topic41");
-		Attribute sentence_topic42= new Attribute("sentence_topic42");
-		Attribute sentence_topic43= new Attribute("sentence_topic43");
-		Attribute sentence_topic44= new Attribute("sentence_topic44");
-		Attribute sentence_topic45= new Attribute("sentence_topic45");
-		Attribute sentence_topic46= new Attribute("sentence_topic46");
-		Attribute sentence_topic47= new Attribute("sentence_topic47");
-		Attribute sentence_topic48= new Attribute("sentence_topic48");
-		Attribute sentence_topic49= new Attribute("sentence_topic49");
-		Attribute sentence_topic50= new Attribute("sentence_topic50");
+
 		FastVector fvClassVal = new FastVector(4);
 		// AdverseEvent,InclusionExclusion,DontCare,BaselineCharacteristic
 		fvClassVal.addElement("AdverseEvent");
@@ -191,7 +116,7 @@ public class SpecPragmaticCreateDataset_posteriori {
 		fvClassVal.addElement("BaselineCharacteristic");
 		Attribute ClassAttribute = new Attribute("clas", fvClassVal);
 		// Declare the feature vector
-		FastVector fvWekaAttributes = new FastVector(128);
+		FastVector fvWekaAttributes = new FastVector(48);
 		fvWekaAttributes.addElement(PMCAttribute);
 		fvWekaAttributes.addElement(TableIDAttribute);
 		fvWekaAttributes.addElement(NoRowsAttribute);
@@ -238,46 +163,7 @@ public class SpecPragmaticCreateDataset_posteriori {
 		fvWekaAttributes.addElement(caption_topic8);
 		fvWekaAttributes.addElement(caption_topic9);
 		fvWekaAttributes.addElement(caption_topic10);
-		fvWekaAttributes.addElement(caption_topic11);
-		fvWekaAttributes.addElement(caption_topic12);
-		fvWekaAttributes.addElement(caption_topic13);
-		fvWekaAttributes.addElement(caption_topic14);
-		fvWekaAttributes.addElement(caption_topic15);
-		fvWekaAttributes.addElement(caption_topic16);
-		fvWekaAttributes.addElement(caption_topic17);
-		fvWekaAttributes.addElement(caption_topic18);
-		fvWekaAttributes.addElement(caption_topic19);
-		fvWekaAttributes.addElement(caption_topic20);
-		fvWekaAttributes.addElement(caption_topic21);
-		fvWekaAttributes.addElement(caption_topic22);
-		fvWekaAttributes.addElement(caption_topic23);
-		fvWekaAttributes.addElement(caption_topic24);
-		fvWekaAttributes.addElement(caption_topic25);
-		fvWekaAttributes.addElement(caption_topic26);
-		fvWekaAttributes.addElement(caption_topic27);
-		fvWekaAttributes.addElement(caption_topic28);
-		fvWekaAttributes.addElement(caption_topic29);
-		fvWekaAttributes.addElement(caption_topic30);
-		fvWekaAttributes.addElement(caption_topic31);
-		fvWekaAttributes.addElement(caption_topic32);
-		fvWekaAttributes.addElement(caption_topic33);
-		fvWekaAttributes.addElement(caption_topic34);
-		fvWekaAttributes.addElement(caption_topic35);
-		fvWekaAttributes.addElement(caption_topic36);
-		fvWekaAttributes.addElement(caption_topic37);
-		fvWekaAttributes.addElement(caption_topic38);
-		fvWekaAttributes.addElement(caption_topic39);
-		fvWekaAttributes.addElement(caption_topic40);
-		fvWekaAttributes.addElement(caption_topic41);
-		fvWekaAttributes.addElement(caption_topic42);
-		fvWekaAttributes.addElement(caption_topic43);
-		fvWekaAttributes.addElement(caption_topic44);
-		fvWekaAttributes.addElement(caption_topic45);
-		fvWekaAttributes.addElement(caption_topic46);
-		fvWekaAttributes.addElement(caption_topic47);
-		fvWekaAttributes.addElement(caption_topic48);
-		fvWekaAttributes.addElement(caption_topic49);
-		fvWekaAttributes.addElement(caption_topic50);
+		
 		
 		fvWekaAttributes.addElement(sentence_topic1);
 		fvWekaAttributes.addElement(sentence_topic2);
@@ -289,62 +175,24 @@ public class SpecPragmaticCreateDataset_posteriori {
 		fvWekaAttributes.addElement(sentence_topic8);
 		fvWekaAttributes.addElement(sentence_topic9);
 		fvWekaAttributes.addElement(sentence_topic10);
-		fvWekaAttributes.addElement(sentence_topic11);
-		fvWekaAttributes.addElement(sentence_topic12);
-		fvWekaAttributes.addElement(sentence_topic13);
-		fvWekaAttributes.addElement(sentence_topic14);
-		fvWekaAttributes.addElement(sentence_topic15);
-		fvWekaAttributes.addElement(sentence_topic16);
-		fvWekaAttributes.addElement(sentence_topic17);
-		fvWekaAttributes.addElement(sentence_topic18);
-		fvWekaAttributes.addElement(sentence_topic19);
-		fvWekaAttributes.addElement(sentence_topic20);
-		fvWekaAttributes.addElement(sentence_topic21);
-		fvWekaAttributes.addElement(sentence_topic22);
-		fvWekaAttributes.addElement(sentence_topic23);
-		fvWekaAttributes.addElement(sentence_topic24);
-		fvWekaAttributes.addElement(sentence_topic25);
-		fvWekaAttributes.addElement(sentence_topic26);
-		fvWekaAttributes.addElement(sentence_topic27);
-		fvWekaAttributes.addElement(sentence_topic28);
-		fvWekaAttributes.addElement(sentence_topic29);
-		fvWekaAttributes.addElement(sentence_topic30);
-		fvWekaAttributes.addElement(sentence_topic31);
-		fvWekaAttributes.addElement(sentence_topic32);
-		fvWekaAttributes.addElement(sentence_topic33);
-		fvWekaAttributes.addElement(sentence_topic34);
-		fvWekaAttributes.addElement(sentence_topic35);
-		fvWekaAttributes.addElement(sentence_topic36);
-		fvWekaAttributes.addElement(sentence_topic37);
-		fvWekaAttributes.addElement(sentence_topic38);
-		fvWekaAttributes.addElement(sentence_topic39);
-		fvWekaAttributes.addElement(sentence_topic40);
-		fvWekaAttributes.addElement(sentence_topic41);
-		fvWekaAttributes.addElement(sentence_topic42);
-		fvWekaAttributes.addElement(sentence_topic43);
-		fvWekaAttributes.addElement(sentence_topic44);
-		fvWekaAttributes.addElement(sentence_topic45);
-		fvWekaAttributes.addElement(sentence_topic46);
-		fvWekaAttributes.addElement(sentence_topic47);
-		fvWekaAttributes.addElement(sentence_topic48);
-		fvWekaAttributes.addElement(sentence_topic49);
-		fvWekaAttributes.addElement(sentence_topic50);
+
 		fvWekaAttributes.addElement(ClassAttribute);
 		Instances Instances = new Instances("Rel", fvWekaAttributes, 0);
-		Instances.setClassIndex(127);
+		Instances.setClassIndex(47);
 		return Instances;
 	}
 	
-	public void ProcessTables(String tableType)
+	public void ProcessTables(int[] table_array)
 	{
 		
 		DataBase();
 		int execCount = 0;
 		try {
-			String SQL = "SELECT * from ArtTable where HasXML='yes' and specPragmatic='"+tableType+"' order by RAND() limit 200";
+			String SQL = "SELECT * from ArtTable where HasXML='yes' and idTable in "+Arrays.toString(table_array);
+			SQL = SQL.replace("[", "(").replace("]", ")");
 			Statement st = conn.createStatement();
 			Instances instances = CreateInstances();
-			FastVector fvWekaAttributes = new FastVector(128);
+			FastVector fvWekaAttributes = new FastVector(48);
 			rs = st.executeQuery(SQL);
 			while (rs.next()) {
 				Instance iExample = processTable(rs.getInt(1));
@@ -362,7 +210,7 @@ public class SpecPragmaticCreateDataset_posteriori {
 			System.out.println(instances.toString());
 			ArffSaver saver = new ArffSaver();
 			 saver.setInstances(instances);
-			 saver.setFile(new File("spptest.arff"));
+			 saver.setFile(new File("spptest10.arff"));
 			 //saver.setDestination(new File("./data/test.arff"));   // **not** necessary in 3.5.4 and later
 			 saver.writeBatch();
 		} catch (Exception ex) {
@@ -458,8 +306,8 @@ public class SpecPragmaticCreateDataset_posteriori {
 			String WholeSuperRow="";
 			String WholeData = "";
 			int PMC = 0;
-			int[] caption_topics = new  int[50];
-			int[] ref_sentence_topic = new int[50];
+			int[] caption_topics = new  int[10];
+			int[] ref_sentence_topic = new int[10];
 
 			String SQL = "select * from ArtTable inner join article on article.idArticle=ArtTable.Article_idArticle where idTable=" + tableid;
 			Statement st = conn.createStatement();
@@ -503,7 +351,7 @@ public class SpecPragmaticCreateDataset_posteriori {
 						WholeSuperRow+="; "+rs3.getString(13).toLowerCase();
 					}
 				}
-				String SQL4 = "select * from topics_captions where Table_id=" + tableid;
+				String SQL4 = "select * from caption_topic10 where SentenceID=" + tableid;
 				Statement st4 = conn.createStatement();
 
 				ResultSet rs4 = st4.executeQuery(SQL4);
@@ -512,7 +360,7 @@ public class SpecPragmaticCreateDataset_posteriori {
 					caption_topics[Integer.parseInt(num)]=1;
 				}
 				
-				String SQL5 = "SELECT * FROM table_db.tablesentences inner join sentence_topic on idTableSentences = SentenceID where Table_idTable=" + tableid;
+				String SQL5 = "SELECT * FROM table_db.tablesentences inner join sentence_topic10 on idTableSentences = SentenceID where Table_idTable=" + tableid;
 				Statement st5 = conn.createStatement();
 
 				ResultSet rs5 = st5.executeQuery(SQL5);
@@ -567,7 +415,7 @@ public class SpecPragmaticCreateDataset_posteriori {
 			if (Caption.toLowerCase().contains("trial"))
 				containsBaseline = 1;
 			if (Caption.toLowerCase().contains("inclusion"))
-				ContainsInclusion = 1;
+				containsBaseline = 1;
 			if (Caption.toLowerCase().contains("exclusion"))
 				ContainsExclusion = 1;
 			if (Caption.toLowerCase().contains("adverse"))
@@ -662,46 +510,7 @@ public class SpecPragmaticCreateDataset_posteriori {
 			Attribute caption_topic8= new Attribute("Caption_topic8");
 			Attribute caption_topic9= new Attribute("Caption_topic9");
 			Attribute caption_topic10= new Attribute("Caption_topic10");
-			Attribute caption_topic11= new Attribute("Caption_topic11");
-			Attribute caption_topic12= new Attribute("Caption_topic12");
-			Attribute caption_topic13= new Attribute("Caption_topic13");
-			Attribute caption_topic14= new Attribute("Caption_topic14");
-			Attribute caption_topic15= new Attribute("Caption_topic15");
-			Attribute caption_topic16= new Attribute("Caption_topic16");
-			Attribute caption_topic17= new Attribute("Caption_topic17");
-			Attribute caption_topic18= new Attribute("Caption_topic18");
-			Attribute caption_topic19= new Attribute("Caption_topic19");
-			Attribute caption_topic20= new Attribute("Caption_topic20");
-			Attribute caption_topic21= new Attribute("Caption_topic21");
-			Attribute caption_topic22= new Attribute("Caption_topic22");
-			Attribute caption_topic23= new Attribute("Caption_topic23");
-			Attribute caption_topic24= new Attribute("Caption_topic24");
-			Attribute caption_topic25= new Attribute("Caption_topic25");
-			Attribute caption_topic26= new Attribute("Caption_topic26");
-			Attribute caption_topic27= new Attribute("Caption_topic27");
-			Attribute caption_topic28= new Attribute("Caption_topic28");
-			Attribute caption_topic29= new Attribute("Caption_topic29");
-			Attribute caption_topic30= new Attribute("Caption_topic30");
-			Attribute caption_topic31= new Attribute("Caption_topic31");
-			Attribute caption_topic32= new Attribute("Caption_topic32");
-			Attribute caption_topic33= new Attribute("Caption_topic33");
-			Attribute caption_topic34= new Attribute("Caption_topic34");
-			Attribute caption_topic35= new Attribute("Caption_topic35");
-			Attribute caption_topic36= new Attribute("Caption_topic36");
-			Attribute caption_topic37= new Attribute("Caption_topic37");
-			Attribute caption_topic38= new Attribute("Caption_topic38");
-			Attribute caption_topic39= new Attribute("Caption_topic39");
-			Attribute caption_topic40= new Attribute("Caption_topic40");
-			Attribute caption_topic41= new Attribute("Caption_topic41");
-			Attribute caption_topic42= new Attribute("Caption_topic42");
-			Attribute caption_topic43= new Attribute("Caption_topic43");
-			Attribute caption_topic44= new Attribute("Caption_topic44");
-			Attribute caption_topic45= new Attribute("Caption_topic45");
-			Attribute caption_topic46= new Attribute("Caption_topic46");
-			Attribute caption_topic47= new Attribute("Caption_topic47");
-			Attribute caption_topic48= new Attribute("Caption_topic48");
-			Attribute caption_topic49= new Attribute("Caption_topic49");
-			Attribute caption_topic50= new Attribute("Caption_topic50");
+			
 			Attribute sentence_topic1= new Attribute("sentence_topic1");
 			Attribute sentence_topic2= new Attribute("sentence_topic2");
 			Attribute sentence_topic3= new Attribute("sentence_topic3");
@@ -712,46 +521,7 @@ public class SpecPragmaticCreateDataset_posteriori {
 			Attribute sentence_topic8= new Attribute("sentence_topic8");
 			Attribute sentence_topic9= new Attribute("sentence_topic9");
 			Attribute sentence_topic10= new Attribute("sentence_topic10");
-			Attribute sentence_topic11= new Attribute("sentence_topic11");
-			Attribute sentence_topic12= new Attribute("sentence_topic12");
-			Attribute sentence_topic13= new Attribute("sentence_topic13");
-			Attribute sentence_topic14= new Attribute("sentence_topic14");
-			Attribute sentence_topic15= new Attribute("sentence_topic15");
-			Attribute sentence_topic16= new Attribute("sentence_topic16");
-			Attribute sentence_topic17= new Attribute("sentence_topic17");
-			Attribute sentence_topic18= new Attribute("sentence_topic18");
-			Attribute sentence_topic19= new Attribute("sentence_topic19");
-			Attribute sentence_topic20= new Attribute("sentence_topic20");
-			Attribute sentence_topic21= new Attribute("sentence_topic21");
-			Attribute sentence_topic22= new Attribute("sentence_topic22");
-			Attribute sentence_topic23= new Attribute("sentence_topic23");
-			Attribute sentence_topic24= new Attribute("sentence_topic24");
-			Attribute sentence_topic25= new Attribute("sentence_topic25");
-			Attribute sentence_topic26= new Attribute("sentence_topic26");
-			Attribute sentence_topic27= new Attribute("sentence_topic27");
-			Attribute sentence_topic28= new Attribute("sentence_topic28");
-			Attribute sentence_topic29= new Attribute("sentence_topic29");
-			Attribute sentence_topic30= new Attribute("sentence_topic30");
-			Attribute sentence_topic31= new Attribute("sentence_topic31");
-			Attribute sentence_topic32= new Attribute("sentence_topic32");
-			Attribute sentence_topic33= new Attribute("sentence_topic33");
-			Attribute sentence_topic34= new Attribute("sentence_topic34");
-			Attribute sentence_topic35= new Attribute("sentence_topic35");
-			Attribute sentence_topic36= new Attribute("sentence_topic36");
-			Attribute sentence_topic37= new Attribute("sentence_topic37");
-			Attribute sentence_topic38= new Attribute("sentence_topic38");
-			Attribute sentence_topic39= new Attribute("sentence_topic39");
-			Attribute sentence_topic40= new Attribute("sentence_topic40");
-			Attribute sentence_topic41= new Attribute("sentence_topic41");
-			Attribute sentence_topic42= new Attribute("sentence_topic42");
-			Attribute sentence_topic43= new Attribute("sentence_topic43");
-			Attribute sentence_topic44= new Attribute("sentence_topic44");
-			Attribute sentence_topic45= new Attribute("sentence_topic45");
-			Attribute sentence_topic46= new Attribute("sentence_topic46");
-			Attribute sentence_topic47= new Attribute("sentence_topic47");
-			Attribute sentence_topic48= new Attribute("sentence_topic48");
-			Attribute sentence_topic49= new Attribute("sentence_topic49");
-			Attribute sentence_topic50= new Attribute("sentence_topic50");
+			
 			FastVector fvClassVal = new FastVector(4);
 			// AdverseEvent,InclusionExclusion,DontCare,BaselineCharacteristic
 			fvClassVal.addElement("AdverseEvent");
@@ -760,7 +530,7 @@ public class SpecPragmaticCreateDataset_posteriori {
 			fvClassVal.addElement("BaselineCharacteristic");
 			Attribute ClassAttribute = new Attribute("clas", fvClassVal);
 			// Declare the feature vector
-			FastVector fvWekaAttributes = new FastVector(128);
+			FastVector fvWekaAttributes = new FastVector(48);
 			
 			fvWekaAttributes.addElement(PMCAttribute);
 			fvWekaAttributes.addElement(TableIDAttribute);
@@ -808,46 +578,7 @@ public class SpecPragmaticCreateDataset_posteriori {
 			fvWekaAttributes.addElement(caption_topic8);
 			fvWekaAttributes.addElement(caption_topic9);
 			fvWekaAttributes.addElement(caption_topic10);
-			fvWekaAttributes.addElement(caption_topic11);
-			fvWekaAttributes.addElement(caption_topic12);
-			fvWekaAttributes.addElement(caption_topic13);
-			fvWekaAttributes.addElement(caption_topic14);
-			fvWekaAttributes.addElement(caption_topic15);
-			fvWekaAttributes.addElement(caption_topic16);
-			fvWekaAttributes.addElement(caption_topic17);
-			fvWekaAttributes.addElement(caption_topic18);
-			fvWekaAttributes.addElement(caption_topic19);
-			fvWekaAttributes.addElement(caption_topic20);
-			fvWekaAttributes.addElement(caption_topic21);
-			fvWekaAttributes.addElement(caption_topic22);
-			fvWekaAttributes.addElement(caption_topic23);
-			fvWekaAttributes.addElement(caption_topic24);
-			fvWekaAttributes.addElement(caption_topic25);
-			fvWekaAttributes.addElement(caption_topic26);
-			fvWekaAttributes.addElement(caption_topic27);
-			fvWekaAttributes.addElement(caption_topic28);
-			fvWekaAttributes.addElement(caption_topic29);
-			fvWekaAttributes.addElement(caption_topic30);
-			fvWekaAttributes.addElement(caption_topic31);
-			fvWekaAttributes.addElement(caption_topic32);
-			fvWekaAttributes.addElement(caption_topic33);
-			fvWekaAttributes.addElement(caption_topic34);
-			fvWekaAttributes.addElement(caption_topic35);
-			fvWekaAttributes.addElement(caption_topic36);
-			fvWekaAttributes.addElement(caption_topic37);
-			fvWekaAttributes.addElement(caption_topic38);
-			fvWekaAttributes.addElement(caption_topic39);
-			fvWekaAttributes.addElement(caption_topic40);
-			fvWekaAttributes.addElement(caption_topic41);
-			fvWekaAttributes.addElement(caption_topic42);
-			fvWekaAttributes.addElement(caption_topic43);
-			fvWekaAttributes.addElement(caption_topic44);
-			fvWekaAttributes.addElement(caption_topic45);
-			fvWekaAttributes.addElement(caption_topic46);
-			fvWekaAttributes.addElement(caption_topic47);
-			fvWekaAttributes.addElement(caption_topic48);
-			fvWekaAttributes.addElement(caption_topic49);
-			fvWekaAttributes.addElement(caption_topic50);
+			
 			
 			fvWekaAttributes.addElement(sentence_topic1);
 			fvWekaAttributes.addElement(sentence_topic2);
@@ -859,51 +590,12 @@ public class SpecPragmaticCreateDataset_posteriori {
 			fvWekaAttributes.addElement(sentence_topic8);
 			fvWekaAttributes.addElement(sentence_topic9);
 			fvWekaAttributes.addElement(sentence_topic10);
-			fvWekaAttributes.addElement(sentence_topic11);
-			fvWekaAttributes.addElement(sentence_topic12);
-			fvWekaAttributes.addElement(sentence_topic13);
-			fvWekaAttributes.addElement(sentence_topic14);
-			fvWekaAttributes.addElement(sentence_topic15);
-			fvWekaAttributes.addElement(sentence_topic16);
-			fvWekaAttributes.addElement(sentence_topic17);
-			fvWekaAttributes.addElement(sentence_topic18);
-			fvWekaAttributes.addElement(sentence_topic19);
-			fvWekaAttributes.addElement(sentence_topic20);
-			fvWekaAttributes.addElement(sentence_topic21);
-			fvWekaAttributes.addElement(sentence_topic22);
-			fvWekaAttributes.addElement(sentence_topic23);
-			fvWekaAttributes.addElement(sentence_topic24);
-			fvWekaAttributes.addElement(sentence_topic25);
-			fvWekaAttributes.addElement(sentence_topic26);
-			fvWekaAttributes.addElement(sentence_topic27);
-			fvWekaAttributes.addElement(sentence_topic28);
-			fvWekaAttributes.addElement(sentence_topic29);
-			fvWekaAttributes.addElement(sentence_topic30);
-			fvWekaAttributes.addElement(sentence_topic31);
-			fvWekaAttributes.addElement(sentence_topic32);
-			fvWekaAttributes.addElement(sentence_topic33);
-			fvWekaAttributes.addElement(sentence_topic34);
-			fvWekaAttributes.addElement(sentence_topic35);
-			fvWekaAttributes.addElement(sentence_topic36);
-			fvWekaAttributes.addElement(sentence_topic37);
-			fvWekaAttributes.addElement(sentence_topic38);
-			fvWekaAttributes.addElement(sentence_topic39);
-			fvWekaAttributes.addElement(sentence_topic40);
-			fvWekaAttributes.addElement(sentence_topic41);
-			fvWekaAttributes.addElement(sentence_topic42);
-			fvWekaAttributes.addElement(sentence_topic43);
-			fvWekaAttributes.addElement(sentence_topic44);
-			fvWekaAttributes.addElement(sentence_topic45);
-			fvWekaAttributes.addElement(sentence_topic46);
-			fvWekaAttributes.addElement(sentence_topic47);
-			fvWekaAttributes.addElement(sentence_topic48);
-			fvWekaAttributes.addElement(sentence_topic49);
-			fvWekaAttributes.addElement(sentence_topic50);
+			
 			
 			fvWekaAttributes.addElement(ClassAttribute);
 			Instances Instances = new Instances("Rel", fvWekaAttributes, 0);
 
-			iExample = new DenseInstance(128);
+			iExample = new DenseInstance(48);
 			Attribute attribute = (Attribute) fvWekaAttributes.elementAt(0);
 			iExample.setValue((Attribute) fvWekaAttributes.elementAt(0), PMC);
 			iExample.setValue((Attribute) fvWekaAttributes.elementAt(1), tableid);
@@ -980,18 +672,18 @@ public class SpecPragmaticCreateDataset_posteriori {
 //					WholeData);
 //			iExample.setValue((Attribute) fvWekaAttributes.elementAt(25),
 //					Caption);
-			for(int i = 27;i<77;i++)
+			for(int i = 27;i<37;i++)
 			{
 				iExample.setValue((Attribute) fvWekaAttributes.elementAt(i),
 						caption_topics[i-27]);
 			}
-			for(int i = 77;i<127;i++)
+			for(int i = 37;i<47;i++)
 			{
 				iExample.setValue((Attribute) fvWekaAttributes.elementAt(i),
-						ref_sentence_topic[i-77]);
+						ref_sentence_topic[i-37]);
 			}
 			Instances.add(iExample);
-			Instances.setClassIndex(127);
+			Instances.setClassIndex(47);
 
 
 		
