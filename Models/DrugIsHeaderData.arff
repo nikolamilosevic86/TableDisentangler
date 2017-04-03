@@ -1,0 +1,829 @@
+@relation isHeader-weka.filters.unsupervised.instance.Randomize-S434-weka.filters.unsupervised.instance.Randomize-S434-weka.filters.unsupervised.instance.Randomize-S323
+
+@attribute CellContent string
+@attribute classa {yes,no}
+
+@data
+'Drugs That Are Affected By KETEK',yes
+'Furosemide ( > 80 mg IV)HeparinHydantoinsNon SteroidalAnti-lnflammatory Drugs- Fenamates- PhenylbutazoneSalicylates ( > 2 g/day)',no
+'Re-evaluate dosing. ',no
+'carbamazepine',no
+'1.6',no
+'10 mg/day ',no
+'0.51 ',no
+'Coadministered Drug',yes
+'Dopamine/Dopamine AgonistsGlucocorticoidsOctreotide',no
+'Coadministered Drug',yes
+'1.5',no
+'Potential increase in the risk of methotrexate associated toxic reactions. Therefore, carefully monitor patients under methotrexate therapy when concomitant CIPRO XR therapy is indicated.',no
+'Drugs that may decrease thyroid hormone secretion, which may \result in hypothyroidism',yes
+'Dosing of Vardenafil 5 mgand Alpha-BlockerSeparated by 6 Hours,Placebo-Subtracted',no
+'InteractionInteraction',no
+'1.8',no
+'Antidepressants- Tricyclics (e.g., Amitriptyline)- Tetracyclics (e.g., Maprotiline)- Selective Serotonin Reuptake Inhibitors (SSRIs; e.g., Sertraline)',no
+'Anticoagulants (oral)- Coumarin Derivatives- Indandione Derivatives',no
+'Clinical Comment',yes
+'The concomitant use of CNS depressants can increase the risk of hypotension, respiratory depression, profound sedation, coma, and death.',no
+'573 ± 168 mg/day',no
+'1.4',no
+'Coadministered Drug',yes
+'Risperidone',no
+'4 mg/day',no
+'Ketamine',no
+'Decreased lamotrigine AUCapproximately 32\%.',no
+'Tamoxifen',no
+'Telaprevir',no
+'¯Ethinyl estradiol¯ Norethindrone',no
+'\% Change of Didanosine Pharmacokeinetic ParametersThe 95\% confidence intervals for the percent change in the pharmacokinetic parameter are displayed.',no
+'Antidepressants - Tricyclics (e.g., Amitriptyline) - Tetracyclics (e.g., Maprotiline) - Selective Serotonin Reuptake Inhibitors (SSRIs; e.g., Sertraline)',no
+'Asparaginase',no
+'Increased exposure to eluxadoline when coadministered with cyclosporine [see Clinical Pharmacology (12.3)]',no
+'\% Change of Didanosine Pharmacokinetic ParametersThe 90\% confidence intervals for the percent change in the pharmacokinetic parameter are displayed.',no
+'Cmax ',yes
+'Drugs that may alter T and T serum transport - but FT concentration remains normal; and, therefore, the patient remains euthyroid',yes
+'Clofibrate',no
+'Tmax(hr)',yes
+'4 mg/day',no
+'150 mg twice daily',no
+'diarrheaelevated temperaturehepatic disorders infectious hepatitis jaundice',no
+'Exposure',yes
+'Chloral HydrateDiazepamEthionamideLovastatinMetoclopramide6-MercaptopurineNITROPRUSSIDEPara-aminosalicylate sodiumPerphenazineResorcinol (excessive topical use)Thiazide Diuretics',no
+'Didanosine Dosage ',yes
+'Appropriate doses for these combinations have not been established.',no
+'573 ± 168 mg/day',no
+'Effect on Active Moiety (Risperidone + 9-Hydroxy-Risperidone (RatioChange relative to reference) ',yes
+'Cmax(ng/mL)',yes
+'Dose adjustment not needed',no
+'0.94',no
+'Oral drugs that are to be separated from Velphoro and meals',yes
+'Voriconazole Plasma Exposure (Cmax and AUC? after 200 mg q12h)',yes
+'1 mg single dose',no
+'Concurrent use may reduce the efficacy of levothyroxine by binding and delaying or preventing absorption, potentially resulting in hypothyroidism. Calcium carbonate may form an insoluble chelate with levothyroxine, and ferrous sulfate likely forms a ferric-thyroxine complex. Administer levothyroxine at least 4 hours apart from these agents. Patients treated concomitantly with orlistat and levothyroxine should be monitored for changes in thyroid function.',no
+'Administration of these enzyme inhibitors decrease the peripheral conversion of T4 to T3, leading to decreased T3 levels. However, serum T4 levels are usually normal but may occasionally be slightly increased. In patients treated with large doses of propranolol ( > 160 mg/day), T3 and T4 levels change slightly, TSH levels remain normal, and patients are clinically euthyroid. It should be noted that actions of particular beta-adrenergic antagonists may be impaired when the hypothyroid patient is converted to the euthyroid state. Short-term administration of large doses of glucocorticoids may decrease serum T3 concentrations by 30\% with minimal change in serum T4 levels. However, long-term glucocorticoid therapy may result in slightly decreased T3 and T4 levels due to decreased TBG production (see above).',no
+'Risperidone Dose Recommendation ',yes
+'Avoid Use Five-fold increase in duloxetine exposure ',no
+'Atazanavir 300 mg/100 mg?42 (?52 to ?29)',no
+'Cmx',yes
+'Radiographic Agents',yes
+'lomefloxacinmebendazolemedroxyprogesteronemethylprednisolonemetronidazolemetoprolol\nadolol\nifedipine\nizatidine\norfloxacinofloxacinomeprazoleprednisone, prednisolone\ranitidine\rifabutin\roxithromycinsorbitol(purgative doses do not inhibit\theophylline absorption)sucralfate\terbutaline, systemic\terfenadine\tetracycline\tocainide',no
+'Addition of levothyroxine to antidiabetic or insulin therapy may result in increased antidiabetic agent or insulin requirements.Careful monitoring of diabetic control is recommended, especially when thyroid therapy is started, changed, or discontinued.',no
+'Re-evaluate dosing. ',no
+'Addition of levothyroxine to antidiabetic or insulin therapy may result in increased antidiabetic agent or insulin requirements. Careful monitoring of diabetic control is recommended, especially when thyroid therapy is started, changed, or discontinued.',no
+'Decrease ciprofloxacin absorption, resulting in lower serum and urine levels',no
+'Noted or anticipated Outcome',yes
+'Slow-Release Nicotinic Acid',no
+'CmaxSS(Peak plasma concentration)',yes
+'500 mg four times daily',no
+'Dopamine/Dopamine AgonistsGlucocorticoidsOctreotide',no
+'1 mg single dose',no
+'There have been a number of reports regarding coma and death associated with the misuse and abuse of the combination of buprenorphine and benzodiazepines. In many, but not all of these cases, buprenorphine was misused by self-injection of crushed buprenorphine tablets. Preclinical studies have shown that the combination of benzodiazepines and buprenorphine altered the usual ceiling effect on buprenorphine-induced respiratory depression, making the respiratory effects of buprenorphine appear similar to those of full opioid agonists.',no
+'bosentan',no
+'Recommendation(Exposure)',yes
+'EFFECT',yes
+'Iodide and drugs that contain pharmacologic amounts of iodide may cause hyperthyroidism in euthyroid patients with Grave\'s disease previously treated with antithyroid drugs or in euthyroid patients with thyroid autonomy (e.g., multinodular goiter or hyper functioning thyroid adenoma). Hyperthyroidism may develop over several weeks and may persist for several months after therapy discontinuation. Amiodarone may induce hyperthyroidism by causing thyroiditis.',no
+'Vardenafil10 mgPlacebo-Subtracted',yes
+'10 mg/day ',no
+'¯Amprenavir  ­Nevirapine',no
+'AmiodaroneIodide (including iodine-containing Radiographic contrast agents)',no
+'Oral drugs for which sevelamer did not alter the pharmacokinetics when administered concomitantly',yes
+'AUC ofDidanosine(90\% CI) ',yes
+'1.1 ',no
+'Drugs that may alter T nd T metabolism',yes
+'Coadministered Drug',yes
+'Co-administered Drug ',yes
+'AUC ofDidanosine(95\% CI)',yes
+'Cmax',yes
+'¯ Methadone',no
+'Concomitant administration of tizanidine and ciprofloxacin is contraindicated due to the potentiation of hypotensive and sedative effects of tizanidine [see Contraindications (4.2)] ',no
+'Clinical Comment',yes
+'Clofibrate Estrogen-containing oral contraceptives Estrogens (oral) Heroin / Methadone 5-Fluorouracil Mitotane Tamoxifen',no
+'Chloral Hydrate Diazepam Ethionamide Lovastatin Metoclopramide 6-Mercaptopurine NITROPRUSSIDE Para-aminosalicylate sodium Perphenazine Resorcinol  (excessive topical use) Thiazide Diuretics',no
+'-',no
+'150 mg twice daily',no
+'Nelfinavir* ',no
+'Inducers',yes
+'Dosing Schedule ',yes
+'Plasma concentrations may be increased.',no
+'AUC ',yes
+'1.1 ',no
+'Carbamazepine Hydantoins Phenobarbital Rifampin',no
+'Drug Interactions Associated with Increased Risk of Myopathy/Rhabdomyolysis (2.6, 5.1, 7, 12.3)',no
+'Drugs that may increase serum TBG concentration',yes
+'1.1 ',no
+'0.51 ',no
+'AminoglutethimideAmiodaroneIodide (including iodine-   containing radiographic   contrast agents)LithiumMethimazolePropylthioracil (PTU)SulfonamidesTolbutamide',no
+'Androgens / Anabolic SteroidsAsparaginaseGlucocorticoidsSlow-Release Nicotinic Acid',no
+'Specific Drugs',yes
+'na   ',no
+'1.4 ',no
+'¯ Ketoconazole',no
+'n',yes
+'Calcitriol Ciprofloxacin Digoxin Enalapril Furosemide HMG-CoA reductase inhibitors Hydrochlorothiazide Losartan Metoprolol Nifedipine Omeprazole Quinidine Warfarin',no
+'2 or 3 mg twicedaily',no
+'Avoid Use (Plasma Exposure Likely to be Increased and Prolonged) ',no
+'1.4 ',no
+'Recommendations for VoriconazoleDosage Adjustment/Comments',yes
+'ClofibrateEstrogen-containing oral contraceptivesEstrogens (oral)Heroin / Methadone5-FluorouracilMitotaneTamoxifen',no
+'Use with caution(Increase in anticoagulant effect)',no
+'Ciprofloxacin may further prolong the QT interval in patients receiving drugs known to prolong the QT interval (for example, class IA or III antiarrhythmics, tricyclic antidepressants, macrolides, antipsychotics) [see Warnings and Precautions (5.10) and Use in Specific Populations (8.5)]. ',no
+'Non-steroidal anti-inflammatory drugs (but not acetyl salicylic acid) in combination of very high doses of quinolones have been shown to provoke convulsions in pre-clinical studies and in postmarketing. ',no
+'Voriconazole Plasma Exposure(Cmax and AUC? after200 mg Q12h)',yes
+'Administration of these enzyme inhibitors decrease the peripheral conversion of T to T , Ieading to decreased T levels. However, serum T levels are usually normal but may occasionally be slightly increased. In patients treated with large doses of propranolol ( > 160 mg/day), T and T levels change slightly, TSH levels remain normal, and patients are clinically euthyroid. It should be noted that actions of particular beta-adrenergic antagonists may be impaired when the hypothyroid patient is converted to the euthyroid state. Short-term administration of large doses of glucocorticoids may decrease serum T concentrations by 30\% with minimal change in serum T levels. However, long-term glucocorticoid therapy may result in slightly decreased T and T levels due to decreased TBG production (see above).',no
+'Type of Interaction',yes
+'1.4 ',no
+'Dosing Schedule',yes
+'¯ Indinavir',no
+'Oral drugs that have demonstrated interaction with sevelamer and are to be dosed separately from Renagel',yes
+'Drug',yes
+'Monitor for sildenafil toxicity (see Pharmacokinetics 12.3). ',no
+'Drug Plasma Exposure (Cmax and AUC?)',yes
+'AmiodaroneIodide (including iodine-containing Radiographic contrast agents)',no
+'Excessive use of thyroid hormones with growth hormones may accelerate epiphyseal closure. However, untreated hypothyroidism may interfere with growth response to growth hormone.',no
+'0.55',no
+'Decreased lamotrigine concentrationsapproximately 50\%. Decrease in levonorgestrel component by 19\%.',no
+'Drugs that may decrease serum TBG concentration',yes
+'Mean Ratio ofCo-administered DrugPharmacokinetic Parameters90\% CI; No effect = 1.00',no
+'Decreased lamotrigine concentrationapproximately 50\%.',no
+'400 mg twice daily',no
+Prescribing Recommendations  ,yes
+'Immunosuppressants: Cyclosporine, tacrolimus, sirolimus',no
+CarbamazepineHydantoinsPhenobarbitalRifampin,no
+'Nevirapine and ketoconazole should not be administered concomitantly because decreases in ketoconazole plasma concentrations may reduce the efficacy of the drug.',no
+'Ergot alkaloids: Ergotamine',no
+Lopinavir/Ritonavir*,no
+'hyperthyroidismpoor nutritional statesteatorrheavitamin K deficiency',no
+0.51 ,no
+'Analgesics:Methadone* ',no
+'Plasma concentrations     of boceprevir may be decreased due to induction of CYP3A4/5 by nevirapine',no
+'Other Agents',yes
+2 or 3 mg twicedaily,no
+' Ratio (with/without azithromycin) of Coadministered Drug Pharmacokinetic Parameters (90\% CI); No Effect = 1.00 ',yes
+'Nevirapine and boceprevir should not be coadministered because decreases in boceprevir plasma concentrations may result in a reduction in efficacy.',no
+'Interaction ',yes
+'Administration of these enzyme inhibitors decrease the peripheral conversion of T4 to T3, Ieading to decreased T3 levels. However, serum T4 levels are usually normal but may occasionally be slightly increased. In patients treated with large doses of propranolol ( > 160 mg/day), T3 and T4 levels change slightly, TSH levels remain normal, and patients are clinically euthyroid. It should be noted that actions of particular beta-adrenergic antagonists may be impaired when the hypothyroid patient is converted to the euthyroid state. Short-term administration of large doses of glucocorticoids may decrease serum T3 concentrations by 30\% with minimal change in serum T4 levels. However, long-term glucocorticoid therapy may result in slightly decreased T3 and T4 levels due to decreased TBG production (see above).',no
+'OATP1B1 and BCRP Substrate',yes
+Probenecid,no
+'Effect on Concentration of Nevirapine or Concomitant Drug',yes
+'No dosing adjustments are required when nevirapine is co-administered with 700/100 mg of fosamprenavir/ritonavir twice daily. The combination of nevirapine administered with fosamprenavir/ritonavir once daily has not been studied.',no
+'Serum digitalis glycoside levels may be reduced in hyperthyroidism or when the hypothyroid patient is converted to the euthyroid state. Therapeutic effect of digitalis glycosides may be reduced.',no
+Re-evaluate dosing. ,no
+Dosing Schedule,yes
+'Drug Name ',yes
+'Stimulation of hepatic microsomal drug-metabolizing enzyme activity may cause increased hepatic degradation of levothyroxine, resulting in increased Ievothyroxine requirements. Phenytoin and carbamazepine reduce serum protein binding of levothyroxine, and total- and free-T may be reduced by 20\% to 40\%, but most patients have normal serum TSH levels and are clinically euthyroid.',no
+5-Fluorouracil,no
+Cmax(ng/mL),yes
+AUC,yes
+Dosing Schedule,yes
+'Avoid Use(Plasma Exposure Likely to be Increased and Prolonged) ',no
+'Antacids- Aluminum & Magnesium Hydroxides- SimethiconeBile Acid Sequestrants- Cholestyramine- ColestipolCalcium CarbonateCation Exchange Resins- KayexalateFerrous SulfateOrlistatSucralfate',no
+'AminoglutethimideAmiodaroneIodide (including iodine-containing Radiographic contrast agents)LithiumMethimazolePropylthioracil (PTU)SulfonamidesTolbutamide',no
+'Calcium channel blockers: Diltiazem, nifedipine, verapamil',no
+'Plasma concentrations may be decreased.',no
+'Table III. Drugs That Have Been Documented Not to Interact With Theophylline or Drugs That Produce No Clinically Significant Interaction With Theophylline*',no
+Comments,yes
+'diarrheaelevated temperaturehepatic disorders  infectious hepatitis  jaundice',no
+Cmax,yes
+Effect on ActiveMoiety (Risperidone + 9-Hydroxy- Risperidone (Ratio*),yes
+'Drugs that may increase thyroid hormone secretion, whichmay result in hyperthyroidism',yes
+'For patients with HoFH, do not exceed 20 mg simvastatin daily*',no
+Effect on ActiveMoiety(Risperidone + 9-Hydroxy-Risperidone (Ratio*),yes
+'Clinical Comment',yes
+'Avoid UseFive-fold increase in duloxetine exposure',no
+'AUC(0-24h)(ng × h/mL)',yes
+'Clinical Recommendation',yes
+'OATP1B1 Inhibitors',yes
+'Dosing in adult patients:  A dose adjustment of lopinavir/ritonavir to 500/125 mg tablets twice daily or 533/133 mg (6.5 mL) oral solution twice daily is recommended when used in combination with nevirapine. Neither lopinavir/ritonavir tablets nor oral solution should be administered once daily in combination with nevirapine.  Dosing in pediatric patients:  Please refer to the Kaletra® prescribing information for dosing recommendations based on body surface area and body weight. Neither lopinavir/ritonavir tablets nor oral solution should be administered once daily in combination with nevirapine.',no
+20 mg/day,no
+2 or 3 mg twicedaily,no
+'Anticoagulants (oral) - Coumarin Derivatives - Indandione Derivatives',no
+' Prescribing Recommendations ',yes
+Risperidone ,no
+'Androgens / Anabolic SteroidsAsparaginaseGlucocorticoidsSlow-Release Nicotinic Acid',no
+'Drug Interactions Associated with Increased Risk of Myopathy/Rhabdomyolysis (2.6, 5.1, 7, 12.3)',no
+'TopiramateConcentration ',yes
+1.3,no
+500 mg four timesdaily,no
+ClinicalComment,yes
+1.8,no
+'Non-steroidal anti-inflammatory drugs (but not acetyl salicylic acid) in combination of very high doses of quinolones have been shown to provoke convulsions in pre-clinical studies and in postmarketing.',no
+Recommendation,yes
+'Potentiation of CIPRO XR toxicity may occur.',no
+'AminoglutethimideAmiodaroneIodide (including iodine-containing Radiographic contrast agents)LithiumMethimazolePropylthioracil (PTU)SulfonamidesTolbutamide',no
+'Administration of these agents with levothyroxine results in an initial transient increase in FT4. Continued administration results in a decrease in serum T4 and normal FT4 and TSH concentrations and, therefore, patients are clinically euthyroid. Salicylates inhibit binding of T4 and T3 to TBG and transthyretin. An initial increase in serum FT4, is followed by return of FT4 to normal levels with sustained therapeutic serum salicylate concentrations, although total-T4 levels may decrease by as much as 30\%.',no
+'hypothyroidism nephrotic syndrome',no
+'CmaxSS(Peak plasma concentration)',yes
+'Drugs that may reduce TSH secretion –the reduction is not sustained; therefore, hypothyroidism does not occur',yes
+'Drugs that may increase hepatic metabolism, whichmay resultin hypothyroidism',yes
+'Ratio (with/without CRIXIVAN) of Coadministered DrugPharmacokinetic Parameters (90\% CI); No Effect = 1.00',yes
+573 ± 168 mg/day,no
+'Table IV. Drugs that haveeen documented not to interact with theophyllineor drugs that produce no clinically significantinteraction with theophylline.Refer to PRECAUTIONS, Drug Interactions forinformation regarding table.',no
+'Drugs that alter thyroid hormone secretion',yes
+'Hepatitis C Antiviral Agents  ',yes
+'Other Drugs / Dietary Supplements',yes
+1.3,no
+Re-evaluate dosing. Do not exceed 8 mg/day,no
+'Careful monitoring of clozapine associated adverse reactions and appropriate adjustment of clozapine dosage during and shortly after co-administration with ciprofloxacin are advised.',no
+'Type of Interaction',yes
+'* The interaction between nevirapine and the drug was evaluated in a clinical study. All other drug interactions shown are predicted.',no
+AEDConcentration,yes
+150 mg twice daily,no
+'Nevirapine and rifampin should not be administered concomitantly because decreases in nevirapine plasma concentrations may reduce the efficacy of the drug. Physicians needing to treat patients co-infected with tuberculosis and using a nevirapine-containing regimen may use rifabutin instead.',no
+'Atazanavir 300 mg/100 mg?42 (?52 to ?29)',no
+'Use with caution Inhibition of methotrexate renal tubular transport potentially leading to increased methotrexate plasma levels',no
+'\% Change of CoadministeredDrug Pharmacokinetic ParametersThe 90\% confidence intervals for the percent change in the pharmacokinetic parameter are displayed.All studies conducted in healthy volunteers at least 60 kg with creatinine clearance of at least 60 mL/min.',no
+Effect,yes
+' n ',yes
+'Influence of AED on MHD Concentration(Mean Change, 90\% Confidence Interval)',yes
+0.51 ,no
+'Drugs that may increase',yes
+'Drugs that alter thyroid hormone secretion',yes
+1.3,no
+'AminoglutethimideAmiodaroneIodide (including iodine-containing Radiographic contrast agents)LithiumMethimazolePropylthioracil (PTU)SulfonamidesTolbutamide',no
+'Oral drugs that have to be separated from Phoslyra',yes
+'EffectAverage effect on steady state theophylline concentration or other clinical effect for pharmacologic interactions. Individual patients may experience larger changes in serum theophylline concentration than the value listed. ',no
+Avoid grapefruit juice  ,no
+20 mg/day ,no
+Anticonvulsants ,yes
+'Other Drugs/Dietary Supplements ',yes
+Refrigerated(4°C),no
+'Atazanavir 300 mg/100 mg?28 (?40 to ?14)',no
+'Stimulation of hepatic microsomal drug-metabolizing enzyme activity may cause increased hepatic degradation of levothyroxine, resulting in increased levothyroxine requirements.Phenytoin and carbamazepine reduce serum protein binding of levothyroxine, and total- and free-T4 may be reduced by 20\% to 40\%, but most patients have normal serum TSH levels and are clinically euthyroid.',no
+Interaction,yes
+'¯ Efavirenz',no
+'Drug Interactions Associated with Increased Risk of Myopathy/Rhabdomyolysis (2.6, 5.1, 7, 12.3)',no
+'Dose Regimen of Nevirapine',yes
+DidanosineDosage,yes
+'Dosage Adjustment of Aripiprazole',yes
+'AUC(0-24h)(ng × h/mL)',yes
+'Avoid Use Five-fold increase in duloxetine exposure',no
+'Concurrent administration of CIPRO XR with theophylline may result in increased risk of a patient developing central nervous system (CNS) or other adverse reactions. If concomitant use cannot be avoided, monitor serum levels of theophylline and adjust dosage as appropriate. [See Warnings and Precautions (5.6).]',no
+'Addition of carbamazepine decreases lamotrigine concentration approximately 40\%.May increase carbamazepine epoxide levels.',no
+Contraindicated,no
+'I.Due to the competition of salicylate with other drugs for binding to serum albumin the following drug interactions may occur:',no
+40 mg/day ,no
+'Recommendations forVoriconazole Dosage Adjustment/Comments',yes
+'Antacids - Aluminum & Magnesium Hydroxides - Simethicone Bile Acid Sequestrants - Cholestyramine - Colestipol Calcium Carbonate Cation Exchange Resins - Kayexalate Ferrous Sulfate Orlistat Sucralfate',no
+'Estrogens (oral)',no
+1.5,no
+500 mg four timesdaily,no
+' Dose of Azithromycin ',yes
+1.5,no
+'Drugs that may decrease T bsorption, which may result in hypothyroidism',yes
+'Ratio (with/without coadministered drug) of IndinavirPharmacokinetic Parameters (90\% CI); No Effect = 1.00',yes
+'Topiramate  Concentration ',yes
+AUC,yes
+Tmax(hr),yes
+'Type Of Interaction',yes
+'Prescribing Recommendations ',yes
+'Antidepressants- Tricyclics (e.g., Amitriptyline)- Tetracyclics (e.g., Maprotiline)- Selective Serotonin Reuptake Inhibitors (SSRIs; e.g., Sertraline)',no
+'HIV Antiviral Agents',yes
+'Table 1: Oral drugs that can be administered concomitantly with Auryxia',no
+Drug,yes
+'Concurrent use may increase the effects of sympathomimetics or thyroid hormone.Thyroid hormones may increase the risk of coronary insufficiency when sympathomimetic agents are administered to patients with coronary artery disease.',no
+'Drugs that may increase thyroid hormone secretion, which may result in hyperthyroidism',yes
+'Oral drugs for which sevelamer did not alter the pharmacokinetics when administered concomitantly',yes
+InteractionInteraction,yes
+'Cmaxof Stavudine(95\% CI)',yes
+'Decrease ciprofloxacin absorption, resulting in lower serum and urine levels ',no
+'Stavudine  Dosage',yes
+'Antiarrhythmics:Amiodarone, disopyramide, lidocaine ',no
+'Drugs that may decrease T\' - deiodinase activity',yes
+'St. John’s Wort',no
+Males(n=106),yes
+'200 mg BID day 1 to 23. Subjects were treated with nevirapine prior to trial entry.',no
+'Vardenafil 10 mgPlacebo-subtracted ',yes
+3 mg twice daily,no
+'Prescribing Recommendations for LIPTRUZET',yes
+' Effect',yes
+Dose adjustment notneeded,no
+AUC,yes
+'Potentiation of ciprofloxacin toxicity may occur. ',no
+'Antacids - Aluminum & Magnesium Hydroxides - Simethicone Bile Acid Sequestrants - Cholestyramine - Colestipol Calcium Carbonate Cation Exchange Resins - Kayexalate Ferrous Sulfate Orlistat Sucralfate',no
+Do not exceed 20 mg simvastatin daily ,no
+'¯Nelfinavir M8 Metabolite¯Nelfinavir Cmin',no
+'Anticoagulants (oral)- Coumarin Derivatives- Indandione Derivatives',no
+'Effect on Concentration',yes
+'Careful monitoring of clozapine associated adverse reactions and appropriate adjustment of clozapine dosage during and shortly after co-administration with CIPRO XR are advised.',no
+'Concomitant administration of tizanidine and ciprofloxacin is contraindicated due to the potentiation of hypotensive and sedative effects of tizanidine [see Contraindications (4.2)] ',no
+'AUCSS(0–12h)(Extent of systemic exposure)',no
+'Probenecid ',no
+'CLINICAL EFFECT(S)',yes
+Clinical Comment ,yes
+'Drugs that may decrease T bsorption, which may result in hypothyroidism',yes
+AED Concentration,yes
+' Mean AUC ',yes
+'2 or 3 mg twice daily',no
+'Boceprevir ',no
+'¯ Itraconazole',no
+'Estrogen-containing oral',no
+4 mg/day,no
+'Drugs That Interfere with Hemostasis',yes
+'Use with cautionInhibition of methotrexate renal tubular transport potentially leading to increased methotrexate plasma levels ',no
+'Table 3 Established and Potential Drug Interactions: Use With Caution, Alteration in Dose or Regimen May Be Needed Due to Drug Interaction Established Drug Interactions: See Clinical Pharmacology (12.3), Table 4 for Magnitude of Interaction. ',no
+'Monitor for sildenafil toxicity (see Pharmacokinetics 12.3). ',no
+'Drug Name  ',yes
+'Administration of these enzyme inhibitors decrease the peripheral conversion of T to T , leading to decreased T levels. However, serum T levels are usually normal but may occasionally be slightly increased. In patients treated with large doses of propranolol ( > 160 mg/day), T and T levels change slightly, TSH levels remain normal, and patients are clinically euthyroid. It should be noted that actions of particular beta-adrenergic antagonists may be impaired when the hypothyroid patient is converted to the euthyroid state. Short-term administration of large doses of glucocorticoids may decrease serum T concentrations by 30\% with minimal change in serum T levels. However, long-term glucocorticoid therapy may result in slightly decreased T and T levels due to decreased TBG production (see above).',no
+573 ± 168 mg/day,no
+'Ciprofloxacin should be taken at least two hours before or six hours after Multivalent cation-containing products administration [see Dosage and Administration. (2)]. ',no
+'Indinavir* ',no
+'Concurrent use of tri/tetracyclic antidepressants and levothyroxine may increase the therapeutic and toxic effects of both drugs, possibly due to increased receptor sensitivity to catecholamines.Toxic effects may include increased risk of cardiac arrhythmias and CNS stimulation; onset of action oftricyclics may be accelerated.Administration of sertraline in patients stabilized on levothyroxine may result in increased levothyroxine requirements.',no
+Interaction,yes
+1.3,no
+400 mg twice daily,no
+Effect,yes
+'Conjugated Estrogens',yes
+'Ratio (90\% Confidence Interval) of Tipranavir PharmacokineticParameters with/withoutCo-administered Drug; No Effect = 1.00',yes
+'Drugs that may decrease T4 5\'-deiodinase activity',yes
+'AEDConcentration ',yes
+'Co-administered Drug Dose (Schedule)',yes
+Recommendation,yes
+1.3,no
+'Recommendations for Voriconazole Dosage Adjustment/Comments',yes
+'Antacids- Aluminum & MagnesiumHydroxides- SimethiconeBile Acid Sequestrants- Cholestyramine- ColestipolCalcium CarbonateCation Exchange Resins- KayexalateFerrous SulfateOrlistatSucralfate',no
+'Co-administration of nevirapine and fosamprenavir without ritonavir is not recommended.  No dosing adjustments are required when nevirapine is co-administered with 700/100 mg of fosamprenavir/ritonavir twice daily. The combination of nevirapine administered with fosamprenavir/ritonavir once daily has not been studied. ',no
+1.2 ,no
+'? Atazanavir ? Nevirapine ',no
+'DESCRIPTION OF INTERACTION',yes
+diltiazem ,no
+AUC,yes
+'Antifungals: Fluconazole*',no
+'Chloral Hydrate Diazepam Ethionamide Lovastatin Metoclopramide 6-Mercaptopurine Nitroprusside Para-aminosalicylate sodium Perphenazine Resorcinol (excessive topical use) Thiazide Diuretics',no
+'?Amprenavir ?Nevirapine   ?Amprenavir ?Nevirapine  ',no
+'Effect on Active Moiety (Risperidone + 9- Hydroxy- Risperidone (Ratio*)',yes
+'Clinical Recommendation',yes
+'Antacids- Aluminum & Magnesium Hydroxides- SimethiconeBile Acid Sequestrants- Cholestyramine- ColestipolCalcium CarbonateCation Exchange Resins- KayexalateFerrous SulfateOrlistatSucralfate',no
+AUC,yes
+'Concurrent administration of ciprofloxacin with theophylline may result in increased risk of a patient developing central nervous system (CNS) or other adverse reactions. If concomitant use cannot be avoided, monitor serum levels of theophylline and adjust dosage as appropriate. [See Warnings and Precautions (5.6).] ',no
+'hyperthyroidism poor nutritional state steatorrhea vitamin K deficiency',no
+'Probenecid ',no
+'Effect on Concentration of Nevirapine or Concomitant Drug ',yes
+'Effect on Concentration of   Nevirapine or                               Concomitant Drug',yes
+'Drug Plasma Exposure(Cmax and AUC?)',yes
+Effect on ActiveMoiety (Risperidone + 9-Hydroxy- Risperidone (Ratio*),yes
+'AUC0–24 hrs',no
+'Decreases tubular reabsorption; clinical toxicity from methotrexate can result.',no
+'The risk may vary with the underlying infection, age and general status of the patient so that the contribution of CIPRO XR to the increase in INR (international normalized ratio) is difficult to assess. Monitor prothrombin time and INR frequently during and shortly after co-administration of CIPRO XR with an oral anti-coagulant (for example, warfarin).',no
+'Vardenafil20 mgPlacebo-Subtracted',yes
+Miscellaneous,yes
+1.2 ,no
+1.4,no
+'Effect on concentration of Nevirapine or Concomitant drug',yes
+'Effect on Concentration of Etravirine or Concomitant Drug',yes
+'Androgens / Anabolic Steroids',no
+'Efavirenz* ',no
+'Drugs that may increase hepatic metabolism, which may result in hypothyroidism',yes
+'Didanosine Dosage',yes
+'Hypoglycemia potentiated',no
+'Drugs That are Affected by CIPRO ',yes
+'Dopamine/Dopamine Agonists Glucocorticoids Octreotide',no
+'Comments ',yes
+'Mean (SD) Pharmacokinetic Parameters in Healthy Young Subjects (n=15)',yes
+'HIV Antiviral Agents: Protease Inhibitors (PIs)',yes
+'DISCRIPTION OF INTERACTION',yes
+'Topiramate Concentration ',yes
+'Effect on Concentration of Rilpivirine or Concomitant Drug ',yes
+Prescribing Recommendations ,yes
+Dose adjustment notneeded,no
+Interaction ,yes
+'Antacids, Sucralfate, Multivitamins and Other Products Containing Multivalent Cations (magnesium/aluminum antacids; polymeric phosphate binders (for example, sevelamer, lanthanum carbonate); sucralfate; Videx® (didanosine) chewable/buffered tablets or pediatric powder; other highly buffered drugs; or products containing calcium, iron, or zinc and dairy products) ',no
+Probenecid,no
+'Drugs that may decrease Tbsorption, which may result in hypothyroidism',yes
+Risperidone DoseRecommendation,yes
+DigoxinEnalaprilIronMetoprololWarfarin,no
+'Atazanavir 300 mg/100 mg?72 (?80 to ?60)',no
+'Risperidone Dose Recommendation ',yes
+40 mg/day ,no
+'Oral drugs for which sevelamer did not alter the pharmacokinetics when administered concomitantly',yes
+'Oxcarbazepine Dose(mg/day)',yes
+1.4,no
+'Antidepressants - Tricyclics (e.g., Amitriptyline) - Tetracyclics (e.g., Maprotiline) - Selective Serotonin Reuptake Inhibitors (SSRIs; e.g., Sertraline)',no
+'Oral drugs thathave demonstrated interaction with sevelamer and are to be dosed separately from Renvela',yes
+'Serum digitalis glycoside levels may be reduced in hyperthyroidism or when the hypothyroid patient is converted to the euthyroid state.Therapeutic effect of digitalis glycosides may be reduced.',no
+Dosing Schedule,yes
+' Drug Interactions Associated with Increased Risk of Myopathy/Rhabdomyolysis (2.6, 5.1, 7, 12.3)',no
+'lomefloxacinmebendazolemedroxyprogesteronemethylprednisolonemetronidazolemetoprolol\nadolol\nifedipine\nizatidine\norfloxacinofloxacinomeprazoleprednisone, prednisolone\ranitidine\rifabutin\roxithromycinsorbitol  (purgative doses do not inhibit  theophylline absorption)sucralfate\terbutaline, systemic\terfenadine\tetracycline\tocainide',no
+Glucocorticoids,yes
+'Decrease ciprofloxacin absorption, resulting in lower serum and urine levels ',no
+20 mg/day ,no
+'Recommendation ',yes
+'Beta-Blockers ',yes
+'Antidiabetic Agents- Biguanides- Meglitinides- Sulfonylureas- Thiazolidediones- Insulin',no
+Risperidone,no
+'Oral drugs that have to be separated from Auryxia and meals',yes
+'Growth Hormones- Somatrem- Somatropin',no
+'Effect on Concentration of Nevirapine or Concomitant Drug',yes
+'Anti-Inflammatory Drugs zapropazoncolchicinediclofenacnaproxensulindac',no
+'Ibuprofen and anticoagulants such as warfarin have a synergistic effect on bleeding. The concomitant use of ibuprofen and anticoagulants have an increased risk of serious bleeding compared to the use of either drug alone.Serotonin release by platelets plays an important role in hemostasis. Case-control and cohort epidemiological studies showed that concomitant use of drugs that interfere with serotonin reuptake and an NSAID may potentiate the risk of bleeding more than an NSAID alone.',no
+'Atazanavir 300 mg/100 mg?28 (?40 to ?14)',no
+'AmiodaroneBeta-adrenergic antagonists- (e.g., Propranolol > 160 mg/day)Glucocorticoids-(e.g., Dexamethasone ? 4 mg/day)Propylthiouracil (PTU)',no
+'Drugs that may decrease T \' - deiodinase activity',yes
+3-Hydroxydesloratadine,no
+'Drugs that may increase serum TBG concentration',yes
+'Co-administration of nevirapine and fosamprenavir without ritonavir is not recommended.',no
+Comments,yes
+'Drugs that may alter T and T metabolism',yes
+Cmax,yes
+'Heroin / Methadone',no
+Cmax(ng/mL),yes
+'Use with cautionReduced clearance resulting in elevated levels and prolongation of serum half-life',no
+'Monitor for sildenafil toxicity (see   ).Pharmacokinetics\n.3',no
+'CLINICAL EFFECT(S)         ',yes
+'Cancer chemotherapy:Cyclophosphamide',no
+'Antidiabetic agents, ACE inhibitors, angiotensin II receptor blocking agents, disopyramide, fibrates, fluoxetine, monoamine oxidase inhibitors, pentoxifylline, pramlintide, propoxyphene, salicylates, somatostatin analogs (e.g., octreotide), and sulfonamide antibiotics.',no
+Comments,yes
+'Type Of Interaction',yes
+'Table 13. Established and Other Potentially Significant Drug Interactions',no
+'Cmaxof Coadministered   Drug(95\% CI)',yes
+'Recommendations for Drug Dosage Adjustment/Comments',yes
+Do not exceed 10 mg simvastatin daily ,no
+Cmax,yes
+4 mg/day,no
+'If unavoidable monitor, for duloxetine toxicity ',no
+'AmiodaroneIodide (including iodine-containing Radiographic contrast agents)',no
+'Drugs that may increase serum TBG concentration',yes
+'Aminoglutethimide Amiodarone Iodide (including iodine-    containing radiographic    contrast agents) Lithium Methimazole Propylthioracil (PTU) Sulfonamides Tolbutamide',no
+'Cytokines- Interferon-?- Interleukin-2',no
+'Iodide and drugs that contain pharmacologic amounts of iodide may cause hyperthyroidism in euthyroid patients with Grave\'s disease previously treated with antithyroid drugs or in euthyroid patients with thyroid autonomy (e.g., multinodular goiter or hyper functioning thyroid adenoma). Hyperthyroidism may develop over several weeks and may persist for several months after therapy discontinuation. Amiodarone may induce hyperthyroidism by causing thyroiditis.',no
+'Atazanavir 300 mg/100 mg?72 (?80 to ?60)',no
+'Administration of these enzyme inhibitors decreases the peripheral conversion of T4 to T3, leading to decreased T3 levels.However, serum T4 levels are usually normal but may occasionally be slightly increased.In patients treated with large doses of propranolol (> 160 mg/day), T3 and T4levels change slightly, TSH levels remain normal, and patients are clinically euthyroid.It should be noted that actions of particular beta-adrenergic antagonists may be impaired when the hypothyroid patient is converted to the euthyroid state.Short-term administration of large doses of glucocorticoids may decrease serum T3 concentrations by 30\% with minimal change in serum T4 levels.However, long-term glucocorticoid therapy may result in slightly decreased T3 and T4 levels due to decreased TBG production (see above).',no
+3 mg twice daily,no
+'Drug(s) Affecting Pharmacokinetics of Ciprofloxacin Tablets, USP',yes
+­Nevirapine,no
+'Type ofInteraction',yes
+Interaction,yes
+'Recommendations for Drug Dosage Adjustment/Comments',yes
+'Drugs that may alter T4 and T3 metabolism',yes
+1.4,no
+'Table III. Clinicallysignificant drug interactions with\theophylline.Refer to PRECAUTIONS, Drug Interactions for Further information regarding table.',no
+'Hypoglycemia sometimes severe has been reported when ciprofloxacin and oral antidiabetic agents, mainly sulfonylureas (for example, glyburide, glimepiride), were co-administered, presumably by intensifying the action of the oral antidiabetic agent. Fatalities have been reported. Monitor blood glucose when ciprofloxacin is co-administered with oral antidiabetic drugs. [See Adverse Reactions (6.1).] ',no
+'Nevirapine and itraconazole should not be administered concomitantly due to potentia decreases in itraconazole plasma concentrations that may reduce efficacy of the drug.',no
+4 mg/day,no
+'Antidiabetic Agents- Biguanides- Meglitinides- Sulfonylureas- Thiazolidediones- Insulin',no
+'Clinical Comment ',yes
+'Antacids, Sucralfate, Multivitamins and Other Products Containing Multivalent Cations (magnesium/aluminum antacids; polymeric phosphate binders (for example, sevelamer, lanthanum carbonate); sucralfate; Videx® (didanosine) chewable/buffered tablets or pediatric powder; other highly buffered drugs; or products containing calcium, iron, or zinc and dairy products) ',no
+lomefloxacinmebendazole,no
+CarbamazepineHydantoinsPhenobarbitalRifampin,no
+'Dopamine/Dopamine AgonistsGlucocorticoidsOctreotide',no
+'The concomitant use of ADDYI with alcohol increased the risk of hypotension, syncope, and CNS depression compared to the use of ADDYI alone or alcohol alone [see Warnings and Precautions (5.1) and Clinical Pharmacology (12.2)].',no
+'Potential effect on anticoagulation. Monitoring of anticoagulation levels is recommended.',no
+Storage,no
+'Ciprofloxacin should be taken at least two hours before or six hours after Multivalent cation-containing products administration .[see Dosage and Administration(2)].',no
+'Antacids, Sucralfate, Multivitamins and Other Products Containing Multivalent Cations (magnesium/aluminum antacids; polymeric phosphate binders (for example, sevelamer, lanthanum carbonate); sucralfate; Videx® (didanosine) chewable/buffered tablets or pediatric powder; other highly buffered drugs; or products containing calcium, iron, or zinc and dairy products)',no
+' Dose of Coadministered Drug ',yes
+n,yes
+­Rifabutin,no
+'Table 2: Drug-Thyroidal Axis Interactions',no
+'?Nelfinavir M8 Metabolite?Nelfinavir Cmin',no
+'Prescribing Recommendations  ',yes
+'Growth Hormones- Somatrem- Somatropin',no
+Do not exceed 20 mg simvastatin daily ,no
+Antibiotics:Clarithromycin*,no
+'diarrhea elevated temperature hepatic disorders infectious hepatitis jaundice',no
+'¯ Nevirapine',no
+1.8,no
+1.6,no
+-,no
+'Avoid Use',no
+'Chloral HydrateDiazepamEthionamideLovastatinMetoclopramide6-MercaptopurineNitroprussidePara-aminosalicylate sodiumPerphenazineResorcinol (excessive topical use)Thiazide Diuretics',no
+'Cmax ofDidanosine(95\% CI)',yes
+'Administration of these agents with levothyroxine results in an initial transient increase in FT4.Continued administration results in a decrease in serum T4 and normal FT4 and TSH concentrations and, therefore, patients are clinically euthyroid.Salicylates inhibit binding of T4 and T3 to TBG and transthyretin.An initial increase in serum FT4 is followed by return of FT4 to normal levels with sustained therapeutic serum salicylate concentrations, although total-T4 levels may decrease by as much as 30\%.',no
+'Amiodarone Iodide (including iodine-containing Radiographic contrast agents)',no
+'Atazanavir/ Ritonavir*',no
+'cyclosporinec, glimepiridea, glipizidea, glyburidea,levothyroxinea, olmesartan medoxomila, and oralcontraceptives containing ethinyl estradiol andnorethindronea',no
+'Dose/Schedule of Co-administered Drug',yes
+'Drugs that may reduce TSH secretion - the reduction is not sustained; therefore, hypothyroidism does not occur',yes
+'Clinical Comment',yes
+'¯ Atazanavir ­ Nevirapine',no
+'Mean (SD) Noncompartmental Pharmacokinetic Parameters After Multiple Doses of 5 mg/day in Older Men',yes
+'Plasma concentrations may be altered. Nevirapine should not be coadministered with another NNRTI as this combination has not been shown to be beneficial.',no
+1.4 ,no
+Do not exceed 8 mg/day,no
+'Use of these agents may result in a transient reduction in TSH secretion when administered at the following doses: dopamine ( ? 1 mcg/kg/min); Glucocorticoids (hydrocortisone ? 100 mg/day or equivalent); Octreotide ( > 100 mcg/day).',no
+'Concurrent use of tri/tetracyclic antidepressants and levothyroxine may increase the therapeutic and toxic effects of both drugs, possibly due to increased receptor sensitivity to catecholamines.Toxic effects may include increased risk of cardiac arrhythmias and CNS stimulation; onset of action of tricyclics may be accelerated. Administration of sertraline in patients stabilized on levothyroxine may result in increased levothyroxine requirements.',no
+'Topiramate Concentration',yes
+'EffectAverage effect on steady state theophylline concentration or other clinical effect for pharmacologic interactions. Individual patients may experience larger changes in serum theophylline concentration than the value listed.',no
+'Drugs That are Affected by Ciprofloxacin Tablets, USP',yes
+'Vardenafil 20 mgPlacebo-subtracted',yes
+'Potentiation of ciprofloxacin toxicity may occur. ',no
+1.2 ,no
+'? lamotrigine   ? levonorgestrel',no
+'AUCSS(0–12h)(Extent of systemic exposure)',yes
+Sympathomimetics,yes
+'Chloral HydrateDiazepamEthionamideLovastatinMetoclopramide6-MercaptopurineNitroprussidePara-aminosalicylate sodiumPerphenazineResorcinol (excessive topical use)Thiazide Diuretics',no
+400 mg twice daily,no
+'Dose of CRIXIVAN (mg)',yes
+-,no
+'Dosing Recommendations',yes
+'Rifabutin and its metabolite concentrations were moderately increased. Due to high intersubject variability, however, some patients may experience large increases in rifabutin exposure and may be at higher risk for rifabutin toxicity. Therefore, caution should be used in concomitant administration.',no
+'Hypoglycemia sometimes severe has been reported when CIPRO XR and oral antidiabetic agents, mainly sulfonylureas (for example, glyburide, glimepiride), were co-administered, presumably by intensifying the action of the oral antidiabetic agent. Fatalities have been reported. Monitor blood glucose when CIPRO XR is co-administered with oral antidiabetic drugs. [See Adverse Reactions (6.1).]',no
+'Amiodarone Iodide (including iodine- containing Radiographic contrast agents)',no
+Do not exceed 10 mg simvastatin daily ,no
+'Effect on Concentration of Lamotrigine or  Concomitant Drug',yes
+'? lamotrigine  ? carbamazepine epoxide',no
+Re-evaluate dosing. ,no
+'Clarithromycin exposure was significantly decreased by nevirapine; however, 14-OH metabolite concentrations were increased. Because clarithromycin active metabolite has reduced activity against Mycobacterium aviumintracellulare complex, overall activity against this pathogen may be altered. Alternatives to clarithromycin, such as azithromycin, should be considered.',no
+1 mg single dose,no
+'ClofibrateEstrogen-containing oral contraceptivesEstrogens (oral)Heroin / Methadone5-FluorouracilMitotaneTamoxifen',no
+'Cardiac Glycosides',yes
+Cmin,yes
+'Mean (± SD)',yes
+AUC ,yes
+'If unavoidable, monitor for duloxetine toxicity',no
+'Administration of these agents with levothyroxine results in an initial transient increase in FT4. Continued administration results in a decrease in serum T4 and normal FT4 and TSH concentrations and, therefore, patients are clinically euthyroid. Salicylates inhibit binding of T4 and T3 to TBG and transthyretin. An initial increase in serum FT4, is followed by return of FT4 to normal levels with sustained therapeutic serum salicylate concentrations, although total-T4 levels may decrease by as much as 30\%.',no
+0.55,no
+'Drugs that may alter T nd T serum transport - but FT concentration remains normal; and, therefore, the patient remains euthyroid',yes
+'Aminoglutethimide Amiodarone Iodide (including iodine-containing Radiographic contrast agents) Lithium Methimazole Propylthioracil (PTU) Sulfonamides Tolbutamide',no
+'For patients with HoFH, do not exceed 20 mg simvastatin daily*',no
+'Drugs That are Affected by CIPRO IV',yes
+'?Efavirenz',no
+'Effect on ActiveMoiety (Risperidone + 9-Hydroxy- Risperidone (Ratio*)',yes
+'Drugs that may decrease T4 absorption, which may result in hypothyroidism',yes
+'ClofibrateEstrogen-containing oral contraceptivesEstrogens (oral)Heroin / Methadone5-FluorouracilMitotaneTamoxifen',no
+'Use with caution Reduced clearance resulting in elevated levels and prolongation of serum half-life',no
+'Antacids- Aluminum & Magnesium Hydroxides- SimethiconeBile Acid Sequestrants- Cholestyramine- ColestipolCalcium CarbonateCation Exchange Resins- KayexalateFerrous SulfateOrlistatSucralfate',no
+'AUC ofCoadministeredDrug (95\% CI)',yes
+medroxyprogesterone ,no
+'Adjusted Dose',yes
+'Drugs that may reduce TSH secretion - the reduction is not sustained; therefore, hypothyroidism does not occur',yes
+'Potential increase in the risk of methotrexate associated toxic reactions. Therefore, carefully monitor patients under methotrexate therapy when concomitant ciprofloxacin therapy is indicated.',no
+AUC,yes
+40 mg/day ,no
+1.8,no
+'Oral drugs that have demonstrated interaction with sevelamer and are to be dosed separately from Renvela',yes
+10 mg/day ,no
+AED Concentration,yes
+'Use with caution Two-fold increase in exposure',no
+'Excessive use of thyroid hormones with growth hormones may accelerate epiphyseal closure.However, untreated hypothyroidism may interfere with growth response to growth hormone.',no
+TopiramateConcentration,yes
+'Effect on Active Moiety (Risperidone + 9-Hydroxy-Risperidone (RatioChange relative to reference) ',yes
+'Voriconazole Plasma Exposure(Cmax and AUC? after 200 mg q12h) ',yes
+'hypothyroidismnephrotic syndrome',no
+'Cytokines - Interferon-? - Interleukin-2',no
+'Dosing of Vardenafil and Alpha-Blocker Separated by 6 Hours',no
+'Effect on Concentration of Lamotrigine or Concomitant Drug',yes
+'Long-term lithium therapy can result in goiter in up to 50\% of patients, and either subclinical or overt hypothyroidism, each in up to 20\% of patients.The fetus, neonate, elderly and euthyroid patients with underlying thyroid disease (e.g., Hashimoto\'s thyroiditis or with Grave\'s disease previously treated with radioiodine or surgery) are among those individuals who are particularly susceptible to iodine-induced hypothyroidism.Oral cholecystographic agents and amiodarone are slowly excreted, producing more prolonged hypothyroidism than parenterally administered iodinated contrast agents.Long-term aminoglutethimide therapy may minimally decrease T4 and T3 levels and increase TSH, although all values remain within normal limits in most patients.',no
+Topiramate Concentration,yes
+'Monitor renal function (in particular serum creatinine) when CIPRO XR is co-administered with cyclosporine.',no
+'Ciprofloxacin should be taken at least two hours before or six hours after Multivalent cation-containing products administration [see Dosage and Administration. (2)]. ',no
+'Table 4 Drugs Tested in Binding or Drug Interaction Testing or With Post-Marketing ReportsIn VitroIn Vivo',no
+'Concurrent use may increase the effects of sympathomimetics or thyroid hormone. Thyroid hormones may increase the risk of coronary insufficiency when sympathomimetic agents are administered to patients with coronary artery disease.',no
+'VIBERZI may increase the exposure of co-administered OATP1B1 and BCRP substrates.Increased exposure to rosuvastatin when co-administered with VIBERZI with a potential for increased risk of myopathy/rhabdomyolysis [see Clinical Pharmacology (12.3)]',no
+'Drugs that may reduce TSH secretion–the reduction is not sustained; therefore, hypothyroidism does not occur',yes
+'Monitoring for ropinirole-related adverse reactions and appropriate dose adjustment of ropinirole is recommended during and shortly after co-administration with CIPRO XR [see Warnings and Precautions (5.15)].',no
+'Methylxanthine Bronchodilators - (e.g., Theophylline)',no
+'Effect onConcentration of Saquinavir or Concomitant Drug',yes
+'Anticoagulants (oral)- Coumarin Derivatives- Indandione Derivatives',no
+' Risperidone Dose Recommendation',yes
+'Effect on Concentration of Lamotrigine or Concomitant Drug',yes
+'Hepatitis C Antiviral Agents',yes
+'AUC ofStavudine (95\% CI)',yes
+'',no
+'Methadone levels were decreased; increased dosages may be required to prevent symptoms of opiate withdrawal. Methadone-maintained patients beginning nevirapine therapy should be monitored for evidence of withdrawal and methadone dose should be adjusted accordingly.',no
+'AmiodaroneIodide (including iodine-containing Radiographiccontrast agents)',no
+'Drugs that may cause protein-binding site displacement',yes
+Risperidone DoseRecommendation,yes
+'Clinical Rationale and Magnitude of Drug Interaction',yes
+'Dose of Coadministered drug (mg) ',yes
+'Drug or Drug Class',yes
+'Table 2: Drug — Thyroidal Axis Interactions',no
+'Mean Ratio of EtravirinePharmacokinetic Parameters90\% CI; No Effect = 1.00',no
+'Cipro XR may further prolong the QT interval in patients receiving drugs known to prolong the QT interval (for example, class IA or III antiarrhythmics, tricyclic antidepressants, macrolides, antipsychotics) [see Warnings and Precautions (5.10) and Use in Specific Populations (8.5)].',no
+10 mg/day ,no
+'Avoid Use Five-fold increase in duloxetine exposure ',no
+'Dosing RecommendationsTake at least 2 hours before or 6 hours after sevelamerTake at least 2 hours before sevelamer',no
+'CIPRO XR inhibits the formation of paraxanthine after caffeine administration (or pentoxifylline containing products). Monitor for xanthine toxicity and adjust dose as necessary.',no
+'Administration of these agents with levothyroxine results in an initial transient increase in FT . Continued administration results in a decrease in serum T and normal FT and TSH concentrations and, therefore, patients are clinically euthyroid. Salicylates inhibit binding of T and T to TBG and transthyretin. An initial increase in serum FT , is followed by return of FT to normal levels with sustained therapeutic serum salicylate concentrations, although total-T levels may decrease by as much as 30\%.',no
+0.94,no
+'AmiodaroneBeta-adrenergic antagonists- (e.g., Propranolol > 160 mg/day)Glucocorticoids-(e.g., Dexamethasone ? 4 mg/day)Propylthiouracil (PTU)',no
+Re-evaluate dosing. Do not exceed 8 mg/day,no
+'Use with caution(interferes with renal tubular secretion of CIPRO XR and increases CIPRO XR serum levels)',no
+Effect**,yes
+'Cmax ofCoadministeredDrug(90\% CI)',yes
+'Gastrointestinal Agentscimetidineranitidine  Immunosuppressives\tacrolimus Other Drugsibric acid derivatives  (e.g., bezafibrate, fenofibrate)',no
+'Table II. Clinically Significant Drug Interactions With Theophylline*',no
+'Dosing Schedule ',yes
+'Administration of these agents with levothyroxine results in an initial transient increase in FT4. Continued administration results in a decrease in serum T4 and normal FT4 and TSH concentrations and, therefore, patients are clinically euthyroid. Salicylates inhibit binding of T4 and T3 to TBG and transthyretin. An initial increase in serum FT4, is followed by return of FT4 to normal levels with sustained therapeutic serum salicylate concentrations, although total-T4 levels may decrease by as much as 30\%.',no
+'AED Concentration',yes
+carbamazepine       ,no
+'Drugs that may alter T4 and T3 serum transport- but FT4 concentration remains normal; and, therefore, the patient remains euthyroid',yes
+1.6,no
+'Voriconazole PlasmaExposure(Cmax and AUC? after200 mg q12h)',yes
+150 mg twice daily,no
+'Stimulation of hepatic microsomal drug-metabolizing enzyme activity may cause increased hepatic degradation of levothyroxine, resulting in increased Ievothyroxine requirements. Phenytoin and carbamazepine reduce serum protein binding of levothyroxine, and total- and free-T4 may be reduced by 20\% to 40\%, but most patients have normal serum TSH levels and are clinically euthyroid.',no
+'Plasma concentrations of boceprevir may be decreased due to induction of CYP3A4/5 by nevirapine.',no
+Cmax,yes
+' Ratio (with/without coadministered drug) of Azithromycin Pharmacokinetic Parameters (90\% CI); No Effect = 1.00 ',yes
+'Decrease CIPRO XR absorption, resulting in lower serum and urine levels considerably lower than desired for concurrent administration of these agents with CIPRO XR',no
+0.94,no
+Females(n=14),yes
+'Amlodipine\t\t\t\t\t\t\t\t\tAspirin\t\t\t\t\t\t\t\t\tAtorvastatin\t\t\t\t\t\t\t\t\tCalcitriol\t\t\t\t\t\t\t\t\tClopidogrel\t\t\t\t\t\t\t\t\tDigoxin\t\t\t\t\t\t\t\t\tDiltiazem\t\t\t\t\t\t\t\t\tDoxercalciferol\t\t\t\t\t\t\t\t\tEnalapril\t\t\t\t\t\t\t\t\tFluvastatin\t\t\t\t\t\t\t\t\tGlimepiride\t\t\t\t\t\t\t\t\tLevofloxacin\t\t\t\t\t\t\t\t\tLosartan\t\t\t\t\t\t\t\t\tMetoprolol\t\t\t\t\t\t\t\t\tPravastatin\t\t\t\t\t\t\t\t\tPropranolol\t\t\t\t\t\t\t\t\tSitagliptin\t\t\t\t\t\t\t\t\tWarfarin',no
+'Drugs That are Affected by Ciprofloxacin',yes
+'Concurrent administration of ciprofloxacin with theophylline may result in increased risk of a patient developing central nervous system (CNS) or other adverse reactions. If concomitant use cannot be avoided, monitor serum levels of theophylline and adjust dosage as appropriate.[See Warnings and Precautions (5.6).]',no
+'Drugs That May Increase the Risk of Hypoglycemia',yes
+Rifabutin*,no
+Coadministered Drug,yes
+'CmaxSS(Peakplasma concentration)',yes
+'Avoid Use(Plasma Exposure Likely to be Increased and Prolonged)',no
+20 mg/day ,no
+'12 to 18 years(n=6)',no
+'Ciprofloxacin may further prolong the QT interval in patients receiving drugs known to prolong the QT interval (for example, class IA or III antiarrhythmics, tricyclic antidepressants, macrolides, antipsychotics)[see Warnings and Precautions (5.10) and Use inSpecific Populations (8.5)].',no
+'Effect on Concentration of Nevirapineor Concomitant Drug',yes
+Effect**,yes
+' Dosing Schedule',yes
+'Change in the Concentration of Ganciclovir or Concomitant Drug',no
+'Antineoplasticmelphalan   Antifungals mphotericin Bketoconazole',no
+'Carbamazepine Hydantoins Phenobarbital Rifampin',no
+'Drugs that may increase thyroid hormone secretion, which may result in hyperthyroidism',yes
+'Cmax SS(Peak plasma concentration)',yes
+Rifampin*,no
+¯Lopinavir ,no
+1.1 ,no
+'Increased Risk of Myopathy/Rhabdomyolysis (2, 5.1, 7, 12.3)',no
+'Drug Interactions Associated with Increased Risk of Myopathy/Rhabdomyolysis (2.2, 4, 5.2, 7.1, 7.2, 7.3, 7.4, 12.3)',no
+'Chloral HydrateDiazepamEthionamideLovastatinMetoclopramide6-MercaptopurineNitroprussidePara-aminosalicylate sodiumPerphenazineResorcinol (excessive topical use)Thiazide Diuretics',no
+'\% Change of Co-administered Drug Pharmacokinetic Parameters (90\% CI)',yes
+'Influence of Oxcarbazepine on AED Concentration(Mean Change, 90\% Confidence Interval)',yes
+'Drugs that may increaseserum TBG concentration',yes
+'Antithrombotics: Warfarin',no
+'Do not co-administer nevirapine with atazanavir because nevirapine substantially decreases atazanavir exposure and there is a potential risk for nevirapine-associated toxicity due to increased nevirapine exposures.',no
+'Furosemide ( > 80 mg IV)HeparinHydantoinsNon Steroidal Anti-lnflammatory Drugs- Fenamates- PhenylbutazoneSalicylates ( > 2 g/day)',no
+'Conjugated Estrogens plus Progesterone Capsules',yes
+400 mg twice daily,no
+Risperidone ,no
+'Drugs That are Affected by Ciprofloxacin ',yes
+'Use with caution(transient elevations in serum creatinine)',no
+'* The interaction between nevirapine and the drug was evaluated in a clinical study. All other drug interactions shown are predicted.',no
+'cyclosporine , glimepiride , glipizide , glyburide , levothyroxine , olmesartan medoxomil , and oral contraceptives containing ethinyl estradiol and norethindronecaa',no
+'Androgens / Anabolic SteroidsAsparaginaseGlucocorticoidsSlow-Release Nicotinic Acid',no
+'Drugs that may decrease thyroid hormone secretion, which mayresult in hypothyroidism',yes
+'Concomitant administration of tizanidine and ciprofloxacin is contraindicated due to the potentiation of hypotensive and sedative effects of tizanidine [ ]see Contraindications (4.2)',no
+'Administration of these enzyme inhibitors decrease the peripheral conversion of T4 to T3, leading to decreased T3 levels. However, serum T4 levels are usually normal but may occasionally be slightly increased. In patients treated with large doses of propranolol ( > 160 mg/day), T3 and T4 levels change slightly, TSH levels remain normal, and patients are clinically euthyroid. It should be noted that actions of particular beta-adrenergic antagonists may be impaired when the hypothyroid patient is converted to the euthyroid state. Short-term administration of large doses of glucocorticoids may decrease serum T3 concentrations by 30\% with minimal change in serum T4 levels. However, long-term glucocorticoid therapy may result in slightly decreased T3 and T4 levels due to decreased TBG production (see above).',no
+'Effect on Concentration of Nevirapine or Concomitant Drug',yes
+'Antidiabetic Agents - Biguanides - Meglitinides - Sulfonylureas - Thiazolidediones - Insulin',no
+'Dosing in pediatric patients:Please refer to the Kaletra® prescribing information for dosing recommendations based on body surface area and body weight.Neither lopinavir/ritonavir tablets nor oral solution should be administered once daily in combination with nevirapine.',no
+'To avoid the loss of seizure control associated with decreased phenytoin levels and to prevent phenytoin overdose-related adverse reactions upon CIPRO XR discontinuation in patients receiving both agents, monitor phenytoin therapy, including phenytoin serum concentration during and shortly after co-administration of CIPRO XR with phenytoin.',no
+40 mg/day ,no
+Cmax ,yes
+'Drugs that may decrease thyroid hormone secretion, which may result in hypothyroidism',yes
+Re-evaluate dosing. ,no
+'Concomitant administration of tizanidine and CIPRO XR is contraindicated due to the potentiation of hypotensive and sedative effects of tizanidine [see Contraindications (4.2)].',no
+'AUC ofCoadministeredDrug(90\% CI)',yes
+Mitotane,no
+'Antacids- Aluminum & Magnesium Hydroxides- SimethiconeBile Acid Sequestrants- Cholestyramine- ColestipolCalcium CarbonateCation Exchange Resins- KayexalateFerrous SulfateOrlistatSucralfate',no
+'AUC of Coadministered  Drug(95\% CI)',yes
+'Cytokines- Interferon-?- Interleukin-2',no
+'Drugs That are Affected by Ciprofloxacin',yes
+'Anticonvulsants:Carbamazepine,clonazepam, ethosuximide',no
+'Opiate agonists: Fentanyl',no
+Anticonvulsants,yes
+'EffectAverage effect on steady-state theophyllineconcentration or other clinical effect forpharmacologic interactions. Individual patientsmay experience larger changes in serum\theophylline concentration than the valuelisted.',no
+'Comments ',yes
+'Stimulation of hepatic microsomal drug-metabolizing enzyme activity may cause increased hepatic degradation of levothyroxine, resulting in increased Ievothyroxine requirements. Phenytoin and carbamazepine reduce serum protein binding of levothyroxine, and total- and free-T4 may be reduced by 20\% to 40\%, but most patients have normal serum TSH levels and are clinically euthyroid.',no
+'n ',yes
+'Effect onConcentration ofLamotrigine orConcomitant Drug',yes
+Recommendation,yes
+'Ciprofloxacin inhibits the formation of paraxanthine after caffeine administration (or pentoxifylline containing products). Monitor for xanthine toxicity and adjust dose as necessary.',no
+'Potentiation of ciprofloxacin toxicity may occur.',no
+Benzodiazapines,yes
+'Methylxanthine Bronchodilators- (e.g., Theophylline)',no
+'Drugs that may decrease thyroid hormone secretion, which may\result in hypothyroidism',yes
+'Administration of these enzyme inhibitors decrease the peripheral conversion of T4 to T3, leading to decreased T3 levels. However, serum T4 levels are usually normal but may occasionally be slightly increased. In patients treated with large doses of propranolol ( > 160 mg/day), T3 and T4 levels change slightly, TSH levels remain normal, and patients are clinically euthyroid. It should be noted that actions of particular beta-adrenergic antagonists may be impaired when the hypothyroid patient is converted to the euthyroid state. Short-term administration of large doses of glucocorticoids may decrease serum T3 concentrations by 30\% with minimal change in serum T4 levels. However, long-term glucocorticoid therapy may result in slightly decreased T3 and T4 levels due to decreased TBG production (see above).',no
+DigoxinEnalaprilIronMetoprololWarfarin,no
+'Recommendations for DrugDosage Adjustment/Comments',yes
+'Drugs that may decrease serum TBG concentration',yes
+'Recommendation ',yes
+'Dose of AED(mg/day)',yes
+'Decreased theophylline clearance may occur in hypothyroid patients; clearance returns to normal when the euthyroid state is achieved.',no
+'Conjugated Estrogens plus PROMETRIUM Capsules',yes
+Dose adjustment notneeded,no
+'Avoid Use (Plasma Exposure Likely to be Increased and Prolonged)',no
+20 mg/day ,no
+'Use with cautionGlucose-lowering effect potentiated',no
+'Oral contraceptives: Ethinyl estradiol and Norethindrone*',no
+Risperidone DoseRecommendation,yes
+'Table 1\tOral drugs that can be administered concomitantly with Velphoro',no
+'¯Amprenavir ­Nevirapine',no
+'Drug(s) Affecting Pharmacokinetics of CIPRO XR',yes
+Cmax,yes
+'Long-term lithium therapy can result in goiter in up to 50\% of patients, and either subclinical or overt hypothyroidism, each in up to 20\% of patients. The fetus, neonate, elderly and euthyroid patients with underlying thyroid disease (e.g., Hashimoto\'s thyroiditis or with Grave\'s disease previously treated with radioiodine or surgery) are among those individuals who are particularly susceptible to iodine-induced hypothyroidism. Oral cholecystographic agents and amiodarone are slowly excreted, producing more prolonged hypothyroidism than parenterally administered iodinated contrast agents. Long-term amino-glu-tethimide therapy may minimally decrease T4 and T3 levels and increase TSH, although all values remain within normal limits in most patients.',no
+1.5,no
+'Drugs that may increase thyroid hormone secretion, whichmay result in hyperthyroidism',yes
+'DigoxinEnalapril Iron Metoprolol Warfarin',no
+'Ratio (90\% ConfidenceInterval) of Co-administered DrugPharmacokinetic Parameterswith/withouttipranavir/ritonavir; No Effect= 1.00',yes
+'Ciprofloxacin may further prolong the QT interval in patients receiving drugs known to prolong the QT interval (for example, class IA or III antiarrhythmics, tricyclic antidepressants, macrolides, antipsychotics) [see Warnings and Precautions (5.10) and Use in Specific Populations (8.5)]. ',no
+Alcohol,yes
+3 mg twice daily,no
+0.55,no
+1.5,no
+'AUCss(0–12h)(Extent of systemic exposure)',yes
+'Central Nervous System (CNS) Depressants',yes
+'Dose of Co-administered Drug',yes
+Risperidone,no
+'Monitor for sildenafil toxicity [see Pharmacokinetics (12.3)].',no
+Avoid grapefruit juice ,no
+Risperidone,no
+3 mg twice daily,no
+'Clinical Comment',yes
+Effect**,yes
+'Drugs That are Affected by CIPRO',yes
+'Cytokines- Interferon-?- Interleukin-2',no
+'Prescribing Recommendations',yes
+'Specific Drugs Reported',yes
+'serum TBG concentration',yes
+'Saquinavir/Ritonavir ',no
+Risperidone,no
+'Antidiabetic Agents- Biguanides- Meglitinides- Sulfonylureas- Thiazolidediones- Insulin',no
+'TOPAMAX Concentration',yes
+PK,no
+'Concurrent use may reduce the efficacy of levothyroxine by binding and delaying or preventing absorption, potentially resulting in hypothyroidism.Calcium carbonate may form an insoluble chelate with levothyroxine, and ferrous sulfate likely forms a ferric-thyroxine complex.Administer levothyroxine at least 4 hours apart from these agents. Patients treated concomitantly with orlistat and levothyroxine should be monitored for changes in thyroid function.',no
+'CIPRO XR should be taken at least two hours before or six hours after Multivalent cation-containing products administration. [See Dosage and Administration (2).]',no
+'\% Change of Coadministered DrugPharmacokinetic ParametersThe 95\% confidence intervals for the percent change in the pharmacokinetic parameter are displayed.',no
+'Drugs that may decrease',yes
+'Clinical Comment ',yes
+'I. Due to the competition of salicylate with other drugs for binding to serum albumin the following drug interactions may occur:',no
+'Simultaneous dosing of Vardenafil and Alpha-Blocker',no
+'Plasma concentrations of nevirapine and the anticonvulsant may be decreased.',no
+'Cmax ofCoadministeredDrug (95\% CI)',yes
+'Risperidone Dose Recommendation',yes
+Re-evaluate dosing. Do not exceed 8 mg/day,no
+'6 to <12years(n=8)',no
+'Effect on Concentration of Ritonavir or Concomitant Drug',yes
+'Table 4 Drugs Tested in In Vitro Binding or In Vivo Drug Interaction Testing or With Post-Marketing Reports',no
+Risperidone DoseRecommendation,yes
+'Antacids, Sucralfate, Multivitamins and Other Products Containing Multivalent Cations (magnesium/aluminum antacids; polymeric phosphate binders (for example, sevelamer, lanthanum carbonate); sucralfate; Videx® (didanosine) chewable/buffered tablets or pediatric powder; other highly buffered drugs; or products containing calcium, iron, or zinc and dairy products)',no
+'? Indinavir  ',no
+'Clinical Comment ',yes
+Fosamprenavir* ,no
+'Prescribing Recommendations ',yes
+'AmiodaroneBeta-adrenergic antagonists- (e.g., Propranolol > 160 mg/day)Glucocorticoids-(e.g., Dexamethasone ? 4 mg/day)Propylthiouracil (PTU)',no
+'AED Concentration',yes
+'Clinical Rationale and Magnitude of Drug Interaction',yes
+'Drugs that may decrease serum TBG concentration',yes
+Tmax(hr),yes
+'CLINICAL EFFECT(S)',yes
+500 mg four timesdaily,no
+2 or 3 mg twicedaily,no
+'Drugs that may increase serum TBG concentration',yes
+1.6,no
+'Prescribing Recommendations',yes
+0.94,no
+'Because of the risk of increased exposure to nevirapine, caution should be used in concomitant administration, and patients should be monitored closely for nevirapine-associated adverse events.',no
+Contraindicated with simvastatin,no
+'Dosing in adult patients:A dose adjustment of lopinavir/ritonavir to 500/125 mg tablets twice daily or 533/133 mg (6.5 mL) oral solution twice daily is recommended when used in combination with nevirapine. Neither lopinavir/ritonavir tablets nor oral solution should be administered once daily in combination with nevirapine.',no
+'Appropriate doses for this combination have not been established.',no
+'Amiodarone Beta-adrenergic antagonists - (e.g., Propranolol > 160 mg/day) Glucocorticoids -(e.g., Dexamethasone ? 4 mg/day) Propylthiouracil (PTU)',no
+'Dose Regimen of Immediate-Release Nevirapine',yes
+Ketoconazole*,no
+'AUC(0-24h)(ng × h/mL)',yes
+'Clinical Comment',yes
+'Concurrent use may reduce the efficacy of levothyroxine by binding and delaying or preventing absorption, potentially resulting in hypothyroidism. Calcium carbonate may form an insoluble chelate with levothyroxine, and ferrous sulfate likely forms a ferric-thyroxine complex. Administer levothyroxine at least 4 hours apart from these agents. Patients treated concomitantly with orlistat and levothyroxine should be monitored for changes in thyroid function.',no
+'HIV Antiviral Agents: Non-Nucleoside Reverse Transcriptase Inhibitors (NNRTIs)',yes
+Topiramate Concentration,yes
+'Antidiabetic agents, ACE inhibitors, angiotensin II receptor blocking agents, disopyramide, fibrates, fluoxetine, monoamine oxidase inhibitors, pentoxifylline, pramlintide, propoxyphene, salicylates, somatostatin analogs (e.g., octreotide), and sulfonamide antibiotics.',no
+'Methylxanthine Bronchodilators- (e.g., Theophylline)',no
+'Methylxanthine Bronchodilators- (e.g., Theophylline)',no
+'Use with cautionTwo-fold increase in exposure',no
+'? Lopinavir  ',no
+'2 to <6years(n=12)',no
+'300 mg/100 mg QD day 4 to 13, then 400 mg/100 mg QD, day 14 to 23',no
+'Classes of Drugs',yes
+n,yes
+'Dosing Recommendations',yes
+'Nevirapine and telaprevir should not be coadministered because changes in plasma concentrations of nevirapine, telaprevir, or both may be may result in a reduction in telaprevir efficacy or an increase in nevirapine-associated adverse events.',no
+Cmin,yes
+' Effect on Active Moiety(Risperidone + 9- Hydroxy-Risperidone (Ratio*)',yes
+'Cmax ofDidanosine(90\% CI)',yes
+'Drugs that may increase thyroid hormone secretion, which may result in hyperthyroidism',yes
+'Drug Interactions Associated with Increased Risk of Myopathy/Rhabdomyolysis (2.6, 5.1, 7, 12.3)',no
+'Use with cautionAltered serum levels of phenytoin (increased and decreased)',no
+'Cmax SS(Peak plasma concentration)',yes
+'Plasma concentrations of telaprevir may be decreased due to induction of CYP3A4 by nevirapine and plasma concentrations of nevirapine may be increased due to inhibition of CYP3A4 by telaprevir.',no
+10 mg/day,no
+0.55,no
+Inhibitors,yes
+'Iodide and drugs that contain pharmacological amounts of iodide may cause hyperthyroidism in euthyroid patients with Grave\'s disease previously treated with antithyroid drugs or in euthyroid patients with thyroid autonomy (e.g., multinodular goiter or hyperfunctioning thyroid adenoma).Hyperthyroidism may develop over several weeks and may persist for several months after therapy discontinuation.Amiodarone may induce hyperthyroidism by causing thyroiditis.',no
+Dosing Schedule,yes
+'Concurrent use may produce marked hypertension and tachycardia; cautious administration to patients receiving thyroid hormone therapy is recommended.',no
+'Drugs that may decrease thyroid hormone secretion, which may result in hypothyroidism',yes
+TopiramateConcentration,yes
+1.2 ,no
+Effect**,yes
+'Simultaneous dosing of Vardenafil 5 mgand Alpha-Blocker,Placebo-Subtracted',no
+'Effect on Concentration of Atazanavir or Concomitant Drug',yes
+AUC,yes
+'Oral contraceptives and other hormonal methods of birth control should not be used as the sole method of contraception in women taking nevirapine, since nevirapine may lower the plasma levels of these medications. An alternative or additional method of contraception is recommended.',no
+'Stimulation of hepatic microsomal drug-metabolizing enzyme activity may cause increased hepatic degradation of levothyroxine, resulting in increased Ievothyroxine requirements. Phenytoin and carbamazepine reduce serum protein binding of levothyroxine, and total- and free-T4 may be reduced by 20\% to 40\%, but most patients have normal serum TSH levels and are clinically euthyroid.',no
+Antiretrovirals,yes
+'Concurrent administration of ciprofloxacin with theophylline may result in increased risk of a patient developing central nervous system (CNS) or other adverse reactions. If concomitant use cannot be avoided, monitor serum levels of theophylline and adjust dosage as appropriate. [See Warnings and Precautions (5.6).] ',no
+'? lamotrigine',no
+'AED Concentration ',yes
+23,no
+Effect,yes
+1.4,no
+Desloratadine,no
+1 mg single dose,no
+'Co-administeredDrug Dose (Schedule)',yes
+Effect**,yes
+'Fosamprenavir/ Ritonavir*',no
+Itraconazole,no
+'Androgens / Anabolic Steroids Asparaginase Glucocorticoids Slow-Release Nicotinic Acid',no
