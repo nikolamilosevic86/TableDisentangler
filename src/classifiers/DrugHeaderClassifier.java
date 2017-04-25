@@ -106,7 +106,7 @@ public class DrugHeaderClassifier {
 		try {
 			classifier.setModelPath(ClassifierPath);
 			classifier.setTrim(true);
-			String SQL = "SELECT * from cell inner join arttable on Table_idTable=idTable where section='34073-7'";
+			String SQL = "SELECT * from cell inner join arttable on Table_idTable=idTable where section='34073-7' and idCell>735589";
 			Statement st = conn.createStatement();
 
 			rs = st.executeQuery(SQL);

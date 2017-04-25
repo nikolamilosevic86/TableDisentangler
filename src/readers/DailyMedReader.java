@@ -61,6 +61,9 @@ public class DailyMedReader implements Reader {
 			while ((line = reader.readLine()) != null) {
 				xml += line + '\n';
 			}
+			xml = xml.replaceAll("&nbsp", " ");
+			xml = xml.replaceAll("<br>", " \n");
+			xml = xml.replaceAll("<br/>", " \n");
 			DocumentBuilderFactory factory = DocumentBuilderFactory
 					.newInstance();
 			factory.setNamespaceAware(true);
@@ -495,6 +498,7 @@ public class DailyMedReader implements Reader {
 			}// end for tds.size()
 		}// end for rowheads
 		table.stat.setNum_columns(num_of_columns);
+		table.setTable_cells(cells);
 		return table;
 	}
 

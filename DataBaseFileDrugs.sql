@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS `Article` (
   `Source` VARCHAR(500) NULL,
   `SpecId` VARCHAR(500) NULL,
   `PlainText` LONGTEXT NULL,
+  `Year` INT NULL,
   PRIMARY KEY (`idArticle`))
 ENGINE = InnoDB;
 

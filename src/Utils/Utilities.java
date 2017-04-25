@@ -247,6 +247,7 @@ public class Utilities {
 
 	public static String getString(Node xml) {
 		String result = "";
+		
 		if (TablInExMain.doXMLInput) {
 			result = CreateXMLStringFromSubNodeWithoutDeclaration(xml);
 		} else {

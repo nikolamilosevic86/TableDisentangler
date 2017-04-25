@@ -361,11 +361,11 @@ public class Statistics {
 			total_num_of_header_cells++;
 		}
 		num_of_chars_in_cells+=cell.getCell_content().length();
-		if(cell.getCell_content().trim().equalsIgnoreCase(" ") || cell.getCell_content().trim().equalsIgnoreCase("") || (((int)cell.getCell_content().trim().charAt(0))== 160))
+		if(cell.getCell_content().trim().equalsIgnoreCase(" ") || cell.getCell_content().trim().equalsIgnoreCase("") || (((int)cell.getCell_content().trim().charAt(0))== 160 &&cell.getCell_content().trim().length()==1 ))
 		{
 			num_of_empty_cells++;
 			table.stat.AddEmptyCell();
-			cell.setCell_content("");
+			//cell.setCell_content("");
 			if(cell.isIs_header())
 				table.stat.AddHeaderEmptyCell();
 			
