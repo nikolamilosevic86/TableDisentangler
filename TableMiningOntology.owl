@@ -1,0 +1,737 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY owl "https://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#"
+     xml:base="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="https://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology">
+        <rdfs:label>Table mining ontology</rdfs:label>
+        <rdfs:comment>This ontology was developed for mining tables (mainly information extraction) from tables in PubMed Central and DailyMed. It can be extended and applied to other scientific literature.</rdfs:comment>
+        <owl:versionInfo>Version 1.0</owl:versionInfo>
+        <owl:versionIRI rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology/1.0"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#dasd -->
+
+    <owl:ObjectProperty rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#dasd"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Empty -->
+
+    <owl:DatatypeProperty rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Empty">
+        <rdfs:subPropertyOf rdf:resource="&owl;topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#List -->
+
+    <owl:DatatypeProperty rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#List"/>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Matrix -->
+
+    <owl:DatatypeProperty rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Matrix"/>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Multi-table -->
+
+    <owl:DatatypeProperty rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Multi-table"/>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Numeric -->
+
+    <owl:DatatypeProperty rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Numeric"/>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#PartiallyNumeric -->
+
+    <owl:DatatypeProperty rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#PartiallyNumeric">
+        <rdfs:subPropertyOf rdf:resource="&owl;topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Super-row -->
+
+    <owl:DatatypeProperty rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Super-row">
+        <rdfs:subPropertyOf rdf:resource="&owl;topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Text -->
+
+    <owl:DatatypeProperty rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Text"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Abstracts -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Abstracts">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Article"/>
+        <rdfs:comment>Abstracts of the paper</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#AgentName -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#AgentName">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Annotation"/>
+        <rdfs:comment>Name of the software or person annotating data</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Agent_type -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Agent_type">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Annotation"/>
+        <rdfs:comment>Type of the annotation agent (e.g. software, human)</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#AnnotatedCellID -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#AnnotatedCellID">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Annotation"/>
+        <rdfs:comment>ID of annotated Cell. Locates the cell</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Annotation -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Annotation">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Annotations"/>
+        <rdfs:comment>Annotation class</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#AnnotationConcept -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#AnnotationConcept">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Annotation"/>
+        <rdfs:comment>Concept or concept id from the annotation resource</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#AnnotationContent -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#AnnotationContent">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Annotation"/>
+        <rdfs:comment>The annotated text in the annotated cell</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#AnnotationDescription -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#AnnotationDescription">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Annotation"/>
+        <rdfs:comment>More high level description of annotation (e.g. in UMLS AnnotationConcept would be concpept id, while annotation description would be semantic type.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#AnnotationSchemaVersion -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#AnnotationSchemaVersion">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Annotation"/>
+        <rdfs:comment>Version of annotation schema</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#AnnotationURL -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#AnnotationURL">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Annotation"/>
+        <rdfs:comment>URL of annotation concept</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Annotations -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Annotations">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Cell"/>
+        <rdfs:comment>List of cell annotations</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Article -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Article">
+        <rdfs:comment>Article layer of the ontology. Subclasses contain information about certain article</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Author -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Author">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Authors"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#AuthorAffiliation -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#AuthorAffiliation">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Author"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#AuthorEmail -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#AuthorEmail">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Author"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#AuthorName -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#AuthorName">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Author"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Authors -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Authors">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Article"/>
+        <rdfs:comment>List of the authors</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Cell -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Cell">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Cells"/>
+        <rdfs:comment>Class for one cell</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#CellID -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#CellID">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Cell"/>
+        <rdfs:comment>Id of the cell. Generated as row number+dot (.)+column number. Basically represent location in the table grid</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#CellRole -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#CellRole">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#CellRoles"/>
+        <rdfs:comment>Instances of cell roles (class for each).
+
+Can be of the following types:
+-Header
+-Stub
+-Super-row
+-Data
+
+Note that cell can have multiple roles (header+stub, stub+super-row, super-row+data).</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#CellRoles -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#CellRoles">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Cell"/>
+        <rdfs:comment>List of roles table has in table
+- header
+- stub
+-super-row
+-data</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#CellType -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#CellType">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Cell"/>
+        <rdfs:comment>Type of the cell. It can take following values:
+- Numeric - if the value is fully numeric
+- Partially numeric - if value contains more than 50% of numericals
+- Text - textual content
+- Empty - empty cell</rdfs:comment>
+        <rdfs:isDefinedBy>
+            <rdf:Description>
+                <rdf:type>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Text"/>
+                        <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onDataRange rdf:resource="&xsd;string"/>
+                    </owl:Restriction>
+                </rdf:type>
+                <rdf:type>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Empty"/>
+                        <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onDataRange rdf:resource="&xsd;string"/>
+                    </owl:Restriction>
+                </rdf:type>
+                <rdf:type>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Numeric"/>
+                        <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onDataRange rdf:resource="&xsd;string"/>
+                    </owl:Restriction>
+                </rdf:type>
+                <rdf:type>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#PartiallyNumeric"/>
+                        <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onDataRange rdf:resource="&xsd;string"/>
+                    </owl:Restriction>
+                </rdf:type>
+            </rdf:Description>
+        </rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#CellValue -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#CellValue">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Cell"/>
+        <rdfs:comment>Content of the cell</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Cells -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Cells">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Table"/>
+        <rdfs:comment>List of cells in the table</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#ColumnNumber -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#ColumnNumber">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Cell"/>
+        <rdfs:comment>Number of column in which cell is located</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Database -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Database">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Article"/>
+        <rdfs:comment>Source database from which article was extracted (i.e. PubMedCentral, PubMed, DailyMed, etc.)</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#DateOfAnnotation -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#DateOfAnnotation">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Annotation"/>
+        <rdfs:comment>Date when annotation took place</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#ESSN -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#ESSN">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#IDs"/>
+        <rdfs:comment>electronic serial number</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#EndOffset -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#EndOffset">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Annotation"/>
+        <rdfs:comment>End possition of annotated cell</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Environment_description -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Environment_description">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Annotation"/>
+        <rdfs:comment>Description of the environment where annotation took place</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#ExtendedAbstract -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#ExtendedAbstract">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Abstracts"/>
+        <rdfs:comment>Long abstract</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#HeaderRef -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#HeaderRef">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Cell"/>
+        <rdfs:comment>ID of the closest header cell (we use cascading referencing style for navigational areas)</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#IDs -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#IDs">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Article"/>
+        <rdfs:comment>Superclass of all ids for an article</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#ISSN -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#ISSN">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#IDs"/>
+        <rdfs:comment>International Standard Serial Number</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#JournalInfo -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#JournalInfo">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Article"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#JournalName -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#JournalName">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#JournalInfo"/>
+        <rdfs:comment>Name of the Journal</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Keyword -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Keyword">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Keywords"/>
+        <rdfs:comment>Single keyword</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Keywords -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Keywords">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Article"/>
+        <rdfs:comment>List of keywords</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Location -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Location">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Annotation"/>
+        <rdfs:comment>Annotation location</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#PMCid -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#PMCid">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#IDs"/>
+        <rdfs:comment>PubMed Central ID</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#PMid -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#PMid">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#IDs"/>
+        <rdfs:comment>PubMed id</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#PragmaticType -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#PragmaticType">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Table"/>
+        <rdfs:comment>Pragmatic type of the table. Definition of pragmatic type depends on the domain</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#PublicationYear -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#PublicationYear">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Article"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#PublisherLocation -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#PublisherLocation">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#JournalInfo"/>
+        <rdfs:comment>Location of the publisher</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#PublisherName -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#PublisherName">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#JournalInfo"/>
+        <rdfs:comment>Name of the publisher</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Referring_sentences -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Referring_sentences">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Table"/>
+        <rdfs:comment>Sentences from the article referencing table</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#RowNumber -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#RowNumber">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Cell"/>
+        <rdfs:comment>Row number the cell is located in the table grid</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#ShortAbstract -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#ShortAbstract">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Abstracts"/>
+        <rdfs:comment>Short Abstract</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#SpecId -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#SpecId">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#IDs"/>
+        <rdfs:comment>Other special article id</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#StartOffset -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#StartOffset">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Annotation"/>
+        <rdfs:comment>Start position of annotated string</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#StubRef -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#StubRef">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Cell"/>
+        <rdfs:comment>ID of the closest stub (row header) cell (we use cascading referencing style for navigational areas)</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#SuperRowRef -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#SuperRowRef">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Cell"/>
+        <rdfs:comment>ID of the closest super-row cell (we use cascading referencing style for navigational areas)</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Table -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Table">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Tables"/>
+        <rdfs:comment>Class for the single table</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#TableCaption -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#TableCaption">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Table"/>
+        <rdfs:comment>Caption of the table</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#TableFooter -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#TableFooter">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Table"/>
+        <rdfs:comment>Footer of the table</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#TableOrder -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#TableOrder">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Table"/>
+        <rdfs:comment>Order of the table in the article (Table 1, Table 2...)</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#TableStructureType -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#TableStructureType">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Table"/>
+        <rdfs:comment>Structure type of the table.
+Can be of following values:
+- List table
+- Matrix table 
+- Super-row table
+- Multi-table</rdfs:comment>
+        <rdfs:isDefinedBy>
+            <rdf:Description>
+                <rdf:type>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#List"/>
+                        <owl:someValuesFrom rdf:resource="&xsd;string"/>
+                    </owl:Restriction>
+                </rdf:type>
+                <rdf:type>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Multi-table"/>
+                        <owl:someValuesFrom rdf:resource="&xsd;string"/>
+                    </owl:Restriction>
+                </rdf:type>
+                <rdf:type>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Super-row"/>
+                        <owl:someValuesFrom rdf:resource="&xsd;string"/>
+                    </owl:Restriction>
+                </rdf:type>
+                <rdf:type>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Matrix"/>
+                        <owl:someValuesFrom rdf:resource="&xsd;string"/>
+                    </owl:Restriction>
+                </rdf:type>
+            </rdf:Description>
+        </rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Tables -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Tables">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Article"/>
+        <rdfs:comment>List of tables in the article</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Title -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Title">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Article"/>
+        <rdfs:comment>Title of the article</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Venue -->
+
+    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Venue">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#JournalInfo"/>
+        <rdfs:comment>In case of the conference: Where was it?</rdfs:comment>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.5.1) http://owlapi.sourceforge.net -->
+
