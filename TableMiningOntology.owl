@@ -7,11 +7,7 @@
      xmlns:tmo="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-    <owl:Ontology rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology/">
-        <owl:versionIRI rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology/1.0"/>
-        <rdfs:comment>This ontology was developed for mining tables (mainly information extraction) from tables in PubMed Central and DailyMed. It can be extended and applied to other scientific literature.
-The ontology was developed in order to disentangle table structure in biomedical literature. By disentnagling tables into the structured form, we tend to help table mining processes, such as information extraction or information retrieval.</rdfs:comment>
-    </owl:Ontology>
+    <owl:Ontology/>
     
 
 
@@ -102,6 +98,15 @@ The ontology was developed in order to disentangle table structure in biomedical
     
 
 
+    <!-- http://www.co-ode.org/ontologies/ont.owl#Annotations-a -->
+
+    <owl:Class rdf:about="http://www.co-ode.org/ontologies/ont.owl#Annotations-a">
+        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Cell"/>
+        <rdfs:label>Annotations</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Abstracts -->
 
     <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Abstracts">
@@ -141,7 +146,7 @@ The ontology was developed in order to disentangle table structure in biomedical
     <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Annotation -->
 
     <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Annotation">
-        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Annotations"/>
+        <rdfs:subClassOf rdf:resource="http://www.co-ode.org/ontologies/ont.owl#Annotations-a"/>
         <rdfs:comment>Annotation class</rdfs:comment>
     </owl:Class>
     
@@ -188,15 +193,6 @@ The ontology was developed in order to disentangle table structure in biomedical
     <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#AnnotationURL">
         <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Annotation"/>
         <rdfs:comment>URL of annotation concept</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Annotations -->
-
-    <owl:Class rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Annotations">
-        <rdfs:subClassOf rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Cell"/>
-        <rdfs:comment>List of cell annotations</rdfs:comment>
     </owl:Class>
     
 
@@ -307,9 +303,6 @@ Note that cell can have multiple roles (header+stub, stub+super-row, super-row+d
 - Partially numeric - if value contains more than 50% of numericals
 - Text - textual content
 - Empty - empty cell</rdfs:comment>
-        <rdfs:isDefinedBy>
-            <rdf:Description/>
-        </rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -628,9 +621,6 @@ Can be of following values:
 - Matrix table 
 - Super-row table
 - Multi-table</rdfs:comment>
-        <rdfs:isDefinedBy>
-            <rdf:Description/>
-        </rdfs:isDefinedBy>
     </owl:Class>
     
 
@@ -660,7 +650,11 @@ Can be of following values:
         <rdfs:comment>In case of the conference: Where was it?</rdfs:comment>
     </owl:Class>
     <rdf:Description>
-        <owl:onProperty rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#List"/>
+        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <owl:onProperty rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#PartiallyNumeric"/>
+    </rdf:Description>
+    <rdf:Description>
+        <owl:onProperty rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Super-row"/>
         <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </rdf:Description>
     <rdf:Description>
@@ -668,20 +662,8 @@ Can be of following values:
         <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </rdf:Description>
     <rdf:Description>
-        <owl:onProperty rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Super-row"/>
+        <owl:onProperty rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#List"/>
         <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    </rdf:Description>
-    <rdf:Description>
-        <owl:onProperty rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Matrix"/>
-        <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    </rdf:Description>
-    <rdf:Description>
-        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <owl:onProperty rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Numeric"/>
-    </rdf:Description>
-    <rdf:Description>
-        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <owl:onProperty rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Empty"/>
     </rdf:Description>
     <rdf:Description>
         <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
@@ -689,7 +671,15 @@ Can be of following values:
     </rdf:Description>
     <rdf:Description>
         <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <owl:onProperty rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#PartiallyNumeric"/>
+        <owl:onProperty rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Empty"/>
+    </rdf:Description>
+    <rdf:Description>
+        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <owl:onProperty rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Numeric"/>
+    </rdf:Description>
+    <rdf:Description>
+        <owl:onProperty rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology#Matrix"/>
+        <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </rdf:Description>
     
 
@@ -715,6 +705,8 @@ Can be of following values:
     </rdf:Description>
     <rdf:Description rdf:about="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology/">
         <rdfs:seeAlso>https://link.springer.com/chapter/10.1007/978-3-319-41754-7_14</rdfs:seeAlso>
+        <rdfs:comment>This ontology was developed for mining tables (mainly information extraction) from tables in PubMed Central and DailyMed. It can be extended and applied to other scientific literature.
+The ontology was developed in order to disentangle table structure in biomedical literature. By disentnagling tables into the structured form, we tend to help table mining processes, such as information extraction or information retrieval.</rdfs:comment>
         <owl:versionIRI rdf:resource="http://www.manchester.ac.uk/semanticweb/ontologies/table_mining_ontology/1.0"/>
         <rdfs:comment>The ontology was developed in order to disentangle table structure in biomedical literature. By disentnagling tables into the structured form, we tend to help table mining processes, such as information extraction or information retrieval.</rdfs:comment>
         <rdfs:isDefinedBy>Nikola Milosevic</rdfs:isDefinedBy>
