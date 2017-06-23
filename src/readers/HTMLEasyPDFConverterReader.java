@@ -44,6 +44,9 @@ public class HTMLEasyPDFConverterReader {
 		try{
 		if(FileName == null || FileName.equals(""))
 			return art;
+		
+		if(!FileName.contains(".html"))
+			return art;
 		@SuppressWarnings("resource")
 		FileReader fr = new FileReader(FileName);
 		if(fr==null)
@@ -187,15 +190,6 @@ public class HTMLEasyPDFConverterReader {
 	 */
 	public Article ParseMetaData(Article art, Document parse, String xml)
 	{
-		String journal = "";
-	    LinkedList<Author> auths = GetAuthors(parse);
-	    for(int j = 0; j<auths.size(); j++)
-	    {
-	    	System.out.println(auths.get(j));
-	    }
-	    
-	    String[] affilis = GetAffiliations(parse);	    
-	    art.setAffiliation(affilis);
 	    
 	    try{
 	    if(parse.getElementsByTagName("body").item(0)!=null)
@@ -211,8 +205,6 @@ public class HTMLEasyPDFConverterReader {
 
 	    art.setTitle(art.getFile_name());
 	    art.setXML(xml);
-	    art.setAuthors(auths);
-	    art.setJournal_name(journal);
 		return art;
 	}
 	
@@ -230,6 +222,7 @@ public class HTMLEasyPDFConverterReader {
 		{
 			label = Utilities.getString(nl.get(0));
 		}
+		//TODO: Obtain label as the first p tag before table tag
 		
 		return label;
 	}
@@ -242,6 +235,7 @@ public class HTMLEasyPDFConverterReader {
 	 */
 	public String readTableCaption(Node tablexmlNode)
 	{
+		//TODO: Obtain label as the first p tag before table tag
 		String caption = "";
 		List<Node>nl = getChildrenByTagName(tablexmlNode,"caption");
 		if(nl.size()>0){
@@ -266,6 +260,7 @@ public class HTMLEasyPDFConverterReader {
 	 */
 	public String ReadTableFooter(Node tablesxmlNode)
 	{
+		//p tags bellow table with spans
 		String foot = "";
 		List<Node> nl = getChildrenByTagName(tablesxmlNode,"table-wrap-foot");
 		if(nl.size()>=1)
@@ -611,13 +606,7 @@ public class HTMLEasyPDFConverterReader {
 				continue;
 			}
 		}// end for tables
-//		if(TablInExMain.TypeClassify){
-//			for(int i = 0;i<numOfTables;i++)
-//			{
-//				SimpleTableClassifier.ClassifyTableByType(tables[i]);
-//				tables[i].printTableStatsToFile("TableStats.txt");
-//			}
-//		}
+
 
 		return article;
 	}
