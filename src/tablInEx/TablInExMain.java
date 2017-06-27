@@ -31,9 +31,11 @@ import Utils.Utilities;
 import ValueParser.ValueParser;
 import classifiers.SimpleTableClassifier;
 import readers.DailyMedReader;
+import readers.HTMLEasyPDFConverterReader;
 import readers.PMCXMLReader;
 import readers.Reader;
 import stats.Statistics;
+
 
 // Import log4j classes.
 import org.apache.log4j.Logger;
@@ -273,6 +275,25 @@ public class TablInExMain {
 					article.getTables()[s].original_cells = original_cells;
 				}
 			}
+			
+			if (runas.toLowerCase().equals("easypdf2html")) {
+				if(!files[a].getName().contains(".html"))
+					continue;
+				article = runReadingloopOneFile(article, files[a],
+						HTMLEasyPDFConverterReader.class);
+				for (int s = 0; s < article.getTables().length; s++) {
+					if (article.getTables()[s].cells == null)
+						continue;
+					Cell[][] original_cells = new Cell[article.getTables()[s].cells.length][];
+					for (int i = 0; i < article.getTables()[s].cells.length; i++) {
+						original_cells[i] = new Cell[article.getTables()[s].cells[i].length];
+						for (int j = 0; j < article.getTables()[s].cells[i].length; j++)
+							original_cells[i][j] = new Cell(article.getTables()[s].cells[i][j]);
+					}
+					article.getTables()[s].original_cells = original_cells;
+				}
+			}
+			
 			Decomposition ie = null;
 			TrialIE2 tie = null;
 			FreqIE tie2 = null;

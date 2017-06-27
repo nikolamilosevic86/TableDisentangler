@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,15 +22,19 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.jsoup.nodes.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
 import tablInEx.Cell;
 import tablInEx.TablInExMain;
@@ -220,6 +225,28 @@ public class Utilities {
 		}
 		return result;
 	}
+	
+	public static String CreateXMLStringFromSubNode(Element xml) {
+		String result = "";
+		try {
+			StringWriter sw = new StringWriter();
+			Transformer serializer = TransformerFactory.newInstance()
+					.newTransformer();
+			DocumentBuilderFactory factory = DocumentBuilderFactory
+					.newInstance();
+			factory.setNamespaceAware(true);
+			factory.setValidating(false);
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Node fragmentNode = builder.parse(
+			        new InputSource(new StringReader(xml.html().replaceAll("&nbsp", " "))))
+			        .getDocumentElement();
+			serializer.transform(new DOMSource(fragmentNode), new StreamResult(sw));
+			result = sw.toString();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return result;
+	}
 
 	/**
 	 * Creates the xml string from sub node.
@@ -244,6 +271,31 @@ public class Utilities {
 		}
 		return result;
 	}
+	
+	public static String CreateXMLStringFromSubNodeWithoutDeclaration(Element xml) {
+		xml = xml.getAllElements().first();
+		String result = "";
+		try {
+			StringWriter sw = new StringWriter();
+			Transformer serializer = TransformerFactory.newInstance()
+					.newTransformer();
+			serializer
+					.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+			DocumentBuilderFactory factory = DocumentBuilderFactory
+					.newInstance();
+			factory.setNamespaceAware(true);
+			factory.setValidating(false);
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Node fragmentNode = builder.parse(
+			        new InputSource(new StringReader(xml.html())))
+			        .getDocumentElement();
+			serializer.transform(new DOMSource(fragmentNode), new StreamResult(sw));
+			result = sw.toString();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return result;
+	}
 
 	public static String getString(Node xml) {
 		String result = "";
@@ -252,6 +304,17 @@ public class Utilities {
 			result = CreateXMLStringFromSubNodeWithoutDeclaration(xml);
 		} else {
 			result = xml.getTextContent();
+		}
+		return result;
+	}
+	
+	public static String getString(Element xml) {
+		String result = "";
+		
+		if (TablInExMain.doXMLInput) {
+			result = CreateXMLStringFromSubNodeWithoutDeclaration(xml);
+		} else {
+			result = xml.text();
 		}
 		return result;
 	}

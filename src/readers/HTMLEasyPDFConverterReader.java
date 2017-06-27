@@ -2,29 +2,28 @@ package readers;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXParseException;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+//import org.w3c.dom.NamedNodeMap;
+//import org.w3c.dom.Node;
+//import org.w3c.dom.NodeList;
+//import org.xml.sax.InputSource;
+//import org.xml.sax.SAXParseException;
 
 import stats.Statistics;
 import tablInEx.Article;
 import tablInEx.Cell;
 import tablInEx.Table;
-import Utils.Author;
+//import Utils.Author;
 import Utils.Utilities;
 
-public class HTMLEasyPDFConverterReader {
+public class HTMLEasyPDFConverterReader  implements Reader{
 	private String FileName;
 	
 	public void init(String file_name)
@@ -55,22 +54,32 @@ public class HTMLEasyPDFConverterReader {
 		String line = null;
 		String xml = "";
 		while ((line = reader.readLine()) != null) {
-			if(line.contains("JATS-archivearticle1.dtd")||line.contains("archivearticle.dtd"))
+			if(line.contains("JATS-archivearticle1.dtd")||line.contains("archivearticle.dtd")||line.contains("strict.dtd"))
 				continue;
+			if(line.toLowerCase().contains("meta"))
+			{
+				String[] splitted = line.split("><");
+				line = "";
+				for(String s : splitted)
+				{
+					line=s+"</META>";
+				}
+			}
+			if(line.toLowerCase().contains("img"))
+			{
+				String[] splitted = line.split("><");
+				line = "";
+				for(String s : splitted)
+				{
+					line=s+"</IMG>";
+				}
+			}
 		    xml +=line+'\n';
 		}		
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		
-		factory.setNamespaceAware(true);
-		factory.setValidating(false);
-	    DocumentBuilder builder = factory.newDocumentBuilder();
-	    InputSource is = new InputSource(new StringReader(xml));
-	    Document parse =  builder.parse(is);
+	    Document parse =  Jsoup.parse(xml);//builder.parse(is);
 	    art = ParseMetaData(art, parse, xml);
 		art = ParseTables(art,parse);
-		}catch(SAXParseException sex)
-		{
-			sex.printStackTrace();
 		}catch(Exception ex)
 		{
 			ex.printStackTrace();
@@ -85,101 +94,10 @@ public class HTMLEasyPDFConverterReader {
 		FileName = fileName;
 	}
 
-	public LinkedList<Author> GetAuthors(Document parse)
-	{
-		LinkedList<Author> auths = new LinkedList<Author>();
-		NodeList authors = parse.getElementsByTagName("contrib");
-	    for(int j = 0; j<authors.getLength(); j++)
-	    {
-	    	Author auth = new Author();
-	    	String givenName = "";
-	    	String surname = "";
-	    	String email = "";
-	    	
-	    	for(int k = 0;k<authors.item(j).getChildNodes().getLength();k++){
-	    	if(authors.item(j).getChildNodes().item(k).getNodeName()=="name"){
-	    	NodeList name = authors.item(j).getChildNodes().item(k).getChildNodes();
-	    	if(name.item(1)!=null)
-	    		surname = Utilities.getString(name.item(0));
-	    	if(name.item(1)!=null)
-	    		givenName = Utilities.getString(name.item(1));
-	    	auth.name = surname+ ", "+givenName;
-	    	}
-	    	if(authors.item(j).getChildNodes().item(k).getNodeName()=="email"){
-	    		NodeList name = authors.item(j).getChildNodes().item(k).getChildNodes();
-		    	if(name.item(0)!=null)
-		    		email = Utilities.getString(name.item(0));
-		    	auth.email = email;
-	    	}
-	    	
-	    	
-	    	if(authors.item(j).getChildNodes().item(k).getNodeName()=="xref"){
-	    		Node name = authors.item(j).getChildNodes().item(k);
-	    		NamedNodeMap attr = name.getAttributes();
-	    		if (null != attr) {
-	    			Node p = attr.getNamedItem("ref-type");
-	    	        //if(p.getNodeValue() == "aff");
-	    	        Node p2 = attr.getNamedItem("rid");
-	    	        String affId = p2.getNodeValue();
-	    	        NodeList affis = parse.getElementsByTagName("aff");
-	    		    String[] affilis = new String[affis.getLength()];
-	    		    for(int s = 0; s<affis.getLength(); s++)
-	    		    {
-	    		    	if(affis.item(s).getAttributes()!=null &&affis.item(s).getAttributes().getNamedItem("id")!=null&& affis.item(s).getAttributes().getNamedItem("id").getNodeValue().equals(affId)){
-	    		    		String affName = Utilities.getString(affis.item(s));
-	    		    		if(affName.contains("1")||affName.contains("2")||affName.contains("3")||affName.contains("4")||affName.contains("5"))
-	    		    			affName = affName.substring(1);
-	    		    		auth.affiliation.add(affName);	
-	    		    	}
-	    		    }
-	    		}
-	    	}
-	    	
-	    	}
-	    auths.add(auth);
-	    }
-	    return auths;
-	}
 	
-	/**
-	 * Gets the affiliations of authors.
-	 *
-	 * @param parse the parse
-	 * @return the string[]
-	 */
-	public String[] GetAffiliations(Document parse)
-	{
-	    NodeList affis = parse.getElementsByTagName("aff");
-	    String[] affilis = new String[affis.getLength()];
-	    for(int j = 0; j<affis.getLength(); j++)
-	    {
-	    	String affiliation = Utilities.getString(affis.item(j));
-	    	affilis[j] = affiliation;
-	    	System.out.println("Affiliation:"+affiliation);
-	    }
-	    return affilis;
-	}
 	
-	/**
-	 * Gets the article keywords.
-	 *
-	 * @param parse the parse
-	 * @return the keywords
-	 */
-	public String[] getKeywords(Document parse)
-	{
-	    NodeList keywords = parse.getElementsByTagName("kwd");
-	    String[] keywords_str = new String[keywords.getLength()];
-	    for(int j = 0; j<keywords.getLength(); j++)
-	    {
-	    	if(keywords.item(j).getTextContent().length()>1){
-	    		String Keyword = keywords.item(j).getTextContent().substring(1);
-	    		keywords_str[j] = Keyword;
-	    		System.out.println("Keyword:"+Keyword);
-	    	}
-	    }
-	    return keywords_str;
-	}
+	
+	
 	
 	/**
 	 * Reads metadata from article such as title, authors, publication type etc
@@ -192,9 +110,9 @@ public class HTMLEasyPDFConverterReader {
 	{
 	    
 	    try{
-	    if(parse.getElementsByTagName("body").item(0)!=null)
+	    if(parse.getElementsByTag("body")!=null)
 	    {
-	    String plain_text = parse.getElementsByTagName("body").item(0).getTextContent();
+	    String plain_text = parse.getElementsByTag("body").text();
 	    art.setPlain_text(plain_text);
 	    }
 	    }
@@ -214,10 +132,10 @@ public class HTMLEasyPDFConverterReader {
 	 * @param tablexmlNode the tablexml node
 	 * @return the string
 	 */
-	public String readTableLabel(Node tablexmlNode)
+	public String readTableLabel(Element tablexmlNode)
 	{
 		String label = "Table without label";
-		List<Node> nl = getChildrenByTagName(tablexmlNode,"label");
+		List<Element> nl = getChildrenByTagName(tablexmlNode,"label");
 		if(nl.size()>0)
 		{
 			label = Utilities.getString(nl.get(0));
@@ -233,17 +151,24 @@ public class HTMLEasyPDFConverterReader {
 	 * @param tablexmlNode the tablexml node
 	 * @return the string
 	 */
-	public String readTableCaption(Node tablexmlNode)
+	public String readTableCaption(Element tablexmlNode)
 	{
 		//TODO: Obtain label as the first p tag before table tag
 		String caption = "";
-		List<Node>nl = getChildrenByTagName(tablexmlNode,"caption");
+		List<Element>nl = getChildrenByTagName(tablexmlNode,"caption");
 		if(nl.size()>0){
 			caption = Utilities.getString(nl.get(0));
 		}
-		nl = getChildrenByTagName(tablexmlNode,"p");
-		if(nl.size()>0){
-			caption = Utilities.getString(nl.get(0));
+		Elements inDivChild = tablexmlNode.parent().getAllElements().first().children();
+		for(int i =0;i<inDivChild.size();i++){
+			Element el = inDivChild.get(i);
+			if(i+1<inDivChild.size()){
+				Element tableel = inDivChild.get(i+1);
+				if(tableel.tagName().equals("table")){
+					caption = el.text();
+				}
+			}
+		
 		}
 		nl = getChildrenByTagName(tablexmlNode,"title");
 		if(nl.size()>0){
@@ -258,16 +183,25 @@ public class HTMLEasyPDFConverterReader {
 	 * @param tablesxmlNode the tablesxml node
 	 * @return the string
 	 */
-	public String ReadTableFooter(Node tablesxmlNode)
+	public String ReadTableFooter(Element tablesxmlNode)
 	{
-		//p tags bellow table with spans
-		String foot = "";
-		List<Node> nl = getChildrenByTagName(tablesxmlNode,"table-wrap-foot");
-		if(nl.size()>=1)
-		{
-			foot = Utilities.getString(nl.get(0));
-		}
-		return foot;
+		//TODO: Obtain label as the first p tag before table tag
+				String caption = "";
+				List<Element>nl = getChildrenByTagName(tablesxmlNode,"caption");
+				if(nl.size()>0){
+					caption = Utilities.getString(nl.get(0));
+				}
+				nl = getChildrenByTagName(tablesxmlNode,"p");
+				if(nl.size()>0){
+					for(int i=0;i<nl.size();i++){
+					caption += Utilities.getString(nl.get(i))+'\n';
+					}
+				}
+				nl = getChildrenByTagName(tablesxmlNode,"title");
+				if(nl.size()>0){
+					caption = Utilities.getString(nl.get(0));
+				}
+				return caption;
 	}
 	
 	/**
@@ -277,7 +211,7 @@ public class HTMLEasyPDFConverterReader {
 	 * @param rowshead the rowshead
 	 * @return the int
 	 */
-	public int CountColumns(List<Node> rowsbody,List<Node> rowshead)
+	public int CountColumns(List<Element> rowsbody,List<Element> rowshead)
 	{
 		int cols=0;
 		int headrowscount= 0;
@@ -286,12 +220,12 @@ public class HTMLEasyPDFConverterReader {
 		for(int row = 0;row<rowsbody.size();row++)
 		{
 			int cnt=0;
-			List<Node> tds = getChildrenByTagName(rowsbody.get(row), "td");
+			List<Element> tds = getChildrenByTagName(rowsbody.get(row), "td");
 			for(int k=0;k<tds.size();k++)
 			{
-				if(tds.get(k).getAttributes().getNamedItem("colspan")!=null && Utilities.getFirstValue(tds.get(k).getAttributes().getNamedItem("colspan").getNodeValue())>1)
+				if(tds.get(k).attr("colspan")!=null && Utilities.getFirstValue(tds.get(k).attr("colspan"))>1)
 				{
-					cnt+=Utilities.getFirstValue(tds.get(k).getAttributes().getNamedItem("colspan").getNodeValue());
+					cnt+=Utilities.getFirstValue(tds.get(k).attr("colspan"));
 				}
 				else
 				{
@@ -302,7 +236,7 @@ public class HTMLEasyPDFConverterReader {
 		}
 		if(headrowscount!=0)
 		{
-			List<Node> tdsh =  getChildrenByTagName(rowshead.get(0), "td");
+			List<Element> tdsh =  getChildrenByTagName(rowshead.get(0), "td");
 			if(tdsh.size()==0){
 				tdsh =  getChildrenByTagName(rowshead.get(0), "th");
 			}
@@ -322,14 +256,14 @@ public class HTMLEasyPDFConverterReader {
 	 * @param num_of_columns the num_of_columns
 	 * @return the table
 	 */
-	public Table ProcessTableHeader(Article a,Table table, Cell[][] cells,List<Node> rowshead,int headrowscount,int num_of_columns)
+	public Table ProcessTableHeader(Article a,Table table, Cell[][] cells,List<Element> rowshead,int headrowscount,int num_of_columns)
 	{
 		for(int j = 0;j<headrowscount;j++)
 		{
 
 			Statistics.addHeaderRow();
 			table.stat.AddHeaderRow();
-			List<Node> tds = getChildrenByTagName(rowshead.get(j), "td");
+			List<Element> tds = getChildrenByTagName(rowshead.get(j), "td");
 			if(tds.size()==0)
 				tds = getChildrenByTagName(rowshead.get(j), "th");
 			int index = 0;
@@ -342,22 +276,22 @@ public class HTMLEasyPDFConverterReader {
 				boolean is_rowspanning = false;
 				int colspanVal = 1;
 				int rowspanVal = 1;
-				if(tds.get(k).getAttributes().getNamedItem("rowspan")!=null && Utilities.isNumeric(tds.get(k).getAttributes().getNamedItem("rowspan").getNodeValue()) && Utilities.getFirstValue(tds.get(k).getAttributes().getNamedItem("rowspan").getNodeValue())>1)
+				if(tds.get(k).attr("rowspan")!=null && Utilities.isNumeric(tds.get(k).attr("rowspan")) && Utilities.getFirstValue(tds.get(k).attr("rowspan"))>1)
 				{
 					table.setRowSpanning(true);
 					Statistics.addRowSpanningCell();
 					table.stat.AddRowSpanningCell();
 					is_rowspanning = true;
-					rowspanVal =  Utilities.getFirstValue(tds.get(k).getAttributes().getNamedItem("rowspan").getNodeValue());											
+					rowspanVal =  Utilities.getFirstValue(tds.get(k).attr("rowspan"));											
 				}
 				//colspan
-				if(tds.get(k).getAttributes().getNamedItem("colspan")!=null && Utilities.isNumeric(tds.get(k).getAttributes().getNamedItem("colspan").getNodeValue()) && Utilities.getFirstValue(tds.get(k).getAttributes().getNamedItem("colspan").getNodeValue())>1)
+				if(tds.get(k).attr("colspan")!=null && Utilities.isNumeric(tds.get(k).attr("colspan")) && Utilities.getFirstValue(tds.get(k).attr("colspan"))>1)
 				{
 					table.setColSpanning(true);
 					Statistics.addColumnSpanningCell();
 					table.stat.AddColSpanningCell();
 					is_colspanning = true;
-					colspanVal =  Utilities.getFirstValue(tds.get(k).getAttributes().getNamedItem("colspan").getNodeValue());					
+					colspanVal =  Utilities.getFirstValue(tds.get(k).attr("colspan"));					
 				}
 
 				for(int l=0;l<colspanVal;l++)
@@ -396,20 +330,20 @@ public class HTMLEasyPDFConverterReader {
 	 * @param num_of_columns the num_of_columns
 	 * @return the table
 	 */ 
-	public Table ProcessTableBody(Article a, Table table, Cell[][] cells,List<Node> rowsbody,int headrowscount, int num_of_columns)
+	public Table ProcessTableBody(Article a, Table table, Cell[][] cells,List<Element> rowsbody,int headrowscount, int num_of_columns)
 	{
 		int startj = headrowscount;
-		boolean tablecounted = false;
+		//boolean tablecounted = false;
 		for(int j = 0;j<rowsbody.size();j++)
 		{
 			table.stat.AddBodyRow();
-			List<Node> tds = getChildrenByTagName(rowsbody.get(j), "td");
+			List<Element> tds = getChildrenByTagName(rowsbody.get(j), "td");
 			int index = 0;
 			int rowindex = startj;
 			for(int k = 0;k<tds.size();k++)
 			{
 				table.stat.AddUnprCell();
-				List<Node> hr = getChildrenByTagName(tds.get(k), "hr");
+				List<Element> hr = getChildrenByTagName(tds.get(k), "hr");
 				boolean isStub = false;
 				float stubProbability =0;
 				
@@ -424,22 +358,22 @@ public class HTMLEasyPDFConverterReader {
 				boolean is_rowspanning = false;
 				int colspanVal = 1;
 				int rowspanVal = 1;
-				if(tds.get(k).getAttributes().getNamedItem("rowspan")!=null && Utilities.isNumeric(tds.get(k).getAttributes().getNamedItem("rowspan").getNodeValue()) && Utilities.getFirstValue(tds.get(k).getAttributes().getNamedItem("rowspan").getNodeValue())>1)
+				if(tds.get(k).attr("rowspan")!=null && Utilities.isNumeric(tds.get(k).attr("rowspan")) && Utilities.getFirstValue(tds.get(k).attr("rowspan"))>1)
 				{
 					table.setRowSpanning(true);
 					Statistics.addRowSpanningCell();
 					table.stat.AddRowSpanningCell();
 					is_rowspanning = true;
-					rowspanVal = Utilities.getFirstValue(tds.get(k).getAttributes().getNamedItem("rowspan").getNodeValue());											
+					rowspanVal = Utilities.getFirstValue(tds.get(k).attr("rowspan"));											
 				}
 				//colspan
-				if(tds.get(k).getAttributes().getNamedItem("colspan")!=null && Utilities.isNumeric(tds.get(k).getAttributes().getNamedItem("colspan").getNodeValue()) && Utilities.getFirstValue(tds.get(k).getAttributes().getNamedItem("colspan").getNodeValue())>1)
+				if(tds.get(k).attr("colspan")!=null && Utilities.isNumeric(tds.get(k).attr("colspan")) && Utilities.getFirstValue(tds.get(k).attr("colspan"))>1)
 				{
 					table.setColSpanning(true);
 					Statistics.addColumnSpanningCell();
 					table.stat.AddColSpanningCell();
 					is_colspanning = true;
-					colspanVal = Utilities.getFirstValue(tds.get(k).getAttributes().getNamedItem("colspan").getNodeValue());					
+					colspanVal = Utilities.getFirstValue(tds.get(k).attr("colspan"));					
 				}
 				for(int l=0;l<colspanVal;l++)
 				{
@@ -471,16 +405,16 @@ public class HTMLEasyPDFConverterReader {
 		return table;
 	}
 	
-	public int getNumOfTablesInArticle(NodeList tablesxml)
+	public int getNumOfTablesInArticle(Elements tablesxml)
 	{
 		int numOfTables = 0;
-		for(int i = 0;i<tablesxml.getLength();i++)
+		for(int i = 0;i<tablesxml.size();i++)
 		{
-			List<Node> tb = getChildrenByTagName(tablesxml.item(i),"table");
+			List<Element> tb = getChildrenByTagName(tablesxml.get(i),"table");
 			numOfTables+=tb.size();
 		}
-		if(numOfTables<tablesxml.getLength())
-			numOfTables = tablesxml.getLength();
+		if(numOfTables<tablesxml.size())
+			numOfTables = tablesxml.size();
 		
 		return numOfTables;
 	}
@@ -494,47 +428,37 @@ public class HTMLEasyPDFConverterReader {
 	 */
 	public Article ParseTables(Article article, Document parse)
 	{
-		NodeList tablesxml = parse.getElementsByTagName("table-wrap");
+		Elements tablesxml = parse.getElementsByTag("table");
 		int numOfTables =  getNumOfTablesInArticle(tablesxml);
 		
 		Table[] tables = new Table[numOfTables];
 		article.setTables(tables);
 		int tableindex = 0;
-		//Iterate document tables
-		for(int i = 0;i<tablesxml.getLength();i++)
-		{
-			List<Node> inline_formula = null;
-			List<Node> tb = getChildrenByTagName(tablesxml.item(i),"table");
-			//check if there is one cell table with reference to the image of the actual table
-			try{
-			inline_formula =  getChildrenByTagName( getChildrenByTagName(getChildrenByTagName(getChildrenByTagName(tb.get(0), "tbody").get(0), "tr").get(0), "td").get(0), "inline-formula");
-			}
-			catch(Exception ex)
-			{}
-			if((inline_formula!=null && inline_formula.size()==0)||inline_formula==null){
+
+			List<Element> tb = tablesxml;
 			for(int s = 0;s<tb.size();s++)
 			{
 			Statistics.addTable();
-			String label = readTableLabel(tablesxml.item(i));
+			String label = readTableLabel(tablesxml.get(s));
 			
 			tables[tableindex] = new Table(label);
 			tables[tableindex].setDocumentFileName("PMC"+article.getPmc());
-			tables[tableindex].setXml(Utilities.CreateXMLStringFromSubNode(tablesxml.item(i)));
+			tables[tableindex].setXml(Utilities.CreateXMLStringFromSubNode(tablesxml.get(s)));
 			System.out.println("Table title:"+tables[tableindex].getTable_title());
-			String caption = readTableCaption(tablesxml.item(i));
-			tables[tableindex].setTable_caption(caption);
-			String foot = ReadTableFooter(tablesxml.item(i));
-			tables[tableindex].setTable_footer(foot);
+			String caption = readTableCaption(tablesxml.get(s));
+			tables[tableindex].setTable_footer(caption);
+			String foot = ReadTableFooter(tablesxml.get(s));
+			//tables[tableindex].setTable_footer(foot);
 			System.out.println("Foot: "+foot);
 
 			//count rows
 			int headsize = 0;
-			List<Node> thead = null;
+			List<Element> thead = null;
 			if(tb.size()>0){
 				thead = getChildrenByTagName(tb.get(s), "thead");
 				headsize = thead.size();
 			}
-			List<Node> rowshead = null;
+			List<Element> rowshead = null;
 			if(headsize>0)
 			{
 				rowshead = getChildrenByTagName(thead.get(0), "tr");
@@ -544,7 +468,7 @@ public class HTMLEasyPDFConverterReader {
 				tables[tableindex].setHasHeader(false);
 				Statistics.TableWithoutHead();
 			}
-			List<Node> tbody = getChildrenByTagName(tb.get(s), "tbody");
+			List<Element> tbody = getChildrenByTagName(tb.get(s), "tbody");
 			if(tbody.size()==0)
 			{
 				Statistics.TableWithoutBody();
@@ -552,7 +476,7 @@ public class HTMLEasyPDFConverterReader {
 				tableindex++;
 				continue;
 			}
-			List<Node> rowsbody = getChildrenByTagName(tbody.get(0), "tr");
+			List<Element> rowsbody = getChildrenByTagName(tbody.get(0), "tr");
 			//int num_of_rows = headrowscount+rowsbody.size();
 			int headrowscount = 0;
 			if (rowshead != null) 
@@ -584,28 +508,23 @@ public class HTMLEasyPDFConverterReader {
 			System.out.println("Number of columns: "+num_of_columns);
 			tableindex++;
 			}
-			}
-			//List<Node> inlinegraphic =  getChildrenByTagName(tb.get(0), "inline-graphic");
-			
-			if((tb.size()==0 && tableindex<numOfTables)||(inline_formula!=null && inline_formula.size()==1))
-			{
-				Statistics.addTable();
-				String label = readTableLabel(tablesxml.item(i));
-				tables[tableindex] = new Table(label);
-				tables[tableindex].setDocumentFileName("PMC"+article.getPmc());
-				tables[tableindex].setXml(Utilities.CreateXMLStringFromSubNode(tablesxml.item(i)));
-				System.out.println("Table title:"+tables[tableindex].getTable_title());
-				String caption = readTableCaption(tablesxml.item(i));
-				tables[tableindex].setTable_caption(caption);
-				String foot = ReadTableFooter(tablesxml.item(i));
-				tables[tableindex].setTable_footer(foot);
-				System.out.println("Foot: "+foot);
-				Statistics.ImageTable(FileName);
-				tables[tableindex].setNoXMLTable(true);
-				tableindex++;
-				continue;
-			}
-		}// end for tables
+//			
+//				Statistics.addTable();
+//				String label = readTableLabel(tablesxml.get(i));
+//				tables[tableindex] = new Table(label);
+//				tables[tableindex].setDocumentFileName("PMC"+article.getPmc());
+//				tables[tableindex].setXml(Utilities.CreateXMLStringFromSubNode(tablesxml.get(s)));
+//				System.out.println("Table title:"+tables[tableindex].getTable_title());
+//				String caption = readTableCaption(tablesxml.get(s));
+//				tables[tableindex].setTable_caption(caption);
+//				String foot = ReadTableFooter(tablesxml.get(i));
+//				tables[tableindex].setTable_footer(foot);
+//				System.out.println("Foot: "+foot);
+//				Statistics.ImageTable(FileName);
+//				tables[tableindex].setNoXMLTable(true);
+//				tableindex++;
+//				continue;
+
 
 
 		return article;
@@ -620,12 +539,11 @@ public class HTMLEasyPDFConverterReader {
 	 * @param name the name
 	 * @return the children by tag name
 	 */
-	public static List<Node> getChildrenByTagName(Node parent, String name) {
-	    List<Node> nodeList = new ArrayList<Node>();
-	    for (Node child = parent.getFirstChild(); child != null; child = child.getNextSibling()) {
-	      if (child.getNodeType() == Node.ELEMENT_NODE && 
-	          name.equals(child.getNodeName())) {
-	        nodeList.add((Node) child);
+	public static List<Element> getChildrenByTagName(Element parent, String name) {
+	    List<Element> nodeList = new ArrayList<Element>();
+	    for (Element child = parent.getAllElements().first().children().first(); child != null; child = child.nextElementSibling()) {
+	      if ( name.equals(child.nodeName())) {
+	        nodeList.add(child);
 	      }
 	    }
 
