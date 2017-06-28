@@ -121,6 +121,10 @@ public class PragmaticClassifier {
 		 Instances Instances = new Instances("Rel", fvWekaAttributes, 0);
 			 
 		 Instance iExample = new DenseInstance(12);
+		 if(t.getTable_caption()==null)
+		 {
+			 t.setTable_caption("");
+		 }
 		 Attribute attribute = (Attribute)fvWekaAttributes.elementAt(0);
 		 iExample.setValue((Attribute)fvWekaAttributes.elementAt(0), t.getNum_of_rows());
 		 iExample.setValue((Attribute)fvWekaAttributes.elementAt(1), t.getNum_of_columns());

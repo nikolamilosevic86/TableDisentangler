@@ -5,7 +5,7 @@
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-
+SET NAMES utf8;
 -- -----------------------------------------------------
 -- Table `Article`
 -- -----------------------------------------------------
@@ -17,14 +17,14 @@ CREATE TABLE IF NOT EXISTS `Article` (
   `PMID` VARCHAR(45) NULL,
   `pissn` VARCHAR(45) NULL,
   `eissn` VARCHAR(45) NULL,
-  `Title` VARCHAR(2000) NULL,
-  `Abstract` VARCHAR(5000) NULL,
-  `JournalName` VARCHAR(2000) NULL,
-  `JournalPublisherName` VARCHAR(2000) NULL,
-  `JournalPublisherLocation` VARCHAR(5000) NULL,
+  `Title` VARCHAR(2000) CHARACTER SET utf8 NULL,
+  `Abstract` VARCHAR(5000) CHARACTER SET utf8 NULL,
+  `JournalName` VARCHAR(2000) CHARACTER SET utf8 NULL,
+  `JournalPublisherName` VARCHAR(2000)CHARACTER SET utf8  NULL,
+  `JournalPublisherLocation` VARCHAR(5000) CHARACTER SET utf8 NULL,
   `Source` VARCHAR(500) NULL,
   `SpecId` VARCHAR(500) NULL,
-  `PlainText` LONGTEXT NULL,
+  `PlainText` LONGTEXT CHARACTER SET utf8 NULL,
   `Year` INT NULL,
   PRIMARY KEY (`idArticle`))
 ENGINE = InnoDB;
@@ -58,8 +58,8 @@ DROP TABLE IF EXISTS `ArtTable` ;
 CREATE TABLE IF NOT EXISTS `ArtTable` (
   `idTable` INT NOT NULL AUTO_INCREMENT,
   `TableOrder` VARCHAR(500) NULL,
-  `TableCaption` VARCHAR(5000) NULL,
-  `TableFooter` VARCHAR(5000) NULL,
+  `TableCaption` VARCHAR(5000) CHARACTER SET utf8 NULL,
+  `TableFooter` VARCHAR(5000) CHARACTER SET utf8 NULL,
   `StructureType` VARCHAR(45) NULL,
   `PragmaticType` VARCHAR(45) NULL,
   `HasXML` VARCHAR(40) NULL,
@@ -90,10 +90,10 @@ CREATE TABLE IF NOT EXISTS `Cell` (
   `HeaderRef` VARCHAR(200) NULL,
   `StubRef` VARCHAR(200) NULL,
   `SuperRowRef` VARCHAR(200) NULL,
-  `Content` VARCHAR(5000) NULL,
-  `WholeHeader` VARCHAR(5000) NULL,
-  `WholeStub` VARCHAR(5000) NULL,
-  `WholeSuperRow` VARCHAR(5000) NULL,
+  `Content` VARCHAR(5000) CHARACTER SET utf8 NULL,
+  `WholeHeader` VARCHAR(5000) CHARACTER SET utf8 NULL,
+  `WholeStub` VARCHAR(5000) CHARACTER SET utf8 NULL,
+  `WholeSuperRow` VARCHAR(5000) CHARACTER SET utf8 NULL,
   PRIMARY KEY (`idCell`),
   INDEX `fk_Cell_Table1_idx` (`Table_idTable` ASC),
   CONSTRAINT `fk_Cell_Table1`

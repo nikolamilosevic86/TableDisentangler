@@ -1,9 +1,14 @@
 package readers;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+
+
+
 
 
 import org.jsoup.Jsoup;
@@ -16,10 +21,14 @@ import org.jsoup.select.Elements;
 //import org.xml.sax.InputSource;
 //import org.xml.sax.SAXParseException;
 
+
+
+
 import stats.Statistics;
 import tablInEx.Article;
 import tablInEx.Cell;
 import tablInEx.Table;
+import Utils.Author;
 //import Utils.Author;
 import Utils.Utilities;
 
@@ -38,7 +47,9 @@ public class HTMLEasyPDFConverterReader  implements Reader{
 	 */
 	public Article Read()
 	{
-		Article art =  new Article(FileName);
+		File fn = new File(FileName);
+		
+		Article art =  new Article(fn.getName());
 		art.setSource("easyPDF2HTML");
 		try{
 		if(FileName == null || FileName.equals(""))
@@ -50,6 +61,7 @@ public class HTMLEasyPDFConverterReader  implements Reader{
 		FileReader fr = new FileReader(FileName);
 		if(fr==null)
 			return art;
+		
 		BufferedReader reader = new BufferedReader(fr);
 		String line = null;
 		String xml = "";
@@ -120,7 +132,9 @@ public class HTMLEasyPDFConverterReader  implements Reader{
 	    {
 	    	ex.printStackTrace();
 	    }
-
+	    art.setAuthors(new LinkedList<Author>());
+	    art.setAffiliation(new String[0]);
+	    art.setSpec_id(art.getFile_name());
 	    art.setTitle(art.getFile_name());
 	    art.setXML(xml);
 		return art;
@@ -132,9 +146,9 @@ public class HTMLEasyPDFConverterReader  implements Reader{
 	 * @param tablexmlNode the tablexml node
 	 * @return the string
 	 */
-	public String readTableLabel(Element tablexmlNode)
+	public String readTableLabel(Element tablexmlNode, int order)
 	{
-		String label = "Table without label";
+		String label = "Table "+order;
 		List<Element> nl = getChildrenByTagName(tablexmlNode,"label");
 		if(nl.size()>0)
 		{
@@ -384,7 +398,14 @@ public class HTMLEasyPDFConverterReader  implements Reader{
 						{
 							while(cells[rowindex][index].isIs_filled() && index!=num_of_columns)
 								index++;
+							// It assumes the first row to be always header, since it is the most usual in financial reports
+							if(rowindex==0)
+							{
+								cells[rowindex][index] = Cell.setCellValues(a,cells[rowindex][index], Utilities.getString(tds.get(k)), is_colspanning, colspanVal, is_rowspanning, rowspanVal, true, 0, isStub, stubProbability, index,rowindex, l, s);
+								
+							}else{
 							cells[rowindex][index] = Cell.setCellValues(a,cells[rowindex][index], Utilities.getString(tds.get(k)), is_colspanning, colspanVal, is_rowspanning, rowspanVal, false, 0, isStub, stubProbability, index,rowindex, l, s);
+							}
 							if(hr!=null && hr.size()!=0 && hr.get(0)!=null){
 								cells[rowindex][index].setBreakingLineOverRow(true);
 								isStub=false;
@@ -439,11 +460,11 @@ public class HTMLEasyPDFConverterReader  implements Reader{
 			for(int s = 0;s<tb.size();s++)
 			{
 			Statistics.addTable();
-			String label = readTableLabel(tablesxml.get(s));
+			String label = readTableLabel(tablesxml.get(s),s);
 			
 			tables[tableindex] = new Table(label);
-			tables[tableindex].setDocumentFileName("PMC"+article.getPmc());
-			tables[tableindex].setXml(Utilities.CreateXMLStringFromSubNode(tablesxml.get(s)));
+			tables[tableindex].setDocumentFileName(article.getFile_name());
+			tables[tableindex].setXml(tablesxml.get(s).toString());
 			System.out.println("Table title:"+tables[tableindex].getTable_title());
 			String caption = readTableCaption(tablesxml.get(s));
 			tables[tableindex].setTable_footer(caption);

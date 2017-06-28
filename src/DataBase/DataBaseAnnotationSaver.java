@@ -61,7 +61,7 @@ public class DataBaseAnnotationSaver {
 			 	
 				database_password = database_password.replace("\"", "");
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
-				String connectionUrl = "jdbc:mysql://"+host+":"+database_port+"/"+database_name;
+				String connectionUrl = "jdbc:mysql://"+host+":"+database_port+"/"+database_name+"?useUnicode=true&characterEncoding=UTF-8";
 				String connectionUser = database_username;
 				String connectionPassword = database_password;
 				conn = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);	
