@@ -211,6 +211,24 @@ public class HTMLEasyPDFConverterReader  implements Reader{
 					caption += Utilities.getString(nl.get(i))+'\n';
 					}
 				}
+				
+				Elements inDivChild = tablesxmlNode.parent().getAllElements().first().children();
+				boolean isafterTable = false;
+				for(int i =0;i<inDivChild.size();i++){
+					Element el = inDivChild.get(i);
+					if(el.tagName().equals("table"))
+					{
+						isafterTable = true;
+						continue;
+					}
+					if(isafterTable){
+
+							caption += el.text()+'\n';
+						
+					}
+				
+				}
+				
 				nl = getChildrenByTagName(tablesxmlNode,"title");
 				if(nl.size()>0){
 					caption = Utilities.getString(nl.get(0));
@@ -467,9 +485,9 @@ public class HTMLEasyPDFConverterReader  implements Reader{
 			tables[tableindex].setXml(tablesxml.get(s).toString());
 			System.out.println("Table title:"+tables[tableindex].getTable_title());
 			String caption = readTableCaption(tablesxml.get(s));
-			tables[tableindex].setTable_footer(caption);
+			tables[tableindex].setTable_caption(caption);
 			String foot = ReadTableFooter(tablesxml.get(s));
-			//tables[tableindex].setTable_footer(foot);
+			tables[tableindex].setTable_footer(foot);
 			System.out.println("Foot: "+foot);
 
 			//count rows
