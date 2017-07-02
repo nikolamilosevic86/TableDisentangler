@@ -169,6 +169,7 @@ public class HTMLEasyPDFConverterReader  implements Reader{
 	{
 		//TODO: Obtain label as the first p tag before table tag
 		String caption = "";
+		boolean captionFound = false;
 		List<Element>nl = getChildrenByTagName(tablexmlNode,"caption");
 		if(nl.size()>0){
 			caption = Utilities.getString(nl.get(0));
@@ -178,8 +179,9 @@ public class HTMLEasyPDFConverterReader  implements Reader{
 			Element el = inDivChild.get(i);
 			if(i+1<inDivChild.size()){
 				Element tableel = inDivChild.get(i+1);
-				if(tableel.tagName().equals("table")){
+				if(tableel.tagName().equals("table") && captionFound==false && tableel.equals(tablexmlNode)){
 					caption = el.text();
+					captionFound = true;
 				}
 			}
 		
@@ -201,6 +203,7 @@ public class HTMLEasyPDFConverterReader  implements Reader{
 	{
 		//TODO: Obtain label as the first p tag before table tag
 				String caption = "";
+				
 				List<Element>nl = getChildrenByTagName(tablesxmlNode,"caption");
 				if(nl.size()>0){
 					caption = Utilities.getString(nl.get(0));
@@ -216,15 +219,20 @@ public class HTMLEasyPDFConverterReader  implements Reader{
 				boolean isafterTable = false;
 				for(int i =0;i<inDivChild.size();i++){
 					Element el = inDivChild.get(i);
-					if(el.tagName().equals("table"))
+					if(el.tagName().equals("table")&& el.equals(tablesxmlNode))
 					{
+						//caption = "";
 						isafterTable = true;
 						continue;
 					}
-					if(isafterTable){
+					if(isafterTable && !el.tagName().equals("table")){
 
 							caption += el.text()+'\n';
 						
+					}
+					if(el.tagName().equals("table"))
+					{
+						isafterTable= false;
 					}
 				
 				}
