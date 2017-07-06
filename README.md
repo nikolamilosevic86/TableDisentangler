@@ -1,7 +1,7 @@
-TableAnnotator - A tool for automatic table annotation
+TableDisentangler - A tool for automatic disentangling of functional areas in tables and their annotation
 ===============================================
 
-TableAnnotator is a tool for annotating tables written in Java. It uses specific annotation schema we proposed that is able to capture information about functions of a cell and inter-cell relationships. TableAnnotator is a tool for extracting annotations from tables in PMC clinical documents in XML format.
+TableDisentangler is a tool for annotating tables written in Java. It uses specific annotation schema we proposed that is able to capture information about functions of a cell and inter-cell relationships. TableDisentangler is a tool for extracting annotations from tables in PMC clinical documents in XML format (it is possible to generate XML from PDF).
 
 Tool does this in a couple of steps. Firstly, tables are decomposed to a matrix of cell objects containing data and information about navigational path (headers, stubs, subheaders).
 
@@ -10,7 +10,7 @@ This project is developed on the University of Manchester as a part of my PhD
 Requirements
 ------------
 
-The tool requires Java, OpenNLP, Weka toolkit, MySQL database and possibly it will require some semantic tools such as metamap, WikipediaMiner etc.
+The tool requires Java, OpenNLP, Weka toolkit, MySQL database, installed MetaMap and WordNet.
 
 
 Other project dependences
