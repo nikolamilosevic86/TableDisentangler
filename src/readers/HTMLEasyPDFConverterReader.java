@@ -3,6 +3,8 @@ package readers;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.PrintWriter;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,15 +13,22 @@ import java.util.List;
 
 
 
+
+
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Entities.EscapeMode;
 import org.jsoup.select.Elements;
 //import org.w3c.dom.NamedNodeMap;
 //import org.w3c.dom.Node;
 //import org.w3c.dom.NodeList;
 //import org.xml.sax.InputSource;
 //import org.xml.sax.SAXParseException;
+
+
+
 
 
 
@@ -65,6 +74,7 @@ public class HTMLEasyPDFConverterReader  implements Reader{
 		BufferedReader reader = new BufferedReader(fr);
 		String line = null;
 		String xml = "";
+		int cnt = 0;
 		while ((line = reader.readLine()) != null) {
 			if(line.contains("JATS-archivearticle1.dtd")||line.contains("archivearticle.dtd")||line.contains("strict.dtd"))
 				continue;
@@ -86,10 +96,14 @@ public class HTMLEasyPDFConverterReader  implements Reader{
 					line=s+"</IMG>";
 				}
 			}
+			line = line.replaceAll( "([\\ud800-\\udbff\\udc00-\\udfff])", "");
 		    xml +=line+'\n';
+		    cnt = cnt +1;
 		}		
 		
+		
 	    Document parse =  Jsoup.parse(xml);//builder.parse(is);
+
 	    art = ParseMetaData(art, parse, xml);
 		art = ParseTables(art,parse);
 		}catch(Exception ex)
@@ -477,6 +491,7 @@ public class HTMLEasyPDFConverterReader  implements Reader{
 	{
 		Elements tablesxml = parse.getElementsByTag("table");
 		int numOfTables =  getNumOfTablesInArticle(tablesxml);
+
 		
 		Table[] tables = new Table[numOfTables];
 		article.setTables(tables);

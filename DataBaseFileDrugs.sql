@@ -65,6 +65,7 @@ CREATE TABLE IF NOT EXISTS `ArtTable` (
   `HasXML` VARCHAR(40) NULL,
   `Article_idArticle` INT NOT NULL,
   `Section` VARCHAR(1000) NULL,
+  `SpecPragmatic` VARCHAR(100) NULL,
   PRIMARY KEY (`idTable`),
   INDEX `fk_Table_Article1_idx` (`Article_idArticle` ASC),
   CONSTRAINT `fk_Table_Article1`

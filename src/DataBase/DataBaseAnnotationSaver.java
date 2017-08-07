@@ -85,6 +85,41 @@ public class DataBaseAnnotationSaver {
 			Statement stmt = conn.createStatement();
 			String insertTableSQL = "INSERT INTO Article (PMCID,PMID,pissn,eissn,Title,Abstract,JournalName,JournalPublisherName,JournalPublisherLocation,Source,SpecId,PlainText) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement(insertTableSQL,Statement.RETURN_GENERATED_KEYS);
+			if(art.getPmc()!=null && art.getPmc().length()>8000)
+			{
+				art.setPmc(art.getPmc().substring(0,8000));
+			}
+			if(art.getPmid()!=null && art.getPmid().length()>8000)
+			{
+				art.setPmid(art.getPmid().substring(0,8000));
+			}
+			if(art.getTitle()!=null && art.getTitle().length()>8000)
+			{
+				art.setTitle(art.getTitle().substring(0,8000));
+			}
+			if(art.getAbstract()!=null && art.getAbstract().length()>8000)
+			{
+				art.setAbstract(art.getAbstract().substring(0,8000));
+			}
+			if(art.getAbstract()!=null && art.getAbstract().length()>8000)
+			{
+				art.setAbstract(art.getAbstract().substring(0,8000));
+			}
+			
+			if(art.getJournal_name()!=null && art.getJournal_name().length()>8000)
+			{
+				art.setJournal_name(art.getJournal_name().substring(0,8000));
+			}
+			
+			if(art.getPublisher_name()!=null && art.getPublisher_name().length()>8000)
+			{
+				art.setPublisher_name(art.getPublisher_name().substring(0,8000));
+			}
+			if(art.getPublisher_loc()!=null && art.getPublisher_loc().length()>8000)
+			{
+				art.setPublisher_loc(art.getPublisher_loc().substring(0,8000));
+			}
+			
 			preparedStatement.setString(1, art.getPmc());
 			preparedStatement.setString(2, art.getPmid());
 			preparedStatement.setString(3, art.getPissn());
@@ -106,6 +141,7 @@ public class DataBaseAnnotationSaver {
 	        }
 	        
             //-----------------------------------------------
+	        try{
             Statement stmt12 = conn.createStatement();
 	  		String insertTableSQL12 = "INSERT INTO OriginalArticle (PMID,PMCID,pissn,eissn,xml,Article_idArticle) VALUES (?,?,?,?,?,?)";
 	  		PreparedStatement preparedStatement12 = conn.prepareStatement(insertTableSQL12,Statement.RETURN_GENERATED_KEYS);
@@ -123,7 +159,10 @@ public class DataBaseAnnotationSaver {
             {
             	TableXMLId = rs12.getInt(1);
             }
-            
+	        }catch(Exception ex)
+	        {
+	        	ex.printStackTrace();
+	        }
             
             //-------------------------------------------------
 	        
@@ -194,6 +233,20 @@ public class DataBaseAnnotationSaver {
 				Statement stmt6 = conn.createStatement();
 		  		String insertTableSQL6 = "INSERT INTO ArtTable (TableOrder,TableCaption,TableFooter,StructureType,PragmaticType,HasXML,Article_idArticle,Section) VALUES (?,?,?,?,?,?,?,?)";
 		  		PreparedStatement preparedStatement6 = conn.prepareStatement(insertTableSQL6,Statement.RETURN_GENERATED_KEYS);
+		  		
+		  		if(Tables[i].getTable_title()!=null && Tables[i].getTable_title().length()>8000)
+				{
+		  			Tables[i].setTable_title(Tables[i].getTable_title().substring(0,8000));
+				}
+		  		if(Tables[i].getTable_caption()!=null && Tables[i].getTable_caption().length()>8000)
+				{
+		  			Tables[i].setTable_caption(Tables[i].getTable_caption().substring(0,8000));
+				}
+		  		if(Tables[i].getTable_footer()!=null && Tables[i].getTable_footer().length()>8000)
+				{
+		  			Tables[i].setTable_footer(Tables[i].getTable_footer().substring(0,8000));
+				}
+		  		
 		  		preparedStatement6.setString(1,Tables[i].getTable_title());
 		  		preparedStatement6.setString(2, Tables[i].getTable_caption());
 		  		preparedStatement6.setString(3, Tables[i].getTable_footer());
@@ -226,6 +279,26 @@ public class DataBaseAnnotationSaver {
 	            	Statement stmt7 = conn.createStatement();
 	    	  		String insertTableSQL7 = "INSERT INTO Cell (CellID,CellType,Table_idTable,RowN,ColumnN,HeaderRef,StubRef,SuperRowRef,Content,WholeHeader,WholeStub,WholeSuperRow) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 	    	  		PreparedStatement preparedStatement7 = conn.prepareStatement(insertTableSQL7,Statement.RETURN_GENERATED_KEYS);
+	    	  		
+	    	  		if(cells[j][k].getCell_content()!=null && cells[j][k].getCell_content().length()>8000)
+					{
+	    	  			cells[j][k].setCell_content(cells[j][k].getCell_content().substring(0,8000));
+					}
+	    	  		if(cells[j][k].getHeader_values()!=null && cells[j][k].getHeader_values().length()>8000)
+					{
+	    	  			cells[j][k].setHeader_values(cells[j][k].getHeader_values().substring(0,8000));
+					}
+	    	  		
+	    	  		if(cells[j][k].getStub_values()!=null && cells[j][k].getStub_values().length()>8000)
+					{
+	    	  			cells[j][k].setStub_values(cells[j][k].getStub_values().substring(0,8000));
+					}
+	    	  		
+	    	  		if(cells[j][k].getSubheader_values()!=null && cells[j][k].getSubheader_values().length()>8000)
+					{
+	    	  			cells[j][k].setSubheader_values(cells[j][k].getSubheader_values().substring(0,8000));
+					}
+	    	  		
 	    	  		preparedStatement7.setString(1,""+j+"."+k);
 	    	  		preparedStatement7.setString(2, cells[j][k].getCellType());
 	    	  		preparedStatement7.setInt(3,TableId);

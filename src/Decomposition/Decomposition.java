@@ -988,7 +988,7 @@ public class Decomposition {
 						
 						if(hasSubheaders)
 						{
-							if(TopLevel==false && Utilities.numOfSpaceOrBullets(cells[j][k].getCell_content())==0 && cells[j+1]!= null && Utilities.numOfSpaceOrBullets(cells[j+1][k].getCell_content())!=0 && currentSubHeader.equals(""))
+							if(TopLevel==false && Utilities.numOfSpaceOrBullets(cells[j][k].getCell_content())==0 && cells.length>j+1 && cells[j+1]!= null  && Utilities.numOfSpaceOrBullets(cells[j+1][k].getCell_content())!=0 && currentSubHeader.equals(""))
 							{
 								TopLevel = true;
 								currentSubHeader=cells[j][k].getCell_content();
@@ -996,7 +996,7 @@ public class Decomposition {
 								SubHeaderIndex = j+"."+k;
 								continue;
 							}
-							if(TopLevel==false && Utilities.numOfSpaceOrBullets(cells[j][k].getCell_content())==0 && (cells[j+2]!= null && Utilities.numOfSpaceOrBullets(cells[j+2][k].getCell_content())!=0) && currentSubHeader.equals(""))
+							if(TopLevel==false && Utilities.numOfSpaceOrBullets(cells[j][k].getCell_content())==0 && (cells.length>j+2 && cells[j+2]!= null && Utilities.numOfSpaceOrBullets(cells[j+2][k].getCell_content())!=0) && currentSubHeader.equals(""))
 							{
 								TopLevel = true;
 								currentSubHeader=cells[j][k].getCell_content();
